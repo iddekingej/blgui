@@ -1,5 +1,5 @@
 #include "globals.h"
-#include <klocale.h>
+#include <klocalizedstring.h>
 
 const  int g_numDeviceFields=9;
 const  char *g_deviceFields[g_numDeviceFields]={
