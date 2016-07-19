@@ -28,9 +28,12 @@ void TMainWindow::refresh()
 	if(info != nullptr) delete info;
 	info=new TDeviceInfo();
 	info->getDisks();
-	fillTable(info);
+	fillDevice(info);
 	fillRaid(info);	
 }
+
+//Fill Raid TAb
+//p_info : Information to display
 
 void TMainWindow::fillRaid(TDeviceInfo *p_info)
 {
@@ -66,6 +69,7 @@ void TMainWindow::fillRaid(TDeviceInfo *p_info)
 	ui.raidList->resizeColumnsToContents();
 }
 
+
 void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list)
 {
 	int l_fieldId;
@@ -93,7 +97,9 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	}
 }
 
-void TMainWindow::fillTable(TDeviceInfo *p_info)
+//Fill Device tab in main main window 
+//p_info : device information to display
+void TMainWindow::fillDevice(TDeviceInfo *p_info)
 {
 	const QMap<QString,TDeviceBase *> *l_map;
 	TDeviceList *l_devices=p_info->getDevices();
@@ -104,6 +110,7 @@ void TMainWindow::fillTable(TDeviceInfo *p_info)
 		case 2:l_map=l_devices->getLabelIndex();break;
 		case 3:l_map=l_devices->getUuidIndex();break;
 		case 4:l_map=l_devices->getPathIndex();break;
+		case 5:l_map=l_devices->getLvmIndex();break;
 		default:
 			l_map=l_devices->getNameIndex();
 	}
@@ -122,6 +129,7 @@ void TMainWindow::fillTable(TDeviceInfo *p_info)
 		case 2:l_extraLabel=i18n("Label");break;
 		case 3:l_extraLabel=i18n("Uuid");break;
 		case 4:l_extraLabel=i18n("Path");break;
+		case 5:l_extraLabel=i18n("LVM");break;
 		default:
 			break;
 	}

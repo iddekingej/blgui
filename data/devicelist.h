@@ -10,22 +10,25 @@ class TDeviceList:public TLinkList<TDevice>
 {
 	
 private:
-	QMap<QString,TDeviceBase *> nameIndex;
+	TAlias *aliasses;
+	QMap<QString,TDeviceBase *> nameIndex;		//name=>Device or partition
 	QMap<QString,TDeviceBase *> deviceByDevPath;
 	QMap<QString,TDeviceBase *> labelIndex;
 	QMap<QString,TDeviceBase *> uuidIndex;
 	QMap<QString,TDeviceBase *> pathIndex;
 	QMap<QString,TDeviceBase *> idIndex;
-	void readPartitions(TDevice *p_device);
-	void readLabels(TAlias *p_aliasses);
-	void readDevices();
+	QMap<QString,TDeviceBase *> lvmIndex;
+	void readPartitions(TDevice *p_device);         //read information about partitions of device  p_device
+	void readDevices();                             //read device information from /sys/block
+	void readLabels(TAlias *p_aliasses);            //read information about all labels
 	bool readMounts(TAlias *p_aliasses);
 	void readUuid(TAlias *p_aliasses);
 	void readPath(TAlias *p_aliasses);
-	void readAliases(TAlias *p_aliasses);
+	void readAliases();
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index,TAlias *p_aliasses);
 	void readLabels();
-	
+	void readLvm();
+	void readSlaves();
 public:
 	inline TDeviceBase * getDeviceByName(const QString &p_name)
 	{
@@ -55,6 +58,13 @@ public:
 	{
 		return &idIndex;
 	}
+	
+	inline const QMap<QString,TDeviceBase *> *getLvmIndex()
+	{
+		return &lvmIndex;
+	}
+	
 	void readInfo(TAlias *p_aliasses);
+	TDeviceList(TAlias *p_aliasses);
 };
 #endif

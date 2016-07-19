@@ -17,6 +17,7 @@ private:
 	TDiskSize size;
 	TLinkList<TMount > mounts;
 	TLinkList<TDeviceAlias> deviceAlias;
+	QList<TDeviceBase *>    slaves;
 
 public:
 	inline TLinkListItem<TDeviceAlias> *getDeviceAliasStart(){
@@ -69,9 +70,20 @@ public:
 		return devPath;
 	}
 	
+	inline QList<TDeviceBase *> *getSlaves()
+	{
+		return &slaves;
+	}
+	
+	inline void addSlave(TDeviceBase *p_slave)
+	{
+		slaves.append(p_slave);
+	}
+	
 	virtual bool hasPartitions()=0;
 	
 	QString getMounts();
+	const QString getSlavesString();
 	virtual void fillDataRow(QStringList &p_list)=0;
 	TDeviceBase(const QString &p_name,TDiskSize p_size);
 	virtual ~TDeviceBase();

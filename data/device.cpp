@@ -33,7 +33,8 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< getReadableSize()
 		<< (readonly?"X":"")
 		<< (removable?"X":"")
-		<< loopbackFile;
+		<< loopbackFile
+		<< getSlavesString();
 }
 
 bool TDevice::hasPartitions()

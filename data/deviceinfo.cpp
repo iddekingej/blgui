@@ -78,8 +78,9 @@ void TDeviceInfo::getDisks()
 TDeviceInfo::TDeviceInfo()
 {	
 	btrfsInfo=new TBtrfsInfo();
-	devices  =new TDeviceList();
+	
 	aliasses =new TAlias();
+	devices  =new TDeviceList(aliasses);
 	raidList =new TRaidInfo();
 }
 TDeviceInfo::~TDeviceInfo(){

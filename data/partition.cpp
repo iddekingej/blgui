@@ -17,7 +17,11 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<getType()
 		<<getMounts()
 		<<getLabel()
-		<<getReadableSize();
+		<<getReadableSize()
+		<<""
+		<<""
+		<<""
+		<<getSlavesString();
 }
 
 

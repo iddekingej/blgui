@@ -25,7 +25,7 @@ private:
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list);
 	void readConfiguation();
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
-	void fillTable(TDeviceInfo *p_info);
+	void fillDevice(TDeviceInfo *p_info);
 	void fillRaid(TDeviceInfo *p_info);
 	
 public:

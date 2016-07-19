@@ -56,6 +56,11 @@ public:
 		return partions.getStart();
 	}
 
+	inline void setModel(const QString &p_model)
+	{
+		model=p_model;
+	}
+	
 	virtual const QString getModel();
 	virtual void fillDataRow(QStringList &p_list);
 

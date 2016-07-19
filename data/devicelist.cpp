@@ -38,7 +38,7 @@ void TDeviceList::readDevices()
 				l_model="Loopback";
 				readString(l_iter.filePath(),"loop/backing_file",l_loopFile);				
 			} else{
-				l_model="??";
+				l_model="";
 				l_loopFile="";
 			}
 			l_device=new TDevice(l_deviceName,l_model,l_size);
@@ -113,13 +113,14 @@ bool TDeviceList::readMounts(TAlias *p_aliasses)
 	return true;
 }
 
-void TDeviceList::readAliases(TAlias *p_aliasses)
+void TDeviceList::readAliases()
 {
-	readAliasFromPath("label","/dev/disk/by-label/",labelIndex,p_aliasses);
-	readAliasFromPath("label","/dev/disk/by-partlabel/",labelIndex,p_aliasses);
-	readAliasFromPath("uuid","/dev/disk/by-uuid/",uuidIndex,p_aliasses);
-	readAliasFromPath("path","/dev/disk/by-path/",pathIndex,p_aliasses);
-	readAliasFromPath("id","/dev/disk/by-id/",idIndex,p_aliasses);
+	readAliasFromPath("label","/dev/disk/by-label/",labelIndex,aliasses);
+	readAliasFromPath("Part.label","/dev/disk/by-partlabel/",labelIndex,aliasses);
+	readAliasFromPath("uuid","/dev/disk/by-uuid/",uuidIndex,aliasses);
+	readAliasFromPath("path","/dev/disk/by-path/",pathIndex,aliasses);
+	readAliasFromPath("id","/dev/disk/by-id/",idIndex,aliasses);
+	readAliasFromPath("LVM","/dev/mapper/",lvmIndex,aliasses);
 	
 }
 
@@ -151,13 +152,67 @@ void TDeviceList::readLabels()
 	}
 }
 
+void TDeviceList::readLvm()
+{
+	QDir l_dir("/dev/mapper/");
+	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+	TDeviceBase  *l_deviceBase;
+	
+	while(l_iter.hasNext()){
+		l_iter.next();
+		if(l_iter.fileInfo().isSymLink()){
+				l_deviceBase=getDeviceByName(aliasses->getDeviceNameFromAliasPath(l_iter.filePath()));
+				if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
+					if(l_device != nullptr){
+						if(l_device->getModel().length()==0){
+								l_device->setModel("LVM Device");
+						}
+					}
+				}
+		}
+	}
+}
+
+
+void TDeviceList::readSlaves()
+{
+	QDir l_dir("/sys/block/");
+	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+	TDeviceBase *l_device;
+	TDeviceBase *l_slaveDevice;
+	while(l_iter.hasNext()){
+		l_iter.next();
+		l_device=nameIndex.value(l_iter.fileName());
+		if(l_device != nullptr){
+			QDir l_slaves(l_iter.filePath());
+			l_slaves.cd("slaves");
+			if(l_slaves.exists()){
+				QDirIterator l_slaveIter(l_slaves,QDirIterator::NoIteratorFlags);
+				while(l_slaveIter.hasNext()){
+					l_slaveIter.next();
+					l_slaveDevice=nameIndex.value(l_slaveIter.fileName());
+					if(l_slaveDevice != nullptr) l_device->addSlave(l_slaveDevice);
+				}
+			}
+		}
+	}
+		
+}
+
+
+TDeviceList::TDeviceList(TAlias *p_aliasses)
+{
+	aliasses=p_aliasses;
+}
 
 void TDeviceList::readInfo(TAlias* p_aliasses)
 {
 	readDevices();
 	readMounts(p_aliasses);
-	readAliases(p_aliasses);
+	readAliases();
 	readLabels();
+	readSlaves();
+	readLvm();
 }
 
 
