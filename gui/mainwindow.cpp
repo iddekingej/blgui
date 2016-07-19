@@ -14,10 +14,10 @@
 #include "gui/formparinfo.h"
 #include "mainwindow.h"
 #include "about.h"
-
+#include "base/utils.h"
 QApplication *g_app;
 
-void TMainWindow::sourceChanged(int p_index)
+void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
 {
 	refresh();
 }

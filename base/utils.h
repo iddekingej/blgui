@@ -2,6 +2,7 @@
 #define __UTILS_H_
 #include <QString>
 
+#define PAR_UNUSED __attribute__((unused))
 typedef unsigned long TDiskSize;
 bool readLong(QString p_path,QString p_name,unsigned long &p_size);
 bool readString(QString p_path,QString p_name,QString &p_return);
