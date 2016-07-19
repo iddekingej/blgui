@@ -4,22 +4,29 @@
 template<class T>
 class TLinkList;
 
+// Container class for item with T
+// Container is added to TLinklist
+
 template<class T>
 class TLinkListItem
 {
 	friend class TLinkList<T>;
 private:
-	T *item;
+	T *item;   //Item
 protected:
 	TLinkListItem<T> *next;	
 public:		
-	inline T *getItem(){ return item;}
-	inline TLinkListItem<T> *getNext(){ return next;}	
+	inline T *getItem(){ return item;} //GetItem from container
+	inline TLinkListItem<T> *getNext(){ return next;} //Next item in linked list
 	~TLinkListItem()
 	{
 		delete item;
 	}
 	
+//Constructor
+//p_item : Item to add to list:
+//See TLinkList::Append
+
 	TLinkListItem(T *p_item)
 	{	
 		item=p_item;
@@ -28,18 +35,24 @@ public:
 };
 
 
+//Linkedlist 
+//Create:  TLinkList<TMyObject> l_list()
+//Append item  l_list->append(myObject) (myObject of type TMyObject)
+//Get top:     l_link->getStart()
+//When listis is destoyes item is also deleted
+
 template<class T>
 class TLinkList
 {
 private:
-	TLinkListItem<T> *start;
-	TLinkListItem<T> *top;
+	TLinkListItem<T> *start;   //start of linklist
+	TLinkListItem<T> *end;     //last in linkedlist
 public:
 		
-	inline TLinkListItem<T> *getStart(){ return start;}
+	inline TLinkListItem<T> *getStart(){ return start;} //start of linked list
 	
 	TLinkList(){
-		top=nullptr;
+		end=nullptr;
 		start=nullptr;
 	}
 	~TLinkList(){
@@ -59,9 +72,9 @@ public:
 		if(start==nullptr){
 			start=l_item;
 		} else {
-			top->next=l_item;
+			end->next=l_item;
 		}
-		top=l_item;
+		end=l_item;
 	}
 
 

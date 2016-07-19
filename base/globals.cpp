@@ -1,5 +1,6 @@
 #include "globals.h"
 #include <klocalizedstring.h>
+//List of fields shown in "Device" tab
 
 const  int g_numDeviceFields=9;
 const  char *g_deviceFields[g_numDeviceFields]={

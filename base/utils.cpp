@@ -4,6 +4,49 @@
 #include <QTextStream>
 #include <QIODevice>
 
+//Used for reading files in /sys/block
+//Read file containing ulong (like /sys/block/sda/size)
+//p_path  - Path 
+//p_name  - File name under path to read
+//p_value - Returned value
+//Return    true when successful  false file reading error
+
+bool readLong(QString p_path,QString p_name,unsigned long &p_value)
+{
+	QString l_string;
+	p_value=0;
+	if(!readString(p_path,p_name,l_string)) return false;
+	p_value=l_string.toULong();
+	return true;
+}
+
+//Used for reading files in /sys/block
+//Read file containing string (like /sys/block/sda/mode)
+//p_path  - Path 
+//p_name  - File name under path to read
+//p_value - Returned value
+//Return    true when successful  false file reading error
+
+bool readString(QString p_path,QString p_name,QString &p_value)
+{
+	bool l_succes;
+	QDir l_dir=QDir(p_path);	
+	QFile l_file(l_dir.absoluteFilePath(p_name));
+	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
+		p_value= QStringLiteral("");
+		return false;
+	}
+	QTextStream l_stream(&l_file);
+	p_value=l_stream.readLine();
+	l_succes=(l_stream.status() ==  QTextStream::Ok);
+	l_file.close();
+	
+	return l_succes;
+}
+
+//Return readable 
+//p_value - value (ex 1024)
+//p_size/p_ind  - Return value and indicator  (2048=> p_size=2 p_ind="K"  2097152=> p_size=2 p_ind='M')
 void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind)
 {
 	TDiskSize l_size=p_value;
@@ -28,29 +71,3 @@ void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind)
 	p_size=l_size;
 }
 
-bool readString(QString p_path,QString p_name,QString &p_return)
-{
-	bool l_succes;
-	QDir l_dir=QDir(p_path);	
-	QFile l_file(l_dir.absoluteFilePath(p_name));
-	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
-		p_return="";
-		return false;
-	}
-	QTextStream l_stream(&l_file);
-	p_return=l_stream.readLine();
-	l_succes=(l_stream.status() ==  QTextStream::Ok);
-	l_file.close();
-	
-	return l_succes;
-}
-
-
-bool readLong(QString p_path,QString p_name,unsigned long &p_size)
-{
-	QString l_string;
-	p_size=0;
-	if(!readString(p_path,p_name,l_string)) return false;
-	p_size=l_string.toULong();
-	return true;
-}
