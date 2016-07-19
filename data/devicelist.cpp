@@ -29,6 +29,7 @@ void TDeviceList::readDevices()
 		if( l_deviceName != "." && l_deviceName != ".."){		
 			QDir l_dir(l_iter.filePath());
 			readLong(l_iter.filePath(),"size",l_size);
+			l_size=l_size*512;
 			readLong(l_iter.filePath(),"removable",l_removable);
 			readLong(l_iter.filePath(),"ro",l_readonly);
 			if(l_dir.exists("device")==1){
@@ -65,6 +66,7 @@ void TDeviceList::readPartitions(TDevice* p_device)
 		l_iter.next();
 		if(l_iter.fileInfo().isDir() && l_iter.fileName().startsWith(p_device->getName())){
 			readLong(l_iter.filePath(),l_sizeStr,l_size);		
+			l_size=l_size*512;
 			l_deviceName=l_iter.fileName();		
 			l_partition=p_device->addParition(l_deviceName,l_size);	
 			nameIndex.insert(l_deviceName,l_partition);
