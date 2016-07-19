@@ -15,7 +15,10 @@ BUILDING
 
 For building this program the following is necessary:
 
-*QT/KDE + dev packages v 5.2 or higher
+*QT 5 +dev find_package
+*GetText +dev packages
+*KDE + dev packages v 5.2 or higher
+* extra-cmake-modules
 *libblkid + dev packages
 *CMake and c++
 

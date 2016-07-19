@@ -6,7 +6,7 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include "base/globals.h"
-#include "partition.h"
+#include "data/partition.h"
 #include "base/linklist.h"
 #include "data/mtabdevice.h"
 #include "data/devicealias.h"
