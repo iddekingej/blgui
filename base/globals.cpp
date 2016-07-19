@@ -9,7 +9,7 @@ const  char *g_deviceFields[g_numDeviceFields]={
 ,	I18N_NOOP("Mounted")
 ,	I18N_NOOP("Label")
 ,	I18N_NOOP("Size (KMG)")
-,	I18N_NOOP("Readonly")
+,	I18N_NOOP("Read only")
 ,	I18N_NOOP("Removable")
-,	I18N_NOOP("Loopback file")
+,	I18N_NOOP("Loop back file")
 };

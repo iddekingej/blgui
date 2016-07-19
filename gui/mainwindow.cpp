@@ -118,8 +118,8 @@ void TMainWindow::fillTable(TDeviceInfo *p_info)
 	QString l_extraLabel;
 	
 	switch(ui.itemSource->currentIndex()){		
-		case 1:l_extraLabel=i18n("Label");break;
-		case 2:l_extraLabel=i18n("Id");break;
+		case 1:l_extraLabel=i18n("Id");break;
+		case 2:l_extraLabel=i18n("Label");break;
 		case 3:l_extraLabel=i18n("Uuid");break;
 		case 4:l_extraLabel=i18n("Path");break;
 		default:
