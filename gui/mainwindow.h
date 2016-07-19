@@ -27,6 +27,7 @@ private:
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
 	void fillTable(TDeviceInfo *p_info);
 	void fillRaid(TDeviceInfo *p_info);
+	
 public:
 
 	TMainWindow(QWidget *p_parent=NULL);
