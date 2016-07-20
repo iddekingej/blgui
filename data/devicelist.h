@@ -26,8 +26,7 @@ private:
 	void readPath();
 	void readAliases();
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index);	
-	void readLvm();
-	void readSlaves();
+	void readLVM();
 public:
 	inline TDeviceBase * getDeviceByName(const QString &p_name)
 	{

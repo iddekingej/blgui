@@ -11,14 +11,14 @@
 class TRaidDevice
 {
 private:
-	QStringList  raidDevices;
-	QString      raidLevel;
-	TDeviceBase *device;
-	QString      type;
+	QList<TDeviceBase*>  raidDevices;
+	QString              raidLevel;
+	TDeviceBase          *device;
+	QString              type;
 public:
-	inline const QStringList &getRaidDevices()
+	inline QList<TDeviceBase*> *getRaidDevices()
 	{
-		return raidDevices;
+		return &raidDevices;
 	}
 	
 	inline const QString &getRaidLevel()
@@ -36,19 +36,20 @@ public:
 		return type;
 	}
 	
-	inline void addRaidDevice(QString p_device)
-	{
-		raidDevices << p_device;
-	}
-	
-	inline void addRaidDevices(QStringList p_device)
+	inline void addRaidDevice(TDeviceBase *p_device)
 	{
 		raidDevices << p_device;
 	}
 	
 	QString getRaidDeviceString()
 	{
-		return raidDevices.join(",");
+		QListIterator<TDeviceBase *>l_iter(raidDevices);
+		QString l_return;
+		while(l_iter.hasNext()){
+			if(l_return.length()>0) l_return += QStringLiteral(",");
+			l_return += l_iter.next()->getName();
+		}
+		return l_return;
 	}
 	
 	TRaidDevice(TDeviceBase *p_device,const QString &p_type,const QString &p_level);

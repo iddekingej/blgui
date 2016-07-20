@@ -27,8 +27,9 @@ void TRaidInfo::processMD(TDeviceList *p_list)
 	QString      l_fileName;
 	QDir         l_devDir("/sys/block/");
 	QDirIterator l_devIter(l_devDir,QDirIterator::NoIteratorFlags);
-	TDeviceBase  *l_device;
+	TDeviceBase  *l_deviceBase;
 	TRaidDevice  *l_raid;
+	TDeviceBase  *l_slave;
 	while(l_devIter.hasNext()){
 		l_devIter.next();
 		QDir l_dir(l_devIter.filePath() );
@@ -36,17 +37,18 @@ void TRaidInfo::processMD(TDeviceList *p_list)
 		if(l_dir.exists("md")){
 			l_dir.cd("md");
 			readString(l_dir.path(),"level",l_level);
-			l_device=p_list->getDeviceByName(l_devIter.fileName());
-			if(l_device){
-				l_raid=AddRaidDevice(l_device,"linux raid",l_level);
-				QDirIterator l_iter(l_dir);
-				while(l_iter.hasNext()){
-					l_iter.next();
-					if(l_iter.fileInfo().isDir()){
-						l_fileName=l_iter.fileInfo().fileName();
-						if(l_fileName.startsWith("dev-")){
-							l_raid->addRaidDevice(l_fileName.mid(4));
-						}			
+			l_deviceBase=p_list->getDeviceByName(l_devIter.fileName());
+			
+			if(l_deviceBase){
+				if(TDevice *l_device =dynamic_cast<TDevice *>(l_deviceBase)){
+					l_raid=AddRaidDevice(l_device,"linux raid",l_level);
+					l_device->setModel("Linux raid");
+					l_dir.cd("../slaves");
+					QDirIterator l_iter(l_dir);
+					while(l_iter.hasNext()){
+						l_iter.next();
+						l_slave=p_list->getDeviceByName(l_iter.fileName());
+						if(l_slave)l_raid->addRaidDevice(l_slave);
 					}
 				}
 			}
@@ -58,13 +60,20 @@ void TRaidInfo::processMD(TDeviceList *p_list)
 void TRaidInfo::processBtrfs(TBtrfsInfo* p_info,TDeviceList *p_list)
 {
 	TDeviceBase *l_device;
+	TDeviceBase *l_slave;
 	TRaidDevice *l_raid;
-	TLinkListItem<TBtrfsMountItem> *l_current=p_info->getStart();
+	TLinkListItem<TBtrfsItem> *l_current=p_info->getStart();
 	while(l_current != nullptr){
 		if(l_current->getItem()->isMultiDev()){
 			l_device=p_list->getDeviceByName(l_current->getItem()->getFs());
 			l_raid=AddRaidDevice(l_device,"btrfs",l_current->getItem()->getRaidLevel());
-			l_raid->addRaidDevices(l_current->getItem()->getDevices());		
+			QStringListIterator l_iter(l_current->getItem()->getDevices());
+			while(l_iter.hasNext()){
+				l_slave=p_list->getDeviceByName(l_iter.next());
+				if(l_slave){
+					l_raid->addRaidDevice(l_slave);		
+				}
+			}
 		}
 		l_current=l_current->getNext();
 	}

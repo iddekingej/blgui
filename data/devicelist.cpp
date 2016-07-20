@@ -154,41 +154,37 @@ void TDeviceList::readLabels()
 	}
 }
 
-void TDeviceList::readLvm()
-{
-}
-
-
-void TDeviceList::readSlaves()
+/**
+ * Read LVM device data
+ * -setModel to LVM Device 
+ * -read LVM members from slaves folder and set fs type to LVM Member
+ */
+void TDeviceList::readLVM()
 {
 	QDir l_dir("/sys/block/");
 	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
 	TDeviceBase *l_deviceBase;
-	TDeviceBase *l_slaveDevice;
-	bool l_isDm=false;
-	bool l_isMd=false;
+	TDeviceBase *l_slaveDevice;	
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_deviceBase=nameIndex.value(l_iter.fileName());
 		
 		if(l_deviceBase != nullptr){
 			QDir l_slaves(l_iter.filePath());
-			l_isDm=l_slaves.exists("dm");
-			l_isMd=l_slaves.exists("md");
-			if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
-				if(l_isDm) l_device->setModel(i18n("LVM Device"));
-				if(l_isMd) l_device->setModel(i18n("Linux soft raid"));
-			}
-			l_slaves.cd("slaves");
-			if(l_slaves.exists()){
-				QDirIterator l_slaveIter(l_slaves,QDirIterator::NoIteratorFlags);
-				while(l_slaveIter.hasNext()){
-					l_slaveIter.next();
-					l_slaveDevice=nameIndex.value(l_slaveIter.fileName());
-					if(l_slaveDevice != nullptr){
-						if(l_isDm) l_slaveDevice->setType(i18n("LVM Member"));
-						if(l_isMd) l_slaveDevice->setType(i18n("Linux raid member"));
-						l_deviceBase->addSlave(l_slaveDevice);
+			if(l_slaves.exists("dm")){
+				if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
+					l_device->setModel(i18n("LVM Device"));
+				}
+				l_slaves.cd("slaves");
+				if(l_slaves.exists()){
+					QDirIterator l_slaveIter(l_slaves,QDirIterator::NoIteratorFlags);
+					while(l_slaveIter.hasNext()){
+						l_slaveIter.next();
+						l_slaveDevice=nameIndex.value(l_slaveIter.fileName());
+						if(l_slaveDevice != nullptr){
+							l_slaveDevice->setType(i18n("LVM Member"));		
+							l_deviceBase->addSlave(l_slaveDevice);
+						}
 					}
 				}
 			}
@@ -209,8 +205,7 @@ void TDeviceList::readInfo()
 	readMounts();
 	readAliases();
 	readLabels();
-	readSlaves();
-	readLvm();
+	readLVM();
 }
 
 

@@ -3,11 +3,12 @@
 
 #include "base/linklist.h"
 #include "alias.h"
+#include "devicebase.h"
 #include <QStringList>
 #include <QString>
 #include <QSet>
 
-class TBtrfsMountItem
+class TBtrfsItem
 {
 private:
 	QStringList devices;
@@ -20,23 +21,23 @@ public:
 	inline QString     getRaidLevel(){return raidLevel;}
 	inline bool        isMultiDev(){ return devices.length() >1;}
 	void appendDevice(const QString &p_device);		
-	TBtrfsMountItem(const QString &p_fs,const QString &p_raidLevel);
+	TBtrfsItem(const QString &p_fs,const QString &p_raidLevel);
 };
 
 
 class TBtrfsInfo
 {
 private:
-	TLinkList<TBtrfsMountItem> mountItems;
-	int readDevices(QString p_path,TBtrfsMountItem *p_info);
+	TLinkList<TBtrfsItem> mountItems;
+	int readDevices(QString p_path,TBtrfsItem *p_info);
 	QSet<QString> btrfsDevices;
 public:
-	TLinkList<TBtrfsMountItem> &getMountItems()
+	TLinkList<TBtrfsItem> &getMountItems()
 	{
 		return mountItems;
 	}
 	
-	TLinkListItem<TBtrfsMountItem> *getStart()
+	TLinkListItem<TBtrfsItem> *getStart()
 	{
 		return mountItems.getStart();
 	}
