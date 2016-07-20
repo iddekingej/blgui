@@ -21,6 +21,12 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	ui.readonlyLabel->setText(p_device->getReadonly()?i18n("Yes"):i18n("No"));
 	ui.labelLabel->setText(p_device->getLabel());
 	ui.typeLabel->setText(p_device->getType());
+	if(p_device->getLoopbackFile().length()>0){
+		ui.valLoopbackFile->setText(p_device->getLoopbackFile());
+	} else {
+		ui.valLoopbackFile->setVisible(false);
+		ui.labLoopbackFile->setVisible(false);
+	}
 	fillParitions(p_device);
 	fillMountPoints(p_device);
 	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
@@ -95,16 +101,22 @@ void TFormDevInfo::fillSlaves(TDevice* p_device)
 {
 	QStandardItemModel *l_model=new QStandardItemModel(p_device->getSlaves()->count(),1,this);
 	
-	QListIterator<TDeviceBase *> l_item(*p_device->getSlaves());
-	TDeviceBase                *l_device;
-	int l_cnt=0;
-	l_model->setHorizontalHeaderItem(0,new  QStandardItem(i18n("Slave name")));
-	while(l_item.hasNext()){
-		l_device=l_item.next();
-		l_model->setItem(l_cnt,0,new QStandardItem(l_device->getName()));
-		l_cnt++;
+	
+	if(p_device->getSlaves()->length()==0){
+		ui.slaveList->setVisible(false);
+	} else {
+		ui.noSlaveLabel->setVisible(false);
+		QListIterator<TDeviceBase *> l_item(*p_device->getSlaves());
+		TDeviceBase                *l_device;
+		int l_cnt=0;
+		l_model->setHorizontalHeaderItem(0,new  QStandardItem(i18n("Slave name")));
+		while(l_item.hasNext()){
+			l_device=l_item.next();
+			l_model->setItem(l_cnt,0,new QStandardItem(l_device->getName()));
+			l_cnt++;
+		}
+		ui.slaveList->setModel(l_model);
 	}
-	ui.slaveList->setModel(l_model);
 }
 
 
