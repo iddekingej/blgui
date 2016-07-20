@@ -20,13 +20,12 @@ private:
 	QMap<QString,TDeviceBase *> lvmIndex;
 	void readPartitions(TDevice *p_device);         //read information about partitions of device  p_device
 	void readDevices();                             //read device information from /sys/block
-	void readLabels(TAlias *p_aliasses);            //read information about all labels
-	bool readMounts(TAlias *p_aliasses);
-	void readUuid(TAlias *p_aliasses);
-	void readPath(TAlias *p_aliasses);
+	void readLabels();            //read information about all labels
+	bool readMounts();
+	void readUuid();
+	void readPath();
 	void readAliases();
-	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index,TAlias *p_aliasses);
-	void readLabels();
+	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index);	
 	void readLvm();
 	void readSlaves();
 public:
@@ -64,7 +63,7 @@ public:
 		return &lvmIndex;
 	}
 	
-	void readInfo(TAlias *p_aliasses);
+	void readInfo();
 	TDeviceList(TAlias *p_aliasses);
 };
 #endif

@@ -50,7 +50,7 @@ void TDeviceInfo::getDisks()
 		printf("Failed to cache\n");
 	 }	
 	aliasses->readInfo();
-	devices->readInfo(aliasses);
+	devices->readInfo();
 	btrfsInfo->readInfo(aliasses);
 	raidList->processMD(devices);
 	raidList->processBtrfs(btrfsInfo,devices);

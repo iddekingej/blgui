@@ -78,7 +78,7 @@ void TDeviceList::readPartitions(TDevice* p_device)
 }
 
 
-bool TDeviceList::readMounts(TAlias *p_aliasses)
+bool TDeviceList::readMounts()
 
 {
 	char        l_lineBuffer[256];
@@ -97,8 +97,8 @@ bool TDeviceList::readMounts(TAlias *p_aliasses)
 		l_line=l_lineBuffer;
 		l_parts=l_line.split(" ");
 		if(l_parts.size()>=3){
-			if(p_aliasses->contains(l_parts[0])){
-				l_deviceName=p_aliasses->getDeviceNameFromAliasPath(l_parts[0]);
+			if(aliasses->contains(l_parts[0])){
+				l_deviceName=aliasses->getDeviceNameFromAliasPath(l_parts[0]);
 			} else {
 				QFileInfo l_info(l_parts[0]);
 				l_deviceName=l_info.fileName();
@@ -117,16 +117,16 @@ bool TDeviceList::readMounts(TAlias *p_aliasses)
 
 void TDeviceList::readAliases()
 {
-	readAliasFromPath("label","/dev/disk/by-label/",labelIndex,aliasses);
-	readAliasFromPath("Part.label","/dev/disk/by-partlabel/",labelIndex,aliasses);
-	readAliasFromPath("uuid","/dev/disk/by-uuid/",uuidIndex,aliasses);
-	readAliasFromPath("path","/dev/disk/by-path/",pathIndex,aliasses);
-	readAliasFromPath("id","/dev/disk/by-id/",idIndex,aliasses);
-	readAliasFromPath("LVM","/dev/mapper/",lvmIndex,aliasses);
+	readAliasFromPath(QStringLiteral("label"),QStringLiteral("/dev/disk/by-label/"),labelIndex);
+	readAliasFromPath(QStringLiteral("Part.label"),QStringLiteral("/dev/disk/by-partlabel/"),labelIndex);
+	readAliasFromPath(QStringLiteral("uuid"),QStringLiteral("/dev/disk/by-uuid/"),uuidIndex);
+	readAliasFromPath(QStringLiteral("path"),QStringLiteral("/dev/disk/by-path/"),pathIndex);
+	readAliasFromPath(QStringLiteral("id"),QStringLiteral("/dev/disk/by-id/"),idIndex);
+	readAliasFromPath(QStringLiteral("LVM"),QStringLiteral("/dev/mapper/"),lvmIndex);
 	
 }
 
-void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,QMap<QString,TDeviceBase *> &p_index,TAlias *p_aliasses)
+void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,QMap<QString,TDeviceBase *> &p_index)
 {
 	QDir l_dir(p_path);
 	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
@@ -135,7 +135,7 @@ void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,
 	while(l_iter.hasNext()){		
 		l_iter.next();
 		if(l_iter.fileInfo().isSymLink()){
-			l_other=p_aliasses->getDeviceNameFromAliasPath(l_iter.filePath());			
+			l_other=aliasses->getDeviceNameFromAliasPath(l_iter.filePath());			
 			l_device=nameIndex.value(l_other);
 			if(l_device !=nullptr){
 				p_index.insert(l_iter.fileName() ,l_device);			
@@ -156,27 +156,6 @@ void TDeviceList::readLabels()
 
 void TDeviceList::readLvm()
 {
-	QDir l_dir("/dev/mapper/");
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
-	TDeviceBase  *l_deviceBase;
-	
-	while(l_iter.hasNext()){
-		l_iter.next();
-		if(l_iter.fileInfo().isSymLink()){
-				l_deviceBase=getDeviceByName(aliasses->getDeviceNameFromAliasPath(l_iter.filePath()));
-				if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
-					if(l_device != nullptr){
-						if(l_device->getModel().length()==0){
-							l_device->setModel(i18n("LVM Device"));
-							QListIterator<TDeviceBase *> l_slaves(*l_device->getSlaves());
-							while(l_slaves.hasNext()){
-								l_slaves.next()->setType(i18n("LVM member"));								
-							}
-						}
-					}
-				}
-		}
-	}
 }
 
 
@@ -184,20 +163,33 @@ void TDeviceList::readSlaves()
 {
 	QDir l_dir("/sys/block/");
 	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
-	TDeviceBase *l_device;
+	TDeviceBase *l_deviceBase;
 	TDeviceBase *l_slaveDevice;
+	bool l_isDm=false;
+	bool l_isMd=false;
 	while(l_iter.hasNext()){
 		l_iter.next();
-		l_device=nameIndex.value(l_iter.fileName());
-		if(l_device != nullptr){
+		l_deviceBase=nameIndex.value(l_iter.fileName());
+		
+		if(l_deviceBase != nullptr){
 			QDir l_slaves(l_iter.filePath());
+			l_isDm=l_slaves.exists("dm");
+			l_isMd=l_slaves.exists("md");
+			if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
+				if(l_isDm) l_device->setModel(i18n("LVM Device"));
+				if(l_isMd) l_device->setModel(i18n("Linux soft raid"));
+			}
 			l_slaves.cd("slaves");
 			if(l_slaves.exists()){
 				QDirIterator l_slaveIter(l_slaves,QDirIterator::NoIteratorFlags);
 				while(l_slaveIter.hasNext()){
 					l_slaveIter.next();
 					l_slaveDevice=nameIndex.value(l_slaveIter.fileName());
-					if(l_slaveDevice != nullptr) l_device->addSlave(l_slaveDevice);
+					if(l_slaveDevice != nullptr){
+						if(l_isDm) l_slaveDevice->setType(i18n("LVM Member"));
+						if(l_isMd) l_slaveDevice->setType(i18n("Linux raid member"));
+						l_deviceBase->addSlave(l_slaveDevice);
+					}
 				}
 			}
 		}
@@ -211,10 +203,10 @@ TDeviceList::TDeviceList(TAlias *p_aliasses)
 	aliasses=p_aliasses;
 }
 
-void TDeviceList::readInfo(TAlias* p_aliasses)
+void TDeviceList::readInfo()
 {
 	readDevices();
-	readMounts(p_aliasses);
+	readMounts();
 	readAliases();
 	readLabels();
 	readSlaves();
