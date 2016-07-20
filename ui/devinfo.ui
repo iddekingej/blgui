@@ -257,7 +257,7 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -352,6 +352,39 @@
          </item>
          <item>
           <widget class="QTableView" name="mountPoints"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_4">
+        <attribute name="title">
+         <string>Slaves</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Slaves</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="noSlaveLabel">
+           <property name="text">
+            <string>No slave found</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableView" name="slaveList"/>
          </item>
         </layout>
        </widget>

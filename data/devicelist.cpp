@@ -7,6 +7,8 @@
 #include "device.h"
 #include "alias.h"
 #include <QIODevice>
+#include <klocalizedstring.h>
+
 
 const char* MOUNTS_PATH="/proc/mounts";
 
@@ -165,7 +167,11 @@ void TDeviceList::readLvm()
 				if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
 					if(l_device != nullptr){
 						if(l_device->getModel().length()==0){
-								l_device->setModel("LVM Device");
+							l_device->setModel(i18n("LVM Device"));
+							QListIterator<TDeviceBase *> l_slaves(*l_device->getSlaves());
+							while(l_slaves.hasNext()){
+								l_slaves.next()->setType(i18n("LVM member"));								
+							}
 						}
 					}
 				}

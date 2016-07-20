@@ -25,6 +25,7 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	fillMountPoints(p_device);
 	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
 	fillAliases(ui.deviceAliases,ui.noAliasesLabel, p_device);
+	fillSlaves(p_device);
 }
 
 void TFormDevInfo::fillMountPoints(TDevice *p_device)
@@ -74,7 +75,6 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Name"))));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Partition"))));
 	ui.partInfo->setWordWrap(false);
-	ui.partInfo->setModel(l_model);	
 	ui.partInfo->resizeRowsToContents();
 	ui.partInfo->resizeColumnsToContents();	
 	l_current=p_device->getPartitionStart();
@@ -87,7 +87,26 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 		l_cnt++;
 		l_current=l_current->getNext();		
 	}	
+	ui.partInfo->setModel(l_model);	
 }
+
+//Fill slaves tab
+void TFormDevInfo::fillSlaves(TDevice* p_device)
+{
+	QStandardItemModel *l_model=new QStandardItemModel(p_device->getSlaves()->count(),1,this);
+	
+	QListIterator<TDeviceBase *> l_item(*p_device->getSlaves());
+	TDeviceBase                *l_device;
+	int l_cnt=0;
+	l_model->setHorizontalHeaderItem(0,new  QStandardItem(i18n("Slave name")));
+	while(l_item.hasNext()){
+		l_device=l_item.next();
+		l_model->setItem(l_cnt,0,new QStandardItem(l_device->getName()));
+		l_cnt++;
+	}
+	ui.slaveList->setModel(l_model);
+}
+
 
 void TFormDevInfo::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list)
 {
