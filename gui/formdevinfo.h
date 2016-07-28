@@ -14,6 +14,10 @@ private:
 	void fillParitions(TDevice *p_device);
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list);	
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
+	//fill mount fillmount
+	//for device
+	bool fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *p_device);
+	//for device and all mount points
 	void fillMountPoints(TDevice *p_device);
 	//Fill slave tabs
 	void fillSlaves(TDevice *p_device); 

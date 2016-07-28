@@ -34,42 +34,42 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	fillSlaves(p_device);
 }
 
-void TFormDevInfo::fillMountPoints(TDevice *p_device)
+bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *p_device)
 {
-	QStandardItemModel *l_model=new QStandardItemModel(1,2,this);
 	TLinkListItem<TMount> *l_current=p_device->getMountStart();
-	TLinkListItem<TPartition> * l_partition=p_device->getPartitionStart();
-	QString l_value;
+	int  l_cnt=p_model->rowCount();
 	bool l_found=false;
-	int l_cnt=0;
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Device"))));
-	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Mountpoint"))));
 	while(l_current != nullptr){
-		l_model->setItem(l_cnt,0,new QStandardItem(p_device->getName()));
-		l_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getMountPoint()));
+		p_model->setItem(l_cnt,0,new QStandardItem(p_device->getName()));
+		p_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getMountPoint()));
 		l_found=true;
 		l_cnt++;
 		l_current=l_current->getNext();
-	}
+	}	
+	return  l_found;
+}
+
+void TFormDevInfo::fillMountPoints(TDevice *p_device)
+{
+	QStandardItemModel        *l_model=new QStandardItemModel(0,2,this);
+	TLinkListItem<TPartition> *l_partition=p_device->getPartitionStart();
+	QString l_value;
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Device"))));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Mount point"))));
+
+	bool l_found=fillMountPointItems(l_model,p_device);
 	while(l_partition != nullptr){
-
-		l_current=l_partition->getItem()->getMountStart();
-		while(l_current != nullptr){
-			l_model->setItem(l_cnt,0,new QStandardItem(l_partition->getItem()->getName()));
-			l_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getMountPoint()));
-			l_found=true;
-			l_cnt++;
-			l_current=l_current->getNext();
-
-		}
+		if(fillMountPointItems(l_model,l_partition->getItem())) l_found=true;
 		l_partition=l_partition->getNext();
 	}
 
 	ui.mountPoints->setModel(l_model);
 	ui.mountPoints->setVisible(l_found);
 	ui.noMountPointsLabel->setVisible(!l_found);
-	ui.mountPoints->resizeRowsToContents();
-	ui.mountPoints->resizeColumnsToContents();	
+	if(l_found){
+		ui.mountPoints->resizeRowsToContents();
+		ui.mountPoints->resizeColumnsToContents();	
+	}
 }
 
 void TFormDevInfo::fillParitions(TDevice* p_device)
@@ -85,8 +85,7 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	ui.partInfo->resizeColumnsToContents();	
 	l_current=p_device->getPartitionStart();
 	fillHeader(2,l_model);
-	while(l_current != nullptr){
-			
+	while(l_current != nullptr){			
 		l_deviceRow.clear();
 		l_current->getItem()->fillDataRow(l_deviceRow);
 		displayRow(2,l_model,l_cnt,l_deviceRow);		
@@ -99,20 +98,20 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 //Fill slaves tab
 void TFormDevInfo::fillSlaves(TDevice* p_device)
 {
-	QStandardItemModel *l_model=new QStandardItemModel(p_device->getSlaves()->count(),1,this);
 	
 	
 	if(p_device->getSlaves()->length()==0){
 		ui.slaveList->setVisible(false);
 	} else {
 		ui.noSlaveLabel->setVisible(false);
+		QStandardItemModel          *l_model=new QStandardItemModel(p_device->getSlaves()->count(),1,this);
 		QListIterator<TDeviceBase *> l_item(*p_device->getSlaves());
-		TDeviceBase                *l_device;
+		TDeviceBase                 *l_device;
 		int l_cnt=0;
 		l_model->setHorizontalHeaderItem(0,new  QStandardItem(i18n("Slave name")));
 		while(l_item.hasNext()){
 			l_device=l_item.next();
-			l_model->setItem(l_cnt,0,new QStandardItem(l_device->getName()));
+			l_model->setItem(l_cnt,new QStandardItem(l_device->getName()));
 			l_cnt++;
 		}
 		ui.slaveList->setModel(l_model);
