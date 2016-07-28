@@ -27,8 +27,8 @@ void TFormBaseDevInfo::fillAliases(QTableView *p_view,QLabel *p_noAlias,TDeviceB
 		p_view->setVisible(false);
 	}else{
 		int l_cnt=0;	
-		l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Type"))));
-		l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Alias"))));
+		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Type")));
+		l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Alias")));
 		while(l_current !=nullptr){
 			l_model->setItem(l_cnt,0,new QStandardItem(l_current->getItem()->getType()));
 			l_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getAlias()));

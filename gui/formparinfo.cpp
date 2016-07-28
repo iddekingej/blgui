@@ -22,7 +22,7 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 	if(l_current==nullptr){
 		ui.mountPoints->setVisible(false);
 	} else {
-		l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Mountpoint"))));
+		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Mountpoint")));
 		int l_cnt=0;
 		while(l_current){
 			l_model->setItem(l_cnt,0,new QStandardItem(l_current->getItem()->getMountPoint()));

@@ -35,33 +35,29 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 }
 
 bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *p_device)
-{
-	TLinkListItem<TMount> *l_current=p_device->getMountStart();
+{	
 	int  l_cnt=p_model->rowCount();
 	bool l_found=false;
-	while(l_current != nullptr){
+	LOOPLL(TMount,p_device->getMountStart(),l_current)
 		p_model->setItem(l_cnt,0,new QStandardItem(p_device->getName()));
 		p_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getMountPoint()));
 		l_found=true;
 		l_cnt++;
-		l_current=l_current->getNext();
-	}	
+	LOOPLLEND(l_current);	
 	return  l_found;
 }
 
 void TFormDevInfo::fillMountPoints(TDevice *p_device)
 {
 	QStandardItemModel        *l_model=new QStandardItemModel(0,2,this);
-	TLinkListItem<TPartition> *l_partition=p_device->getPartitionStart();
 	QString l_value;
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Device"))));
-	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Mount point"))));
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Mount point")));
 
 	bool l_found=fillMountPointItems(l_model,p_device);
-	while(l_partition != nullptr){
+	LOOPLL(TPartition,p_device->getPartitionStart(),l_partition)
 		if(fillMountPointItems(l_model,l_partition->getItem())) l_found=true;
-		l_partition=l_partition->getNext();
-	}
+	LOOPLLEND(l_partition)
 
 	ui.mountPoints->setModel(l_model);
 	ui.mountPoints->setVisible(l_found);
@@ -74,31 +70,25 @@ void TFormDevInfo::fillMountPoints(TDevice *p_device)
 
 void TFormDevInfo::fillParitions(TDevice* p_device)
 {
-	TLinkListItem<TPartition> *l_current;
-	int l_cnt=0;
 	QStringList l_deviceRow;
 	QStandardItemModel *l_model=new QStandardItemModel(p_device->getNumPartitions(),1,this);
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Name"))));
-	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Partition"))));
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Name")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Partition")));
 	ui.partInfo->setWordWrap(false);
 	ui.partInfo->resizeRowsToContents();
-	ui.partInfo->resizeColumnsToContents();	
-	l_current=p_device->getPartitionStart();
+	ui.partInfo->resizeColumnsToContents();		
 	fillHeader(2,l_model);
-	while(l_current != nullptr){			
+	LOOPLLN(TPartition,p_device->getPartitionStart(),l_current)	
 		l_deviceRow.clear();
 		l_current->getItem()->fillDataRow(l_deviceRow);
 		displayRow(2,l_model,l_cnt,l_deviceRow);		
-		l_cnt++;
-		l_current=l_current->getNext();		
-	}	
+	LOOPLLNEND(l_current)
 	ui.partInfo->setModel(l_model);	
 }
 
 //Fill slaves tab
 void TFormDevInfo::fillSlaves(TDevice* p_device)
 {
-	
 	
 	if(p_device->getSlaves()->length()==0){
 		ui.slaveList->setVisible(false);

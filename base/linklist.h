@@ -91,6 +91,28 @@ public:
 };
 
 
+#define LOOPLL(p_type,p_current,p_name) \
+{\
+	TLinkListItem<p_type> *p_name=(p_current);\
+	while(p_name){
+		
+#define LOOPLLEND(p_name) \
+	p_name=p_name->getNext();\
+	}\
+}
+
+
+#define LOOPLLN(p_type,p_current,p_name) \
+{\
+	int l_cnt=0;\
+	TLinkListItem<p_type> *p_name=(p_current);\
+	while(p_name){
+		
+#define LOOPLLNEND(p_name) \
+	p_name=p_name->getNext();\
+	l_cnt++;\
+	}\
+}
 
 
 

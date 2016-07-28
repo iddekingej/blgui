@@ -45,11 +45,11 @@ void TMainWindow::fillRaid(TDeviceInfo *p_info)
 	
 	QStandardItemModel *l_model=new QStandardItemModel(p_info->getRaidList()->getLength(),4,this);
 	
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(QString(i18n("Device"))));
-	l_model->setHorizontalHeaderItem(1,new QStandardItem(QString(i18n("Raid members"))));
-	l_model->setHorizontalHeaderItem(2,new QStandardItem(QString(i18n("Raid level"))));
-	l_model->setHorizontalHeaderItem(3,new QStandardItem(QString(i18n("Raid type"))));
-	l_model->setHorizontalHeaderItem(4,new QStandardItem(QString(i18n("Mounted point"))));
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Raid members")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Raid level")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Raid type")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Mounted point")));
 	
 	l_item=p_info->getRaidList()->getTop();
 	
@@ -103,43 +103,44 @@ void TMainWindow::fillDevice(TDeviceInfo *p_info)
 {
 	const QMap<QString,TDeviceBase *> *l_map;
 	TDeviceList *l_devices=p_info->getDevices();
-	
-	switch(ui.itemSource->currentIndex()){
-		case 0:l_map=l_devices->getNameIndex();break;
-		case 1:l_map=l_devices->getIdIndex();break;
-		case 2:l_map=l_devices->getLabelIndex();break;
-		case 3:l_map=l_devices->getUuidIndex();break;
-		case 4:l_map=l_devices->getPathIndex();break;
-		case 5:l_map=l_devices->getLvmIndex();break;
+	int l_selectedType=ui.itemSource->currentIndex();
+	QString l_extraLabel;
+
+	switch(l_selectedType){
+		case 1:	l_map=l_devices->getIdIndex();
+			l_extraLabel=i18n("Id");
+			break;
+		case 2:	l_map=l_devices->getLabelIndex();
+			l_extraLabel=i18n("Label");
+			break;
+		case 3:	l_map=l_devices->getUuidIndex();
+			l_extraLabel=i18n("Uuid");
+			break;
+		case 4:	l_map=l_devices->getPathIndex();
+			l_extraLabel=i18n("Path");
+			break;
+		case 5:	l_map=l_devices->getLvmIndex();
+			l_extraLabel=i18n("LVM");
+			break;
 		default:
 			l_map=l_devices->getNameIndex();
 	}
 	
-	QStandardItemModel *l_model=new QStandardItemModel(l_map->count(),1,this);
+	QStandardItemModel *l_model=new QStandardItemModel(l_map->count(),1,this);	
 	devModel=l_model;
 	
 	QStringList l_deviceRow;
 	
 	int l_cnt=0;
 	int l_fixed=0;
-	QString l_extraLabel;
 	
-	switch(ui.itemSource->currentIndex()){		
-		case 1:l_extraLabel=i18n("Id");break;
-		case 2:l_extraLabel=i18n("Label");break;
-		case 3:l_extraLabel=i18n("Uuid");break;
-		case 4:l_extraLabel=i18n("Path");break;
-		case 5:l_extraLabel=i18n("LVM");break;
-		default:
-			break;
-	}
 	if(l_extraLabel.length()>0){
 		l_model->setHorizontalHeaderItem(l_fixed,new QStandardItem(l_extraLabel));
 		l_fixed++;
 	}
-	l_model->setHorizontalHeaderItem(l_fixed,new QStandardItem(QString(i18n("Name"))));
+	l_model->setHorizontalHeaderItem(l_fixed,new QStandardItem(i18n("Name")));
 	l_fixed++;
-	l_model->setHorizontalHeaderItem(l_fixed,new QStandardItem(QString(i18n("Partition"))));
+	l_model->setHorizontalHeaderItem(l_fixed,new QStandardItem(i18n("Partition")));
 	l_fixed++;
 
 	fillHeader(l_fixed,l_model);
@@ -148,7 +149,7 @@ void TMainWindow::fillDevice(TDeviceInfo *p_info)
 	while(l_mi.hasNext()){
 		l_mi.next();		
 		l_deviceRow.clear();
-		if(ui.itemSource->currentIndex()>0){
+		if(l_selectedType>0){
 			l_deviceRow << l_mi.key();
 		
 		}
@@ -219,6 +220,12 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	ui.itemSource->addItem(i18n("Path"));
 	ui.diskList->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	refresh();
+}
+
+TMainWindow::~TMainWindow()
+{
+	if(info)delete info;
+	if(devModel) delete devModel;
 }
 
 void TMainWindow::showAbout()

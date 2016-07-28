@@ -31,6 +31,7 @@ private:
 public:
 
 	TMainWindow(QWidget *p_parent=NULL);
+	~TMainWindow();
 public slots:
 	void refresh();
 
