@@ -41,25 +41,28 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 KI18N_WRAP_UI(ding_ui_h ui/main.ui ui/fields.ui ui/devinfo.ui ui/parinfo.ui ui/about.ui)
 
 set(ding_SRCS   
-	gui/about.cpp
-	gui/formparinfo.cpp 
-	gui/formbasedevinfo.cpp 
-	data/devicealias.cpp data/alias.cpp 
-	gui/formdevinfo.cpp 
+	dingui.cpp 
+	base/globals.cpp 
+	base/linklist.cpp 
+	base/utils.cpp
+	data/devicealias.cpp 
+	data/alias.cpp 	
 	data/device.cpp 
 	data/devicelist.cpp 
-	data/mtabdevice.cpp 
+	data/mount.cpp
+	data/mtab.cpp
 	data/partition.cpp 
 	data/devicebase.cpp 
 	data/deviceinfo.cpp 
-	dingui.cpp 
-	gui/fieldconfig.cpp 
-	base/globals.cpp 
-	base/linklist.cpp 
-	gui/mainwindow.cpp 
 	data/raid.cpp 
 	data/btrfs.cpp 
-	base/utils.cpp)
+	gui/about.cpp
+	gui/formparinfo.cpp 
+	gui/formbasedevinfo.cpp 
+	gui/formdevinfo.cpp 
+	gui/fieldconfig.cpp 	
+	gui/mainwindow.cpp 
+)
 
 set(ding_SRCS  ${ding_SRCS} ${ding_ui_h})
 

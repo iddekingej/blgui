@@ -2,7 +2,7 @@
 #define __PARTITION_H_
 #include <QString>
 #include "devicebase.h"
-#include "mtabdevice.h"
+#include "mount.h"
 
 class TPartition:public TDeviceBase
 {

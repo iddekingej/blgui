@@ -8,7 +8,7 @@
 #include "base/globals.h"
 #include "data/partition.h"
 #include "base/linklist.h"
-#include "data/mtabdevice.h"
+#include "data/mount.h"
 #include "data/devicealias.h"
 
 TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()

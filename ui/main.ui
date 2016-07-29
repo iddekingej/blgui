@@ -128,6 +128,16 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>MTab</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QTableView" name="mtabList"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>

@@ -14,6 +14,7 @@
 #include "raid.h"
 #include "device.h"
 #include "devicelist.h"
+#include "mtab.h"
 
 
 class TDeviceInfo
@@ -23,6 +24,7 @@ private:
 	TDeviceList *devices;
 	TAlias      *aliasses;
 	TRaidInfo   *raidList;
+	TMTab       *mtab;
 	blkid_cache blkidCache;
 
 	void procesAliasses(const QString &p_path);
@@ -42,6 +44,10 @@ public:
 		return raidList;
 	}
 	
+	inline TMTab *getMTab()
+	{
+		return mtab;
+	}
 	
 	void getDisks();	
 	TDeviceInfo();

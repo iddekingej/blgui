@@ -12,6 +12,7 @@
 #include "raid.h"
 #include "device.h"
 #include "partition.h"
+#include "mtab.h"
 
 
 QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
@@ -54,6 +55,7 @@ void TDeviceInfo::getDisks()
 	btrfsInfo->readInfo(aliasses);
 	raidList->processMD(devices);
 	raidList->processBtrfs(btrfsInfo,devices);
+	mtab->processInfo();
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
 	while(l_mi.hasNext()){
@@ -82,11 +84,13 @@ TDeviceInfo::TDeviceInfo()
 	aliasses =new TAlias();
 	devices  =new TDeviceList(aliasses);
 	raidList =new TRaidInfo();
+	mtab     =new TMTab(devices);
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete btrfsInfo;
 	delete devices;
 	delete aliasses;
 	delete raidList;
+	delete mtab;
 	blkid_put_cache(blkidCache);
 }

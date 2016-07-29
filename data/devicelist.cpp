@@ -193,11 +193,45 @@ void TDeviceList::readLVM()
 		
 }
 
+TDeviceBase* TDeviceList::findDeviceByDevPath(const QString& p_devPath)
+{
+	QString l_name=aliasses->getDeviceNameFromAliasPath(p_devPath);
+	if(l_name.length()==0){
+		return  deviceByDevPath.value(p_devPath);
+
+	} else {
+		return getDeviceByName(l_name);
+	}
+}
 
 TDeviceList::TDeviceList(TAlias *p_aliasses)
 {
 	aliasses=p_aliasses;
 }
+
+void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
+{
+	TDeviceBase *l_copyFrom=nullptr;
+	TDeviceBase *l_item;
+	QListIterator<TDeviceBase *> l_iter(p_list);
+	while(l_iter.hasNext()){
+		l_item=l_iter.next();
+		if(l_item->isMounted()){
+			l_copyFrom=l_item;
+			break;
+		}
+	}
+	if(l_copyFrom != nullptr){
+		l_iter.toFront();
+		while(l_iter.hasNext()){
+			l_item=l_iter.next();
+			if(l_item != l_copyFrom){
+				l_item->copyMount(l_copyFrom->getMountStart());
+			}
+		}
+	}
+}
+
 
 void TDeviceList::readInfo()
 {

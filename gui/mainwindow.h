@@ -27,6 +27,8 @@ private:
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
 	void fillDevice(TDeviceInfo *p_info);
 	void fillRaid(TDeviceInfo *p_info);
+	void fillMtab(TDeviceInfo *p_info);
+
 	
 public:
 

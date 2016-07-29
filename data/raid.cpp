@@ -62,18 +62,22 @@ void TRaidInfo::processBtrfs(TBtrfsInfo* p_info,TDeviceList *p_list)
 	TDeviceBase *l_device;
 	TDeviceBase *l_slave;
 	TRaidDevice *l_raid;
+	QList<TDeviceBase *> l_slaveDevices;
 	TLinkListItem<TBtrfsItem> *l_current=p_info->getStart();
 	while(l_current != nullptr){
 		if(l_current->getItem()->isMultiDev()){
 			l_device=p_list->getDeviceByName(l_current->getItem()->getFs());
 			l_raid=AddRaidDevice(l_device,"btrfs",l_current->getItem()->getRaidLevel());
 			QStringListIterator l_iter(l_current->getItem()->getDevices());
+			l_slaveDevices.clear();
 			while(l_iter.hasNext()){
 				l_slave=p_list->getDeviceByName(l_iter.next());
 				if(l_slave){
 					l_raid->addRaidDevice(l_slave);		
+					l_slaveDevices << l_slave;
 				}
 			}
+			p_list->sameMountPoint(l_slaveDevices);
 		}
 		l_current=l_current->getNext();
 	}

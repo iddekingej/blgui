@@ -5,7 +5,7 @@
 #include <QMap>
 #include "base/linklist.h"
 #include "base/utils.h"
-#include "mtabdevice.h"
+#include "mount.h"
 #include "devicealias.h"
 class TDeviceBase
 {
@@ -81,7 +81,8 @@ public:
 	}
 	
 	virtual bool hasPartitions()=0;
-	
+	bool isMountedOn(const QString &p_path);
+	bool isMounted();
 	QString getMounts();
 	const QString getSlavesString();
 	virtual void fillDataRow(QStringList &p_list)=0;
@@ -89,6 +90,7 @@ public:
 	virtual ~TDeviceBase();
 	void addMount(const QString &p_type,const QString &p_mountPoint);
 	void addAlias(const QString &p_type,const QString p_alias);
+	void copyMount(TLinkListItem<TMount> *p_mountStart);
 };
 
 #endif

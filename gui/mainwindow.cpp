@@ -15,6 +15,8 @@
 #include "mainwindow.h"
 #include "about.h"
 #include "base/utils.h"
+#include "data/mtab.h"
+
 QApplication *g_app;
 
 void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
@@ -30,6 +32,47 @@ void TMainWindow::refresh()
 	info->getDisks();
 	fillDevice(info);
 	fillRaid(info);	
+	fillMtab(info);
+}
+
+void TMainWindow::fillMtab(TDeviceInfo *p_info)
+{
+	TLinkListItem<TMTabEntry> *l_current=p_info->getMTab()->getEntriesStart();
+	QStandardItemModel *l_model=new QStandardItemModel(0,6,this);
+	TMTabEntry *l_info;
+	QString l_note;
+	int l_cnt=0;
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Options")));
+
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Real device")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Mount point")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Type")));
+	l_model->setHorizontalHeaderItem(5,new QStandardItem(i18n("Options")));
+	while(l_current){
+		l_info=l_current->getItem();
+		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getDevice()));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():""));
+		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getMountPoint()));
+		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getType()));
+		l_model->setItem(l_cnt,5,new QStandardItem(l_info->getOptions()));		
+		switch(l_info->isMounted()){
+			case TMTabEntry::NOTMOUNTED : l_note = i18n("Not mounted\n");break;
+			case TMTabEntry::DIFMOUNTED : l_note = i18n("Mounted on different path \n");break;
+			default:
+				l_note="";
+		}
+		if(l_info->getRealDevice() != nullptr){	
+			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_info->getRealDevice()->getType());
+			if(l_info->getRealDevice()->hasPartitions()) l_note+=i18n("Device not mountable (has partitions)");
+		}
+		l_model->setItem(l_cnt,0,new QStandardItem(l_note));
+		l_current=l_current->getNext();
+		l_cnt++;
+	}
+	ui.mtabList->setModel(l_model);
+	ui.mtabList->resizeRowsToContents();
+	ui.mtabList->resizeColumnsToContents();
 }
 
 //Fill Raid TAb
