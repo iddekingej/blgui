@@ -46,6 +46,7 @@ void TDeviceInfo::getDisks()
 	TDeviceBase *l_db;
 	QString l_partLabel;
 	QString l_devicePath;
+	char *l_label;
 
 	if (blkid_get_cache(&blkidCache, NULL) < 0){
 		printf("Failed to cache\n");
@@ -69,7 +70,9 @@ void TDeviceInfo::getDisks()
 		}
 		if(l_db->getLabel().length()==0){
 			l_devicePath=l_db->getDevPath();
-			l_partLabel=QString(blkid_get_tag_value(blkidCache,"PARTLABEL",l_devicePath.toUtf8().data()));
+			l_label=blkid_get_tag_value(blkidCache,"PARTLABEL",l_devicePath.toUtf8().data());
+			l_partLabel=l_label;
+			free(l_label);
 			l_db->setLabel(l_partLabel);
 		}
 	}

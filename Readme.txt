@@ -15,12 +15,30 @@ BUILDING
 
 For building this program the following is necessary:
 
-*QT 5 +dev find_package
-*GetText +dev packages
-*KDE + dev packages v 5.2 or higher
-* extra-cmake-modules
-*libblkid + dev packages
-*CMake and c++
+extra-cmake-modules
+cmake and c++ 
+Gettext
+
+
+KF5 (kde) +Develop packages:
+=========================
+libKF5ConfigCore
+libKF5CoreAddons
+libKF5I18n
+
+QT5 + Develop packages
+=======================
+libQt5Core
+libQt5Core
+libQt5Core
+libQt5Gui
+libQt5Widgets
+
+
+Blkid+ Develop packages
+==========================
+libblkid
+
 
 Building the exec_program:
 * cmake.
@@ -42,6 +60,8 @@ This program displays information about:
 And displays information about the following raid system 
 * MD Software raid
 * BTRFS
+
+Displays information about fstab
 
 This program displays the following information:
 Devices:

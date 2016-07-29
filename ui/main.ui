@@ -130,7 +130,7 @@
         </widget>
         <widget class="QWidget" name="tab">
          <attribute name="title">
-          <string>MTab</string>
+          <string>Fstab</string>
          </attribute>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
