@@ -1,0 +1,12 @@
+# Hashes of file build rules.
+032cb7293281d86b38556e158daa2f94 CMakeFiles/ding_automoc
+6462feb4ca3024deaaf88a6b4af308f7 CMakeFiles/uninstall
+1276375f111a39d5575131a66c4d8552 po/en/CMakeFiles/pofiles_2
+c34450c82016595f1630e89b1dd6e381 po/en/ding.gmo
+dd75f4e50394bdd08427834e58085e64 po/nl/CMakeFiles/pofiles_1
+10e6cf0b8983c084ab86d957c277906c po/nl/ding.gmo
+de724dd885e82e2d353878eda509747e ui_about.h
+595743748da84dd67ba86714b8914ca0 ui_devinfo.h
+b59eb94dabf360371d36470ef8c60c83 ui_fields.h
+493893c1c0f984dd85960b37d41b2e51 ui_main.h
+da921cc1f4ac011978db22baa1d20c01 ui_parinfo.h

@@ -1,0 +1,1878 @@
+desc: (none)
+cmd: ./ding
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=15885467
+mem_heap_B=72704
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=50556176
+mem_heap_B=705668
+mem_heap_extra_B=40212
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=75672742
+mem_heap_B=777885
+mem_heap_extra_B=52627
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=117282126
+mem_heap_B=1280637
+mem_heap_extra_B=2414931
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=147506016
+mem_heap_B=1599542
+mem_heap_extra_B=1589210
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=187982893
+mem_heap_B=2464208
+mem_heap_extra_B=1830592
+mem_stacks_B=0
+heap_tree=detailed
+n12: 2464208 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 564995 in 714 places, all below massif's threshold (01.00%)
+ n2: 442624 0x1200F8A8: ???
+  n1: 442048 0x1200B870: ???
+   n1: 442048 0x1200BB0D: ???
+    n1: 442048 0xFAD4F9B: ???
+     n1: 442048 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+      n1: 442048 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+       n1: 442048 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+        n1: 442048 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+         n1: 442048 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+          n1: 442048 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+           n1: 442048 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+            n1: 442048 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+             n1: 442048 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+              n1: 442048 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+               n1: 442048 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                n0: 442048 0x43110D: main (in /data/files/sources/ding/build/ding)
+  n0: 576 in 2 places, all below massif's threshold (01.00%)
+ n1: 287232 0x1200F1F8: ???
+  n2: 287232 0x1200F913: ???
+   n1: 282624 0x1200B870: ???
+    n1: 282624 0x1200BB0D: ???
+     n1: 282624 0xFAD4F9B: ???
+      n1: 282624 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+       n1: 282624 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+        n1: 282624 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+         n1: 282624 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+          n1: 282624 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+           n1: 282624 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+            n1: 282624 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+             n1: 282624 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+              n1: 282624 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+               n1: 282624 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                n1: 282624 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                 n0: 282624 0x43110D: main (in /data/files/sources/ding/build/ding)
+   n0: 4608 in 2 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 2 places, all below massif's threshold (01.00%)
+ n2: 223928 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 85240 in 28 places, all below massif's threshold (01.00%)
+ n3: 181866 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n0: 71527 in 43 places, all below massif's threshold (01.00%)
+  n1: 58696 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n0: 58696 in 4 places, all below massif's threshold (01.00%)
+  n1: 51643 0x67B472C: QByteArray::QByteArray(char const*, int) (qarraydata.h:222)
+   n0: 51643 in 46 places, all below massif's threshold (01.00%)
+ n2: 131238 0x76D1368: strdup (in /lib64/libc-2.19.so)
+  n1: 91324 0x1200EB5B: ???
+   n2: 91324 0x1200F8C3: ???
+    n1: 90896 0x1200B870: ???
+     n1: 90896 0x1200BB0D: ???
+      n1: 90896 0xFAD4F9B: ???
+       n1: 90896 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+        n1: 90896 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+         n1: 90896 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+          n1: 90896 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+           n1: 90896 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+            n1: 90896 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+             n1: 90896 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+              n1: 90896 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+               n1: 90896 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                n1: 90896 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                 n1: 90896 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                  n0: 90896 0x43110D: main (in /data/files/sources/ding/build/ding)
+    n0: 428 in 2 places, all below massif's threshold (01.00%)
+  n0: 39914 in 41 places, all below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n2: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n1: 68836 0x60EEFDF: QPlatformThemeFactory::create(QString const&, QString const&) (qfactoryloader_p.h:101)
+                  n1: 68836 0x60F95E6: QGuiApplicationPrivate::createPlatformIntegration() (qguiapplication.cpp:1135)
+                   n1: 68836 0x60F9F5B: QGuiApplicationPrivate::createEventDispatcher() (qguiapplication.cpp:1280)
+                    n1: 68836 0x696E516: QCoreApplicationPrivate::init() (qcoreapplication.cpp:787)
+                     n1: 68836 0x60FA83A: QGuiApplicationPrivate::init() (qguiapplication.cpp:1303)
+                      n1: 68836 0x4F94187: QApplicationPrivate::init() (qapplication.cpp:583)
+                       n0: 68836 0x430DD8: main (in /data/files/sources/ding/build/ding)
+                 n0: 30814 in 3 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+ n1: 72704 0x6E4566E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:117)
+  n1: 72704 0x400E8E8: call_init.part.0 (in /lib64/ld-2.19.so)
+   n1: 72704 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+    n0: 72704 0x40011C8: ??? (in /lib64/ld-2.19.so)
+ n1: 55032 0x120131F3: ???
+  n0: 55032 in 8 places, all below massif's threshold (01.00%)
+ n1: 52992 0x12009D7C: ???
+  n1: 52992 0x1200A0CC: ???
+   n1: 52992 0x1200EB08: ???
+    n1: 52992 0x1200F8C3: ???
+     n1: 52992 0x1200B870: ???
+      n1: 52992 0x1200BB0D: ???
+       n1: 52992 0xFAD4F9B: ???
+        n1: 52992 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 52992 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 52992 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 52992 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 52992 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 52992 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 52992 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 52992 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 52992 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 52992 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 52992 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 52992 0x43110D: main (in /data/files/sources/ding/build/ding)
+#-----------
+snapshot=7
+#-----------
+time=223830343
+mem_heap_B=1737569
+mem_heap_extra_B=1647439
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=259674633
+mem_heap_B=1740548
+mem_heap_extra_B=1649492
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=300819495
+mem_heap_B=2501616
+mem_heap_extra_B=1685512
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=333055350
+mem_heap_B=2669133
+mem_heap_extra_B=1775339
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=368789389
+mem_heap_B=2672112
+mem_heap_extra_B=1777360
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=402310709
+mem_heap_B=2778882
+mem_heap_extra_B=1781854
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=433077761
+mem_heap_B=2930066
+mem_heap_extra_B=1812046
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=459223858
+mem_heap_B=5566921
+mem_heap_extra_B=1819791
+mem_stacks_B=0
+heap_tree=peak
+n10: 5566921 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n2: 2507120 0x857A559: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 2507120 0x85931EC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+   n1: 2507120 0x858DC10: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+    n2: 2507120 0x852BBE0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 2507120 0x8555B23: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 2507120 0x854F2EC: glXChooseFBConfig (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 2507120 0x13B90295: ???
+        n1: 2507120 0x13B905BB: ???
+         n1: 2507120 0x13B8CE27: ???
+          n1: 2507120 0xFABC1DF: ???
+           n1: 2507120 0xFAA7ADF: ???
+            n1: 2507120 0x6107B58: QWindowPrivate::create(bool) (qwindow.cpp:404)
+             n1: 2507120 0x4FC78F9: QWidgetPrivate::create_sys(unsigned long long, bool, bool) (qwidget.cpp:1476)
+              n1: 2507120 0x4FC70B7: QWidget::create(unsigned long long, bool, bool) (qwidget.cpp:1339)
+               n1: 2507120 0x4FD28F8: QWidget::setVisible(bool) (qwidget.cpp:8157)
+                n0: 2507120 0x43111D: main (in /data/files/sources/ding/build/ding)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+  n0: 0 in 1 place, below massif's threshold (01.00%)
+ n0: 1361394 in 898 places, all below massif's threshold (01.00%)
+ n4: 654910 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n0: 199572 in 57 places, all below massif's threshold (01.00%)
+  n2: 196698 0x6834B61: QString::QString(int, Qt::Initialization) (qarraydata.h:222)
+   n1: 144134 0x69BE357: QUtf8::convertToUnicode(char const*, int, QTextCodec::ConverterState*) (qutfcodec.cpp:342)
+    n2: 144134 0x69BEA5F: QUtf8Codec::convertToUnicode(char const*, int, QTextCodec::ConverterState*) const (qutfcodec.cpp:701)
+     n2: 144134 0x683B347: QString::fromLocal8Bit_helper(char const*, int) (qtextcodec.h:109)
+      n1: 84446 0xFAD48E7: ???
+       n1: 84446 0xFAD4FD2: ???
+        n1: 84446 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 84446 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 84446 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 84446 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 84446 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 84446 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 84446 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 84446 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 84446 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 84446 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 84446 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 84446 0x43110D: main (in /data/files/sources/ding/build/ding)
+      n0: 59688 in 15 places, all below massif's threshold (01.00%)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 52564 in 52 places, all below massif's threshold (01.00%)
+  n2: 173440 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n2: 116188 0x6834A46: QString::mid(int, int) const (qstring.cpp:4380)
+    n2: 89942 0x68F6FEA: QFileSystemEntry::fileName() const (qfilesystementry.cpp:192)
+     n2: 89942 0x68A1E57: QFileInfo::fileName() const (qfileinfo.cpp:756)
+      n1: 89806 0x6898C4E: QDirIterator::fileName() const (qdiriterator.cpp:521)
+       n0: 89806 in 14 places, all below massif's threshold (01.00%)
+      n0: 136 in 6 places, all below massif's threshold (01.00%)
+     n0: 0 in 3 places, all below massif's threshold (01.00%)
+    n0: 26246 in 10 places, all below massif's threshold (01.00%)
+   n0: 57252 in 5 places, all below massif's threshold (01.00%)
+  n1: 85200 0x6416FC9: QVector<QStandardItemData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>) (qarraydata.h:222)
+   n1: 85200 0x64172CF: QVector<QStandardItemData>::append(QStandardItemData&&) (qvector.h:662)
+    n1: 85200 0x64130D4: QStandardItem::setData(QVariant const&, int) (qstandarditemmodel.cpp:841)
+     n0: 85200 in 3 places, all below massif's threshold (01.00%)
+ n2: 265864 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 127176 in 35 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 2 places, all below massif's threshold (01.00%)
+ n1: 134528 0x6140B86: QImageData::create(QSize const&, QImage::Format) (qimage.cpp:156)
+  n2: 134528 0x6140D99: QImage::QImage(int, int, QImage::Format) (qimage.cpp:772)
+   n1: 132224 0x617435F: QRasterPlatformPixmap::resize(int, int) (qpixmap_raster.cpp:104)
+    n1: 132224 0x616FA8A: QPlatformPixmap::create(int, int, QPlatformPixmap::PixelType) (qplatformpixmap.cpp:62)
+     n1: 132224 0x6167645: QPixmap::doInit(int, int, int) (qpixmap.cpp:95)
+      n2: 132224 0x61677C8: QPixmap::QPixmap(int, int) (qpixmap.cpp:133)
+       n1: 132224 0x1CFA5C34: ???
+        n1: 132224 0x1CFA6AC9: ???
+         n1: 132224 0x1CFB452B: ???
+          n1: 132224 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+           n1: 132224 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+            n1: 132224 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+             n1: 132224 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+              n0: 132224 0x43110D: main (in /data/files/sources/ding/build/ding)
+       n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 2304 in 1 place, below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n1: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n0: 99650 in 4 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n2: 101184 0x640E4C6: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.cpp:718)
+  n1: 80640 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+   n1: 80640 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+    n1: 80640 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+     n0: 80640 in 2 places, all below massif's threshold (01.00%)
+  n0: 20544 in 15 places, all below massif's threshold (01.00%)
+ n1: 90324 0x6272012: _hb_qt_reference_table(hb_face_t*, unsigned int, void*) (qharfbuzzng.cpp:639)
+  n2: 90324 0x8075A94: hb_face_t::reference_table(unsigned int) const (hb-face-private.hh:72)
+   n1: 84692 0x8074519: _hb_ot_layout_create(hb_face_t*) (hb-ot-layout.cc:59)
+    n1: 84692 0x806B418: hb_shape_plan_create (hb-shaper-list.hh:43)
+     n1: 84692 0x806BF28: hb_shape_plan_create_cached (hb-shape-plan.cc:453)
+      n1: 84692 0x806AF7B: hb_shape_full (hb-shape.cc:379)
+       n1: 84692 0x61C38DA: QTextEngine::shapeTextWithHarfbuzzNG(QScriptItem const&, unsigned short const*, int, QFontEngine*, QVector<unsigned int> const&, bool, bool) const (qtextengine.cpp:1214)
+        n1: 84692 0x61C65AC: QTextEngine::shapeText(int) const (qtextengine.cpp:1068)
+         n1: 84692 0x61C7211: QTextEngine::shape(int) const (qtextengine.cpp:1534)
+          n0: 84692 in 2 places, all below massif's threshold (01.00%)
+   n0: 5632 in 2 places, all below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=15
+#-----------
+time=480845854
+mem_heap_B=3267389
+mem_heap_extra_B=1848323
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=506281198
+mem_heap_B=3293421
+mem_heap_extra_B=1853587
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=536351567
+mem_heap_B=3283908
+mem_heap_extra_B=1853308
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=578221215
+mem_heap_B=3332250
+mem_heap_extra_B=1853558
+mem_stacks_B=0
+heap_tree=detailed
+n16: 3332250 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1125557 in 1057 places, all below massif's threshold (01.00%)
+ n5: 667017 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n2: 196510 0x6834B61: QString::QString(int, Qt::Initialization) (qarraydata.h:222)
+   n1: 144174 0x69BE357: QUtf8::convertToUnicode(char const*, int, QTextCodec::ConverterState*) (qutfcodec.cpp:342)
+    n2: 144174 0x69BEA5F: QUtf8Codec::convertToUnicode(char const*, int, QTextCodec::ConverterState*) const (qutfcodec.cpp:701)
+     n3: 144174 0x683B347: QString::fromLocal8Bit_helper(char const*, int) (qtextcodec.h:109)
+      n1: 84446 0xFAD48E7: ???
+       n1: 84446 0xFAD4FD2: ???
+        n1: 84446 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 84446 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 84446 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 84446 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 84446 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 84446 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 84446 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 84446 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 84446 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 84446 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 84446 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 84446 0x43110D: main (in /data/files/sources/ding/build/ding)
+      n1: 56342 0x68F6A03: QFileSystemEntry::filePath() const (qstring.h:547)
+       n1: 56342 0x68F7C4B: _q_resolveEntryAndCreateLegacyEngine_recursive(QFileSystemEntry&, QFileSystemMetaData&, QAbstractFileEngine*&, bool) (qfilesystemengine.cpp:140)
+        n1: 56342 0x68F81E3: QFileSystemEngine::resolveEntryAndCreateLegacyEngine(QFileSystemEntry&, QFileSystemMetaData&) (qfilesystemengine.cpp:198)
+         n2: 56342 0x6899978: QDirIteratorPrivate::advance() (qfileinfo_p.h:113)
+          n2: 56342 0x689A9A2: QDirIterator::next() (qdiriterator.cpp:487)
+           n1: 56342 0x42550F: TAlias::procesAliasses(QString const&) (in /data/files/sources/ding/build/ding)
+            n0: 56342 in 6 places, all below massif's threshold (01.00%)
+           n0: 0 in 11 places, all below massif's threshold (01.00%)
+          n0: 0 in 1 place, below massif's threshold (01.00%)
+      n0: 3386 in 15 places, all below massif's threshold (01.00%)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 52336 in 54 places, all below massif's threshold (01.00%)
+  n2: 173440 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n2: 116188 0x6834A46: QString::mid(int, int) const (qstring.cpp:4380)
+    n2: 89942 0x68F6FEA: QFileSystemEntry::fileName() const (qfilesystementry.cpp:192)
+     n2: 89942 0x68A1E57: QFileInfo::fileName() const (qfileinfo.cpp:756)
+      n1: 89806 0x6898C4E: QDirIterator::fileName() const (qdiriterator.cpp:521)
+       n0: 89806 in 14 places, all below massif's threshold (01.00%)
+      n0: 136 in 7 places, all below massif's threshold (01.00%)
+     n0: 0 in 3 places, all below massif's threshold (01.00%)
+    n0: 26246 in 11 places, all below massif's threshold (01.00%)
+   n0: 57252 in 5 places, all below massif's threshold (01.00%)
+  n0: 155225 in 66 places, all below massif's threshold (01.00%)
+  n1: 85200 0x6416FC9: QVector<QStandardItemData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>) (qarraydata.h:222)
+   n1: 85200 0x64172CF: QVector<QStandardItemData>::append(QStandardItemData&&) (qvector.h:662)
+    n2: 85200 0x64130D4: QStandardItem::setData(QVariant const&, int) (qstandarditemmodel.cpp:841)
+     n2: 69840 0x640E529: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.h:259)
+      n1: 60480 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+       n1: 60480 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+        n1: 60480 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+         n0: 60480 in 2 places, all below massif's threshold (01.00%)
+      n0: 9360 in 15 places, all below massif's threshold (01.00%)
+     n0: 15360 in 2 places, all below massif's threshold (01.00%)
+  n1: 56642 0x67B472C: QByteArray::QByteArray(char const*, int) (qarraydata.h:222)
+   n0: 56642 in 54 places, all below massif's threshold (01.00%)
+ n2: 267376 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 128688 in 39 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 3 places, all below massif's threshold (01.00%)
+ n2: 138672 0x680D587: QHashData::allocateNode(int) (qhash.cpp:501)
+  n1: 110952 0x631EEDD: QGradientCache::addCacheElement(unsigned long long, QGradient const&, int) (qhash.h:548)
+   n2: 110952 0x631F309: QGradientCache::getBuffer(QGradient const&, int) (qpaintengine_raster.cpp:4187)
+    n1: 98624 0x6316C9B: QSpanData::setup(QBrush const&, int, QPainter::CompositionMode) (qpaintengine_raster.cpp:4443)
+     n0: 98624 in 2 places, all below massif's threshold (01.00%)
+    n0: 12328 in 1 place, below massif's threshold (01.00%)
+  n0: 27720 in 67 places, all below massif's threshold (01.00%)
+ n1: 134528 0x6140B86: QImageData::create(QSize const&, QImage::Format) (qimage.cpp:156)
+  n2: 134528 0x6140D99: QImage::QImage(int, int, QImage::Format) (qimage.cpp:772)
+   n1: 132224 0x617435F: QRasterPlatformPixmap::resize(int, int) (qpixmap_raster.cpp:104)
+    n1: 132224 0x616FA8A: QPlatformPixmap::create(int, int, QPlatformPixmap::PixelType) (qplatformpixmap.cpp:62)
+     n1: 132224 0x6167645: QPixmap::doInit(int, int, int) (qpixmap.cpp:95)
+      n2: 132224 0x61677C8: QPixmap::QPixmap(int, int) (qpixmap.cpp:133)
+       n1: 132224 0x1CFA5C34: ???
+        n1: 132224 0x1CFA6AC9: ???
+         n1: 132224 0x1CFB452B: ???
+          n1: 132224 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+           n1: 132224 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+            n1: 132224 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+             n1: 132224 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+              n0: 132224 0x43110D: main (in /data/files/sources/ding/build/ding)
+       n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 2304 in 1 place, below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n2: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n1: 68836 0x60EEFDF: QPlatformThemeFactory::create(QString const&, QString const&) (qfactoryloader_p.h:101)
+                  n1: 68836 0x60F95E6: QGuiApplicationPrivate::createPlatformIntegration() (qguiapplication.cpp:1135)
+                   n1: 68836 0x60F9F5B: QGuiApplicationPrivate::createEventDispatcher() (qguiapplication.cpp:1280)
+                    n1: 68836 0x696E516: QCoreApplicationPrivate::init() (qcoreapplication.cpp:787)
+                     n1: 68836 0x60FA83A: QGuiApplicationPrivate::init() (qguiapplication.cpp:1303)
+                      n1: 68836 0x4F94187: QApplicationPrivate::init() (qapplication.cpp:583)
+                       n0: 68836 0x430DD8: main (in /data/files/sources/ding/build/ding)
+                 n0: 30814 in 3 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n2: 101184 0x640E4C6: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.cpp:718)
+  n1: 80640 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+   n1: 80640 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+    n1: 80640 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+     n0: 80640 in 2 places, all below massif's threshold (01.00%)
+  n0: 20544 in 15 places, all below massif's threshold (01.00%)
+ n1: 90324 0x6272012: _hb_qt_reference_table(hb_face_t*, unsigned int, void*) (qharfbuzzng.cpp:639)
+  n2: 90324 0x8075A94: hb_face_t::reference_table(unsigned int) const (hb-face-private.hh:72)
+   n1: 84692 0x8074519: _hb_ot_layout_create(hb_face_t*) (hb-ot-layout.cc:59)
+    n1: 84692 0x806B418: hb_shape_plan_create (hb-shaper-list.hh:43)
+     n1: 84692 0x806BF28: hb_shape_plan_create_cached (hb-shape-plan.cc:453)
+      n1: 84692 0x806AF7B: hb_shape_full (hb-shape.cc:379)
+       n1: 84692 0x61C38DA: QTextEngine::shapeTextWithHarfbuzzNG(QScriptItem const&, unsigned short const*, int, QFontEngine*, QVector<unsigned int> const&, bool, bool) const (qtextengine.cpp:1214)
+        n1: 84692 0x61C65AC: QTextEngine::shapeText(int) const (qtextengine.cpp:1068)
+         n1: 84692 0x61C7211: QTextEngine::shape(int) const (qtextengine.cpp:1534)
+          n0: 84692 in 2 places, all below massif's threshold (01.00%)
+   n0: 5632 in 2 places, all below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+ n1: 72704 0x6E4566E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:117)
+  n1: 72704 0x400E8E8: call_init.part.0 (in /lib64/ld-2.19.so)
+   n1: 72704 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+    n0: 72704 0x40011C8: ??? (in /lib64/ld-2.19.so)
+ n1: 60680 0x6310CF2: QRasterPaintEngine::QRasterPaintEngine(QPaintDevice*) (qpaintengine_raster.cpp:337)
+  n2: 60680 0x613D3C6: QImage::paintEngine() const (qimage.cpp:3888)
+   n2: 59200 0x6326F17: QPainter::begin(QPaintDevice*) (qpainter.cpp:1739)
+    n1: 59200 0x1CFA5C57: ???
+     n1: 59200 0x1CFA6AC9: ???
+      n1: 59200 0x1CFB452B: ???
+       n1: 59200 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+        n1: 59200 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+         n1: 59200 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+          n1: 59200 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+           n0: 59200 0x43110D: main (in /data/files/sources/ding/build/ding)
+    n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 1480 in 1 place, below massif's threshold (01.00%)
+ n1: 59712 0x855654A: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 59712 0x854F2EC: glXChooseFBConfig (in /usr/X11R6/lib64/libGL.so.340.96)
+   n1: 59712 0x13B90295: ???
+    n1: 59712 0x13B905BB: ???
+     n1: 59712 0x13B8CE27: ???
+      n1: 59712 0xFABC1DF: ???
+       n1: 59712 0xFAA7ADF: ???
+        n1: 59712 0x6107B58: QWindowPrivate::create(bool) (qwindow.cpp:404)
+         n1: 59712 0x4FC78F9: QWidgetPrivate::create_sys(unsigned long long, bool, bool) (qwidget.cpp:1476)
+          n1: 59712 0x4FC70B7: QWidget::create(unsigned long long, bool, bool) (qwidget.cpp:1339)
+           n1: 59712 0x4FD28F8: QWidget::setVisible(bool) (qwidget.cpp:8157)
+            n0: 59712 0x43111D: main (in /data/files/sources/ding/build/ding)
+ n1: 55656 0x6995168: QMetaObjectPrivate::connect(QObject const*, int, QMetaObject const*, QObject const*, int, QMetaObject const*, int, int*) (qobject.cpp:3276)
+  n1: 55656 0x6995983: QObject::connect(QObject const*, char const*, QObject const*, char const*, Qt::ConnectionType) (qobject.cpp:2747)
+   n0: 55656 in 125 places, all below massif's threshold (01.00%)
+ n1: 55032 0x120131F3: ???
+  n0: 55032 in 8 places, all below massif's threshold (01.00%)
+ n1: 52211 0x9B4C1BE: ft_mem_qalloc (ftutil.c:76)
+  n1: 52211 0x9B4C206: ft_mem_alloc (ftutil.c:55)
+   n0: 52211 in 21 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=19
+#-----------
+time=598585124
+mem_heap_B=3332154
+mem_heap_extra_B=1853582
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=630208250
+mem_heap_B=3335878
+mem_heap_extra_B=1853842
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=657165970
+mem_heap_B=3336042
+mem_heap_extra_B=1853870
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=683996022
+mem_heap_B=3336638
+mem_heap_extra_B=1853842
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=710125973
+mem_heap_B=3336990
+mem_heap_extra_B=1853794
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=742310094
+mem_heap_B=3338458
+mem_heap_extra_B=1854094
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=767463238
+mem_heap_B=3354382
+mem_heap_extra_B=1811530
+mem_stacks_B=0
+heap_tree=detailed
+n16: 3354382 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1099071 in 1060 places, all below massif's threshold (01.00%)
+ n5: 567627 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n2: 185468 0x6834B61: QString::QString(int, Qt::Initialization) (qarraydata.h:222)
+   n1: 133072 0x69BE357: QUtf8::convertToUnicode(char const*, int, QTextCodec::ConverterState*) (qutfcodec.cpp:342)
+    n2: 133072 0x69BEA5F: QUtf8Codec::convertToUnicode(char const*, int, QTextCodec::ConverterState*) const (qutfcodec.cpp:701)
+     n2: 133072 0x683B347: QString::fromLocal8Bit_helper(char const*, int) (qtextcodec.h:109)
+      n1: 84446 0xFAD48E7: ???
+       n1: 84446 0xFAD4FD2: ???
+        n1: 84446 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 84446 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 84446 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 84446 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 84446 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 84446 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 84446 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 84446 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 84446 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 84446 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 84446 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 84446 0x43110D: main (in /data/files/sources/ding/build/ding)
+      n0: 48626 in 16 places, all below massif's threshold (01.00%)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 52396 in 54 places, all below massif's threshold (01.00%)
+  n0: 157017 in 66 places, all below massif's threshold (01.00%)
+  n1: 85200 0x6416FC9: QVector<QStandardItemData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>) (qarraydata.h:222)
+   n1: 85200 0x64172CF: QVector<QStandardItemData>::append(QStandardItemData&&) (qvector.h:662)
+    n2: 85200 0x64130D4: QStandardItem::setData(QVariant const&, int) (qstandarditemmodel.cpp:841)
+     n2: 69840 0x640E529: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.h:259)
+      n1: 60480 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+       n1: 60480 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+        n1: 60480 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+         n0: 60480 in 2 places, all below massif's threshold (01.00%)
+      n0: 9360 in 15 places, all below massif's threshold (01.00%)
+     n0: 15360 in 2 places, all below massif's threshold (01.00%)
+  n1: 83300 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n0: 83300 in 6 places, all below massif's threshold (01.00%)
+  n1: 56642 0x67B472C: QByteArray::QByteArray(char const*, int) (qarraydata.h:222)
+   n0: 56642 in 54 places, all below massif's threshold (01.00%)
+ n2: 311000 0x680D587: QHashData::allocateNode(int) (qhash.cpp:501)
+  n1: 283544 0x631EEDD: QGradientCache::addCacheElement(unsigned long long, QGradient const&, int) (qhash.h:548)
+   n2: 283544 0x631F309: QGradientCache::getBuffer(QGradient const&, int) (qpaintengine_raster.cpp:4187)
+    n2: 271216 0x6316C9B: QSpanData::setup(QBrush const&, int, QPainter::CompositionMode) (qpaintengine_raster.cpp:4443)
+     n1: 135608 0x6319F14: QRasterPaintEngine::updateBrush(QBrush const&) (qpaintengine_raster.cpp:813)
+      n1: 135608 0x631A923: QRasterPaintEngine::fill(QVectorPath const&, QBrush const&) (qpaintengine_raster_p.h:253)
+       n1: 135608 0x6302583: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:598)
+        n1: 135608 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 135608 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 135608 0x1CF8A2E6: ???
+           n1: 135608 0x1CF96EDD: ???
+            n1: 135608 0x1CFA1A30: ???
+             n1: 135608 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 135608 0x1CFA1A47: ???
+               n1: 135608 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 135608 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 135608 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 135608 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 135608 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 135608 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 135608 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 135608 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 86296 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 86296 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 86296 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 86296 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 86296 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                       n0: 49312 in 1 place, below massif's threshold (01.00%)
+     n1: 135608 0x6317585: QRasterPaintEngine::updatePen(QPen const&) (qpaintengine_raster.cpp:714)
+      n1: 135608 0x6318C59: QRasterPaintEngine::stroke(QVectorPath const&, QPen const&) (qpaintengine_raster_p.h:259)
+       n1: 135608 0x63025C3: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:602)
+        n1: 135608 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 135608 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 135608 0x1CF8A2E6: ???
+           n1: 135608 0x1CF96EDD: ???
+            n1: 135608 0x1CFA1A30: ???
+             n1: 135608 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 135608 0x1CFA1A47: ???
+               n1: 135608 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 135608 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 135608 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 135608 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 135608 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 135608 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 135608 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 135608 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 86296 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 86296 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 86296 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 86296 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 86296 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                       n0: 49312 in 1 place, below massif's threshold (01.00%)
+    n0: 12328 in 1 place, below massif's threshold (01.00%)
+  n0: 27456 in 67 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 3 places, all below massif's threshold (01.00%)
+ n2: 243056 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 104368 in 39 places, all below massif's threshold (01.00%)
+ n1: 134528 0x6140B86: QImageData::create(QSize const&, QImage::Format) (qimage.cpp:156)
+  n2: 134528 0x6140D99: QImage::QImage(int, int, QImage::Format) (qimage.cpp:772)
+   n1: 132224 0x617435F: QRasterPlatformPixmap::resize(int, int) (qpixmap_raster.cpp:104)
+    n1: 132224 0x616FA8A: QPlatformPixmap::create(int, int, QPlatformPixmap::PixelType) (qplatformpixmap.cpp:62)
+     n1: 132224 0x6167645: QPixmap::doInit(int, int, int) (qpixmap.cpp:95)
+      n2: 132224 0x61677C8: QPixmap::QPixmap(int, int) (qpixmap.cpp:133)
+       n1: 132224 0x1CFA5C34: ???
+        n1: 132224 0x1CFA6AC9: ???
+         n1: 132224 0x1CFB452B: ???
+          n1: 132224 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+           n1: 132224 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+            n1: 132224 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+             n1: 132224 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+              n0: 132224 0x43110D: main (in /data/files/sources/ding/build/ding)
+       n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 2304 in 1 place, below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n2: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n1: 68836 0x60EEFDF: QPlatformThemeFactory::create(QString const&, QString const&) (qfactoryloader_p.h:101)
+                  n1: 68836 0x60F95E6: QGuiApplicationPrivate::createPlatformIntegration() (qguiapplication.cpp:1135)
+                   n1: 68836 0x60F9F5B: QGuiApplicationPrivate::createEventDispatcher() (qguiapplication.cpp:1280)
+                    n1: 68836 0x696E516: QCoreApplicationPrivate::init() (qcoreapplication.cpp:787)
+                     n1: 68836 0x60FA83A: QGuiApplicationPrivate::init() (qguiapplication.cpp:1303)
+                      n1: 68836 0x4F94187: QApplicationPrivate::init() (qapplication.cpp:583)
+                       n0: 68836 0x430DD8: main (in /data/files/sources/ding/build/ding)
+                 n0: 30814 in 3 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n2: 101184 0x640E4C6: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.cpp:718)
+  n1: 80640 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+   n1: 80640 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+    n1: 80640 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+     n0: 80640 in 2 places, all below massif's threshold (01.00%)
+  n0: 20544 in 15 places, all below massif's threshold (01.00%)
+ n1: 90324 0x6272012: _hb_qt_reference_table(hb_face_t*, unsigned int, void*) (qharfbuzzng.cpp:639)
+  n2: 90324 0x8075A94: hb_face_t::reference_table(unsigned int) const (hb-face-private.hh:72)
+   n1: 84692 0x8074519: _hb_ot_layout_create(hb_face_t*) (hb-ot-layout.cc:59)
+    n1: 84692 0x806B418: hb_shape_plan_create (hb-shaper-list.hh:43)
+     n1: 84692 0x806BF28: hb_shape_plan_create_cached (hb-shape-plan.cc:453)
+      n1: 84692 0x806AF7B: hb_shape_full (hb-shape.cc:379)
+       n1: 84692 0x61C38DA: QTextEngine::shapeTextWithHarfbuzzNG(QScriptItem const&, unsigned short const*, int, QFontEngine*, QVector<unsigned int> const&, bool, bool) const (qtextengine.cpp:1214)
+        n1: 84692 0x61C65AC: QTextEngine::shapeText(int) const (qtextengine.cpp:1068)
+         n1: 84692 0x61C7211: QTextEngine::shape(int) const (qtextengine.cpp:1534)
+          n0: 84692 in 2 places, all below massif's threshold (01.00%)
+   n0: 5632 in 2 places, all below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+ n1: 72704 0x6E4566E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:117)
+  n1: 72704 0x400E8E8: call_init.part.0 (in /lib64/ld-2.19.so)
+   n1: 72704 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+    n0: 72704 0x40011C8: ??? (in /lib64/ld-2.19.so)
+ n1: 60680 0x6310CF2: QRasterPaintEngine::QRasterPaintEngine(QPaintDevice*) (qpaintengine_raster.cpp:337)
+  n2: 60680 0x613D3C6: QImage::paintEngine() const (qimage.cpp:3888)
+   n2: 59200 0x6326F17: QPainter::begin(QPaintDevice*) (qpainter.cpp:1739)
+    n1: 59200 0x1CFA5C57: ???
+     n1: 59200 0x1CFA6AC9: ???
+      n1: 59200 0x1CFB452B: ???
+       n1: 59200 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+        n1: 59200 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+         n1: 59200 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+          n1: 59200 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+           n0: 59200 0x43110D: main (in /data/files/sources/ding/build/ding)
+    n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 1480 in 1 place, below massif's threshold (01.00%)
+ n1: 59712 0x855654A: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 59712 0x854F2EC: glXChooseFBConfig (in /usr/X11R6/lib64/libGL.so.340.96)
+   n1: 59712 0x13B90295: ???
+    n1: 59712 0x13B905BB: ???
+     n1: 59712 0x13B8CE27: ???
+      n1: 59712 0xFABC1DF: ???
+       n1: 59712 0xFAA7ADF: ???
+        n1: 59712 0x6107B58: QWindowPrivate::create(bool) (qwindow.cpp:404)
+         n1: 59712 0x4FC78F9: QWidgetPrivate::create_sys(unsigned long long, bool, bool) (qwidget.cpp:1476)
+          n1: 59712 0x4FC70B7: QWidget::create(unsigned long long, bool, bool) (qwidget.cpp:1339)
+           n1: 59712 0x4FD28F8: QWidget::setVisible(bool) (qwidget.cpp:8157)
+            n0: 59712 0x43111D: main (in /data/files/sources/ding/build/ding)
+ n1: 55656 0x6995168: QMetaObjectPrivate::connect(QObject const*, int, QMetaObject const*, QObject const*, int, QMetaObject const*, int, int*) (qobject.cpp:3276)
+  n1: 55656 0x6995983: QObject::connect(QObject const*, char const*, QObject const*, char const*, Qt::ConnectionType) (qobject.cpp:2747)
+   n0: 55656 in 125 places, all below massif's threshold (01.00%)
+ n1: 55032 0x120131F3: ???
+  n0: 55032 in 8 places, all below massif's threshold (01.00%)
+ n1: 52211 0x9B4C1BE: ft_mem_qalloc (ftutil.c:76)
+  n1: 52211 0x9B4C206: ft_mem_alloc (ftutil.c:55)
+   n0: 52211 in 21 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=26
+#-----------
+time=798880713
+mem_heap_B=3660814
+mem_heap_extra_B=1888746
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=817741700
+mem_heap_B=3666232
+mem_heap_extra_B=1888160
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=844041303
+mem_heap_B=3601644
+mem_heap_extra_B=1852868
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=862891208
+mem_heap_B=3841424
+mem_heap_extra_B=1921864
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=888131529
+mem_heap_B=3841262
+mem_heap_extra_B=1920762
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=907033947
+mem_heap_B=3661788
+mem_heap_extra_B=1865156
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=940669484
+mem_heap_B=4029302
+mem_heap_extra_B=1955122
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=957480073
+mem_heap_B=4037872
+mem_heap_extra_B=1957520
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=982718209
+mem_heap_B=4026908
+mem_heap_extra_B=1952892
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=999586080
+mem_heap_B=4023756
+mem_heap_extra_B=1952780
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=1024882567
+mem_heap_B=4026992
+mem_heap_extra_B=1952888
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=1050720047
+mem_heap_B=4077794
+mem_heap_extra_B=1953574
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=1084455266
+mem_heap_B=4105199
+mem_heap_extra_B=1953537
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=1101654456
+mem_heap_B=4413356
+mem_heap_extra_B=2002268
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=1135292435
+mem_heap_B=4588665
+mem_heap_extra_B=2031415
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=1160553989
+mem_heap_B=4613485
+mem_heap_extra_B=2030859
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=1177595425
+mem_heap_B=4632301
+mem_heap_extra_B=2031219
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=1202883760
+mem_heap_B=4622817
+mem_heap_extra_B=2031583
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=1219724546
+mem_heap_B=4612449
+mem_heap_extra_B=2030607
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=1244956723
+mem_heap_B=4617065
+mem_heap_extra_B=2031071
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=1261827587
+mem_heap_B=4614973
+mem_heap_extra_B=2030923
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=1287483254
+mem_heap_B=4619445
+mem_heap_extra_B=2031059
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=1304332043
+mem_heap_B=4617013
+mem_heap_extra_B=2032539
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=1329573217
+mem_heap_B=4620725
+mem_heap_extra_B=2034419
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=1345461542
+mem_heap_B=4624321
+mem_heap_extra_B=2034231
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=1361352686
+mem_heap_B=4619977
+mem_heap_extra_B=2034135
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=1377244530
+mem_heap_B=4155561
+mem_heap_extra_B=1959183
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=1393409825
+mem_heap_B=4177269
+mem_heap_extra_B=1958731
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=1409308430
+mem_heap_B=4154289
+mem_heap_extra_B=1958479
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=1425194285
+mem_heap_B=4154353
+mem_heap_extra_B=1958431
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=1441127814
+mem_heap_B=4367693
+mem_heap_extra_B=1992395
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=1457727390
+mem_heap_B=4430156
+mem_heap_extra_B=1999516
+mem_stacks_B=0
+heap_tree=detailed
+n13: 4430156 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1518051 in 1168 places, all below massif's threshold (01.00%)
+ n4: 941208 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n0: 313986 in 68 places, all below massif's threshold (01.00%)
+  n3: 222966 0x6834B61: QString::QString(int, Qt::Initialization) (qarraydata.h:222)
+   n1: 144174 0x69BE357: QUtf8::convertToUnicode(char const*, int, QTextCodec::ConverterState*) (qutfcodec.cpp:342)
+    n2: 144174 0x69BEA5F: QUtf8Codec::convertToUnicode(char const*, int, QTextCodec::ConverterState*) const (qutfcodec.cpp:701)
+     n2: 144174 0x683B347: QString::fromLocal8Bit_helper(char const*, int) (qtextcodec.h:109)
+      n1: 84446 0xFAD48E7: ???
+       n1: 84446 0xFAD4FD2: ???
+        n1: 84446 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 84446 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 84446 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 84446 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 84446 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 84446 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 84446 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 84446 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 84446 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 84446 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 84446 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 84446 0x43110D: main (in /data/files/sources/ding/build/ding)
+      n0: 59728 in 16 places, all below massif's threshold (01.00%)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+   n1: 76788 0x69BE2CB: QUtf8::convertToUnicode(char const*, int) (qutfcodec.cpp:264)
+    n1: 76788 0x683B40C: QString::fromUtf8_helper(char const*, int) (qstring.cpp:4785)
+     n0: 76788 in 26 places, all below massif's threshold (01.00%)
+   n0: 2004 in 54 places, all below massif's threshold (01.00%)
+  n1: 213816 0x6416FC9: QVector<QStandardItemData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>) (qarraydata.h:222)
+   n1: 213816 0x64172CF: QVector<QStandardItemData>::append(QStandardItemData&&) (qvector.h:662)
+    n2: 213816 0x64130D4: QStandardItem::setData(QVariant const&, int) (qstandarditemmodel.cpp:841)
+     n2: 175392 0x640E529: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.h:259)
+      n1: 151200 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+       n1: 151200 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+        n2: 151200 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+         n1: 90720 0x43A4FD: TMainWindow::qt_static_metacall(QObject*, QMetaObject::Call, int, void**) (in /data/files/sources/ding/build/ding)
+          n1: 90720 0x69906E3: QMetaObject::activate(QObject*, int, int, void**) (qobject.cpp:3740)
+           n1: 90720 0x506F03B: QAbstractButtonPrivate::emitPressed() (qabstractbutton.cpp:425)
+            n1: 90720 0x506F664: QAbstractButton::mousePressEvent(QMouseEvent*) (qabstractbutton.cpp:982)
+             n1: 90720 0x4FD3431: QWidget::event(QEvent*) (qwidget.cpp:8774)
+              n1: 90720 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+               n1: 90720 0x4F97459: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3273)
+                n1: 90720 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                 n1: 90720 0x4F95EE1: QApplicationPrivate::sendMouseEvent(QWidget*, QMouseEvent*, QWidget*, QWidget*, QWidget**, QPointer<QWidget>&, bool) (qcoreapplication.h:231)
+                  n1: 90720 0x4FEC31F: QWidgetWindow::handleMouseEvent(QMouseEvent*) (qwidgetwindow.cpp:613)
+                   n1: 90720 0x4FEE771: QWidgetWindow::event(QEvent*) (qwidgetwindow.cpp:239)
+                    n1: 90720 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                     n1: 90720 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                      n1: 90720 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                       n1: 90720 0x60FE6C9: QGuiApplicationPrivate::processMouseEvent(QWindowSystemInterfacePrivate::MouseEvent*) (qcoreapplication.h:234)
+                        n1: 90720 0x6100223: QGuiApplicationPrivate::processWindowSystemEvent(QWindowSystemInterfacePrivate::WindowSystemEvent*) (qguiapplication.cpp:1693)
+                         n1: 90720 0x60E22D9: QWindowSystemInterface::sendWindowSystemEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qwindowsysteminterface.cpp:654)
+                          n1: 90720 0xFAD3E8E: ???
+                           n1: 90720 0x9669C82: g_main_context_dispatch (gmain.c:3122)
+                            n1: 90720 0x9669ED6: g_main_context_iterate.isra.24 (gmain.c:3808)
+                             n1: 90720 0x9669F7A: g_main_context_iteration (gmain.c:3869)
+                              n0: 90720 0x69B6F5A: QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qeventdispatcher_glib.cpp:423)
+         n0: 60480 in 2 places, all below massif's threshold (01.00%)
+      n0: 24192 in 30 places, all below massif's threshold (01.00%)
+     n0: 38424 in 2 places, all below massif's threshold (01.00%)
+  n2: 190440 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n2: 124606 0x6834A46: QString::mid(int, int) const (qstring.cpp:4380)
+    n2: 97400 0x68F6FEA: QFileSystemEntry::fileName() const (qfilesystementry.cpp:192)
+     n2: 97400 0x68A1E57: QFileInfo::fileName() const (qfileinfo.cpp:756)
+      n1: 97264 0x6898C4E: QDirIterator::fileName() const (qdiriterator.cpp:521)
+       n0: 97264 in 14 places, all below massif's threshold (01.00%)
+      n0: 136 in 7 places, all below massif's threshold (01.00%)
+     n0: 0 in 3 places, all below massif's threshold (01.00%)
+    n0: 27206 in 14 places, all below massif's threshold (01.00%)
+   n0: 65834 in 5 places, all below massif's threshold (01.00%)
+ n2: 466576 0x680D587: QHashData::allocateNode(int) (qhash.cpp:501)
+  n1: 431480 0x631EEDD: QGradientCache::addCacheElement(unsigned long long, QGradient const&, int) (qhash.h:548)
+   n2: 431480 0x631F309: QGradientCache::getBuffer(QGradient const&, int) (qpaintengine_raster.cpp:4187)
+    n2: 419152 0x6316C9B: QSpanData::setup(QBrush const&, int, QPainter::CompositionMode) (qpaintengine_raster.cpp:4443)
+     n1: 209576 0x6319F14: QRasterPaintEngine::updateBrush(QBrush const&) (qpaintengine_raster.cpp:813)
+      n1: 209576 0x631A923: QRasterPaintEngine::fill(QVectorPath const&, QBrush const&) (qpaintengine_raster_p.h:253)
+       n1: 209576 0x6302583: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:598)
+        n1: 209576 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 209576 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 209576 0x1CF8A2E6: ???
+           n1: 209576 0x1CF96EDD: ???
+            n1: 209576 0x1CFA1A30: ???
+             n1: 209576 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 209576 0x1CFA1A47: ???
+               n1: 209576 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 209576 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 209576 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 209576 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 209576 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 209576 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 209576 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 209576 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n2: 123280 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 110952 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 110952 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 110952 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 110952 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 110952 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 110952 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 110952 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                        n0: 12328 in 1 place, below massif's threshold (01.00%)
+                       n1: 86296 0x4FCD022: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5818)
+                        n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                         n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                          n0: 86296 in 2 places, all below massif's threshold (01.00%)
+     n1: 209576 0x6317585: QRasterPaintEngine::updatePen(QPen const&) (qpaintengine_raster.cpp:714)
+      n1: 209576 0x6318C59: QRasterPaintEngine::stroke(QVectorPath const&, QPen const&) (qpaintengine_raster_p.h:259)
+       n1: 209576 0x63025C3: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:602)
+        n1: 209576 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 209576 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 209576 0x1CF8A2E6: ???
+           n1: 209576 0x1CF96EDD: ???
+            n1: 209576 0x1CFA1A30: ???
+             n1: 209576 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 209576 0x1CFA1A47: ???
+               n1: 209576 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 209576 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 209576 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 209576 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 209576 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 209576 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 209576 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 209576 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n2: 123280 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 110952 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 110952 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 110952 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 110952 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 110952 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 110952 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 110952 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                        n0: 12328 in 1 place, below massif's threshold (01.00%)
+                       n1: 86296 0x4FCD022: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5818)
+                        n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                         n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                          n0: 86296 in 2 places, all below massif's threshold (01.00%)
+    n0: 12328 in 1 place, below massif's threshold (01.00%)
+  n0: 35096 in 69 places, all below massif's threshold (01.00%)
+ n2: 273376 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 134688 in 39 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 3 places, all below massif's threshold (01.00%)
+ n2: 254016 0x640E4C6: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.cpp:718)
+  n1: 201600 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+   n1: 201600 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+    n2: 201600 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+     n1: 120960 0x43A4FD: TMainWindow::qt_static_metacall(QObject*, QMetaObject::Call, int, void**) (in /data/files/sources/ding/build/ding)
+      n1: 120960 0x69906E3: QMetaObject::activate(QObject*, int, int, void**) (qobject.cpp:3740)
+       n1: 120960 0x506F03B: QAbstractButtonPrivate::emitPressed() (qabstractbutton.cpp:425)
+        n1: 120960 0x506F664: QAbstractButton::mousePressEvent(QMouseEvent*) (qabstractbutton.cpp:982)
+         n1: 120960 0x4FD3431: QWidget::event(QEvent*) (qwidget.cpp:8774)
+          n1: 120960 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+           n1: 120960 0x4F97459: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3273)
+            n1: 120960 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+             n1: 120960 0x4F95EE1: QApplicationPrivate::sendMouseEvent(QWidget*, QMouseEvent*, QWidget*, QWidget*, QWidget**, QPointer<QWidget>&, bool) (qcoreapplication.h:231)
+              n1: 120960 0x4FEC31F: QWidgetWindow::handleMouseEvent(QMouseEvent*) (qwidgetwindow.cpp:613)
+               n1: 120960 0x4FEE771: QWidgetWindow::event(QEvent*) (qwidgetwindow.cpp:239)
+                n1: 120960 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                 n1: 120960 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                  n1: 120960 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                   n1: 120960 0x60FE6C9: QGuiApplicationPrivate::processMouseEvent(QWindowSystemInterfacePrivate::MouseEvent*) (qcoreapplication.h:234)
+                    n1: 120960 0x6100223: QGuiApplicationPrivate::processWindowSystemEvent(QWindowSystemInterfacePrivate::WindowSystemEvent*) (qguiapplication.cpp:1693)
+                     n1: 120960 0x60E22D9: QWindowSystemInterface::sendWindowSystemEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qwindowsysteminterface.cpp:654)
+                      n1: 120960 0xFAD3E8E: ???
+                       n1: 120960 0x9669C82: g_main_context_dispatch (gmain.c:3122)
+                        n1: 120960 0x9669ED6: g_main_context_iterate.isra.24 (gmain.c:3808)
+                         n1: 120960 0x9669F7A: g_main_context_iteration (gmain.c:3869)
+                          n1: 120960 0x69B6F5A: QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qeventdispatcher_glib.cpp:423)
+                           n1: 120960 0x69668C9: QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>) (qeventloop.cpp:210)
+                            n1: 120960 0x696E6C4: QCoreApplication::exec() (qcoreapplication.cpp:1261)
+                             n0: 120960 0x431122: main (in /data/files/sources/ding/build/ding)
+     n0: 80640 in 2 places, all below massif's threshold (01.00%)
+  n0: 52416 in 30 places, all below massif's threshold (01.00%)
+ n1: 134528 0x6140B86: QImageData::create(QSize const&, QImage::Format) (qimage.cpp:156)
+  n2: 134528 0x6140D99: QImage::QImage(int, int, QImage::Format) (qimage.cpp:772)
+   n1: 132224 0x617435F: QRasterPlatformPixmap::resize(int, int) (qpixmap_raster.cpp:104)
+    n1: 132224 0x616FA8A: QPlatformPixmap::create(int, int, QPlatformPixmap::PixelType) (qplatformpixmap.cpp:62)
+     n1: 132224 0x6167645: QPixmap::doInit(int, int, int) (qpixmap.cpp:95)
+      n2: 132224 0x61677C8: QPixmap::QPixmap(int, int) (qpixmap.cpp:133)
+       n1: 132224 0x1CFA5C34: ???
+        n1: 132224 0x1CFA6AC9: ???
+         n1: 132224 0x1CFB452B: ???
+          n1: 132224 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+           n1: 132224 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+            n1: 132224 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+             n1: 132224 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+              n0: 132224 0x43110D: main (in /data/files/sources/ding/build/ding)
+       n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 2304 in 1 place, below massif's threshold (01.00%)
+ n1: 132624 0x6995168: QMetaObjectPrivate::connect(QObject const*, int, QMetaObject const*, QObject const*, int, QMetaObject const*, int, int*) (qobject.cpp:3276)
+  n1: 132624 0x6995983: QObject::connect(QObject const*, char const*, QObject const*, char const*, Qt::ConnectionType) (qobject.cpp:2747)
+   n0: 132624 in 127 places, all below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n2: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n1: 68836 0x60EEFDF: QPlatformThemeFactory::create(QString const&, QString const&) (qfactoryloader_p.h:101)
+                  n1: 68836 0x60F95E6: QGuiApplicationPrivate::createPlatformIntegration() (qguiapplication.cpp:1135)
+                   n1: 68836 0x60F9F5B: QGuiApplicationPrivate::createEventDispatcher() (qguiapplication.cpp:1280)
+                    n1: 68836 0x696E516: QCoreApplicationPrivate::init() (qcoreapplication.cpp:787)
+                     n1: 68836 0x60FA83A: QGuiApplicationPrivate::init() (qguiapplication.cpp:1303)
+                      n1: 68836 0x4F94187: QApplicationPrivate::init() (qapplication.cpp:583)
+                       n0: 68836 0x430DD8: main (in /data/files/sources/ding/build/ding)
+                 n0: 30814 in 3 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n2: 95152 0x6790472: QPropertyAnimation::QPropertyAnimation(QObject*) (qpropertyanimation.cpp:152)
+  n1: 71440 0x1CF7D4D3: ???
+   n0: 71440 in 5 places, all below massif's threshold (01.00%)
+  n0: 23712 in 7 places, all below massif's threshold (01.00%)
+ n1: 90324 0x6272012: _hb_qt_reference_table(hb_face_t*, unsigned int, void*) (qharfbuzzng.cpp:639)
+  n2: 90324 0x8075A94: hb_face_t::reference_table(unsigned int) const (hb-face-private.hh:72)
+   n1: 84692 0x8074519: _hb_ot_layout_create(hb_face_t*) (hb-ot-layout.cc:59)
+    n1: 84692 0x806B418: hb_shape_plan_create (hb-shaper-list.hh:43)
+     n1: 84692 0x806BF28: hb_shape_plan_create_cached (hb-shape-plan.cc:453)
+      n1: 84692 0x806AF7B: hb_shape_full (hb-shape.cc:379)
+       n1: 84692 0x61C38DA: QTextEngine::shapeTextWithHarfbuzzNG(QScriptItem const&, unsigned short const*, int, QFontEngine*, QVector<unsigned int> const&, bool, bool) const (qtextengine.cpp:1214)
+        n1: 84692 0x61C65AC: QTextEngine::shapeText(int) const (qtextengine.cpp:1068)
+         n1: 84692 0x61C7211: QTextEngine::shape(int) const (qtextengine.cpp:1534)
+          n0: 84692 in 2 places, all below massif's threshold (01.00%)
+   n0: 5632 in 2 places, all below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+ n1: 72704 0x6E4566E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:117)
+  n1: 72704 0x400E8E8: call_init.part.0 (in /lib64/ld-2.19.so)
+   n1: 72704 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+    n0: 72704 0x40011C8: ??? (in /lib64/ld-2.19.so)
+#-----------
+snapshot=58
+#-----------
+time=1475137035
+mem_heap_B=4450456
+mem_heap_extra_B=1999800
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=1491023310
+mem_heap_B=4423180
+mem_heap_extra_B=1999932
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=1507339145
+mem_heap_B=4448610
+mem_heap_extra_B=2000238
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=1523231203
+mem_heap_B=4422050
+mem_heap_extra_B=1999694
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=1539527348
+mem_heap_B=4445762
+mem_heap_extra_B=2000134
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=1555476905
+mem_heap_B=4424722
+mem_heap_extra_B=2000254
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=1571362747
+mem_heap_B=4423696
+mem_heap_extra_B=1999912
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=1587256487
+mem_heap_B=4431970
+mem_heap_extra_B=2001854
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=1603177038
+mem_heap_B=4433002
+mem_heap_extra_B=2001854
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=67
+#-----------
+time=1619642513
+mem_heap_B=4450206
+mem_heap_extra_B=2001762
+mem_stacks_B=0
+heap_tree=detailed
+n13: 4450206 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n0: 1535739 in 1168 places, all below massif's threshold (01.00%)
+ n4: 942226 0x67B28AD: QArrayData::allocate(unsigned long, unsigned long, unsigned long, QFlags<QArrayData::AllocationOption>) (qarraydata.cpp:114)
+  n0: 315130 in 68 places, all below massif's threshold (01.00%)
+  n3: 222840 0x6834B61: QString::QString(int, Qt::Initialization) (qarraydata.h:222)
+   n1: 144174 0x69BE357: QUtf8::convertToUnicode(char const*, int, QTextCodec::ConverterState*) (qutfcodec.cpp:342)
+    n2: 144174 0x69BEA5F: QUtf8Codec::convertToUnicode(char const*, int, QTextCodec::ConverterState*) const (qutfcodec.cpp:701)
+     n2: 144174 0x683B347: QString::fromLocal8Bit_helper(char const*, int) (qtextcodec.h:109)
+      n1: 84446 0xFAD48E7: ???
+       n1: 84446 0xFAD4FD2: ???
+        n1: 84446 0x61B93A7: initializeDb() (qfontdatabase.cpp:896)
+         n1: 84446 0x61BDA5B: QFontDatabase::findFont(QFontDef const&, int) (qfontdatabase.cpp:2640)
+          n1: 84446 0x61BE6CD: QFontDatabase::load(QFontPrivate const*, int) (qfontdatabase.cpp:2795)
+           n1: 84446 0x61976B5: QFontPrivate::engineForScript(int) const (qfont.cpp:215)
+            n1: 84446 0x61B2091: QFontMetrics::height() const (qfontmetrics.cpp:304)
+             n1: 84446 0x51CCE72: QHeaderView::minimumSectionSize() const (qheaderview.cpp:1600)
+              n1: 84446 0x51CD77C: QHeaderViewPrivate::updateDefaultSectionSizeFromStyle() (qheaderview.cpp:3629)
+               n1: 84446 0x51CD9F2: QHeaderView::QHeaderView(Qt::Orientation, QWidget*) (qheaderview_p.h:169)
+                n1: 84446 0x51EDF0B: QTableViewPrivate::init() (qtableview.cpp:610)
+                 n1: 84446 0x43740C: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+                  n1: 84446 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 84446 0x43110D: main (in /data/files/sources/ding/build/ding)
+      n0: 59728 in 16 places, all below massif's threshold (01.00%)
+     n0: 0 in 1 place, below massif's threshold (01.00%)
+   n1: 76662 0x69BE2CB: QUtf8::convertToUnicode(char const*, int) (qutfcodec.cpp:264)
+    n1: 76662 0x683B40C: QString::fromUtf8_helper(char const*, int) (qstring.cpp:4785)
+     n0: 76662 in 26 places, all below massif's threshold (01.00%)
+   n0: 2004 in 54 places, all below massif's threshold (01.00%)
+  n1: 213816 0x6416FC9: QVector<QStandardItemData>::reallocData(int, int, QFlags<QArrayData::AllocationOption>) (qarraydata.h:222)
+   n1: 213816 0x64172CF: QVector<QStandardItemData>::append(QStandardItemData&&) (qvector.h:662)
+    n2: 213816 0x64130D4: QStandardItem::setData(QVariant const&, int) (qstandarditemmodel.cpp:841)
+     n2: 175392 0x640E529: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.h:259)
+      n1: 151200 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+       n1: 151200 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+        n2: 151200 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+         n1: 90720 0x43A4FD: TMainWindow::qt_static_metacall(QObject*, QMetaObject::Call, int, void**) (in /data/files/sources/ding/build/ding)
+          n1: 90720 0x69906E3: QMetaObject::activate(QObject*, int, int, void**) (qobject.cpp:3740)
+           n1: 90720 0x506F03B: QAbstractButtonPrivate::emitPressed() (qabstractbutton.cpp:425)
+            n1: 90720 0x506F664: QAbstractButton::mousePressEvent(QMouseEvent*) (qabstractbutton.cpp:982)
+             n1: 90720 0x4FD3431: QWidget::event(QEvent*) (qwidget.cpp:8774)
+              n1: 90720 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+               n1: 90720 0x4F97459: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3273)
+                n1: 90720 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                 n1: 90720 0x4F95EE1: QApplicationPrivate::sendMouseEvent(QWidget*, QMouseEvent*, QWidget*, QWidget*, QWidget**, QPointer<QWidget>&, bool) (qcoreapplication.h:231)
+                  n1: 90720 0x4FEC31F: QWidgetWindow::handleMouseEvent(QMouseEvent*) (qwidgetwindow.cpp:613)
+                   n1: 90720 0x4FEE771: QWidgetWindow::event(QEvent*) (qwidgetwindow.cpp:239)
+                    n1: 90720 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                     n1: 90720 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                      n1: 90720 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                       n1: 90720 0x60FE6C9: QGuiApplicationPrivate::processMouseEvent(QWindowSystemInterfacePrivate::MouseEvent*) (qcoreapplication.h:234)
+                        n1: 90720 0x6100223: QGuiApplicationPrivate::processWindowSystemEvent(QWindowSystemInterfacePrivate::WindowSystemEvent*) (qguiapplication.cpp:1693)
+                         n1: 90720 0x60E22D9: QWindowSystemInterface::sendWindowSystemEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qwindowsysteminterface.cpp:654)
+                          n1: 90720 0xFAD3E8E: ???
+                           n1: 90720 0x9669C82: g_main_context_dispatch (gmain.c:3122)
+                            n1: 90720 0x9669ED6: g_main_context_iterate.isra.24 (gmain.c:3808)
+                             n1: 90720 0x9669F7A: g_main_context_iteration (gmain.c:3869)
+                              n0: 90720 0x69B6F5A: QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qeventdispatcher_glib.cpp:423)
+         n0: 60480 in 2 places, all below massif's threshold (01.00%)
+      n0: 24192 in 30 places, all below massif's threshold (01.00%)
+     n0: 38424 in 2 places, all below massif's threshold (01.00%)
+  n2: 190440 0x6834812: QString::QString(QChar const*, int) (qarraydata.h:222)
+   n2: 124606 0x6834A46: QString::mid(int, int) const (qstring.cpp:4380)
+    n2: 97400 0x68F6FEA: QFileSystemEntry::fileName() const (qfilesystementry.cpp:192)
+     n2: 97400 0x68A1E57: QFileInfo::fileName() const (qfileinfo.cpp:756)
+      n1: 97264 0x6898C4E: QDirIterator::fileName() const (qdiriterator.cpp:521)
+       n0: 97264 in 14 places, all below massif's threshold (01.00%)
+      n0: 136 in 7 places, all below massif's threshold (01.00%)
+     n0: 0 in 3 places, all below massif's threshold (01.00%)
+    n0: 27206 in 14 places, all below massif's threshold (01.00%)
+   n0: 65834 in 5 places, all below massif's threshold (01.00%)
+ n2: 467848 0x680D587: QHashData::allocateNode(int) (qhash.cpp:501)
+  n1: 431480 0x631EEDD: QGradientCache::addCacheElement(unsigned long long, QGradient const&, int) (qhash.h:548)
+   n2: 431480 0x631F309: QGradientCache::getBuffer(QGradient const&, int) (qpaintengine_raster.cpp:4187)
+    n2: 419152 0x6316C9B: QSpanData::setup(QBrush const&, int, QPainter::CompositionMode) (qpaintengine_raster.cpp:4443)
+     n1: 209576 0x6319F14: QRasterPaintEngine::updateBrush(QBrush const&) (qpaintengine_raster.cpp:813)
+      n1: 209576 0x631A923: QRasterPaintEngine::fill(QVectorPath const&, QBrush const&) (qpaintengine_raster_p.h:253)
+       n1: 209576 0x6302583: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:598)
+        n1: 209576 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 209576 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 209576 0x1CF8A2E6: ???
+           n1: 209576 0x1CF96EDD: ???
+            n1: 209576 0x1CFA1A30: ???
+             n1: 209576 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 209576 0x1CFA1A47: ???
+               n1: 209576 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 209576 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 209576 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 209576 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 209576 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 209576 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 209576 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 209576 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n2: 123280 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 110952 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 110952 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 110952 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 110952 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 110952 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 110952 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 110952 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                        n0: 12328 in 1 place, below massif's threshold (01.00%)
+                       n1: 86296 0x4FCD022: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5818)
+                        n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                         n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                          n0: 86296 in 2 places, all below massif's threshold (01.00%)
+     n1: 209576 0x6317585: QRasterPaintEngine::updatePen(QPen const&) (qpaintengine_raster.cpp:714)
+      n1: 209576 0x6318C59: QRasterPaintEngine::stroke(QVectorPath const&, QPen const&) (qpaintengine_raster_p.h:259)
+       n1: 209576 0x63025C3: QPaintEngineEx::draw(QVectorPath const&) (qpaintengineex.cpp:602)
+        n1: 209576 0x63038F1: QPaintEngineEx::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpaintengineex.cpp:778)
+         n1: 209576 0x632C839: QPainter::drawRoundedRect(QRectF const&, double, double, Qt::SizeMode) (qpainter.cpp:4142)
+          n1: 209576 0x1CF8A2E6: ???
+           n1: 209576 0x1CF96EDD: ???
+            n1: 209576 0x1CFA1A30: ???
+             n1: 209576 0x5009B4B: QCommonStyle::drawControl(QStyle::ControlElement, QStyleOption const*, QPainter*, QWidget const*) const (qcommonstyle.cpp:1209)
+              n1: 209576 0x1CFA1A47: ???
+               n1: 209576 0x50FDE41: QPushButton::paintEvent(QPaintEvent*) (qstylepainter.h:84)
+                n1: 209576 0x4FD3135: QWidget::event(QEvent*) (qwidget.cpp:8930)
+                 n1: 209576 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                  n1: 209576 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                   n1: 209576 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                    n1: 209576 0x4FCBFB8: QWidgetPrivate::sendPaintEvent(QRegion const&) (qcoreapplication.h:234)
+                     n1: 209576 0x4FCC5A8: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5636)
+                      n2: 209576 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                       n2: 123280 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                        n1: 110952 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                         n1: 110952 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                          n1: 110952 0x4F9E549: QWidgetBackingStore::doSync() (qwidgetbackingstore.cpp:1362)
+                           n1: 110952 0x4F9F74F: QWidgetBackingStore::sync() (qwidgetbackingstore.cpp:1151)
+                            n1: 110952 0x4FBDF8D: QWidgetPrivate::syncBackingStore() (qwidget.cpp:1955)
+                             n1: 110952 0x4FD2D73: QWidget::event(QEvent*) (qwidget.cpp:9083)
+                              n0: 110952 0x50C8BA9: QMainWindow::event(QEvent*) (qmainwindow.cpp:1543)
+                        n0: 12328 in 1 place, below massif's threshold (01.00%)
+                       n1: 86296 0x4FCD022: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5818)
+                        n1: 86296 0x4FCC134: QWidgetPrivate::drawWidget(QPaintDevice*, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5688)
+                         n1: 86296 0x4FCD1AA: QWidgetPrivate::paintSiblingsRecursive(QPaintDevice*, QList<QObject*> const&, int, QRegion const&, QPoint const&, int, QPainter*, QWidgetBackingStore*) (qwidget.cpp:5831)
+                          n0: 86296 in 2 places, all below massif's threshold (01.00%)
+    n0: 12328 in 1 place, below massif's threshold (01.00%)
+  n0: 36368 in 69 places, all below massif's threshold (01.00%)
+ n2: 273376 0x681EC8F: QMapDataBase::createNode(int, int, QMapNodeBase*, bool) (qmap.cpp:316)
+  n1: 138688 0x593398C: KEntryMap::setEntry(QByteArray const&, QByteArray const&, QByteArray const&, QFlags<KEntryMap::EntryOption>) (qmap.h:228)
+   n2: 138688 0x5941369: KConfigIniBackend::parseConfig(QByteArray const&, KEntryMap&, QFlags<KConfigBackend::ParseOption>, bool) (kconfigini.cpp:293)
+    n1: 114944 0x5929893: KConfigPrivate::parseConfigFiles() (kconfig.cpp:742)
+     n1: 114944 0x592A058: KConfig::reparseConfiguration() (kconfig.cpp:655)
+      n1: 114944 0x594593E: KSharedConfig::KSharedConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:127)
+       n2: 114944 0x5945EEF: KSharedConfig::openConfig(QString const&, QFlags<KConfig::OpenFlag>, QStandardPaths::StandardLocation) (ksharedconfig.cpp:103)
+        n2: 114496 0x157A1F5F: KIconTheme::KIconTheme(QString const&, QString const&, QString const&) (kicontheme.cpp:216)
+         n2: 105536 0x1579405C: KIconLoaderPrivate::addThemeByName(QString const&, QString const&) (kiconloader.cpp:687)
+          n1: 74304 0x15794238: KIconLoaderPrivate::addBaseThemes(KIconThemeNode*, QString const&) (kiconloader.cpp:664)
+           n1: 74304 0x15794381: KIconLoaderPrivate::initIconThemes() [clone .part.82] (kiconloader.cpp:595)
+            n1: 74304 0x15799D11: KIconLoaderPrivate::init(QString const&, QStringList const&) (kiconloader.cpp:572)
+             n1: 74304 0x15799E7F: KIconLoader::KIconLoader(QString const&, QStringList const&, QObject*) (kiconloader.cpp:519)
+              n1: 74304 0x15799F66: KIconLoader::global() (kiconloader.cpp:1701)
+               n1: 74304 0x1D1D8423: ???
+                n1: 74304 0x1CF9FD13: ???
+                 n1: 74304 0x50C7109: QMainWindowPrivate::init() (qmainwindow.cpp:178)
+                  n1: 74304 0x4358E0: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+                   n0: 74304 0x43110D: main (in /data/files/sources/ding/build/ding)
+          n0: 31232 in 1 place, below massif's threshold (01.00%)
+         n0: 8960 in 1 place, below massif's threshold (01.00%)
+        n0: 448 in 1 place, below massif's threshold (01.00%)
+    n0: 23744 in 2 places, all below massif's threshold (01.00%)
+  n0: 134688 in 39 places, all below massif's threshold (01.00%)
+ n2: 260495 0x857F2A0: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+  n1: 260287 0xB835A5F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+   n1: 260287 0xB52028F: ??? (in /usr/lib64/libnvidia-glcore.so.340.96)
+    n1: 260287 0x8554AFB: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+     n1: 260287 0x855BACC: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+      n1: 260287 0x855C60C: ??? (in /usr/X11R6/lib64/libGL.so.340.96)
+       n1: 260287 0x400E8AB: call_init.part.0 (in /lib64/ld-2.19.so)
+        n1: 260287 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+         n0: 260287 0x40011C8: ??? (in /lib64/ld-2.19.so)
+  n0: 208 in 3 places, all below massif's threshold (01.00%)
+ n2: 254016 0x640E4C6: QStandardItem::QStandardItem(QString const&) (qstandarditemmodel.cpp:718)
+  n1: 201600 0x434E42: TMainWindow::displayRow(int, QStandardItemModel*, int, QStringList const&) (in /data/files/sources/ding/build/ding)
+   n1: 201600 0x435423: TMainWindow::fillDevice(TDeviceInfo*) (in /data/files/sources/ding/build/ding)
+    n2: 201600 0x4348D9: TMainWindow::refresh() (in /data/files/sources/ding/build/ding)
+     n1: 120960 0x43A4FD: TMainWindow::qt_static_metacall(QObject*, QMetaObject::Call, int, void**) (in /data/files/sources/ding/build/ding)
+      n1: 120960 0x69906E3: QMetaObject::activate(QObject*, int, int, void**) (qobject.cpp:3740)
+       n1: 120960 0x506F03B: QAbstractButtonPrivate::emitPressed() (qabstractbutton.cpp:425)
+        n1: 120960 0x506F664: QAbstractButton::mousePressEvent(QMouseEvent*) (qabstractbutton.cpp:982)
+         n1: 120960 0x4FD3431: QWidget::event(QEvent*) (qwidget.cpp:8774)
+          n1: 120960 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+           n1: 120960 0x4F97459: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3273)
+            n1: 120960 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+             n1: 120960 0x4F95EE1: QApplicationPrivate::sendMouseEvent(QWidget*, QMouseEvent*, QWidget*, QWidget*, QWidget**, QPointer<QWidget>&, bool) (qcoreapplication.h:231)
+              n1: 120960 0x4FEC31F: QWidgetWindow::handleMouseEvent(QMouseEvent*) (qwidgetwindow.cpp:613)
+               n1: 120960 0x4FEE771: QWidgetWindow::event(QEvent*) (qwidgetwindow.cpp:239)
+                n1: 120960 0x4F8FAFA: QApplicationPrivate::notify_helper(QObject*, QEvent*) (qapplication.cpp:3799)
+                 n1: 120960 0x4F96A7E: QApplication::notify(QObject*, QEvent*) (qapplication.cpp:3556)
+                  n1: 120960 0x69685F3: QCoreApplication::notifyInternal2(QObject*, QEvent*) (qcoreapplication.cpp:988)
+                   n1: 120960 0x60FE6C9: QGuiApplicationPrivate::processMouseEvent(QWindowSystemInterfacePrivate::MouseEvent*) (qcoreapplication.h:234)
+                    n1: 120960 0x6100223: QGuiApplicationPrivate::processWindowSystemEvent(QWindowSystemInterfacePrivate::WindowSystemEvent*) (qguiapplication.cpp:1693)
+                     n1: 120960 0x60E22D9: QWindowSystemInterface::sendWindowSystemEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qwindowsysteminterface.cpp:654)
+                      n1: 120960 0xFAD3E8E: ???
+                       n1: 120960 0x9669C82: g_main_context_dispatch (gmain.c:3122)
+                        n1: 120960 0x9669ED6: g_main_context_iterate.isra.24 (gmain.c:3808)
+                         n1: 120960 0x9669F7A: g_main_context_iteration (gmain.c:3869)
+                          n1: 120960 0x69B6F5A: QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>) (qeventdispatcher_glib.cpp:423)
+                           n1: 120960 0x69668C9: QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>) (qeventloop.cpp:210)
+                            n1: 120960 0x696E6C4: QCoreApplication::exec() (qcoreapplication.cpp:1261)
+                             n0: 120960 0x431122: main (in /data/files/sources/ding/build/ding)
+     n0: 80640 in 2 places, all below massif's threshold (01.00%)
+  n0: 52416 in 30 places, all below massif's threshold (01.00%)
+ n1: 134528 0x6140B86: QImageData::create(QSize const&, QImage::Format) (qimage.cpp:156)
+  n2: 134528 0x6140D99: QImage::QImage(int, int, QImage::Format) (qimage.cpp:772)
+   n1: 132224 0x617435F: QRasterPlatformPixmap::resize(int, int) (qpixmap_raster.cpp:104)
+    n1: 132224 0x616FA8A: QPlatformPixmap::create(int, int, QPlatformPixmap::PixelType) (qplatformpixmap.cpp:62)
+     n1: 132224 0x6167645: QPixmap::doInit(int, int, int) (qpixmap.cpp:95)
+      n2: 132224 0x61677C8: QPixmap::QPixmap(int, int) (qpixmap.cpp:133)
+       n1: 132224 0x1CFA5C34: ???
+        n1: 132224 0x1CFA6AC9: ???
+         n1: 132224 0x1CFB452B: ???
+          n1: 132224 0x50F630A: QMenuBarExtension::QMenuBarExtension(QWidget*) (qmenubar.cpp:90)
+           n1: 132224 0x50F9B0C: QMenuBarPrivate::init() (qmenubar.cpp:718)
+            n1: 132224 0x437989: Ui_MainWindow::setupUi(QMainWindow*) (in /data/files/sources/ding/build/ding)
+             n1: 132224 0x43593E: TMainWindow::TMainWindow(QWidget*) (in /data/files/sources/ding/build/ding)
+              n0: 132224 0x43110D: main (in /data/files/sources/ding/build/ding)
+       n0: 0 in 1 place, below massif's threshold (01.00%)
+   n0: 2304 in 1 place, below massif's threshold (01.00%)
+ n1: 132696 0x6995168: QMetaObjectPrivate::connect(QObject const*, int, QMetaObject const*, QObject const*, int, QMetaObject const*, int, int*) (qobject.cpp:3276)
+  n1: 132696 0x6995983: QObject::connect(QObject const*, char const*, QObject const*, char const*, Qt::ConnectionType) (qobject.cpp:2747)
+   n0: 132696 in 127 places, all below massif's threshold (01.00%)
+ n1: 109342 0x400A792: _dl_new_object (in /lib64/ld-2.19.so)
+  n1: 109342 0x4005E42: _dl_map_object_from_fd (in /lib64/ld-2.19.so)
+   n2: 109342 0x4008011: _dl_map_object (in /lib64/ld-2.19.so)
+    n1: 102017 0x400C2D0: openaux (in /lib64/ld-2.19.so)
+     n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+      n1: 102017 0x400C523: _dl_map_object_deps (in /lib64/ld-2.19.so)
+       n1: 102017 0x401293A: dl_open_worker (in /lib64/ld-2.19.so)
+        n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+         n1: 102017 0x40122F9: _dl_open (in /lib64/ld-2.19.so)
+          n1: 102017 0x941B029: dlopen_doit (in /lib64/libdl-2.19.so)
+           n1: 102017 0x400E7A2: _dl_catch_error (in /lib64/ld-2.19.so)
+            n1: 102017 0x941B5DB: _dlerror_run (in /lib64/libdl-2.19.so)
+             n1: 102017 0x941B0BF: dlopen@@GLIBC_2.2.5 (in /lib64/libdl-2.19.so)
+              n2: 102017 0x6964C3E: QLibraryPrivate::load_sys() (qlibrary_unix.cpp:233)
+               n1: 99650 0x695D773: QLibraryPrivate::loadPlugin() (qlibrary.cpp:538)
+                n2: 99650 0x69560CA: QFactoryLoader::instance(int) const (qfactoryloader.cpp:281)
+                 n1: 68836 0x60EEFDF: QPlatformThemeFactory::create(QString const&, QString const&) (qfactoryloader_p.h:101)
+                  n1: 68836 0x60F95E6: QGuiApplicationPrivate::createPlatformIntegration() (qguiapplication.cpp:1135)
+                   n1: 68836 0x60F9F5B: QGuiApplicationPrivate::createEventDispatcher() (qguiapplication.cpp:1280)
+                    n1: 68836 0x696E516: QCoreApplicationPrivate::init() (qcoreapplication.cpp:787)
+                     n1: 68836 0x60FA83A: QGuiApplicationPrivate::init() (qguiapplication.cpp:1303)
+                      n1: 68836 0x4F94187: QApplicationPrivate::init() (qapplication.cpp:583)
+                       n0: 68836 0x430DD8: main (in /data/files/sources/ding/build/ding)
+                 n0: 30814 in 3 places, all below massif's threshold (01.00%)
+               n0: 2367 in 1 place, below massif's threshold (01.00%)
+    n0: 7325 in 1 place, below massif's threshold (01.00%)
+ n2: 95152 0x6790472: QPropertyAnimation::QPropertyAnimation(QObject*) (qpropertyanimation.cpp:152)
+  n1: 71440 0x1CF7D4D3: ???
+   n0: 71440 in 5 places, all below massif's threshold (01.00%)
+  n0: 23712 in 7 places, all below massif's threshold (01.00%)
+ n1: 90324 0x6272012: _hb_qt_reference_table(hb_face_t*, unsigned int, void*) (qharfbuzzng.cpp:639)
+  n2: 90324 0x8075A94: hb_face_t::reference_table(unsigned int) const (hb-face-private.hh:72)
+   n1: 84692 0x8074519: _hb_ot_layout_create(hb_face_t*) (hb-ot-layout.cc:59)
+    n1: 84692 0x806B418: hb_shape_plan_create (hb-shaper-list.hh:43)
+     n1: 84692 0x806BF28: hb_shape_plan_create_cached (hb-shape-plan.cc:453)
+      n1: 84692 0x806AF7B: hb_shape_full (hb-shape.cc:379)
+       n1: 84692 0x61C38DA: QTextEngine::shapeTextWithHarfbuzzNG(QScriptItem const&, unsigned short const*, int, QFontEngine*, QVector<unsigned int> const&, bool, bool) const (qtextengine.cpp:1214)
+        n1: 84692 0x61C65AC: QTextEngine::shapeText(int) const (qtextengine.cpp:1068)
+         n1: 84692 0x61C7211: QTextEngine::shape(int) const (qtextengine.cpp:1534)
+          n0: 84692 in 2 places, all below massif's threshold (01.00%)
+   n0: 5632 in 2 places, all below massif's threshold (01.00%)
+ n1: 81760 0x11FFD4D0: ???
+  n0: 81760 in 4 places, all below massif's threshold (01.00%)
+ n1: 72704 0x6E4566E: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:117)
+  n1: 72704 0x400E8E8: call_init.part.0 (in /lib64/ld-2.19.so)
+   n1: 72704 0x400E9D1: _dl_init (in /lib64/ld-2.19.so)
+    n0: 72704 0x40011C8: ??? (in /lib64/ld-2.19.so)
+#-----------
+snapshot=68
+#-----------
+time=1635682687
+mem_heap_B=4434586
+mem_heap_extra_B=2001814
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=69
+#-----------
+time=1651576833
+mem_heap_B=4436126
+mem_heap_extra_B=2001298
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=1667500124
+mem_heap_B=4434374
+mem_heap_extra_B=2001866
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=71
+#-----------
+time=1683434388
+mem_heap_B=4434790
+mem_heap_extra_B=2001978
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=1699972420
+mem_heap_B=4157112
+mem_heap_extra_B=1960040
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=73
+#-----------
+time=1715872598
+mem_heap_B=4157148
+mem_heap_extra_B=1959988
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=1732967494
+mem_heap_B=4151460
+mem_heap_extra_B=1958868
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=75
+#-----------
+time=1749867466
+mem_heap_B=4178904
+mem_heap_extra_B=1959384
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=1765753240
+mem_heap_B=3576852
+mem_heap_extra_B=1844620
+mem_stacks_B=0
+heap_tree=empty
