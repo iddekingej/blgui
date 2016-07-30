@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-07-19 15:35+0200\n"
-"PO-Revision-Date: 2016-07-19 15:37+0200\n"
+"POT-Creation-Date: 2016-07-30 10:07+0200\n"
+"PO-Revision-Date: 2016-07-30 10:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -17,41 +17,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: base/globals.cpp:6
+#: base/globals.cpp:7
 msgid "Size"
 msgstr "Omvang"
 
-#: base/globals.cpp:7
+#: base/globals.cpp:8
 msgid "Model"
 msgstr "Model"
 
-#: base/globals.cpp:8 build/ui_devinfo.h:310
+#: base/globals.cpp:9 build/ui_devinfo.h:352 gui/formbasedevinfo.cpp:30
+#: gui/mainwindow.cpp:53
 msgid "Type"
 msgstr "Type"
 
-#: base/globals.cpp:9
+#: base/globals.cpp:10
 msgid "Mounted"
 msgstr "Gekoppeld"
 
-#: base/globals.cpp:10 build/ui_devinfo.h:309 gui/mainwindow.cpp:121
+#: base/globals.cpp:11 build/ui_devinfo.h:351 gui/mainwindow.cpp:160
 msgid "Label"
 msgstr "Label"
 
-#: base/globals.cpp:11
+#: base/globals.cpp:12
 msgid "Size (KMG)"
 msgstr "Omvang (KMG)"
 
-#: base/globals.cpp:12
-msgid "Readonly"
+#: base/globals.cpp:13
+msgid "Read only"
 msgstr "Alleen lezen"
 
-#: base/globals.cpp:13
+#: base/globals.cpp:14
 msgid "Removable"
 msgstr "Verwijderbaar"
 
-#: base/globals.cpp:14
-msgid "Loopback file"
-msgstr "Loopback bestand"
+#: base/globals.cpp:15
+msgid "Loop back file"
+msgstr "Loop back bestand"
+
+#: base/globals.cpp:16 build/ui_devinfo.h:364 build/ui_devinfo.h:366
+msgid "Slaves"
+msgstr "Slaaf"
 
 #: build/ui_about.h:97
 msgid "About"
@@ -69,79 +74,88 @@ msgstr "(c) 2016 Jeroen van Iddekinge"
 msgid "License: Gpl v2"
 msgstr "Licentie: GPL v2"
 
-#: build/ui_about.h:101 build/ui_devinfo.h:320 build/ui_parinfo.h:254
+#: build/ui_about.h:101 build/ui_devinfo.h:367 build/ui_parinfo.h:254
 msgid "Close"
 msgstr "Sluiten"
 
-#: build/ui_devinfo.h:297
+#: build/ui_devinfo.h:339
 msgid "Device information"
 msgstr "Apparaat informatie"
 
-#: build/ui_devinfo.h:298 build/ui_parinfo.h:238
+#: build/ui_devinfo.h:340 build/ui_parinfo.h:238
 msgid "Device name:"
 msgstr "Naam aperaat"
 
-#: build/ui_devinfo.h:299 build/ui_devinfo.h:305 build/ui_devinfo.h:311
+#: build/ui_devinfo.h:341 build/ui_devinfo.h:347 build/ui_devinfo.h:353
 #: build/ui_parinfo.h:241 build/ui_parinfo.h:245
 msgid "none"
 msgstr "geen"
 
-#: build/ui_devinfo.h:300 build/ui_parinfo.h:239
+#: build/ui_devinfo.h:342 build/ui_parinfo.h:239
 msgid "Size:"
 msgstr "Omvang:"
 
-#: build/ui_devinfo.h:301 build/ui_devinfo.h:303 build/ui_devinfo.h:308
-#: build/ui_parinfo.h:240 build/ui_parinfo.h:242 build/ui_parinfo.h:247
+#: build/ui_devinfo.h:343 build/ui_devinfo.h:345 build/ui_devinfo.h:350
+#: build/ui_devinfo.h:355 build/ui_parinfo.h:240 build/ui_parinfo.h:242
+#: build/ui_parinfo.h:247
 msgid "None"
 msgstr "Geen"
 
-#: build/ui_devinfo.h:302
+#: build/ui_devinfo.h:344
 msgid "Model:"
 msgstr "Model:"
 
-#: build/ui_devinfo.h:304
+#: build/ui_devinfo.h:346
 msgid "Removable:"
 msgstr "Verwijderbaar:"
 
-#: build/ui_devinfo.h:306
+#: build/ui_devinfo.h:348
 msgid "Readonly:"
 msgstr "Alleen lezen:"
 
-#: build/ui_devinfo.h:307
+#: build/ui_devinfo.h:349
 msgid "TextLabel"
 msgstr "Textlabel"
 
-#: build/ui_devinfo.h:312 build/ui_parinfo.h:248
+#: build/ui_devinfo.h:354
+msgid "Loopback file"
+msgstr "Loopback bestand"
+
+#: build/ui_devinfo.h:356 build/ui_parinfo.h:248
 msgid "Device aliases"
 msgstr "Apparaat alias"
 
-#: build/ui_devinfo.h:313 build/ui_parinfo.h:249
+#: build/ui_devinfo.h:357 build/ui_parinfo.h:249
 msgid "Device has no aliasses"
 msgstr "Apparaat heeft geen aliassen"
 
-#: build/ui_devinfo.h:314
+#: build/ui_devinfo.h:358
 msgid "Aliases"
 msgstr "Aliassen"
 
-#: build/ui_devinfo.h:315
+#: build/ui_devinfo.h:359
 msgid "Paritions"
 msgstr "Partities"
 
-#: build/ui_devinfo.h:316
+#: build/ui_devinfo.h:360
 msgid "Partitions"
 msgstr "Paritities"
 
-#: build/ui_devinfo.h:317 build/ui_parinfo.h:251
+#: build/ui_devinfo.h:361 build/ui_parinfo.h:251
 msgid "Mount points"
 msgstr "Aankoppel punt"
 
-#: build/ui_devinfo.h:318
+#: build/ui_devinfo.h:362
 msgid "This devices or it's partitions are not mounted"
 msgstr "Dit apparaat of een van zijn partities zijn niet aangekoppeld"
 
-#: build/ui_devinfo.h:319 build/ui_parinfo.h:253
+#: build/ui_devinfo.h:363 build/ui_parinfo.h:253
 msgid "Mountpoints"
 msgstr "Koppelpunt"
+
+#: build/ui_devinfo.h:365
+msgid "No slave found"
+msgstr ""
 
 #: build/ui_fields.h:168
 msgid "Fields configuration"
@@ -163,43 +177,47 @@ msgstr ">"
 msgid "Down"
 msgstr "Neer"
 
-#: build/ui_main.h:192
+#: build/ui_main.h:205
 msgid "MainWindow"
 msgstr "Hoofd venster"
 
-#: build/ui_main.h:193
+#: build/ui_main.h:206
 msgid "&Quit"
 msgstr "&Sluiten"
 
-#: build/ui_main.h:194
+#: build/ui_main.h:207
 msgid "&Fields"
 msgstr "&Velden"
 
-#: build/ui_main.h:195
+#: build/ui_main.h:208
 msgid "&About"
 msgstr "&Over"
 
-#: build/ui_main.h:196
+#: build/ui_main.h:209
 msgid "Refresh"
 msgstr "Verversen"
 
-#: build/ui_main.h:197
+#: build/ui_main.h:210
 msgid "Disks"
 msgstr "Disk"
 
-#: build/ui_main.h:198
+#: build/ui_main.h:211
 msgid "Raid"
 msgstr "Raid"
 
-#: build/ui_main.h:199
+#: build/ui_main.h:212
+msgid "Fstab"
+msgstr ""
+
+#: build/ui_main.h:213
 msgid "Fi&le"
 msgstr "&Bestand"
 
-#: build/ui_main.h:200
+#: build/ui_main.h:214
 msgid "Setti&ngs"
 msgstr "&Configuratie"
 
-#: build/ui_main.h:201
+#: build/ui_main.h:215
 msgid "Help"
 msgstr "Help"
 
@@ -227,25 +245,37 @@ msgstr "Aliassen"
 msgid "This partition is not mounted"
 msgstr "Deze partitie is niet aangekoppeld"
 
-#: dingui.cpp:13
+#: data/devicelist.cpp:176
+msgid "LVM Device"
+msgstr "LVM Apparaat"
+
+#: data/devicelist.cpp:185
+msgid "LVM Member"
+msgstr "LVM Lid"
+
+#: dingui.cpp:33
 msgid "Disk information gui"
 msgstr "Disk informatie gui"
 
-#: dingui.cpp:15 dingui.cpp:22
+#: dingui.cpp:35 dingui.cpp:42
 msgid "X"
 msgstr "X"
 
-#: dingui.cpp:17
+#: dingui.cpp:37
 msgid "(C) 2016"
 msgstr "(C) 2016"
 
-#: dingui.cpp:18
+#: dingui.cpp:38
 msgid "x"
 msgstr "x"
 
-#: dingui.cpp:22
+#: dingui.cpp:42
 msgid "Jeroen van Iddekinge"
 msgstr "Jeroen van Iddekinge"
+
+#: gui/formbasedevinfo.cpp:31
+msgid "Alias"
+msgstr "Alias"
 
 #: gui/formdevinfo.cpp:20 gui/formdevinfo.cpp:21
 msgid "Yes"
@@ -255,57 +285,96 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nee"
 
-#: gui/formdevinfo.cpp:38 gui/mainwindow.cpp:45
+#: gui/formdevinfo.cpp:54 gui/mainwindow.cpp:50 gui/mainwindow.cpp:94
 msgid "Device"
 msgstr "Apparaat"
 
-#: gui/formdevinfo.cpp:39 gui/formparinfo.cpp:25
-msgid "Mountpoint"
-msgstr "Koppelpunt"
+#: gui/formdevinfo.cpp:55 gui/mainwindow.cpp:52
+msgid "Mount point"
+msgstr "Koppel punt"
 
-#: gui/formdevinfo.cpp:74 gui/mainwindow.cpp:132
+#: gui/formdevinfo.cpp:75 gui/mainwindow.cpp:187
 msgid "Name"
 msgstr "Naam"
 
-#: gui/formdevinfo.cpp:75 gui/mainwindow.cpp:134
+#: gui/formdevinfo.cpp:76 gui/mainwindow.cpp:189
 msgid "Partition"
 msgstr "Partitie"
 
-#: gui/mainwindow.cpp:46
+#: gui/formdevinfo.cpp:101
+msgid "Slave name"
+msgstr "Naam slaaf"
+
+#: gui/formparinfo.cpp:25
+msgid "Mountpoint"
+msgstr "Koppelpunt"
+
+#: gui/mainwindow.cpp:48 gui/mainwindow.cpp:54
+msgid "Options"
+msgstr "Optie"
+
+#: gui/mainwindow.cpp:51
+msgid "Real device"
+msgstr "Werkelijke apparaat"
+
+#: gui/mainwindow.cpp:63
+msgid "Not mounted\n"
+msgstr "Niet gekoppeld\n"
+
+#: gui/mainwindow.cpp:64
+msgid "Mounted on different path \n"
+msgstr "Gekoppeld aan een andere pad\n"
+
+#: gui/mainwindow.cpp:69
+msgid "Wrong type. Type is (%1)"
+msgstr "Verekeerde type. Type is %1"
+
+#: gui/mainwindow.cpp:70
+msgid "Device not mountable (has partitions)"
+msgstr "Apparaat niet te koppelen (heeft partities)"
+
+#: gui/mainwindow.cpp:95
 msgid "Raid members"
 msgstr "Raid leden"
 
-#: gui/mainwindow.cpp:47
+#: gui/mainwindow.cpp:96
 msgid "Raid level"
 msgstr "Raid niveau"
 
-#: gui/mainwindow.cpp:48
+#: gui/mainwindow.cpp:97
 msgid "Raid type"
 msgstr "Raid type"
 
-#: gui/mainwindow.cpp:49
+#: gui/mainwindow.cpp:98
 msgid "Mounted point"
 msgstr "Aankoppel punt"
 
-#: gui/mainwindow.cpp:122 gui/mainwindow.cpp:208
+#: gui/mainwindow.cpp:157 gui/mainwindow.cpp:257
 msgid "Id"
 msgstr "Id"
 
-#: gui/mainwindow.cpp:123 gui/mainwindow.cpp:210
+#: gui/mainwindow.cpp:163 gui/mainwindow.cpp:259
 msgid "Uuid"
 msgstr "Uuid"
 
-#: gui/mainwindow.cpp:124 gui/mainwindow.cpp:211
+#: gui/mainwindow.cpp:166 gui/mainwindow.cpp:260
 msgid "Path"
 msgstr "Paden"
 
-#: gui/mainwindow.cpp:207
+#: gui/mainwindow.cpp:169
+msgid "LVM"
+msgstr "LVM"
+
+#: gui/mainwindow.cpp:256
 msgid "Devices"
 msgstr "Apparaten"
 
-#: gui/mainwindow.cpp:209
+#: gui/mainwindow.cpp:258
 msgid "Labels"
 msgstr "Labels"
+
+#~ msgid "Readonly"
+#~ msgstr "Alleen lezen"
 
 #~ msgid "Dialog"
 #~ msgstr "Dialoog"

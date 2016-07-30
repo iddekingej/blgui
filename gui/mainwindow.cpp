@@ -5,6 +5,9 @@
 #include <QStandardItemModel> 
 #include <QVariantList>
 #include <QApplication>
+#include <QResizeEvent>
+#include <KSharedConfig>
+#include <KConfigGroup>
 #include "data/deviceinfo.h"
 #include "data/btrfs.h"
 #include "ui_main.h"
@@ -217,8 +220,7 @@ void TMainWindow::showFieldChooser(){
 
 void TMainWindow::readConfiguation()
 {
-	enableDeviceFields.clear();
-	KSharedConfig::Ptr config=KSharedConfig::openConfig();
+	enableDeviceFields.clear();	
 	KConfigGroup  configGroup=config->group("enabledfields");
 	enableDeviceFields=configGroup.readEntry("devicefields",QVariantList());
 }
@@ -250,19 +252,30 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	ui.setupUi(this);
 	info=nullptr;
 	devModel=nullptr;
-	connect(ui.actionQuit,&QAction::triggered,g_app,QApplication::quit);
-	connect(ui.actionFields,&QAction::triggered, this,&TMainWindow::showFieldChooser);
-	connect(ui.refreshButton,SIGNAL(pressed()),this,SLOT(refresh())); 
-	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
-	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
-	connect(ui.actionAbout,&QAction::triggered,this,&TMainWindow::showAbout);
+
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));
 	ui.itemSource->addItem(i18n("Labels"));
 	ui.itemSource->addItem(i18n("Uuid"));
 	ui.itemSource->addItem(i18n("Path"));
 	ui.diskList->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	
+	config=KSharedConfig::openConfig();
+	
+	KConfigGroup  l_configGroup=config->group("windows");
+	int l_width=l_configGroup.readEntry("mainWidth",-1);
+	int l_height=l_configGroup.readEntry("mainHeight",-1);
+	if((l_width>0) && (l_height>0)){
+		resize(l_width,l_height);
+	}
 	refresh();
+	
+	connect(ui.actionQuit,&QAction::triggered,g_app,QApplication::quit);
+	connect(ui.actionFields,&QAction::triggered, this,&TMainWindow::showFieldChooser);
+	connect(ui.refreshButton,SIGNAL(pressed()),this,SLOT(refresh())); 
+	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
+	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
+	connect(ui.actionAbout,&QAction::triggered,this,&TMainWindow::showAbout);	
 }
 
 TMainWindow::~TMainWindow()
@@ -275,4 +288,12 @@ void TMainWindow::showAbout()
 {
 	TAbout l_about;
 	l_about.exec();
+}
+
+void TMainWindow::resizeEvent(QResizeEvent *p_event)
+{
+	KConfigGroup  l_configGroup=config->group("windows");
+	l_configGroup.writeEntry("mainWidth",p_event->size().width() );
+	l_configGroup.writeEntry("mainHeight",p_event->size().height());
+	config->sync();
 }
