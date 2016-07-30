@@ -1,6 +1,6 @@
 WARNING
 =======
-This is version is an early 0.1 development version. It is not yet feature complete or bug free.
+This is version is an early 0.3 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======
@@ -8,7 +8,8 @@ Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux
 License  : Gpl
-Version  : 0.2
+Version  : 0.3 
+
 
 BUILDING
 =======
@@ -88,5 +89,5 @@ information(if available).
 
 Other functions:
 * Pressing the "Refresh" button will refresh the information (There is no auto refresh yet)
-* Settings=>Fields: For configuring the fields shown under the "Disk" tab. (There is no field configuration for the raid tab yet)
+* Settings=>Fields: For configuring the fields shown under the "Disk" tab. (There is no field configuration for the raid and fstab tab yet)
 * Double clicking the row in the "Disk" tab will show more information about the selected device
