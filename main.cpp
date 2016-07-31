@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 	KAboutData l_aboutData(
 			"ding"
 		,	i18n("Disk information gui")
-		,	"0.2"
+		,	"0.4.3"
 		,	i18n("X")
 		,	KAboutLicense::GPL
 		,	i18n("(C) 2016")
