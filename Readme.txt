@@ -42,7 +42,9 @@ libblkid
 
 
 Building the exec_program:
-* cmake.
+* mkdir build
+* cd build
+* cmake ..
 * make
 * make install
 
