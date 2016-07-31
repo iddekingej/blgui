@@ -1,6 +1,6 @@
 WARNING
 =======
-This is version is an early 0.4.3 development version. It is not yet feature complete or bug free.
+This is version is an early 0.4.4 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======
@@ -8,7 +8,7 @@ Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux
 License  : Gpl
-Version  : 0.4.3
+Version  : 0.4.4
 
 
 BUILDING
