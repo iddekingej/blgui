@@ -1,6 +1,6 @@
 WARNING
 =======
-This is version is an early 0.4 development version. It is not yet feature complete or bug free.
+This is version is an early 0.4	 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======

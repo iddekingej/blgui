@@ -15,7 +15,6 @@ include(KDECMakeSettings)
 include(KDECompilerSettings)
 include(FeatureSummary)
 
-
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS 
     Core    
 )
@@ -38,10 +37,12 @@ endif()
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
     
 
-KI18N_WRAP_UI(ding_ui_h ui/main.ui ui/fields.ui ui/devinfo.ui ui/parinfo.ui ui/about.ui)
+KI18N_WRAP_UI(bdgui_ui_h ui/main.ui ui/fields.ui ui/devinfo.ui ui/parinfo.ui ui/about.ui)
 
-set(ding_SRCS   
-	dingui.cpp 
+qt5_add_resources(bdgui_rcc_h resources/icons.qrc)
+
+set(bdgui_SRCS   
+	main.cpp 
 	base/globals.cpp 
 	base/linklist.cpp 
 	base/utils.cpp
@@ -64,12 +65,12 @@ set(ding_SRCS
 	gui/mainwindow.cpp 
 )
 
-set(ding_SRCS  ${ding_SRCS} ${ding_ui_h})
+set(bdgui_SRCS ${bdgui_rcc_h} ${bdgui_SRCS} ${bdgui_ui_h})
 
-add_executable(ding ${ding_SRCS})
+add_executable(bdgui ${bdgui_SRCS})
 
 
-target_link_libraries(ding
+target_link_libraries(bdgui
     Qt5::Widgets
     KF5::CoreAddons
     KF5::ConfigCore
@@ -78,7 +79,7 @@ target_link_libraries(ding
 )
 
 
-install(TARGETS ding  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)

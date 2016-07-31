@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Partition information</string>
+   <string>Partition details information</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

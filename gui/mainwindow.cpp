@@ -268,6 +268,9 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	if((l_width>0) && (l_height>0)){
 		resize(l_width,l_height);
 	}
+	
+	g_app->setWindowIcon(QIcon(":/icons/mainicon.png"));
+	setWindowIcon(QIcon(":/icons/mainicon.png"));
 	refresh();
 	
 	connect(ui.actionQuit,&QAction::triggered,g_app,QApplication::quit);
