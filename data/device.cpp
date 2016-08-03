@@ -17,7 +17,7 @@ const QString TDevice::getModel()
 TPartition *TDevice::addParition(const QString &p_name,TDiskSize p_size)
 {
 	TPartition *l_partition=new TPartition(this,p_name,p_size);
-	partions.append(l_partition);
+	partitions.append(l_partition);
 	return l_partition;
 }
 
@@ -34,11 +34,12 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< (readonly?"X":"")
 		<< (removable?"X":"")
 		<< loopbackFile
-		<< getSlavesString();
+		<<  getSlavesString()
+		<<  (!hasPartitions() && getMounts().length()>0?QString::number(getFree()):"");
 }
 
 bool TDevice::hasPartitions()
 {
-	return partions.getStart() != nullptr;
+	return partitions.getStart() != nullptr;
 }
 

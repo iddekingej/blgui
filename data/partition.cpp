@@ -21,7 +21,9 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<""
 		<<""
 		<<""
-		<<getSlavesString();
+		<<getSlavesString()
+		<< QString::number(getFree());
+;
 }
 
 

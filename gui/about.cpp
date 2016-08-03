@@ -1,3 +1,7 @@
+/*
+ * About.cpp
+ * Information about program
+ */
 #include "about.h"
 TAbout::TAbout(){
 	ui.setupUi(this);

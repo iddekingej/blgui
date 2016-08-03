@@ -1,9 +1,15 @@
+/*
+ * fieldconfig.cpp
+ * configure which fields to display and the desired order
+ */
 #include <QStandardItem>
 #include <QStandardItemModel>
 #include <QVariantList>
 #include <QListView>
 #include "fieldconfig.h"
 #include "base/globals.h"
+
+// Save configuration after pressing "Ok" button
 
 void TFieldsConfig::save()
 {
@@ -18,6 +24,7 @@ void TFieldsConfig::save()
 		
 }
 
+// Move current selected item up (p_diff=-1) or down (p_diff=+1)
 
 void TFieldsConfig::moveItem(int p_diff)
 {
@@ -65,7 +72,6 @@ void TFieldsConfig::removeLabel()
 	QListIterator<QModelIndex> l_iter=QListIterator<QModelIndex>(l_list);
 	int l_code;
 	QStandardItem *l_selectedItem;
-	printf("Remove \n");
 	l_iter.toBack();
 	while(l_iter.hasPrevious()){
 		l_item=l_iter.previous();

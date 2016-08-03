@@ -8,6 +8,8 @@
 #include "alias.h"
 #include <QIODevice>
 #include <klocalizedstring.h>
+#include <sys/statvfs.h>
+#include <sys/types.h>
 
 
 const char* MOUNTS_PATH="/proc/mounts";
@@ -54,6 +56,8 @@ void TDeviceList::readDevices()
 		}
 	}
 }
+
+
 
 void TDeviceList::readPartitions(TDevice* p_device)
 {
@@ -108,6 +112,14 @@ bool TDeviceList::readMounts()
 			if(l_device != nullptr){
 				l_device->addMount(l_parts[1],l_parts[2]);
 				l_device->setType(l_parts[2]);
+				if(l_device->getFree()==0){
+					struct statvfs l_info;
+					int l_return;
+					if((l_return=statvfs((l_parts[1]+"/.").toUtf8().data(),&l_info))==0){
+						l_device->setFree(l_info.f_bsize*l_info.f_bfree);
+					}
+					printf("%d %d %s \n",l_return,errno,l_parts[2].toUtf8().data());
+				}
 			}
 		}
 	}

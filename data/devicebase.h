@@ -14,7 +14,8 @@ private:
 	QString devPath;
 	QString type;
 	QString label;
-	TDiskSize size;
+	TDiskSize size=0;
+	TDiskSize free=0;
 	TLinkList<TMount > mounts;
 	TLinkList<TDeviceAlias> deviceAlias;
 	QList<TDeviceBase *>    slaves;
@@ -63,6 +64,9 @@ public:
 		type=p_type;
 	}
 	
+	inline void setFree(TDiskSize p_free){ free=p_free;}
+	inline TDiskSize getFree(){ return free;}
+	
 	virtual const QString getModel()=0;
 	
 	inline QString  getDevPath()
@@ -79,6 +83,7 @@ public:
 	{
 		slaves.append(p_slave);
 	}
+	
 	
 	virtual bool hasPartitions()=0;
 	bool isMountedOn(const QString &p_path);

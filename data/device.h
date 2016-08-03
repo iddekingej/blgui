@@ -7,7 +7,7 @@
 class TDevice:public TDeviceBase
 {
 private:
-	TLinkList<TPartition> partions;	
+	TLinkList<TPartition> partitions;	
 	QString model;
 	bool    readonly;
 	bool    removable;
@@ -17,7 +17,7 @@ public:
 
 	inline int getNumPartitions()
 	{
-		return partions.getLength();
+		return partitions.getLength();
 	}
 	
 	
@@ -53,7 +53,7 @@ public:
 	
 	TLinkListItem<TPartition> *getPartitionStart()
 	{
-		return partions.getStart();
+		return partitions.getStart();
 	}
 
 	inline void setModel(const QString &p_model)

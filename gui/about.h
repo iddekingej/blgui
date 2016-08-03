@@ -1,3 +1,7 @@
+/*
+ * About.h
+ * Information about program
+ */
 #ifndef __ABOUT_H_
 #define __ABOUT_H_
 #include "gui/about.h"
