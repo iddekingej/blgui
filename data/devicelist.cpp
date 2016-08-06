@@ -10,10 +10,19 @@
 #include <klocalizedstring.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
-
+#include <QTextStream>
 
 const char* MOUNTS_PATH="/proc/mounts";
+//List of devices and retrives information about the device
+//Information about the devices are read from the /sys/block /dev/disk /proc/mounts/ proc/swap 
 
+
+//Read all block devices (not the partitions) by scanning /sys/block
+//This routine determines:
+//-Size
+//-Renovable
+//-Readonly
+//-loopback file
 
 void TDeviceList::readDevices()
 {
@@ -57,8 +66,33 @@ void TDeviceList::readDevices()
 	}
 }
 
+//read information about mounded swap devices.
+//Information is read from file /proc/swap.
+//This routine set device type to "swap"
+
+void TDeviceList::readSwap()
+{
+	QFile l_file(QStringLiteral("/proc/swaps"));
+	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)) return;
+	QTextStream l_stream(&l_file);
+	QString l_line;
+	QString l_dev;
+	TDeviceBase *l_device;
+	l_line=l_stream.readLine();
+	while(true){		
+		if(l_stream.atEnd()) break;
+		l_line=l_stream.readLine();
+		l_dev=l_line.left(l_line.indexOf(' '));
+		l_device=findDeviceByDevPath(l_dev);
+		if(l_device){
+			l_device->setType("swap");
+		}		
+		if(l_stream.atEnd()) break;
+	}
+}
 
 
+//Read data from partitions belonging to block device p_device
 void TDeviceList::readPartitions(TDevice* p_device)
 {
 	QDir         l_dir("/sys/block/"+p_device->getName());
@@ -81,9 +115,13 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	}	
 }
 
+<<<<<<< HEAD
 // Read mount info from /proc/mounts
-bool TDeviceList::readMounts()
+=======
+//Read all mounted devices from /proc/mounts
 
+>>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
+bool TDeviceList::readMounts()
 {
 	char        l_lineBuffer[256];
 	int         l_read;
@@ -112,6 +150,16 @@ bool TDeviceList::readMounts()
 			if(l_device != nullptr){
 				l_device->addMount(l_parts[1],l_parts[2]);
 				l_device->setType(l_parts[2]);
+<<<<<<< HEAD
+=======
+				if(l_device->getFree()==0){
+					struct statvfs l_info;
+					int l_return;
+					if((l_return=statvfs((l_parts[1]+"/.").toUtf8().data(),&l_info))==0){
+						l_device->setFree(l_info.f_bsize*l_info.f_bfree);
+					}
+				}
+>>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
 			}
 		}
 	}
@@ -119,6 +167,7 @@ bool TDeviceList::readMounts()
 	return true;
 }
 
+<<<<<<< HEAD
 //Read from all mounted devices the free size through statvfs
 void TDeviceList::readFreeSpace()
 {
@@ -139,6 +188,10 @@ void TDeviceList::readFreeSpace()
 	}
 }
 
+=======
+//under /dev/disk symlinks to the device are stored. The name of the symlink are 'aliases' of the device (e.g. device uuid,label,bus path etc..
+///dev/mapper are LVM devices
+>>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
 
 void TDeviceList::readAliases()
 {
@@ -218,6 +271,8 @@ void TDeviceList::readLVM()
 		
 }
 
+//Finds TDeviceBase by the path of device inode(or its symbolic link) 
+
 TDeviceBase* TDeviceList::findDeviceByDevPath(const QString& p_devPath)
 {
 	QString l_name=aliasses->getDeviceNameFromAliasPath(p_devPath);
@@ -234,6 +289,8 @@ TDeviceList::TDeviceList(TAlias *p_aliasses)
 	aliasses=p_aliasses;
 }
 
+// For BTRFS raid the mount point from only one raid member is retrieved
+// This routine copies the mount information to the other raid members.
 void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
 {
 	TDeviceBase *l_copyFrom=nullptr;
@@ -265,6 +322,7 @@ void TDeviceList::readInfo()
 	readAliases();
 	readLabels();
 	readLVM();
+	readSwap();
 }
 
 

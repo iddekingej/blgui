@@ -25,7 +25,11 @@ private:
 	void readUuid();
 	void readPath();
 	void readAliases();
+<<<<<<< HEAD
 	
+=======
+	void readSwap();
+>>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index);	
 	void readLVM();
 public:
