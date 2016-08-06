@@ -20,14 +20,14 @@ const char* MOUNTS_PATH="/proc/mounts";
 //Read all block devices (not the partitions) by scanning /sys/block
 //This routine determines:
 //-Size
-//-Renovable
-//-Readonly
+//-Removable
+//-Read only
 //-loopback file
 
 void TDeviceList::readDevices()
 {
 	QString      l_deviceName;
-	QDir         l_dir("/sys/block");
+	QDir         l_dir(QStringLiteral("/sys/block"));
 	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
 	TDevice      *l_device;
 	QString      l_model;
@@ -115,12 +115,9 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	}	
 }
 
-<<<<<<< HEAD
-// Read mount info from /proc/mounts
-=======
 //Read all mounted devices from /proc/mounts
 
->>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
+
 bool TDeviceList::readMounts()
 {
 	char        l_lineBuffer[256];
@@ -150,8 +147,6 @@ bool TDeviceList::readMounts()
 			if(l_device != nullptr){
 				l_device->addMount(l_parts[1],l_parts[2]);
 				l_device->setType(l_parts[2]);
-<<<<<<< HEAD
-=======
 				if(l_device->getFree()==0){
 					struct statvfs l_info;
 					int l_return;
@@ -159,7 +154,7 @@ bool TDeviceList::readMounts()
 						l_device->setFree(l_info.f_bsize*l_info.f_bfree);
 					}
 				}
->>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
+
 			}
 		}
 	}
@@ -167,7 +162,7 @@ bool TDeviceList::readMounts()
 	return true;
 }
 
-<<<<<<< HEAD
+
 //Read from all mounted devices the free size through statvfs
 void TDeviceList::readFreeSpace()
 {
@@ -188,10 +183,10 @@ void TDeviceList::readFreeSpace()
 	}
 }
 
-=======
+
 //under /dev/disk symlinks to the device are stored. The name of the symlink are 'aliases' of the device (e.g. device uuid,label,bus path etc..
 ///dev/mapper are LVM devices
->>>>>>> 278965990a636261ca844d6cb6f0246682b117b0
+
 
 void TDeviceList::readAliases()
 {
@@ -314,7 +309,7 @@ void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
 	}
 }
 
-
+//Read all information
 void TDeviceList::readInfo()
 {
 	readDevices();

@@ -270,15 +270,15 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	
 	config=KSharedConfig::openConfig();
 	
-	KConfigGroup  l_configGroup=config->group("windows");
-	int l_width=l_configGroup.readEntry("mainWidth",-1);
-	int l_height=l_configGroup.readEntry("mainHeight",-1);
+	KConfigGroup  l_configGroup=config->group(QStringLiteral("windows"));
+	int l_width=l_configGroup.readEntry(QStringLiteral("mainWidth"),-1);
+	int l_height=l_configGroup.readEntry(QStringLiteral("mainHeight"),-1);
 	if((l_width>0) && (l_height>0)){
 		resize(l_width,l_height);
 	}
 	
-	g_app->setWindowIcon(QIcon(":/icons/mainicon.png"));
-	setWindowIcon(QIcon(":/icons/mainicon.png"));
+	g_app->setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
+	setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	refresh();
 	
 	connect(ui.actionQuit,&QAction::triggered,g_app,QApplication::quit);
@@ -292,7 +292,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
 	prvMounted=new TMTab(info->getDevices());
-	prvMounted->setSourceFile("/proc/mounts");
+	prvMounted->setSourceFile(QStringLiteral("/proc/mounts"));
 	prvMounted->processInfo();
 	ui.deleteChangeMessage->setVisible(false);
 	connect(ui.deleteChangeMessage,SIGNAL(pressed()),this,SLOT(clearChangeMessage()));
@@ -324,7 +324,7 @@ void TMainWindow::timeOutCheckChange()
 //Read all current mountes  and compares is there is any changes
 //All changes are collected in mount and umount set until the user presses the "clear message" button
 	TMTab *l_tab=new TMTab(info->getDevices());
-	l_tab->setSourceFile("/proc/mounts");
+	l_tab->setSourceFile(QStringLiteral("/proc/mounts"));
 	l_tab->processInfo();
 	
 	
@@ -336,14 +336,14 @@ void TMainWindow::timeOutCheckChange()
 	while(l_iter.hasNext()){
 		if(l_what.length()>0) l_what +=",";
 		
-		l_what += l_iter.next()+" mounted";
+		l_what += l_iter.next()+i18n(" mounted");
 	}
 
 	if(prvMounted->notInOther(l_tab,unmounted)) l_changed=true;
 	QSetIterator<QString> l_iterUnmounted(unmounted);
 	while(l_iterUnmounted.hasNext()){
 		if(l_what.length()>0) l_what +=",";
-		l_what += l_iterUnmounted.next()+" unmounted";
+		l_what += l_iterUnmounted.next()+i18n(" unmounted");
 	}
 	
 	//Check udev for any device new or remove block devices 
@@ -374,8 +374,8 @@ void TMainWindow::showAbout()
 
 void TMainWindow::resizeEvent(QResizeEvent *p_event)
 {
-	KConfigGroup  l_configGroup=config->group("windows");
-	l_configGroup.writeEntry("mainWidth",p_event->size().width() );
-	l_configGroup.writeEntry("mainHeight",p_event->size().height());
+	KConfigGroup  l_configGroup=config->group(QStringLiteral("windows"));
+	l_configGroup.writeEntry(QStringLiteral("mainWidth"),p_event->size().width() );
+	l_configGroup.writeEntry(QStringLiteral("mainHeight"),p_event->size().height());
 	config->sync();
 }
