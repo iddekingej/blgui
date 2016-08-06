@@ -33,14 +33,14 @@ void TMainWindow::refresh()
 	if(info != nullptr) delete info;
 	info=new TDeviceInfo();
 	info->getDisks();
-	fillDevice(info);
-	fillRaid(info);	
-	fillMtab(info);
+	fillDevice();
+	fillRaid();	
+	fillMtab();
 }
 
-void TMainWindow::fillMtab(TDeviceInfo *p_info)
+void TMainWindow::fillMtab()
 {
-	TLinkListItem<TMTabEntry> *l_current=p_info->getMTab()->getEntriesStart();
+	TLinkListItem<TMTabEntry> *l_current=info->getMTab()->getEntriesStart();
 	QStandardItemModel *l_model=new QStandardItemModel(0,6,this);
 	TMTabEntry *l_info;
 	QString l_note;
@@ -79,9 +79,8 @@ void TMainWindow::fillMtab(TDeviceInfo *p_info)
 }
 
 //Fill Raid TAb
-//p_info : Information to display
 
-void TMainWindow::fillRaid(TDeviceInfo *p_info)
+void TMainWindow::fillRaid()
 {
 	TRaidDevice *l_info;	
 	TLinkListItem<TRaidDevice> *l_item;
@@ -89,7 +88,7 @@ void TMainWindow::fillRaid(TDeviceInfo *p_info)
 	int l_cnt=0;
 	
 	
-	QStandardItemModel *l_model=new QStandardItemModel(p_info->getRaidList()->getLength(),4,this);
+	QStandardItemModel *l_model=new QStandardItemModel(info->getRaidList()->getLength(),4,this);
 	
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Raid members")));
@@ -97,7 +96,7 @@ void TMainWindow::fillRaid(TDeviceInfo *p_info)
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Raid type")));
 	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Mounted point")));
 	
-	l_item=p_info->getRaidList()->getTop();
+	l_item=info->getRaidList()->getTop();
 	
 	while(l_item){
 		l_info=l_item->getItem();
@@ -115,16 +114,24 @@ void TMainWindow::fillRaid(TDeviceInfo *p_info)
 	ui.raidList->resizeColumnsToContents();
 }
 
+//Fill row with data
+// p_begin - Column 0..p_begin-1 is fixed columns from p_begin are configured
+// p_model - model for fillen data
+// p_row   - row number
+// p_list  - List with data
 
 void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list)
 {
 	int l_fieldId;
 	QStandardItem *l_item;
-
+	
+//fill fixed columns 
 	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
 		l_item=new QStandardItem(p_list[l_cnt]);		
 		p_model->setItem(p_row,l_cnt,l_item);
 	}
+	
+//fill flexible columns
 	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
 		l_fieldId=enableDeviceFields[l_cnt].toInt();
 		if(l_fieldId+p_begin<p_list.count()){
@@ -133,6 +140,7 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 	}
 }
 
+// Fill the header of the configured columns
 void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	int l_fieldId;
 	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
@@ -144,11 +152,11 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 }
 
 //Fill Device tab in main main window 
-//p_info : device information to display
-void TMainWindow::fillDevice(TDeviceInfo *p_info)
+
+void TMainWindow::fillDevice()
 {
 	const QMap<QString,TDeviceBase *> *l_map;
-	TDeviceList *l_devices=p_info->getDevices();
+	TDeviceList *l_devices=info->getDevices();
 	int l_selectedType=ui.itemSource->currentIndex();
 	QString l_extraLabel;
 
@@ -279,7 +287,29 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
 	connect(ui.actionAbout,&QAction::triggered,this,&TMainWindow::showAbout);	
+	
+	changeMonitor.open();
+	checkChange.start(1000);
+	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
 }
+
+void TMainWindow::timeOutCheckChange()
+{
+	QString l_what;
+	if(refreshNext){
+		printf("Refresh\n");
+		refresh();
+	}
+	if(changeMonitor.isSomethingChanged(l_what)){
+		ui.arInfo->setText(l_what);
+		printf("Changed\n");
+		if(ui.autoRefresh->isChecked()){
+			refreshNext=true;			
+		}
+		
+	}
+}
+
 
 TMainWindow::~TMainWindow()
 {

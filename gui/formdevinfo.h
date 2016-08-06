@@ -2,6 +2,7 @@
 #define __FORMDEVINFO_H_
 #include <QDialog>
 #include <QStandardItemModel>
+#include <QDateTime>
 #include "ui_devinfo.h"
 #include "data/device.h"
 #include "gui/formbasedevinfo.h"

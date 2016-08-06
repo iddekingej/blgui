@@ -81,7 +81,7 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	}	
 }
 
-
+// Read mount info from /proc/mounts
 bool TDeviceList::readMounts()
 
 {
@@ -112,20 +112,33 @@ bool TDeviceList::readMounts()
 			if(l_device != nullptr){
 				l_device->addMount(l_parts[1],l_parts[2]);
 				l_device->setType(l_parts[2]);
-				if(l_device->getFree()==0){
-					struct statvfs l_info;
-					int l_return;
-					if((l_return=statvfs((l_parts[1]+"/.").toUtf8().data(),&l_info))==0){
-						l_device->setFree(l_info.f_bsize*l_info.f_bfree);
-					}
-					printf("%d %d %s \n",l_return,errno,l_parts[2].toUtf8().data());
-				}
 			}
 		}
 	}
 	l_file.close();
 	return true;
 }
+
+//Read from all mounted devices the free size through statvfs
+void TDeviceList::readFreeSpace()
+{
+	QMapIterator<QString,TDeviceBase *> l_iter(nameIndex);
+	TDeviceBase *l_device;
+	QString l_somePath;
+	while(l_iter.hasNext()){
+		l_device=l_iter.next().value();
+		if(l_device->getMountStart() !=nullptr){
+			struct statvfs l_info;
+			//statvfs need some file at device. Using top directory (/.) of first mount point
+			l_somePath=l_device->getMountStart()->getItem()->getMountPoint()+"/.";
+			if((statvfs(l_somePath.toUtf8().data(),&l_info))==0){
+				l_device->setFree(l_info.f_bsize*l_info.f_bfree);
+			}			
+		}
+		
+	}
+}
+
 
 void TDeviceList::readAliases()
 {

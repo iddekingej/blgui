@@ -6,6 +6,7 @@
 #include <QStandardItemModel>
 #include <QStandardItem>
 #include <QMap>
+#include <QDateTime>
 #include <blkid/blkid.h>
 #include "base/utils.h"
 #include "devicebase.h"
@@ -26,6 +27,7 @@ private:
 	TRaidInfo   *raidList;
 	TMTab       *mtab;
 	blkid_cache blkidCache;
+	QDateTime   sbTime;
 
 	void procesAliasses(const QString &p_path);
 	void processAlias(const QString &p_file);
@@ -37,6 +39,11 @@ public:
 	
 	inline TBtrfsInfo *getBtrfsInfo(){
 		return btrfsInfo;
+	}
+	
+	QDateTime *getSbTime()
+	{
+		return &sbTime;
 	}
 	
 	inline TRaidInfo *getRaidList()

@@ -25,6 +25,7 @@ private:
 	void readUuid();
 	void readPath();
 	void readAliases();
+	
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index);	
 	void readLVM();
 public:
@@ -65,6 +66,7 @@ public:
 	void readInfo();
 	TDeviceBase *findDeviceByDevPath(const QString &p_name);
 	void sameMountPoint(const QList<TDeviceBase *> &p_list);
+	void readFreeSpace();
 	TDeviceList(TAlias *p_aliasses);
 };
 #endif

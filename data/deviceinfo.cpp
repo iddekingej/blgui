@@ -56,6 +56,8 @@ void TDeviceInfo::getDisks()
 	btrfsInfo->readInfo(aliasses);
 	raidList->processMD(devices);
 	raidList->processBtrfs(btrfsInfo,devices);
+	devices->readFreeSpace();
+
 	mtab->processInfo();
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
@@ -76,8 +78,7 @@ void TDeviceInfo::getDisks()
 			l_db->setLabel(l_partLabel);
 		}
 	}
-	
-
+	sbTime=QFileInfo("/sys/block").lastModified();
 }
 
 TDeviceInfo::TDeviceInfo()

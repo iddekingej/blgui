@@ -33,6 +33,11 @@ if(NOT INC_BLKID OR NOT LIB_BLKID)
 	message(FATAL_ERROR "Can't find blkid")
 endif()
 
+find_path(INC_UDEV libudev.h)
+find_library(LIB_UDEV NAMES udev)
+if(NOT INC_UDEV OR NOT LIB_UDEV)
+	message(FATAL_ERROR "Can't find libudev")
+endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
     
@@ -57,6 +62,7 @@ set(bdgui_SRCS
 	data/deviceinfo.cpp 
 	data/raid.cpp 
 	data/btrfs.cpp 
+	data/udevmonitor.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 
@@ -76,6 +82,7 @@ target_link_libraries(bdgui
     KF5::ConfigCore
     KF5::I18n
     ${LIB_BLKID}    
+    ${LIB_UDEV}
 )
 
 

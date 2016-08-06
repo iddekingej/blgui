@@ -4,7 +4,6 @@
 #include <QMap>
 #include <QFile>
 
-
 void TAlias::processAlias(const QString &p_file)
 {
 	QString l_currentFile=p_file;
