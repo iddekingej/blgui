@@ -2,5 +2,6 @@
 <RCC version="1.0">
  <qresource>
      <file>../icons/mainicon.png</file> 
+     <file>../icons/close.png</file>
  </qresource>
 </RCC>

@@ -291,23 +291,71 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	changeMonitor.open();
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
+	prvMounted=new TMTab(info->getDevices());
+	prvMounted->setSourceFile("/proc/mounts");
+	prvMounted->processInfo();
+	ui.deleteChangeMessage->setVisible(false);
+	connect(ui.deleteChangeMessage,SIGNAL(pressed()),this,SLOT(clearChangeMessage()));
 }
+
+//Clear "change message" (Mounts/Unmounts/new device/remove etc..)
+void TMainWindow::clearChangeMessage()
+{
+	ui.arInfo->setText("");
+	ui.deleteChangeMessage->setVisible(false);
+	mounted.clear();
+	unmounted.clear();
+}
+
+//Check periodically  if there is any device change
 
 void TMainWindow::timeOutCheckChange()
 {
 	QString l_what;
+
+	
 	if(refreshNext){
-		printf("Refresh\n");
-		refresh();
-	}
-	if(changeMonitor.isSomethingChanged(l_what)){
-		ui.arInfo->setText(l_what);
-		printf("Changed\n");
 		if(ui.autoRefresh->isChecked()){
-			refreshNext=true;			
+			refresh();
+			refreshNext=false;
 		}
-		
 	}
+
+//Read all current mountes  and compares is there is any changes
+//All changes are collected in mount and umount set until the user presses the "clear message" button
+	TMTab *l_tab=new TMTab(info->getDevices());
+	l_tab->setSourceFile("/proc/mounts");
+	l_tab->processInfo();
+	
+	
+	l_what="";
+	bool l_changed=false;
+	
+	if(l_tab->notInOther(prvMounted,mounted)) l_changed=true;
+	QSetIterator<QString> l_iter(mounted);
+	while(l_iter.hasNext()){
+		if(l_what.length()>0) l_what +=",";
+		
+		l_what += l_iter.next()+" mounted";
+	}
+
+	if(prvMounted->notInOther(l_tab,unmounted)) l_changed=true;
+	QSetIterator<QString> l_iterUnmounted(unmounted);
+	while(l_iterUnmounted.hasNext()){
+		if(l_what.length()>0) l_what +=",";
+		l_what += l_iterUnmounted.next()+" unmounted";
+	}
+	
+	//Check udev for any device new or remove block devices 
+	if(changeMonitor.isSomethingChanged(l_what)) l_changed=true;
+	if(l_changed){
+		ui.arInfo->setText(l_what);
+		ui.deleteChangeMessage->setVisible(true);
+		refreshNext=true;							
+	}
+	delete prvMounted;
+	prvMounted=l_tab;
+		
 }
 
 
@@ -315,6 +363,7 @@ TMainWindow::~TMainWindow()
 {
 	if(info)delete info;
 	if(devModel) delete devModel;
+	if(prvMounted) delete prvMounted;
 }
 
 void TMainWindow::showAbout()

@@ -58,6 +58,23 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="deleteChangeMessage">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/icons.qrc">
+            <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="arInfo">
           <property name="styleSheet">
            <string notr="true">QLabel{color:#F00;}</string>
@@ -211,6 +228,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

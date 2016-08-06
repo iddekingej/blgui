@@ -26,6 +26,7 @@ private:
 	TAlias      *aliasses;
 	TRaidInfo   *raidList;
 	TMTab       *mtab;
+	TMTab       *mounted;
 	blkid_cache blkidCache;
 	QDateTime   sbTime;
 
@@ -39,6 +40,11 @@ public:
 	
 	inline TBtrfsInfo *getBtrfsInfo(){
 		return btrfsInfo;
+	}
+	
+	inline TMTab *getMounted()
+	{
+		return mounted;
 	}
 	
 	QDateTime *getSbTime()

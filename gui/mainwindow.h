@@ -22,6 +22,7 @@ private slots:
 	void doubleClickedDevGrid(const QModelIndex &p_index);
 	void refresh();
 	void timeOutCheckChange();
+	void clearChangeMessage();
 
 private:
 	TDeviceInfo        *info;
@@ -30,7 +31,10 @@ private:
 	Ui::MainWindow ui;
 	KSharedConfig::Ptr config;
 	QTimer checkChange;
-	TUDevMonitor changeMonitor;
+	TUDevMonitor  changeMonitor;
+	QSet<QString> mounted;
+	QSet<QString> unmounted;
+	TMTab         *prvMounted=nullptr;
 	bool refreshNext=false;
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list);
 	void readConfiguation();

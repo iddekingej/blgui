@@ -17,7 +17,33 @@ TMTabEntry::TMTabEntry(const QString &p_device,TDeviceBase *p_realDevice,const Q
 TMTab::TMTab(TDeviceList* p_devList)
 {
 	devList=p_devList;
+	sourceFile="/etc/fstab";
 }
+
+bool TMTab::hasMount(const QString &p_device,const QString &p_mountPoint){
+	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
+	while(l_current !=nullptr){
+		if((l_current->getItem()->getDevice()==p_device) && (l_current->getItem()->getMountPoint()==p_mountPoint)) return true;
+		l_current=l_current->getNext();
+	}
+	return false;
+}
+
+
+bool TMTab::notInOther(TMTab *p_other, QSet<QString>& p_return)
+{
+	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
+	bool l_found=false;
+	while(l_current !=nullptr){		
+		if(!p_other->hasMount(l_current->getItem()->getDevice(),l_current->getItem()->getMountPoint())){
+			p_return += l_current->getItem()->getDevice();
+			l_found=true;
+		}
+		l_current=l_current->getNext();
+	}
+	return l_found;
+}
+
 
 void TMTab::nextItem(const QString& p_text, QString& p_out, int& p_cnt)
 {
@@ -63,6 +89,7 @@ bool TMTab::processLine(const QString& p_line)
 		
 		l_items << l_entry;
 	}
+	
 	if(l_items.length()<4) return false;
 	
 	l_device=l_items[0];
@@ -82,17 +109,18 @@ bool TMTab::processLine(const QString& p_line)
 
 void TMTab::processInfo()
 {
-	QFile l_file("/etc/fstab");
+	QFile l_file(sourceFile);
 	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
 		return;
 	}
 	QTextStream l_stream(&l_file);
 	QString l_line;
 	while(true){
-		l_line=l_stream.readLine();
-		if(l_stream.atEnd()) break;
-		if(l_line.at(0)=='#')continue;
-		processLine(l_line);
+		if(!l_stream.readLineInto(&l_line)) break;	
+		if(l_line.length()>0){
+			if(l_line.at(0)=='#')continue;
+			processLine(l_line);
+		}
 
 	}
 
@@ -134,3 +162,5 @@ TMTabEntry::TMountStatus TMTabEntry::isMounted()
 		return UNKMOUNTED;
 	}
 }
+
+

@@ -57,7 +57,7 @@ void TDeviceInfo::getDisks()
 	raidList->processMD(devices);
 	raidList->processBtrfs(btrfsInfo,devices);
 	devices->readFreeSpace();
-
+	mounted->processInfo();
 	mtab->processInfo();
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
@@ -89,6 +89,8 @@ TDeviceInfo::TDeviceInfo()
 	devices  =new TDeviceList(aliasses);
 	raidList =new TRaidInfo();
 	mtab     =new TMTab(devices);
+	mounted  = new TMTab(devices);
+	mounted->setSourceFile("/proc/mounts");	
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete btrfsInfo;
@@ -96,5 +98,6 @@ TDeviceInfo::~TDeviceInfo(){
 	delete aliasses;
 	delete raidList;
 	delete mtab;
+	delete mounted;
 	blkid_put_cache(blkidCache);
 }
