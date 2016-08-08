@@ -21,6 +21,7 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	ui.readonlyLabel->setText(p_device->getReadonly()?i18n("Yes"):i18n("No"));
 	ui.labelLabel->setText(p_device->getLabel());
 	ui.typeLabel->setText(p_device->getType());
+	ui.vendorLabel->setText(p_device->getVendor());
 	if(p_device->getLoopbackFile().length()>0){
 		ui.valLoopbackFile->setText(p_device->getLoopbackFile());
 	} else {

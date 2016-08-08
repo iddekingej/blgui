@@ -26,7 +26,7 @@ void TDevice::fillDataRow(QStringList& p_list)
 	p_list 	<< getName()
 		<< ""
 		<< QString::number(getSize())
-		<< getModel()
+		<< getVendor()+"/"+getModel()
 		<< getType()
 		<< getMounts()
 		<< getLabel()

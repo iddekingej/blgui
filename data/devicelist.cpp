@@ -32,6 +32,7 @@ void TDeviceList::readDevices()
 	TDevice      *l_device;
 	QString      l_model;
 	QString      l_loopFile;
+	QString      l_vendor;
 	TDiskSize    l_size;
 	unsigned long  l_removable;
 	unsigned long  l_readonly;
@@ -47,6 +48,7 @@ void TDeviceList::readDevices()
 			readLong(l_iter.filePath(),"ro",l_readonly);
 			if(l_dir.exists("device")==1){
 				readString(l_iter.filePath(),"device/model",l_model);					
+				readString(l_iter.filePath(),"device/vendor",l_vendor);
 			} else if(l_dir.exists("loop")==1){
 				l_model="Loopback";
 				readString(l_iter.filePath(),"loop/backing_file",l_loopFile);				
@@ -58,6 +60,7 @@ void TDeviceList::readDevices()
 			l_device->setReadonly(l_readonly==1);
 			l_device->setRemovable(l_removable==1);
 			l_device->setLoopbackFile(l_loopFile);
+			l_device->setVendor(l_vendor.trimmed());
 			append(l_device);
 			nameIndex.insert(l_deviceName,l_device);
 			deviceByDevPath.insert(l_device->getDevPath(),l_device);

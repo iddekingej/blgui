@@ -9,6 +9,7 @@ class TDevice:public TDeviceBase
 private:
 	TLinkList<TPartition> partitions;	
 	QString model;
+	QString vendor;
 	bool    readonly;
 	bool    removable;
 	QString loopbackFile;
@@ -56,6 +57,15 @@ public:
 		return partitions.getStart();
 	}
 
+	inline void setVendor(const QString &p_vendor)
+	{
+		vendor=p_vendor;
+	}
+	
+	inline QString &getVendor(){
+		return vendor;
+	}
+	
 	inline void setModel(const QString &p_model)
 	{
 		model=p_model;
