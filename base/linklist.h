@@ -47,9 +47,12 @@ class TLinkList
 private:
 	TLinkListItem<T> *start;   //start of linklist
 	TLinkListItem<T> *end;     //last in linkedlist
+	long             length=0;
 public:
 		
 	inline TLinkListItem<T> *getStart(){ return start;} //start of linked list
+	inline long getLength(){ return length;}
+	inline bool isEmpty(){ return start==nullptr;}
 	
 	TLinkList(){
 		end=nullptr;
@@ -75,21 +78,35 @@ public:
 			end->next=l_item;
 		}
 		end=l_item;
+		length++;
 	}
 
-
-	int getLength()
-	{
-		TLinkListItem<T> *l_current=start;
-		int l_length=0;
-		while(l_current){
-			l_length++;
-			l_current=l_current->getNext();
-		}
-		return l_length;
-	}
 };
 
+
+template<class T>
+class TLinkListIterator{
+private:
+	TLinkListItem<T> *current;
+	
+public:
+	inline TLinkListIterator(TLinkList<T> *p_list){
+		current=p_list->getStart();
+	}
+	
+	inline bool hasNext(){
+		return current != nullptr;
+	}
+	inline T* next(){
+		if(current != nullptr){
+			T *l_item=current->getItem();
+			current=current->getNext();
+			return l_item;
+		}
+		return nullptr;
+	}
+		
+};
 
 #define LOOPLL(p_type,p_current,p_name) \
 {\

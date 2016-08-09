@@ -9,6 +9,7 @@
 #include "data/deviceinfo.h"
 #include "ui_main.h"
 #include "data/udevmonitor.h"
+#include "data/changemanager.h"
 extern QApplication *g_app;
 
 class TMainWindow: public QMainWindow
@@ -31,10 +32,8 @@ private:
 	Ui::MainWindow ui;
 	KSharedConfig::Ptr config;
 	QTimer checkChange;
-	TUDevMonitor  changeMonitor;
-	QSet<QString> mounted;
-	QSet<QString> unmounted;
-	TMTab         *prvMounted=nullptr;
+	
+	TChangeManager  changeManager;
 	bool refreshNext=false;
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list);
 	void readConfiguation();

@@ -66,11 +66,11 @@ int TBtrfsInfo::readInfo(TAlias *p_alias)
 
 int TBtrfsInfo::getNumberMultiDevices()
 {
-		TLinkListItem<TBtrfsItem> *l_top=mountItems.getStart();
+		TLinkListIterator<TBtrfsItem> l_iter(&mountItems);
+		
 		int l_return=0;
-		while(l_top){
-			if(l_top->getItem()->isMultiDev()) l_return++;
-			l_top=l_top->getNext();
+		while(l_iter.hasNext()){
+			if(l_iter.next()->isMultiDev()) l_return++;
 		}
 		return l_return;		
 }
