@@ -15,27 +15,31 @@ bool TUDevMonitor::open()
 	return true;
 }
 
-bool TUDevMonitor::isSomethingChanged(QString &p_comment)
+
+void TUDevMonitor::clear()
+{
+	added.clear();
+	removed.clear();
+}
+
+bool TUDevMonitor::isSomethingChanged()
 {
 	bool l_found=false;
 	const char *l_action;
-	const char *l_subSystem;
+	const char *l_devName;
 	struct udev_device *l_dev;
 	while(true){
 		l_dev=udev_monitor_receive_device(monitor);
 		if(l_dev != nullptr){
 			l_action=udev_device_get_action(l_dev);
-			if(p_comment.length()>0) p_comment +=",";
-			l_subSystem=udev_device_get_subsystem(l_dev);
-			p_comment+=udev_device_get_devnode(l_dev);
-			p_comment +=":";
-			if(strcmp(l_action,"add")==0){
-				p_comment += i18n("Added");
+			l_devName=udev_device_get_devnode(l_dev);
+			
+			if(strcmp(l_action,"add")==0){				
+				added.insert(l_devName);
 			} else if(strcmp(l_action,"remove")==0){
-				p_comment += i18n("Removed");
-			} else {
-				p_comment += i18n("Unkown %1",l_action);
-			}
+				removed.insert(l_devName);
+				
+			} 
 			udev_device_unref(l_dev);
 			
 			l_found=true;

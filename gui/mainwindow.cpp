@@ -322,12 +322,11 @@ void TMainWindow::timeOutCheckChange()
 //All changes are collected in mount and umount set until the user presses the "clear message" button
 
 
-	l_what=changeManager.getChanged();
+	changeManager.getChanged(l_what,refreshNext);
 
-	if(l_what.length()>0){
+	if(refreshNext){
 		ui.arInfo->setText(l_what);
-		ui.deleteChangeMessage->setVisible(true);
-		refreshNext=true;							
+		ui.deleteChangeMessage->setVisible(true);		
 	}
 		
 }

@@ -13,10 +13,11 @@ private:
 	TDeviceInfo   *info=nullptr;
 	TUDevMonitor   changeMonitor;
 public:
-	QString getChanged();
+	void getChanged(QString &p_what,bool &p_changed);
 	void clear();
 	inline void setInfo(TDeviceInfo *p_info){ info=p_info;}
 	~TChangeManager();
+	void getStringOfSet(const QSet< QString >& p_set, QString p_text,QString &p_return);
 };
 
 #endif
