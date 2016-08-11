@@ -63,6 +63,7 @@ set(bdgui_SRCS
 	data/devicebase.cpp 
 	data/deviceinfo.cpp 
 	data/raid.cpp 
+	data/iscsi.cpp
 	data/udevmonitor.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 

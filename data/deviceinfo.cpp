@@ -13,6 +13,7 @@
 #include "device.h"
 #include "partition.h"
 #include "mtab.h"
+#include "iscsi.h"
 
 
 QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
@@ -59,6 +60,7 @@ void TDeviceInfo::getDisks()
 	devices->readFreeSpace();
 	mtab->processInfo();
 	mtab->addMountTODevices();
+	iscsi->processInfo(devices);
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
 	while(l_mi.hasNext()){
@@ -89,6 +91,7 @@ TDeviceInfo::TDeviceInfo()
 	devices  = new TDeviceList(aliasses);
 	raidList = new TRaidInfo();
 	mtab     = new TMTab(devices);
+	iscsi    = new TIScsiSessionList();
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete btrfsInfo;
@@ -96,5 +99,6 @@ TDeviceInfo::~TDeviceInfo(){
 	delete aliasses;
 	delete raidList;
 	delete mtab;
+	delete iscsi;
 	blkid_put_cache(blkidCache);
 }

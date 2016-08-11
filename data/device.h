@@ -13,9 +13,27 @@ private:
 	bool    readonly;
 	bool    removable;
 	QString loopbackFile;
+	QString scsiBus;
+	QString iscsiAddress;
 public:
 	
-
+	inline const QString &getIScsiAddress(){
+		return iscsiAddress;
+	}
+	
+	inline void setIscsiAddress(QString p_address){
+		iscsiAddress=p_address;
+	}
+	
+	inline const QString &getScsiBus(){
+		return scsiBus;
+	}
+	
+	void setScsiBus(const QString &p_scsiBus)
+	{
+		scsiBus=p_scsiBus;
+	}
+	
 	inline int getNumPartitions()
 	{
 		return partitions.getLength();

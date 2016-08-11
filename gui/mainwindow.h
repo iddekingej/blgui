@@ -41,6 +41,7 @@ private:
 	void fillDevice();
 	void fillRaid();
 	void fillMtab();
+	void fillIscsi();
 protected:
 	void resizeEvent(QResizeEvent *p_event);
 public:

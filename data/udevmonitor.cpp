@@ -22,6 +22,8 @@ void TUDevMonitor::clear()
 	removed.clear();
 }
 
+
+//Checks if something changed
 bool TUDevMonitor::isSomethingChanged()
 {
 	bool l_found=false;

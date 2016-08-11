@@ -171,6 +171,16 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>iscsi</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QTableView" name="iscsiTable"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>

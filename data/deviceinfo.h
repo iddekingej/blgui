@@ -16,18 +16,20 @@
 #include "device.h"
 #include "devicelist.h"
 #include "mtab.h"
-
+#include "iscsi.h"
 
 class TDeviceInfo
 {
 private:
-	TBtrfsInfo  *btrfsInfo;
-	TDeviceList *devices;
-	TAlias      *aliasses;
-	TRaidInfo   *raidList;
-	TMTab       *mtab;
+	TBtrfsInfo        *btrfsInfo;
+	TDeviceList       *devices;
+	TAlias            *aliasses;
+	TRaidInfo         *raidList;
+	TMTab             *mtab;
+	TIScsiSessionList *iscsi;
 	blkid_cache blkidCache;
 	QDateTime   sbTime;
+	
 
 	void procesAliasses(const QString &p_path);
 	void processAlias(const QString &p_file);
@@ -54,6 +56,11 @@ public:
 	inline TMTab *getMTab()
 	{
 		return mtab;
+	}
+	
+	inline TIScsiSessionList *getIscsiSessions()
+	{
+		return iscsi;
 	}
 	
 	void getDisks();	

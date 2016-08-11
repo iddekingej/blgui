@@ -34,6 +34,7 @@ void TDeviceList::readDevices()
 	QString      l_model;
 	QString      l_loopFile;
 	QString      l_vendor;
+	QString      l_scsiBus="";
 	TDiskSize    l_size;
 	unsigned long  l_removable;
 	unsigned long  l_readonly;
@@ -51,17 +52,38 @@ void TDeviceList::readDevices()
 				readString(l_iter.filePath(),"device/model",l_model);					
 				readString(l_iter.filePath(),"device/vendor",l_vendor);
 			} else if(l_dir.exists("loop")==1){
+//if /sys/block/<dev>/loop exists =>it is a loop back device read loopback file from loop/backing_file
 				l_model="Loopback";
 				readString(l_iter.filePath(),"loop/backing_file",l_loopFile);				
 			} else{
 				l_model="";
 				l_loopFile="";
 			}
+
 			l_device=new TDevice(l_deviceName,l_model,l_size);
 			l_device->setReadonly(l_readonly==1);
 			l_device->setRemovable(l_removable==1);
 			l_device->setLoopbackFile(l_loopFile);
+			l_device->setScsiBus(l_scsiBus);
 			l_device->setVendor(l_vendor.trimmed());
+
+//finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
+//set device scsibus and add device to scsibus index
+			QDir l_scsi("/sys/block/"+l_deviceName+"/device/scsi_device/");	
+			if(l_scsi.exists()){
+				QDirIterator l_scsiIter(l_scsi);
+				while(l_scsiIter.hasNext()){
+					
+					l_scsiIter.next();
+					if(l_scsiIter.fileName() != "." && l_scsiIter.fileName() != ".."){
+						l_scsiBus=l_scsiIter.fileName();
+						scsiIndex.insert(l_scsiBus,l_device);
+						l_device->setScsiBus(l_scsiBus);
+						break;
+					}
+					
+				}
+			}						
 			append(l_device);
 			nameIndex.insert(l_deviceName,l_device);
 			deviceByDevPath.insert(l_device->getDevPath(),l_device);

@@ -18,6 +18,7 @@ private:
 	QMap<QString,TDeviceBase *> pathIndex;
 	QMap<QString,TDeviceBase *> idIndex;
 	QMap<QString,TDeviceBase *> lvmIndex;
+	QMap<QString,TDevice *> scsiIndex;
 	void readPartitions(TDevice *p_device);         //read information about partitions of device  p_device
 	void readDevices();                             //read device information from /sys/block
 	void readLabels();            			//read information about all labels
@@ -28,6 +29,12 @@ private:
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QMap<QString,TDeviceBase *> &p_index);	
 	void readLVM();
 public:
+	
+	inline TDevice *getDeviceByScsiBus(const QString &p_scsiBus)
+	{
+		return scsiIndex.value(p_scsiBus);
+	}
+	
 	inline TDeviceBase * getDeviceByName(const QString &p_name)
 	{
 		return nameIndex.value(p_name);

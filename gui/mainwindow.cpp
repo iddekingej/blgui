@@ -19,6 +19,7 @@
 #include "about.h"
 #include "base/utils.h"
 #include "data/mtab.h"
+#include "data/iscsi.h"
 
 QApplication *g_app;
 
@@ -37,8 +38,38 @@ void TMainWindow::refresh()
 	fillDevice();
 	fillRaid();	
 	fillMtab();
+	fillIscsi();
 }
 
+void TMainWindow::fillIscsi()
+{
+	TLinkListItem<TIScsiSession> *l_item=info->getIscsiSessions()->getSessionTop();
+	QStandardItemModel *l_model=new QStandardItemModel(0,4,this);
+	TDevice            *l_device;
+	int                l_cnt=0;
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Session")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Address")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Device")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Iscsi bus")));
+	while(l_item != nullptr){
+	
+		QListIterator<TDevice *> l_iter(l_item->getItem()->getDevices());
+		while(l_iter.hasNext()){
+			l_device=l_iter.next();
+			l_model->setItem(l_cnt,0,new QStandardItem(l_item->getItem()->getSession()));
+			l_model->setItem(l_cnt,1,new QStandardItem(l_item->getItem()->getConnection()));
+			l_model->setItem(l_cnt,2,new QStandardItem(l_device->getName()));
+			l_model->setItem(l_cnt,3,new QStandardItem(l_device->getScsiBus()));
+			l_cnt++;
+		}	
+		l_item=l_item->getNext();
+		
+		
+	}
+	ui.iscsiTable->setModel(l_model);
+	ui.iscsiTable->resizeRowsToContents();
+	ui.iscsiTable->resizeColumnsToContents();
+}
 void TMainWindow::fillMtab()
 {
 	TLinkListItem<TMTabEntry> *l_current=info->getMTab()->getEntriesStart();
@@ -46,7 +77,7 @@ void TMainWindow::fillMtab()
 	TMTabEntry *l_info;
 	QString l_note;
 	int l_cnt=0;
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Options")));
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Comments")));
 
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Real device")));
