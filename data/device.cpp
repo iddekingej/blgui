@@ -9,7 +9,7 @@ TDevice::TDevice(const QString &p_name,const QString &p_model,TDiskSize p_size)
 	model=p_model;
 }
 
-const QString TDevice::getModel()
+const QString &TDevice::getModel()
 {
 	return model;
 }

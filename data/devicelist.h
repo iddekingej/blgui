@@ -21,7 +21,6 @@ private:
 	void readPartitions(TDevice *p_device);         //read information about partitions of device  p_device
 	void readDevices();                             //read device information from /sys/block
 	void readLabels();            			//read information about all labels
-	bool readMounts();
 	void readUuid();
 	void readPath();
 	void readAliases();

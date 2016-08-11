@@ -27,7 +27,6 @@ void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_text
 
 void TChangeManager::getChanged(QString &p_what,bool &p_changed)
 {
-	static const char *empty="";
 	QString l_what;
 	
 	TMTab *l_tab=new TMTab(info->getDevices());

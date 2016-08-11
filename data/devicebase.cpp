@@ -83,8 +83,8 @@ const QString TDeviceBase::getSlavesString()
 
 
 
-
-void TDeviceBase::addAlias(const QString& p_type, const QString p_alias)
+//Add alias of device
+void TDeviceBase::addAlias(const QString& p_type, const QString &p_alias)
 {
 	deviceAlias.append(new TDeviceAlias(p_type,p_alias));
 }

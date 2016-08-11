@@ -46,7 +46,7 @@ void TAlias::procesAliasses(const QString &p_path)
 }
 
 
-QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
+const QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
 	QString l_path=aliasses.value(p_path);
 	QFileInfo l_info(l_path);
 	return l_info.fileName();

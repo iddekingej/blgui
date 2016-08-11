@@ -10,13 +10,15 @@ private:
 	void processAlias(const QString &p_file);
 	void procesAliasses(const QString &p_path);
 public:
-	inline QString getDeviceFromAlias(const QString &p_name){
+
+	//Get device object by alias name
+	inline const QString getDeviceFromAlias(const QString &p_name){
 		return aliasses.value(p_name);
 	}
 	
-	QString getDeviceNameFromAliasPath(const QString &p_name);		
+	const QString getDeviceNameFromAliasPath(const QString &p_name);		
 
-	
+	//Does alias exists?
 	inline bool contains(const QString &p_name){
 		return aliasses.contains(p_name);
 	}

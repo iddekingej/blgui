@@ -71,7 +71,7 @@ public:
 		model=p_model;
 	}
 	
-	virtual const QString getModel();
+	const QString &getModel();
 	virtual void fillDataRow(QStringList &p_list);
 
 	TDevice(const QString &p_name,const QString &p_model,TDiskSize p_size);

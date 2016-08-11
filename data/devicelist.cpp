@@ -6,6 +6,7 @@
 #include "partition.h"
 #include "device.h"
 #include "alias.h"
+#include "mtab.h"
 #include <QIODevice>
 #include <klocalizedstring.h>
 #include <sys/statvfs.h>
@@ -116,53 +117,6 @@ void TDeviceList::readPartitions(TDevice* p_device)
 			deviceByDevPath.insert(l_partition->getDevPath(),l_partition);
 		}
 	}	
-}
-
-//Read all mounted devices from /proc/mounts
-
-
-bool TDeviceList::readMounts()
-{
-	char        l_lineBuffer[256];
-	int         l_read;
-	QFile       l_file(MOUNTS_PATH);
-	QString     l_line;
-	QStringList l_parts;
-	QString     l_deviceName;
-	TDeviceBase *l_device;
-	bool l_success=l_file.open(QIODevice::ReadOnly);
-	if(!l_success) return false;
-
-	while(true){
-		l_read=l_file.readLine(l_lineBuffer,sizeof(l_lineBuffer));
-		if(l_read==-1) break;
-		l_line=l_lineBuffer;
-		l_parts=l_line.split(" ");
-		if(l_parts.size()>=3){
-			if(aliasses->contains(l_parts[0])){
-				l_deviceName=aliasses->getDeviceNameFromAliasPath(l_parts[0]);
-			} else {
-				QFileInfo l_info(l_parts[0]);
-				l_deviceName=l_info.fileName();
-				
-			}
-			l_device=getDeviceByName(l_deviceName);
-			if(l_device != nullptr){
-				l_device->addMount(l_parts[1],l_parts[2]);
-				l_device->setType(l_parts[2]);
-				if(l_device->getFree()==0){
-					struct statvfs l_info;
-					int l_return;
-					if((l_return=statvfs((l_parts[1]+"/.").toUtf8().data(),&l_info))==0){
-						l_device->setFree(l_info.f_bsize*l_info.f_bfree);
-					}
-				}
-
-			}
-		}
-	}
-	l_file.close();
-	return true;
 }
 
 
@@ -316,7 +270,6 @@ void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
 void TDeviceList::readInfo()
 {
 	readDevices();
-	readMounts();
 	readAliases();
 	readLabels();
 	readLVM();

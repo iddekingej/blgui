@@ -48,5 +48,6 @@ public:
 	bool hasMount(const QString &p_device,const QString &p_mountPoint);
 	bool notInOther(TMTab *p_other,QSet<QString>&p_return);
 	void processInfo();
+	void addMountTODevices();
 };
 #endif

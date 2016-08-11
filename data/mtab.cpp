@@ -61,6 +61,7 @@ void TMTab::nextItem(const QString& p_text, QString& p_out, int& p_cnt)
 	p_out=p_text.mid(l_begin);
 }
 
+//Scan until next field in fstab or mtab file line (scan until char is no space
 bool TMTab::untilNext(const QString& p_text, int& p_cnt)
 {
 	int l_length=p_text.length();
@@ -75,6 +76,7 @@ bool TMTab::untilNext(const QString& p_text, int& p_cnt)
 	return false;;	
 }
 
+// Proces line in mount file (/etc/mtab or /etc/fstan)
 bool TMTab::processLine(const QString& p_line)
 {
 	QStringList l_items;
@@ -106,7 +108,7 @@ bool TMTab::processLine(const QString& p_line)
 	return true;
 }
 
-
+//Read moint file
 void TMTab::processInfo()
 {
 	QFile l_file(sourceFile);
@@ -126,7 +128,22 @@ void TMTab::processInfo()
 
 }
 
+//Add mount to the TDeviceBase mount list
+void TMTab::addMountTODevices()
+{
+	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
+	TMTabEntry *l_entry;
+	while(l_current != nullptr){
+		l_entry=l_current->getItem();
+		if(l_entry->getRealDevice() != nullptr){
+			l_entry->getRealDevice()->addMount(l_entry->getMountPoint(),l_entry->getType());
+		}
+		l_current=l_current->getNext();
+	}
+}
 
+// Checks if the real device type is same as stored in this object
+// THis is used for checking if device in /etc/fstab is the same as se the real fs type
 TMTabEntry::TSameType TMTabEntry::isSameType()
 {
 

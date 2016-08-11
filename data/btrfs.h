@@ -15,10 +15,10 @@ private:
 	QString     fs;
 	QString     raidLevel;
 public:
-	inline QStringList getDevices(){ return devices;}
-	inline QString     getFs(){ return fs;}
-	inline QString     getDevicesStr(){ return devices.join(",");}
-	inline QString     getRaidLevel(){return raidLevel;}
+	inline QStringList &getDevices(){ return devices;}
+	inline QString     &getFs(){ return fs;}
+	inline QString     getDevicesStr(){ return devices.join(",");}	
+	inline QString     &getRaidLevel(){ return  raidLevel;}
 	inline bool        isMultiDev(){ return devices.length() >1;}
 	void appendDevice(const QString &p_device);		
 	TBtrfsItem(const QString &p_fs,const QString &p_raidLevel);
@@ -45,7 +45,7 @@ public:
 	bool isBtrfs(const QString &p_name);
 	int readInfo(TAlias *p_aliasses);
 	int getNumberMultiDevices();
-	QString getRaidLevel(const QString &p_path);
+	void getRaidLevel(const QString &p_path,QString &p_raidLevel);
 };
 
 #endif

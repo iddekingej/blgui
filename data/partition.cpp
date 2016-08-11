@@ -8,12 +8,15 @@ TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_s
 	device=p_device;
 }
 
+//Fill list with data from partition
+//This list is used when displaying data in a grid
+
 void TPartition::fillDataRow(QStringList& p_list)
 {	
 	p_list 	<<device->getName()
 		<<getName()
 		<<QString::number(getSize())
-		<<getModel()
+		<<""
 		<<getType()
 		<<getMounts()
 		<<getLabel()
@@ -26,13 +29,7 @@ void TPartition::fillDataRow(QStringList& p_list)
 ;
 }
 
-
-const QString TPartition::getModel()
-{
-	return "";
-}
-
-
+//A partition never can have paritions
 bool TPartition::hasPartitions()
 {
 	return false;

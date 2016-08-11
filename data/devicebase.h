@@ -67,8 +67,6 @@ public:
 	inline void setFree(TDiskSize p_free){ free=p_free;}
 	inline TDiskSize getFree(){ return free;}
 	
-	virtual const QString getModel()=0;
-	
 	inline QString  getDevPath()
 	{
 		return devPath;
@@ -94,7 +92,7 @@ public:
 	TDeviceBase(const QString &p_name,TDiskSize p_size);
 	virtual ~TDeviceBase();
 	void addMount(const QString &p_type,const QString &p_mountPoint);
-	void addAlias(const QString &p_type,const QString p_alias);
+	void addAlias(const QString &p_type,const QString &p_alias);
 	void copyMount(TLinkListItem<TMount> *p_mountStart);
 };
 

@@ -11,7 +11,6 @@ private:
 public:
 	inline TDeviceBase *getDevice(){ return device;}
 	
-	virtual const QString getModel();
 	TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size);
 	virtual void fillDataRow(QStringList &p_list);
 	virtual bool hasPartitions();
