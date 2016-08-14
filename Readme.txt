@@ -1,6 +1,6 @@
 WARNING
 =======
-This is version is an early 0.4.4 development version. It is not yet feature complete or bug free.
+This is version is an early 0.5 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======
@@ -8,7 +8,7 @@ Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux
 License  : Gpl
-Version  : 0.4.4
+Version  : 0.5
 
 
 BUILDING
@@ -35,11 +35,13 @@ libQt5Core
 libQt5Gui
 libQt5Widgets
 
-
-Blkid+ Develop packages
+Blkid+ Development packages
 ==========================
 libblkid
 
+Libudev + development packages
+==============================
+libudev.so.1
 
 Building the exec_program:
 * mkdir build
@@ -78,13 +80,17 @@ Devices:
 	* size
 	* file system type
 	* loop back backing file
+	* scsi bus
+	* iscsi hostname
 Raid:
 	* Device
 	* Raid type
 	* Mount points
 	* Raid level
 	
-	
+*fstab
+*iscsi
+
 File system type is determined with information under /sys/fs and from /proc/mounts and as fallback libblkid
 Libblkid can only get information from the block devices when this program is run as root, under normal user libblkid uses cashed 
 information(if available).
