@@ -89,6 +89,8 @@ public:
 		model=p_model;
 	}
 	
+	inline TLinkList<TPartition> *getPartitions(){ return &partitions;}
+	
 	const QString &getModel();
 	virtual void fillDataRow(QStringList &p_list);
 

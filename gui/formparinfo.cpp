@@ -1,18 +1,31 @@
 #include "formparinfo.h"
 #include "ui_parinfo.h"
 #include "base/linklist.h"
+#include "gui/formdevinfo.h"
 #include <QString>
 #include <QStandardItemModel>
-TFormParInfo::TFormParInfo(TPartition *p_partition){
+
+void TFormParInfo::gotoDevice()
+{
+	TFormDevInfo l_info(deviceList, (TDevice*)partition->getDevice());
+	l_info.exec();
+	close();
+}
+
+
+TFormParInfo::TFormParInfo(TDeviceList *p_list,TPartition *p_partition){
 	ui.setupUi(this);
-	ui.nameDevice->setText(p_partition->getDevice()->getName());
+	ui.gotoDevice->setText(p_partition->getDevice()->getName());
 	ui.parName->setText(p_partition->getName());
 	ui.labelLabel->setText(p_partition->getLabel());
 	ui.sizeLabel->setText(QString::number(p_partition->getSize()));
 	ui.typeLabel->setText(p_partition->getType());
 	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
+	connect(ui.gotoDevice,SIGNAL(clicked()),this,SLOT(gotoDevice()));
 	fillAliases(ui.deviceAliases,ui.noAliasesLabel, p_partition);
 	fillMount(p_partition);
+	partition=p_partition;
+	deviceList=p_list;
 }
 
 void TFormParInfo::fillMount(TPartition *p_partition)

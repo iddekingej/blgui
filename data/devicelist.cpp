@@ -12,6 +12,7 @@
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #include <QTextStream>
+#include <errno.h>
 
 const char* MOUNTS_PATH="/proc/mounts";
 //List of devices and retrives information about the device
@@ -151,12 +152,16 @@ void TDeviceList::readFreeSpace()
 	while(l_iter.hasNext()){
 		l_device=l_iter.next().value();
 		if(l_device->getMountStart() !=nullptr){
+			printf("xxx\n");
 			struct statvfs l_info;
 			//statvfs need some file at device. Using top directory (/.) of first mount point
 			l_somePath=l_device->getMountStart()->getItem()->getMountPoint()+"/.";
 			if((statvfs(l_somePath.toUtf8().data(),&l_info))==0){
 				l_device->setFree(l_info.f_bsize*l_info.f_bfree);
-			}			
+				printf("%d \n",l_info.f_bfree);
+			} else{
+				printf("Failed %d \n",errno);
+			}
 		}
 		
 	}

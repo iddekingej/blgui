@@ -6,15 +6,46 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include "base/globals.h"
+#include "data/device.h"
+#include "data/devicelist.h"
 #include "data/partition.h"
 #include "base/linklist.h"
 #include "data/mount.h"
 #include "data/devicealias.h"
 
-TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
+//Iven if device selection changes
+void TFormDevInfo::deviceSelected(int p_index)
+{	
+	TDeviceBase *l_deviceBase=deviceList->getDeviceByName(ui.deviceName->currentText());
+	if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
+		setInfo(l_device);
+	}
+}
+
+
+//Initilize device selectionlist
+//p_list =>List of devices
+//p_device=>Current selected device
+
+void TFormDevInfo::initDevSelect(TDeviceList *p_list,TDevice *p_device)
 {
-	ui.setupUi(this);
-	ui.nameDevice->setText(p_device->getName());
+	TDevice *l_device;
+	TLinkListIterator<TDevice> l_iter(p_list);
+	int l_index=0;
+	while(l_iter.hasNext()){
+		l_device=l_iter.next();
+		ui.deviceName->addItem(l_device->getName());
+		if(p_device->getName()==l_device->getName()){
+			ui.deviceName->setCurrentIndex(l_index);
+		}
+		l_index++;
+	}
+}
+
+//Fill all field of form with information from p_device
+
+void TFormDevInfo::setInfo(TDevice* p_device)
+{
 	ui.sizeLabel->setText(QString(QString::number(p_device->getSize())));
 	ui.modelLabel->setText(p_device->getModel());
 	ui.removeableLabel->setText(p_device->getRemovable()?i18n("Yes"):i18n("No"));
@@ -22,6 +53,8 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	ui.labelLabel->setText(p_device->getLabel());
 	ui.typeLabel->setText(p_device->getType());
 	ui.vendorLabel->setText(p_device->getVendor());
+	ui.scsibusLabel->setText(p_device->getScsiBus());
+	ui.iscsiHost->setText(p_device->getIScsiAddress());
 	if(p_device->getLoopbackFile().length()>0){
 		ui.valLoopbackFile->setText(p_device->getLoopbackFile());
 	} else {
@@ -30,9 +63,21 @@ TFormDevInfo::TFormDevInfo(TDevice *p_device):TFormBaseDevInfo()
 	}
 	fillParitions(p_device);
 	fillMountPoints(p_device);
-	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
 	fillAliases(ui.deviceAliases,ui.noAliasesLabel, p_device);
 	fillSlaves(p_device);
+}
+
+
+TFormDevInfo::TFormDevInfo(TDeviceList *p_list,TDevice *p_device):TFormBaseDevInfo()
+{
+	
+	ui.setupUi(this);
+	deviceList=p_list;
+	initDevSelect(p_list,p_device);
+	setInfo(p_device);
+	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
+	connect(ui.deviceName,SIGNAL(currentIndexChanged(int)),this,SLOT(deviceSelected(int)));
+
 }
 
 bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *p_device)
@@ -71,20 +116,33 @@ void TFormDevInfo::fillMountPoints(TDevice *p_device)
 
 void TFormDevInfo::fillParitions(TDevice* p_device)
 {
+	TPartition *l_partition;
 	QStringList l_deviceRow;
 	QStandardItemModel *l_model=new QStandardItemModel(p_device->getNumPartitions(),1,this);
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Name")));
-	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Partition")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Type")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Size")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Available")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Mount point")));
+	
+	
+	TLinkListIterator<TPartition> l_iter(p_device->getPartitions());
+	int l_cnt=0;
+	while(l_iter.hasNext()){
+		l_partition=l_iter.next();
+		l_deviceRow.clear();
+		l_model->setItem(l_cnt,0,new QStandardItem(l_partition->getName()));
+		l_model->setItem(l_cnt,1,new QStandardItem(l_partition->getType()));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_partition->getReadableSize()));
+		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_partition->getFree())));
+		l_model->setItem(l_cnt,4,new QStandardItem(l_partition->getMounts()));
+		
+		l_cnt++;
+	}
+	ui.partInfo->setModel(l_model);	
 	ui.partInfo->setWordWrap(false);
 	ui.partInfo->resizeRowsToContents();
-	ui.partInfo->resizeColumnsToContents();		
-	fillHeader(2,l_model);
-	LOOPLLN(TPartition,p_device->getPartitionStart(),l_current)	
-		l_deviceRow.clear();
-		l_current->getItem()->fillDataRow(l_deviceRow);
-		displayRow(2,l_model,l_cnt,l_deviceRow);		
-	LOOPLLNEND(l_current)
-	ui.partInfo->setModel(l_model);	
+	ui.partInfo->resizeColumnsToContents();	
 }
 
 //Fill slaves tab

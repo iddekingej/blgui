@@ -276,10 +276,10 @@ void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 		l_deviceBase=info->getDevices()->getDeviceByName(l_name);
 		if(l_deviceBase){
 			if(TPartition *l_partition=dynamic_cast<TPartition *>(l_deviceBase)){
-				TFormParInfo l_parInfo(l_partition);
+				TFormParInfo l_parInfo(info->getDevices(),l_partition);
 				l_parInfo.exec();
 			} else 	if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
-				TFormDevInfo l_info(l_device);
+				TFormDevInfo l_info(info->getDevices(),l_device);
 				l_info.exec();			
 			}
 		}

@@ -57,9 +57,9 @@ void TDeviceInfo::getDisks()
 	btrfsInfo->readInfo(aliasses);
 	raidList->processMD(devices);
 	raidList->processBtrfs(btrfsInfo,devices);
-	devices->readFreeSpace();
 	mtab->processInfo();
 	mtab->addMountTODevices();
+	devices->readFreeSpace();
 	iscsi->processInfo(devices);
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
