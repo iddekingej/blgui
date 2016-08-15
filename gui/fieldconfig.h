@@ -23,8 +23,7 @@ private:
 	QStandardItemModel *modelAvailable;
 	QStandardItemModel *modelSelected;
 	Ui::FieldsConfig ui;
-	KSharedConfig::Ptr config;
-	KConfigGroup configGroup;
+
 	void hideByCode(QListView *p_view,int p_code,bool p_flag);
 	void moveItem(int p_dif);
 	void enableRemoveButton();

@@ -8,6 +8,7 @@
 #include <QListView>
 #include "fieldconfig.h"
 #include "base/globals.h"
+#include "base/config.h"
 
 // Save configuration after pressing "Ok" button
 
@@ -18,8 +19,9 @@ void TFieldsConfig::save()
 		for(int l_cnt=0;l_cnt<modelSelected->rowCount();l_cnt++){
 			l_list << modelSelected->item(l_cnt)->data().toInt();
 		}
-		configGroup.writeEntry("devicefields",l_list);
-		config->sync();
+		
+		g_config.setDeviceFields(l_list);
+		g_config.sync();
 		close();
 		
 }
@@ -132,7 +134,7 @@ void TFieldsConfig::fillAvailableList()
 void TFieldsConfig::fillSelectedList()
 {
 	QStandardItem *l_item;
-	QVariantList l_enabledFields=configGroup.readEntry("devicefields",QVariantList());
+	QVariantList l_enabledFields=g_config.getDeviceFields();
 	for(int l_cnt=0;l_cnt<l_enabledFields.count();l_cnt++){
 		int l_selectedId=l_enabledFields[l_cnt].toInt();
 		if(l_selectedId<g_numDeviceFields){
@@ -148,8 +150,7 @@ void TFieldsConfig::fillSelectedList()
 }
 TFieldsConfig::TFieldsConfig():QDialog()
 {
-	config=KSharedConfig::openConfig();
-	configGroup=config->group("enabledfields");
+
 	modelAvailable=new QStandardItemModel(g_numDeviceFields,1,this);
 	modelSelected=new QStandardItemModel(0,1,this);
 

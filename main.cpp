@@ -8,29 +8,15 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include "base/version.h"
-void checkConfig()
-{
+#include "base/config.h"
 
-	KSharedConfig::Ptr config=KSharedConfig::openConfig();
-	KConfigGroup  l_mainGroup=config->group("main");
-	QString l_check=l_mainGroup.readEntry("check");
-	if(l_check.length()==0){
-		QVariantList l_enableDeviceFields;
-		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
-			l_enableDeviceFields.append(l_cnt);
-		}
-		KConfigGroup  l_fieldsGroup=config->group("enabledfields");
-		l_fieldsGroup.writeEntry("devicefields",l_enableDeviceFields);
-		l_mainGroup.writeEntry("check","1");
-	}
 
-}
 int main(int argc, char **argv) {
 	
 	g_app=new QApplication(argc,argv);
-	KLocalizedString::setApplicationDomain("dingui");
+	KLocalizedString::setApplicationDomain("bdgui");
 	KAboutData l_aboutData(
-			"ding"
+			"bdgui"
 		,	i18n("Disk information gui")
 		,	VERSION
 		,	i18n("X")
@@ -42,14 +28,13 @@ int main(int argc, char **argv) {
 		   );
 	l_aboutData.addAuthor(i18n("Jeroen van Iddekinge"),i18n("X"),("iddekingej@lycos.com"));
 	KAboutData::setApplicationData(l_aboutData);
-
 	QCommandLineParser l_parser;
 	l_parser.addHelpOption();
 	l_parser.addVersionOption();
 	l_aboutData.setupCommandLine(&l_parser);
 	l_parser.process(*g_app);
-	l_aboutData.processCommandLine(&l_parser);	
-	checkConfig();
+	l_aboutData.processCommandLine(&l_parser);		
+	g_config.setup();
 	TMainWindow *l_main=new TMainWindow();
 	l_main->show();
 	int l_exit=g_app->exec();

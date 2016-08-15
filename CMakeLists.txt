@@ -48,17 +48,18 @@ qt5_add_resources(bdgui_rcc_h resources/icons.qrc)
 
 set(bdgui_SRCS   
 	main.cpp 
+	base/globals.cpp 
+	base/linklist.cpp 
+	base/utils.cpp
+	base/config.cpp
 	data/alias.cpp 	
 	data/btrfs.cpp 
 	data/changemanager.cpp
 	data/devicealias.cpp 
 	data/device.cpp 
 	data/devicelist.cpp 
-	base/globals.cpp 
-	base/linklist.cpp 
 	data/mount.cpp
 	data/mtab.cpp
-	base/utils.cpp
 	data/partition.cpp 
 	data/devicebase.cpp 
 	data/deviceinfo.cpp 

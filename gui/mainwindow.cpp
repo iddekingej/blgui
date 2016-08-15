@@ -261,8 +261,7 @@ void TMainWindow::showFieldChooser(){
 void TMainWindow::readConfiguation()
 {
 	enableDeviceFields.clear();	
-	KConfigGroup  configGroup=config->group("enabledfields");
-	enableDeviceFields=configGroup.readEntry("devicefields",QVariantList());
+	enableDeviceFields=g_config.getDeviceFields();
 }
 
 void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
@@ -300,11 +299,8 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	ui.itemSource->addItem(i18n("Path"));
 	ui.diskList->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	
-	config=KSharedConfig::openConfig();
-	
-	KConfigGroup  l_configGroup=config->group(QStringLiteral("windows"));
-	int l_width=l_configGroup.readEntry(QStringLiteral("mainWidth"),-1);
-	int l_height=l_configGroup.readEntry(QStringLiteral("mainHeight"),-1);
+	int l_width= g_config.getMainWindowWidth();
+	int l_height=g_config.getMainWindowHeight();
 	if((l_width>0) && (l_height>0)){
 		resize(l_width,l_height);
 	}
@@ -377,8 +373,6 @@ void TMainWindow::showAbout()
 
 void TMainWindow::resizeEvent(QResizeEvent *p_event)
 {
-	KConfigGroup  l_configGroup=config->group(QStringLiteral("windows"));
-	l_configGroup.writeEntry(QStringLiteral("mainWidth"),p_event->size().width() );
-	l_configGroup.writeEntry(QStringLiteral("mainHeight"),p_event->size().height());
-	config->sync();
+	g_config.setMainWindowSize(p_event->size().width() ,p_event->size().height());
+	g_config.sync();
 }

@@ -4,12 +4,12 @@
 #include <QStandardItemModel>
 #include <QWidget>
 #include <QApplication>
-#include <KSharedConfig>
 #include <QTimer>
 #include "data/deviceinfo.h"
 #include "ui_main.h"
 #include "data/udevmonitor.h"
 #include "data/changemanager.h"
+#include "base/config.h"
 extern QApplication *g_app;
 
 class TMainWindow: public QMainWindow
@@ -30,7 +30,6 @@ private:
 	QStandardItemModel *devModel;
 	QVariantList enableDeviceFields;
 	Ui::MainWindow ui;
-	KSharedConfig::Ptr config;
 	QTimer checkChange;
 	
 	TChangeManager  changeManager;
