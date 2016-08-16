@@ -40,6 +40,7 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 		l_iter.next();
 		if(l_iter.fileName().startsWith("raid")){
 			p_raidLevel=l_iter.fileName();
+			return ;
 		}
 	}
 	p_raidLevel="";	
