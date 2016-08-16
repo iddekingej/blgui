@@ -2,8 +2,8 @@
 #include <klocalizedstring.h>
 //List of fields shown in "Device" tab
 
-const  int g_numDeviceFields=13;
-const  char *g_deviceFields[g_numDeviceFields]={
+
+const  char *g_deviceFields[]={
 	I18N_NOOP("Size")
 ,	I18N_NOOP("Model")
 ,	I18N_NOOP("Type")
@@ -17,4 +17,6 @@ const  char *g_deviceFields[g_numDeviceFields]={
 ,	I18N_NOOP("Free space")
 ,	I18N_NOOP("scsi bus")
 ,	I18N_NOOP("iscsi host")
+,	I18N_NOOP("Start(bytes)")
 };
+const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);

@@ -14,9 +14,9 @@ const QString &TDevice::getModel()
 	return model;
 }
 
-TPartition *TDevice::addParition(const QString &p_name,TDiskSize p_size)
+TPartition *TDevice::addParition(const QString &p_name,TDiskSize p_size,TDiskSize p_start)
 {
-	TPartition *l_partition=new TPartition(this,p_name,p_size);
+	TPartition *l_partition=new TPartition(this,p_name,p_size,p_start);
 	partitions.append(l_partition);
 	return l_partition;
 }

@@ -129,8 +129,9 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Name")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Type")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Size")));
-	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Available")));
-	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Mount point")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Start(Bytes)")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Available")));
+	l_model->setHorizontalHeaderItem(5,new QStandardItem(i18n("Mount point")));
 	
 	
 	TLinkListIterator<TPartition> l_iter(p_device->getPartitions());
@@ -141,8 +142,9 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 		l_model->setItem(l_cnt,0,new QStandardItem(l_partition->getName()));
 		l_model->setItem(l_cnt,1,new QStandardItem(l_partition->getType()));
 		l_model->setItem(l_cnt,2,new QStandardItem(l_partition->getReadableSize()));
-		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_partition->getFree())));
-		l_model->setItem(l_cnt,4,new QStandardItem(l_partition->getMountText()));
+		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_partition->getStart())));
+		l_model->setItem(l_cnt,4,new QStandardItem(QString::number(l_partition->getFree())));
+		l_model->setItem(l_cnt,5,new QStandardItem(l_partition->getMountText()));
 		
 		l_cnt++;
 	}

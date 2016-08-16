@@ -128,14 +128,15 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	QString      l_deviceName;
 	QString      l_sizeStr("size");
 	TPartition   *l_partition;
-	
+	TDiskSize    l_start;
 	while(l_iter.hasNext()){
 		l_iter.next();
 		if(l_iter.fileInfo().isDir() && l_iter.fileName().startsWith(p_device->getName())){
 			readLong(l_iter.filePath(),l_sizeStr,l_size);		
+			readLong(l_iter.filePath(),QStringLiteral("start"),l_start);
 			l_size=l_size*512;
 			l_deviceName=l_iter.fileName();		
-			l_partition=p_device->addParition(l_deviceName,l_size);	
+			l_partition=p_device->addParition(l_deviceName,l_size,l_start);	
 			nameIndex.insert(l_deviceName,l_partition);
 			deviceByDevPath.insert(l_partition->getDevPath(),l_partition);
 		}

@@ -2,10 +2,11 @@
 #include "devicebase.h"
 #include "partition.h"
 
-TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size)
+TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size,TDiskSize p_start)
 :TDeviceBase(p_name,p_size)
 {
 	device=p_device;
+	start=p_start;
 }
 
 //Fill list with data from partition
@@ -25,7 +26,10 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<""
 		<<""
 		<<getSlavesString()
-		<< QString::number(getFree());
+		<< QString::number(getFree())
+		<<""
+		<<""
+		<<QString::number(start);
 ;
 }
 
