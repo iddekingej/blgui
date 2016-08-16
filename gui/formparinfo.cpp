@@ -43,7 +43,7 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 		while(l_iter.hasNext()){
 			l_mount=l_iter.next();
 			l_model->setItem(l_cnt,0,new QStandardItem(l_mount->getMountPoint()));
-			l_model->setItem(l_cnt,0,new QStandardItem(l_mount->getType()));
+			l_model->setItem(l_cnt,1,new QStandardItem(l_mount->getType()));
 
 			l_cnt++;			
 		}
