@@ -21,19 +21,20 @@ TFormBaseDevInfo::TFormBaseDevInfo():QDialog()
 
 void TFormBaseDevInfo::fillAliases(QTableView *p_view,QLabel *p_noAlias,TDeviceBase *p_device)
 {
-	TLinkListItem<TDeviceAlias> *l_current=p_device->getDeviceAliasStart();
-	QStandardItemModel *l_model=new QStandardItemModel(1,2,this);
-	if(l_current==nullptr){
+	if(p_device->getDeviceAlias()->isEmpty()){
 		p_view->setVisible(false);
 	}else{
+		TDeviceAlias *l_alias;
 		int l_cnt=0;	
+		QStandardItemModel *l_model=new QStandardItemModel(1,2,this);
 		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Type")));
 		l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Alias")));
-		while(l_current !=nullptr){
-			l_model->setItem(l_cnt,0,new QStandardItem(l_current->getItem()->getType()));
-			l_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getAlias()));
-			l_cnt++;
-			l_current=l_current->getNext();
+		TLinkListIterator<TDeviceAlias> l_aliasIter(p_device->getDeviceAlias());
+		while(l_aliasIter.hasNext()){
+			l_alias=l_aliasIter.next();
+			l_model->setItem(l_cnt,0,new QStandardItem(l_alias->getType()));
+			l_model->setItem(l_cnt,1,new QStandardItem(l_alias->getAlias()));
+			l_cnt++;			
 		}
 		p_view->setModel(l_model);	
 		p_noAlias->setVisible(false);

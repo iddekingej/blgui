@@ -30,9 +30,9 @@ private:
 	QString findTargetPath(const QString &p_path);
 
 public:
-	inline TLinkListItem<TIScsiSession> *getSessionTop()
+	inline TLinkList<TIScsiSession> *getSessions()
 	{
-		return sessions.getStart();
+		return &sessions;
 	}
 	
 	

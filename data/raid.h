@@ -60,10 +60,10 @@ class TRaidInfo
 private:
 	TLinkList<TRaidDevice>devices;
 public:
-	inline TLinkListItem<TRaidDevice> *getTop(){
-		return devices.getStart();
+	inline TLinkList<TRaidDevice> *getDevices(){
+		return &devices;
 	}
-
+	
 	int getLength()
 	{
 		return devices.getLength();

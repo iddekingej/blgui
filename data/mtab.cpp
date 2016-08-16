@@ -21,25 +21,27 @@ TMTab::TMTab(TDeviceList* p_devList)
 }
 
 bool TMTab::hasMount(const QString &p_device,const QString &p_mountPoint){
-	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
-	while(l_current !=nullptr){
-		if((l_current->getItem()->getDevice()==p_device) && (l_current->getItem()->getMountPoint()==p_mountPoint)) return true;
-		l_current=l_current->getNext();
+	TLinkListIterator<TMTabEntry> l_iter(&entries);
+	TMTabEntry *l_entry;
+	while(l_iter.hasNext()){
+		l_entry=l_iter.next();
+		if((l_entry->getDevice()==p_device) && (l_entry->getMountPoint()==p_mountPoint)) return true;		
 	}
 	return false;
 }
 
 
 bool TMTab::notInOther(TMTab *p_other, QSet<QString>& p_return)
-{
-	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
+{	
 	bool l_found=false;
-	while(l_current !=nullptr){		
-		if(!p_other->hasMount(l_current->getItem()->getDevice(),l_current->getItem()->getMountPoint())){
-			p_return += l_current->getItem()->getDevice();
+	TLinkListIterator<TMTabEntry> l_mtabIter(&entries);
+	TMTabEntry *l_item;
+	while(l_mtabIter.hasNext()){		
+		l_item=l_mtabIter.next();
+		if(!p_other->hasMount(l_item->getDevice(),l_item->getMountPoint())){
+			p_return += l_item->getDevice();
 			l_found=true;
-		}
-		l_current=l_current->getNext();
+		}		
 	}
 	return l_found;
 }

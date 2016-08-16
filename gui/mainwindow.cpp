@@ -43,7 +43,7 @@ void TMainWindow::refresh()
 
 void TMainWindow::fillIscsi()
 {
-	TLinkListItem<TIScsiSession> *l_item=info->getIscsiSessions()->getSessionTop();
+	
 	QStandardItemModel *l_model=new QStandardItemModel(0,4,this);
 	TDevice            *l_device;
 	int                l_cnt=0;
@@ -51,20 +51,19 @@ void TMainWindow::fillIscsi()
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Address")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Iscsi bus")));
-	while(l_item != nullptr){
-	
-		QListIterator<TDevice *> l_iter(l_item->getItem()->getDevices());
+	TLinkListIterator<TIScsiSession> l_sessionIter(info->getIscsiSessions()->getSessions());
+	TIScsiSession *l_session;
+	while(l_sessionIter.hasNext()){
+		l_session=l_sessionIter.next();
+		QListIterator<TDevice *> l_iter(l_session->getDevices());
 		while(l_iter.hasNext()){
 			l_device=l_iter.next();
-			l_model->setItem(l_cnt,0,new QStandardItem(l_item->getItem()->getSession()));
-			l_model->setItem(l_cnt,1,new QStandardItem(l_item->getItem()->getConnection()));
+			l_model->setItem(l_cnt,0,new QStandardItem(l_session->getSession()));
+			l_model->setItem(l_cnt,1,new QStandardItem(l_session->getConnection()));
 			l_model->setItem(l_cnt,2,new QStandardItem(l_device->getName()));
 			l_model->setItem(l_cnt,3,new QStandardItem(l_device->getScsiBus()));
 			l_cnt++;
 		}	
-		l_item=l_item->getNext();
-		
-		
 	}
 	ui.iscsiTable->setModel(l_model);
 	ui.iscsiTable->resizeRowsToContents();
@@ -72,7 +71,6 @@ void TMainWindow::fillIscsi()
 }
 void TMainWindow::fillMtab()
 {
-	TLinkListItem<TMTabEntry> *l_current=info->getMTab()->getEntriesStart();
 	QStandardItemModel *l_model=new QStandardItemModel(0,6,this);
 	TMTabEntry *l_info;
 	QString l_note;
@@ -84,8 +82,9 @@ void TMainWindow::fillMtab()
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Mount point")));
 	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Type")));
 	l_model->setHorizontalHeaderItem(5,new QStandardItem(i18n("Options")));
-	while(l_current){
-		l_info=l_current->getItem();
+	TLinkListIterator<TMTabEntry> l_mtabIter(info->getMTab()->getEntries());;
+	while(l_mtabIter.hasNext()){
+		l_info=l_mtabIter.next();
 		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getDevice()));
 		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():""));
 		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getMountPoint()));
@@ -101,8 +100,7 @@ void TMainWindow::fillMtab()
 			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_info->getRealDevice()->getType());
 			if(l_info->getRealDevice()->hasPartitions()) l_note+=i18n("Device not mountable (has partitions)");
 		}
-		l_model->setItem(l_cnt,0,new QStandardItem(l_note));
-		l_current=l_current->getNext();
+		l_model->setItem(l_cnt,0,new QStandardItem(l_note));		
 		l_cnt++;
 	}
 	ui.mtabList->setModel(l_model);
@@ -114,31 +112,25 @@ void TMainWindow::fillMtab()
 
 void TMainWindow::fillRaid()
 {
-	TRaidDevice *l_info;	
-	TLinkListItem<TRaidDevice> *l_item;
-	
 	int l_cnt=0;
-	
-	
 	QStandardItemModel *l_model=new QStandardItemModel(info->getRaidList()->getLength(),4,this);
-	
+
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Raid members")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Raid level")));
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Raid type")));
 	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Mounted point")));
 	
-	l_item=info->getRaidList()->getTop();
-	
-	while(l_item){
-		l_info=l_item->getItem();
-		l_model->setItem(l_cnt,0,new QStandardItem(l_info->getDevice()->getName() ));
-		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getRaidDeviceString()));
-		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRaidLevel()));
-		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getType()));
-		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getDevice()->getMountText()));
-		l_cnt++;		
-		l_item=l_item->getNext();
+	TLinkListIterator<TRaidDevice> l_raidIter(info->getRaidList()->getDevices());
+	TRaidDevice *l_raid;
+	while(l_raidIter.hasNext()){
+		l_raid=l_raidIter.next();
+		l_model->setItem(l_cnt,0,new QStandardItem(l_raid->getDevice()->getName() ));
+		l_model->setItem(l_cnt,1,new QStandardItem(l_raid->getRaidDeviceString()));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_raid->getRaidLevel()));
+		l_model->setItem(l_cnt,3,new QStandardItem(l_raid->getType()));
+		l_model->setItem(l_cnt,4,new QStandardItem(l_raid->getDevice()->getMountText()));
+		l_cnt++;				
 	}
 		
 	ui.raidList->setModel(l_model);

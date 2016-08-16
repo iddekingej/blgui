@@ -107,9 +107,10 @@ void TFormDevInfo::fillMountPoints(TDevice *p_device)
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Fs. type")));
 
 	bool l_found=fillMountPointItems(l_model,p_device);
-	LOOPLL(TPartition,p_device->getPartitionStart(),l_partition)
-		if(fillMountPointItems(l_model,l_partition->getItem())) l_found=true;
-	LOOPLLEND(l_partition)
+	TLinkListIterator<TPartition> l_iter(p_device->getPartitions());
+	while(l_iter.hasNext()){
+		if(fillMountPointItems(l_model,l_iter.next())) l_found=true;
+	}
 
 	ui.mountPoints->setModel(l_model);
 	ui.mountPoints->setVisible(l_found);

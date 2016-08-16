@@ -21,8 +21,8 @@ private:
 	QList<TDeviceBase *>    slaves;
 
 public:
-	inline TLinkListItem<TDeviceAlias> *getDeviceAliasStart(){
-		return deviceAlias.getStart();
+	inline TLinkList<TDeviceAlias> *getDeviceAlias(){
+		return &deviceAlias;
 	}
 	
 	inline QString getLabel()

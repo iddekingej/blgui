@@ -38,7 +38,7 @@ private:
 	TDeviceList           *devList;
 	QString               sourceFile;
 public:
-	inline TLinkListItem<TMTabEntry> *getEntriesStart(){ return entries.getStart();}
+	inline TLinkList<TMTabEntry> *getEntries(){ return &entries;}
 	inline QString getSourceFile(){ return sourceFile;}
 	inline void setSourceFile(const QString &p_sourceFile){ sourceFile=p_sourceFile;}
 	TMTab(TDeviceList *p_devList);
