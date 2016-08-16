@@ -27,43 +27,38 @@ void TDeviceBase::addMount(const QString &p_mountPoint,const QString &p_type)
 
 
 //Get QString of all mountpoints from device
-QString TDeviceBase::getMounts()
+QString TDeviceBase::getMountText()
 {
-	
-	TLinkListItem<TMount> *l_current=mounts.getStart();
+	TLinkListIterator<TMount> l_iter(&mounts);	
+	TMount *l_mount;
 	QString l_return;
-	while(l_current != nullptr){
+	while(l_iter.hasNext()){
+		l_mount=l_iter.next();
 		if(l_return.length()>0) l_return +=QStringLiteral("\n");
-		l_return +=l_current->getItem()->getMountPoint();
-		l_current=l_current->getNext();
+		l_return +=l_mount->getMountPoint();		
 	}
 	return l_return;
 }
 
 //Copy mounts from other device
-void TDeviceBase::copyMount(TLinkListItem<TMount> *p_mountStart)
+void TDeviceBase::copyMount(TLinkList<TMount> *p_mounts)
 {
-	TLinkListItem<TMount> *l_current=p_mountStart;
-	while(l_current){
-		addMount(l_current->getItem()->getMountPoint(),l_current->getItem()->getType());
-		l_current=l_current->getNext();
+	TLinkListIterator<TMount> l_iter(p_mounts);
+	TMount *l_mount;
+	while(l_iter.hasNext()){
+		l_mount=l_iter.next();
+		addMount(l_mount->getMountPoint(),l_mount->getType());		
 	}
 }
 
-//true device is mounted
-bool TDeviceBase::isMounted()
-{
-		return mounts.getStart() != nullptr;
-}
+
 //True is device is mounted on path
 //p_path=>path to test
 bool TDeviceBase::isMountedOn(const QString &p_path)
-{
-	TLinkListItem<TMount> *l_current=mounts.getStart();
-	QString l_return;
-	while(l_current){
-		if(l_current->getItem()->getMountPoint()==p_path) return true;
-		l_current=l_current->getNext();
+{	
+	TLinkListIterator<TMount> l_iter(&mounts);
+	while(l_iter.hasNext()){
+		if(l_iter.next()->getMountPoint()==p_path) return true;
 	}
 	return false;
 }

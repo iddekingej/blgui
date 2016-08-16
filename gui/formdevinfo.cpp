@@ -84,21 +84,27 @@ bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *
 {	
 	int  l_cnt=p_model->rowCount();
 	bool l_found=false;
-	LOOPLL(TMount,p_device->getMountStart(),l_current)
+	
+	TMount *l_mount;
+	TLinkListIterator<TMount> l_iter(p_device->getMounts());
+	while(l_iter.hasNext()){
+		l_mount=l_iter.next();	
 		p_model->setItem(l_cnt,0,new QStandardItem(p_device->getName()));
-		p_model->setItem(l_cnt,1,new QStandardItem(l_current->getItem()->getMountPoint()));
+		p_model->setItem(l_cnt,1,new QStandardItem(l_mount->getMountPoint()));
+		p_model->setItem(l_cnt,2,new QStandardItem(l_mount->getType()));
 		l_found=true;
 		l_cnt++;
-	LOOPLLEND(l_current);	
+	}
 	return  l_found;
 }
 
 void TFormDevInfo::fillMountPoints(TDevice *p_device)
 {
-	QStandardItemModel        *l_model=new QStandardItemModel(0,2,this);
+	QStandardItemModel        *l_model=new QStandardItemModel(0,3,this);
 	QString l_value;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Mount point")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Fs. type")));
 
 	bool l_found=fillMountPointItems(l_model,p_device);
 	LOOPLL(TPartition,p_device->getPartitionStart(),l_partition)
@@ -135,7 +141,7 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 		l_model->setItem(l_cnt,1,new QStandardItem(l_partition->getType()));
 		l_model->setItem(l_cnt,2,new QStandardItem(l_partition->getReadableSize()));
 		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_partition->getFree())));
-		l_model->setItem(l_cnt,4,new QStandardItem(l_partition->getMounts()));
+		l_model->setItem(l_cnt,4,new QStandardItem(l_partition->getMountText()));
 		
 		l_cnt++;
 	}

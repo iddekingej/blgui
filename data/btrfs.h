@@ -28,20 +28,16 @@ public:
 class TBtrfsInfo
 {
 private:
-	TLinkList<TBtrfsItem> mountItems;
+	TLinkList<TBtrfsItem> btrfsDeviceList;
 	int readDevices(QString p_path,TBtrfsItem *p_info);
 	QSet<QString> btrfsDevices;
 public:
-	TLinkList<TBtrfsItem> &getMountItems()
+	TLinkList<TBtrfsItem> *getBtrfsDeviceList()
 	{
-		return mountItems;
+		return &btrfsDeviceList;
 	}
 	
-	TLinkListItem<TBtrfsItem> *getStart()
-	{
-		return mountItems.getStart();
-	}
-	
+
 	bool isBtrfs(const QString &p_name);
 	int readInfo(TAlias *p_aliasses);
 	int getNumberMultiDevices();

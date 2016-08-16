@@ -136,7 +136,7 @@ void TMainWindow::fillRaid()
 		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getRaidDeviceString()));
 		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRaidLevel()));
 		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getType()));
-		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getDevice()->getMounts()));
+		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getDevice()->getMountText()));
 		l_cnt++;		
 		l_item=l_item->getNext();
 	}

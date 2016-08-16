@@ -130,15 +130,14 @@ void TMTab::processInfo()
 
 //Add mount to the TDeviceBase mount list
 void TMTab::addMountTODevices()
-{
-	TLinkListItem<TMTabEntry> *l_current=entries.getStart();
+{	
 	TMTabEntry *l_entry;
-	while(l_current != nullptr){
-		l_entry=l_current->getItem();
+	TLinkListIterator<TMTabEntry> l_iter(&entries);
+	while(l_iter.hasNext()){
+		l_entry=l_iter.next();		
 		if(l_entry->getRealDevice() != nullptr){
 			l_entry->getRealDevice()->addMount(l_entry->getMountPoint(),l_entry->getType());
-		}
-		l_current=l_current->getNext();
+		}		
 	}
 }
 

@@ -28,14 +28,14 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< QString::number(getSize())
 		<< getVendor()+"/"+getModel()
 		<< getType()
-		<< getMounts()
+		<< getMountText()
 		<< getLabel()
 		<< getReadableSize()
 		<< (readonly?"X":"")
 		<< (removable?"X":"")
 		<< loopbackFile
 		<<  getSlavesString()
-		<<  (!hasPartitions() && getMounts().length()>0?QString::number(getFree()):"")
+		<<  (!hasPartitions() && getMountText().length()>0?QString::number(getFree()):"")
 		<< getScsiBus()
 		<< getIScsiAddress();
 }

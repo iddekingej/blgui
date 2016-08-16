@@ -56,19 +56,23 @@ void TRaidInfo::processMD(TDeviceList *p_list)
 	}
 }
 
-
-void TRaidInfo::processBtrfs(TBtrfsInfo* p_info,TDeviceList *p_list)
+//Fill raid info from btrfsinfo object
+//TODO: process this directly
+void TRaidInfo::processBtrfs(TBtrfsInfo *p_btrfsDisks,TDeviceList *p_list)
 {
 	TDeviceBase *l_device;
 	TDeviceBase *l_slave;
 	TRaidDevice *l_raid;
 	QList<TDeviceBase *> l_slaveDevices;
-	TLinkListItem<TBtrfsItem> *l_current=p_info->getStart();
-	while(l_current != nullptr){
-		if(l_current->getItem()->isMultiDev()){
-			l_device=p_list->getDeviceByName(l_current->getItem()->getFs());
-			l_raid=AddRaidDevice(l_device,"btrfs",l_current->getItem()->getRaidLevel());
-			QStringListIterator l_iter(l_current->getItem()->getDevices());
+	
+	TLinkListIterator<TBtrfsItem> l_iter(p_btrfsDisks->getBtrfsDeviceList());
+	TBtrfsItem *l_btrfs;
+	while(l_iter.hasNext()){
+		l_btrfs=l_iter.next();
+		if(l_btrfs->isMultiDev()){
+			l_device=p_list->getDeviceByName(l_btrfs->getFs());
+			l_raid=AddRaidDevice(l_device,"btrfs",l_btrfs->getRaidLevel());
+			QStringListIterator l_iter(l_btrfs->getDevices());
 			l_slaveDevices.clear();
 			while(l_iter.hasNext()){
 				l_slave=p_list->getDeviceByName(l_iter.next());
@@ -79,6 +83,5 @@ void TRaidInfo::processBtrfs(TBtrfsInfo* p_info,TDeviceList *p_list)
 			}
 			p_list->sameMountPoint(l_slaveDevices);
 		}
-		l_current=l_current->getNext();
 	}
 }

@@ -30,9 +30,9 @@ public:
 		return label;
 	}
 		
-	TLinkListItem<TMount> *getMountStart()
+	TLinkList<TMount> *getMounts()
 	{
-		return mounts.getStart();
+		return &mounts;
 	}
 		
 	inline TDiskSize getSize()
@@ -81,19 +81,22 @@ public:
 	{
 		slaves.append(p_slave);
 	}
-	
+		
+	inline bool isMounted()
+	{
+		return mounts.getStart() != nullptr;
+	}
 	
 	virtual bool hasPartitions()=0;
 	bool isMountedOn(const QString &p_path);
-	bool isMounted();
-	QString getMounts();
+	QString getMountText();
 	const QString getSlavesString();
 	virtual void fillDataRow(QStringList &p_list)=0;
 	TDeviceBase(const QString &p_name,TDiskSize p_size);
 	virtual ~TDeviceBase();
 	void addMount(const QString &p_type,const QString &p_mountPoint);
 	void addAlias(const QString &p_type,const QString &p_alias);
-	void copyMount(TLinkListItem<TMount> *p_mountStart);
+	void copyMount(TLinkList<TMount> *p_mounts);
 };
 
 #endif

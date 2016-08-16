@@ -67,31 +67,31 @@ void TIScsiSessionList::processInfo(TDeviceList* p_list)
 		l_si.next();
 		l_sessionName=l_si.fileName();
 		
-			l_conPath=findConnection(l_si.filePath());
-			l_target=findTargetPath(l_si.filePath()+"/device/");
-			if(l_conPath != nullptr && l_target !=nullptr){
-				readString(l_conPath,"address",l_address);
-				readString(l_conPath,"port",l_port);
-				
-				TIScsiSession *l_session=new TIScsiSession(l_sessionName,l_address+":"+l_port);
-				sessions.append(l_session);
-				QDirIterator l_dit(l_target);
-				//Look in target for file containing ":"=>this are scsi bus number
-				//look device in devicelist and add to scsi list
-				while(l_dit.hasNext()){
-					l_dit.next();
-					if(l_dit.fileName().contains(":") && l_dit.fileInfo().isDir()){
-						l_device=p_list->getDeviceByScsiBus(l_dit.fileName());
-						if(l_device != nullptr){
-							l_device->setIscsiAddress(l_address+":"+l_port);
-							l_session->addDevice(l_device);
-							
-						}
+		l_conPath=findConnection(l_si.filePath());
+		l_target=findTargetPath(l_si.filePath()+"/device/");
+		if(l_conPath != nullptr && l_target !=nullptr){
+			readString(l_conPath,"address",l_address);
+			readString(l_conPath,"port",l_port);
+			
+			TIScsiSession *l_session=new TIScsiSession(l_sessionName,l_address+":"+l_port);
+			sessions.append(l_session);
+			QDirIterator l_dit(l_target);
+			//Look in target for file containing ":"=>this are scsi bus number
+			//look device in devicelist and add to scsi list
+			while(l_dit.hasNext()){
+				l_dit.next();
+				if(l_dit.fileName().contains(":") && l_dit.fileInfo().isDir()){
+					l_device=p_list->getDeviceByScsiBus(l_dit.fileName());
+					if(l_device != nullptr){
+						l_device->setIscsiAddress(l_address+":"+l_port);
+						l_session->addDevice(l_device);
+						
 					}
 				}
-					
-
 			}
+				
+
+		}
 		
 	}	
 }

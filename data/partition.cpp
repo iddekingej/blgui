@@ -18,7 +18,7 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<QString::number(getSize())
 		<<""
 		<<getType()
-		<<getMounts()
+		<<getMountText()
 		<<getLabel()
 		<<getReadableSize()
 		<<""

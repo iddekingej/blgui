@@ -31,16 +31,21 @@ TFormParInfo::TFormParInfo(TDeviceList *p_list,TPartition *p_partition){
 void TFormParInfo::fillMount(TPartition *p_partition)
 {
 	QStandardItemModel *l_model=new QStandardItemModel(1,1,this);
-	TLinkListItem<TMount> *l_current=p_partition->getMountStart();
-	if(l_current==nullptr){
+	
+	if(!p_partition->isMounted()){
 		ui.mountPoints->setVisible(false);
 	} else {
 		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Mountpoint")));
+		l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Fs. type")));
 		int l_cnt=0;
-		while(l_current){
-			l_model->setItem(l_cnt,0,new QStandardItem(l_current->getItem()->getMountPoint()));
-			l_cnt++;
-			l_current=l_current->getNext();
+		TLinkListIterator<TMount> l_iter(p_partition->getMounts());
+		TMount *l_mount;
+		while(l_iter.hasNext()){
+			l_mount=l_iter.next();
+			l_model->setItem(l_cnt,0,new QStandardItem(l_mount->getMountPoint()));
+			l_model->setItem(l_cnt,0,new QStandardItem(l_mount->getType()));
+
+			l_cnt++;			
 		}
 		ui.mountPoints->setModel(l_model);
 		ui.mountPoints->resizeRowsToContents();

@@ -58,7 +58,7 @@ int TBtrfsInfo::readInfo(TAlias *p_alias)
 			getRaidLevel(l_iter.filePath(),l_deviceLevel);
 			l_info=new TBtrfsItem( p_alias->getDeviceNameFromAliasPath("/dev/disk/by-uuid/"+l_fileName),l_deviceLevel);
 			readDevices(l_iter.filePath(), l_info);
-			mountItems.append(l_info);
+			btrfsDeviceList.append(l_info);
 		}
 		
 	}
@@ -67,7 +67,7 @@ int TBtrfsInfo::readInfo(TAlias *p_alias)
 
 int TBtrfsInfo::getNumberMultiDevices()
 {
-		TLinkListIterator<TBtrfsItem> l_iter(&mountItems);
+		TLinkListIterator<TBtrfsItem> l_iter(&btrfsDeviceList);
 		
 		int l_return=0;
 		while(l_iter.hasNext()){

@@ -151,10 +151,10 @@ void TDeviceList::readFreeSpace()
 	QString l_somePath;
 	while(l_iter.hasNext()){
 		l_device=l_iter.next().value();
-		if(l_device->getMountStart() !=nullptr){
+		if(l_device->isMounted()){
 			struct statvfs l_info;
 			//statvfs need some file at device. Using top directory (/.) of first mount point
-			l_somePath=l_device->getMountStart()->getItem()->getMountPoint()+"/.";
+			l_somePath=l_device->getMounts()->getStart()->getItem()->getMountPoint()+"/.";
 			if((statvfs(l_somePath.toUtf8().data(),&l_info))==0){
 				l_device->setFree(l_info.f_bsize*l_info.f_bfree);				
 			} 
@@ -266,11 +266,11 @@ TDeviceList::TDeviceList(TAlias *p_aliasses)
 
 // For BTRFS raid the mount point from only one raid member is retrieved
 // This routine copies the mount information to the other raid members.
-void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
+void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_raidMembers)
 {
 	TDeviceBase *l_copyFrom=nullptr;
 	TDeviceBase *l_item;
-	QListIterator<TDeviceBase *> l_iter(p_list);
+	QListIterator<TDeviceBase *> l_iter(p_raidMembers);
 	while(l_iter.hasNext()){
 		l_item=l_iter.next();
 		if(l_item->isMounted()){
@@ -283,7 +283,7 @@ void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_list)
 		while(l_iter.hasNext()){
 			l_item=l_iter.next();
 			if(l_item != l_copyFrom){
-				l_item->copyMount(l_copyFrom->getMountStart());
+				l_item->copyMount(l_copyFrom->getMounts());
 			}
 		}
 	}
