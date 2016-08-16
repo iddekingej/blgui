@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>Device information GUI</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QTabBar::tab::disabled{width:0px;height:0px;visible:false;border-color:#f00}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -87,22 +90,28 @@
        </layout>
       </item>
       <item>
-       <widget class="QTabWidget" name="tabWidget">
+       <widget class="QTabWidget" name="info">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>1</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
         </property>
-        <property name="currentIndex">
-         <number>0</number>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
-        <widget class="QWidget" name="disks">
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <widget class="QWidget" name="tabDisks">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>1</horstretch>
            <verstretch>1</verstretch>
           </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <attribute name="title">
           <string>Disks</string>
@@ -120,7 +129,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="raid">
+        <widget class="QWidget" name="tabRaid">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>1</horstretch>
@@ -132,6 +141,9 @@
            <width>16777215</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
          <attribute name="title">
           <string>Raid</string>
@@ -161,7 +173,10 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="tabFstab">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
          <attribute name="title">
           <string>Fstab</string>
          </attribute>
@@ -171,7 +186,10 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tab_2">
+        <widget class="QWidget" name="tabIscsi">
+         <property name="styleSheet">
+          <string notr="true">QTabWidget::tab:disabled { width: 0; height: 0; margin: 0; padding: 0; border: none; }</string>
+         </property>
          <attribute name="title">
           <string>iscsi</string>
          </attribute>
@@ -207,6 +225,7 @@
      <string>Setti&amp;ngs</string>
     </property>
     <addaction name="actionFields"/>
+    <addaction name="visibleTabs"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -235,6 +254,11 @@
    </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
+   </property>
+  </action>
+  <action name="visibleTabs">
+   <property name="text">
+    <string>&amp;Visible tabs</string>
    </property>
   </action>
  </widget>

@@ -24,7 +24,7 @@ private slots:
 	void refresh();
 	void timeOutCheckChange();
 	void clearChangeMessage();
-
+	void visibleTabs();
 private:
 	TDeviceInfo        *info;
 	QStandardItemModel *devModel;
@@ -33,7 +33,10 @@ private:
 	QTimer checkChange;
 	
 	TChangeManager  changeManager;
+	QWidget *tabs[4];
+	QWidget *tabsVisible[4];
 	bool refreshNext=false;
+	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list);
 	void readConfiguation();
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
@@ -41,6 +44,8 @@ private:
 	void fillRaid();
 	void fillMtab();
 	void fillIscsi();
+	void setVisibleTabs();
+	
 protected:
 	void resizeEvent(QResizeEvent *p_event);
 public:

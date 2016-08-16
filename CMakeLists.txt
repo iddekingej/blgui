@@ -44,7 +44,7 @@ endif()
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
     
 
-KI18N_WRAP_UI(bdgui_ui_h ui/main.ui ui/fields.ui ui/devinfo.ui ui/parinfo.ui ui/about.ui)
+KI18N_WRAP_UI(bdgui_ui_h ui/main.ui ui/fields.ui ui/devinfo.ui ui/parinfo.ui ui/about.ui ui/visibletabs.ui)
 
 qt5_add_resources(bdgui_rcc_h resources/icons.qrc)
 
@@ -74,6 +74,7 @@ set(bdgui_SRCS
 	gui/formdevinfo.cpp 
 	gui/fieldconfig.cpp 	
 	gui/mainwindow.cpp 
+	gui/visibletabs.cpp
 )
 
 set(bdgui_SRCS ${bdgui_rcc_h} ${bdgui_SRCS} ${bdgui_ui_h})

@@ -25,6 +25,14 @@ public:
 	void setMainWindowSize(int p_width,int p_height);
 	int getMainWindowWidth();
 	int getMainWindowHeight();
+	bool getDisksTab();
+	void setdiskTab(bool p_flag);
+	bool getRaidTab();
+	void setRaidTab(bool p_flag);
+	bool getFsTabTab();
+	void setFsTabTab(bool p_flag);
+	bool getIscsiTab();
+	void setIscsiTab(bool p_flag);
 };
 
 extern TConfig g_config;

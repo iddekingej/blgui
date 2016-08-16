@@ -62,6 +62,35 @@ int TConfig::getMainWindowWidth()
 	return configGui.readEntry(QStringLiteral("mainWidth"),-1);
 }
 
+bool TConfig::getDisksTab(){
+	return configGui.readEntry(QStringLiteral("diskTab"),true);
+}
+void TConfig::setdiskTab(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("diskTab"),p_flag);
+}
 
+bool TConfig::getRaidTab()
+{
+	return configGui.readEntry(QStringLiteral("raidTab"),true);
+}
+
+void TConfig::setRaidTab(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("raidTab"),p_flag);
+}
+bool TConfig::getFsTabTab(){
+	return configGui.readEntry(QStringLiteral("fsTabTab"),true);
+}
+
+void TConfig::setFsTabTab(bool p_flag){
+	configGui.writeEntry(QStringLiteral("fsTabTab"),p_flag);
+}
+bool TConfig::getIscsiTab(){
+	return configGui.readEntry(QStringLiteral("iscsiTab"),true);	
+}
+void TConfig::setIscsiTab(bool p_flag){
+	configGui.writeEntry(QStringLiteral("iscsiTab"),p_flag);
+}
 
 TConfig g_config;

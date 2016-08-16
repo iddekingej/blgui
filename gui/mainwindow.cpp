@@ -15,11 +15,13 @@
 #include "fieldconfig.h"
 #include "gui/formdevinfo.h"
 #include "gui/formparinfo.h"
+#include "gui/visibletabs.h"
 #include "mainwindow.h"
 #include "about.h"
 #include "base/utils.h"
 #include "data/mtab.h"
 #include "data/iscsi.h"
+
 
 QApplication *g_app;
 
@@ -278,6 +280,8 @@ void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 	
 }
 
+
+
 TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 {
 	ui.setupUi(this);
@@ -307,13 +311,68 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
 	connect(ui.actionAbout,&QAction::triggered,this,&TMainWindow::showAbout);	
-	
+	connect(ui.visibleTabs,&QAction::triggered,this,&TMainWindow::visibleTabs);
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
-
+	
 	ui.deleteChangeMessage->setVisible(false);
 	connect(ui.deleteChangeMessage,SIGNAL(pressed()),this,SLOT(clearChangeMessage()));
+	tabs[0]=ui.tabDisks;
+	tabs[1]=ui.tabRaid;
+	tabs[2]=ui.tabFstab;
+	tabs[3]=ui.tabIscsi;
+	tabsVisible[0]=nullptr;
+	tabsVisible[1]=nullptr;
+	tabsVisible[2]=nullptr;
+	tabsVisible[3]=nullptr;
+	setVisibleTabs();
+
 }
+
+//Set which tab is visible from config 
+
+void TMainWindow::setTabVisible(int p_indx,bool p_flag,const QString &p_label)
+{
+	if(p_flag){
+		QWidget *l_tab=tabsVisible[p_indx];
+		if(tabsVisible[p_indx] != nullptr){
+			int l_cnt;
+			int l_pos=0;
+			for(l_cnt=0;l_cnt<4 && tabs[l_cnt]!= l_tab;l_cnt++){
+				if(ui.info->indexOf(tabs[l_cnt])>=0) l_pos++;
+			}	
+			ui.info->insertTab(l_pos,l_tab,p_label);
+			tabsVisible[p_indx]=nullptr;
+		}
+	} else {
+		if(tabsVisible[p_indx] ==nullptr){
+			int l_indx=ui.info->indexOf(tabs[p_indx]);
+			if(l_indx>=0){
+				ui.info->removeTab(l_indx);
+				tabsVisible[p_indx]=tabs[p_indx];
+			}
+		}
+	}
+}
+
+void TMainWindow::setVisibleTabs(){
+	setTabVisible(0,g_config.getDisksTab(),i18n("Disks"));
+	setTabVisible(1,g_config.getRaidTab(),i18n("Raid"));
+	setTabVisible(2,g_config.getFsTabTab(),i18n("Fstab"));
+	setTabVisible(3,g_config.getIscsiTab(),i18n("Iscsi"));
+
+
+}
+
+//Display "Visible tab" dialog when menu option is l_selected
+
+void TMainWindow::visibleTabs()
+{
+	TVisibleTabs l_dialog;
+	l_dialog.exec();
+	setVisibleTabs();
+}
+
 
 //Clear "change message" (Mounts/Unmounts/new device/remove etc..)
 void TMainWindow::clearChangeMessage()
