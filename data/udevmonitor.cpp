@@ -52,3 +52,8 @@ bool TUDevMonitor::isSomethingChanged()
 	return l_found;
 	
 }
+
+TUDevMonitor::~TUDevMonitor()
+{
+	udev_unref(udev);
+}

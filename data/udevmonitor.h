@@ -19,6 +19,7 @@ public:
 		void clear();
 		inline const QSet<QString> &getAdded(){ return added;}
 		inline const QSet<QString> &getRemoved(){ return removed;}
+		~TUDevMonitor();
 }
 ;
 #endif
