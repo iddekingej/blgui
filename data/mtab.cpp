@@ -136,7 +136,7 @@ void TMTab::addMountTODevices()
 	TMTabEntry *l_entry;
 	TLinkListIterator<TMTabEntry> l_iter(&entries);
 	while(l_iter.hasNext()){
-		l_entry=l_iter.next();		
+		l_entry=l_iter.next();				
 		if(l_entry->getRealDevice() != nullptr){
 			l_entry->getRealDevice()->addMount(l_entry->getMountPoint(),l_entry->getType());
 		}		
@@ -168,10 +168,10 @@ TMTabEntry::TMountStatus TMTabEntry::isMounted()
 	if(type=="swap"){
 		return UNKMOUNTED;
 	}	
-	if(nullptr != realDevice){
-		if(realDevice->isMountedOn(mountPoint)){
+	if(nullptr != realDevice){		
+		if(realDevice->isMountedOn(mountPoint)){			
 			return MOUNTED;
-		} else if(realDevice->isMounted()){
+		} else if(realDevice->isMounted()){			
 			return DIFMOUNTED;
 		} else {
 			return NOTMOUNTED;

@@ -278,12 +278,12 @@ void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_raidMembers)
 			l_copyFrom=l_item;
 			break;
 		}
-	}
+	}	
 	if(l_copyFrom != nullptr){
 		l_iter.toFront();
 		while(l_iter.hasNext()){
 			l_item=l_iter.next();
-			if(l_item != l_copyFrom){
+			if(l_item != l_copyFrom){				
 				l_item->copyMount(l_copyFrom->getMounts());
 			}
 		}

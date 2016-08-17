@@ -55,10 +55,15 @@ void TDeviceInfo::getDisks()
 	aliasses->readInfo();
 	devices->readInfo();
 	btrfsInfo->readInfo(aliasses);
-	raidList->processMD(devices);
-	raidList->processBtrfs(btrfsInfo,devices);
+
 	mtab->processInfo();
-	mtab->addMountTODevices();
+	TMTab *l_mtab2=new TMTab(devices);
+	l_mtab2->setSourceFile("/proc/mounts");
+	l_mtab2->processInfo();
+	l_mtab2->addMountTODevices();
+	delete l_mtab2;
+	raidList->processMD(devices);
+	raidList->processBtrfs(btrfsInfo,devices);	
 	devices->readFreeSpace();
 	iscsi->processInfo(devices);
 	
@@ -90,7 +95,7 @@ TDeviceInfo::TDeviceInfo()
 	aliasses = new TAlias();
 	devices  = new TDeviceList(aliasses);
 	raidList = new TRaidInfo();
-	mtab     = new TMTab(devices);
+	mtab     = new TMTab(devices);	
 	iscsi    = new TIScsiSessionList();
 }
 TDeviceInfo::~TDeviceInfo(){

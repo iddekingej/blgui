@@ -25,7 +25,6 @@ QString TIScsiSessionList::findConnection(const QString &p_path)
 	
 		if(l_di.fileName().startsWith("connection") && l_di.fileInfo().isDir()){
 			l_filePath=l_di.filePath();
-			printf("xa:%s \n",l_filePath.toUtf8().data());
 			QDir l_dir2(l_filePath+"/iscsi_connection/");
 			QDirIterator l_di2(l_dir2);
 			while(l_di2.hasNext()){

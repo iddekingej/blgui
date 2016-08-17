@@ -58,7 +58,8 @@ bool TDeviceBase::isMountedOn(const QString &p_path)
 {	
 	TLinkListIterator<TMount> l_iter(&mounts);
 	while(l_iter.hasNext()){
-		if(l_iter.next()->getMountPoint()==p_path) return true;
+		TMount *l_item=l_iter.next();		
+		if(l_item->getMountPoint()==p_path) return true;		
 	}
 	return false;
 }

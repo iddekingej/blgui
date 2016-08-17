@@ -9,7 +9,6 @@ bool TUDevMonitor::open()
 	if(udev==nullptr) return false;
 	monitor=udev_monitor_new_from_netlink(udev,"udev");
 	udev_monitor_filter_add_match_subsystem_devtype(monitor, "block", nullptr);
-
 	udev_monitor_enable_receiving(monitor);
 	waitFd=udev_monitor_get_fd(monitor);
 	return true;
@@ -55,5 +54,6 @@ bool TUDevMonitor::isSomethingChanged()
 
 TUDevMonitor::~TUDevMonitor()
 {
-	udev_unref(udev);
+	if(udev !=nullptr)udev_unref(udev);
+	if(monitor != nullptr) udev_monitor_unref(monitor);
 }
