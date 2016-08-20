@@ -8,7 +8,7 @@ Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux
 License  : Gpl
-Version  : 0.5.1
+Version  : 0.6
 
 
 BUILDING
@@ -56,13 +56,19 @@ Note: When there is an unmounted disk in a cd-rom/dvd drive, the program will ta
 
 FUNCTIONS
 ==================
+This program displays the follow information
+
+* Information over all devices and partitions
+* Raid
+* Iscsi
+* Fstab
+
 This program displays information about:
 * Physical drives
 * connected iScsi drives
 * loopback device
 * MD raid drives
-
-And displays information about the following raid system 
+* LVM
 * MD Software raid
 * BTRFS
 
