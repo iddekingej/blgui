@@ -1,6 +1,6 @@
 WARNING
 =======
-This is version is an early 0.5 development version. It is not yet feature complete or bug free.
+This is version is an early 0.6 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======
@@ -63,18 +63,16 @@ This program displays the follow information
 * Iscsi
 * Fstab
 
-This program displays information about:
+It support the following type of block devices:
 * Physical drives
-* connected iScsi drives
+* iScsi drives
 * loopback device
 * MD raid drives
 * LVM
 * MD Software raid
 * BTRFS
 
-Displays information about fstab
 
-This program displays the following information:
 Devices:
 	* Device name
 	* Partition name
@@ -102,6 +100,29 @@ Libblkid can only get information from the block devices when this program is ru
 information(if available).
 
 Other functions:
-* Pressing the "Refresh" button will refresh the information (There is no auto refresh yet)
+* Pressing the "Refresh" button will refresh the information 
+* Auto refresh: on (un)mount/remove medium
 * Settings=>Fields: For configuring the fields shown under the "Disk" tab. (There is no field configuration for the raid and fstab tab yet)
 * Double clicking the row in the "Disk" tab will show more information about the selected device
+
+Changes:
+=======
+
+
+0.6<=0.5
+* Code cleanup
+	- Linklist iterators
+	- Configuration manager
+* Configure which tabs are visible
+* New columns:
+	-Start of partition
+* Device details:
+	-Redone partition tab: Add start of partition
+        -Select different device
+        -Display scsi bus
+        -Display iscsi host
+* Partition details:
+	-Navigate to device.
+* Fix: free size
+* Fix: raid level
+* Fix: few memory leaks
