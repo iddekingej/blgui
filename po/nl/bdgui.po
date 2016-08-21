@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-08-20 20:59+0200\n"
-"PO-Revision-Date: 2016-08-20 20:59+0200\n"
+"POT-Creation-Date: 2016-08-21 12:14+0200\n"
+"PO-Revision-Date: 2016-08-21 12:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -25,8 +25,8 @@ msgstr "Omvang"
 msgid "Model"
 msgstr "Model"
 
-#: base/globals.cpp:9 build/ui_devinfo.h:400 gui/formbasedevinfo.cpp:30
-#: gui/formdevinfo.cpp:130 gui/mainwindow.cpp:85
+#: base/globals.cpp:9 gui/formbasedevinfo.cpp:30 gui/formdevinfo.cpp:130
+#: gui/mainwindow.cpp:85
 msgid "Type"
 msgstr "Type"
 
@@ -34,7 +34,7 @@ msgstr "Type"
 msgid "Mounted"
 msgstr "Gekoppeld"
 
-#: base/globals.cpp:11 build/ui_devinfo.h:397 gui/mainwindow.cpp:194
+#: base/globals.cpp:11 gui/mainwindow.cpp:194
 msgid "Label"
 msgstr "Label"
 
@@ -54,7 +54,11 @@ msgstr "Verwijderbaar"
 msgid "Loop back file"
 msgstr "Loop back bestand"
 
-#: base/globals.cpp:16 build/ui_devinfo.h:413 build/ui_devinfo.h:415
+#. i18n: file: ui/devinfo.ui:448
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#. i18n: file: ui/devinfo.ui:463
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: base/globals.cpp:16 rc.cpp:114 rc.cpp:117
 msgid "Slaves"
 msgstr "Slaaf"
 
@@ -73,255 +77,6 @@ msgstr "isci host"
 #: base/globals.cpp:20
 msgid "Start(bytes)"
 msgstr "Start(bytes)"
-
-#: build/ui_about.h:122
-msgid "About"
-msgstr "Over"
-
-#: build/ui_about.h:123
-msgid "Disk information GUI"
-msgstr "Disk informatie GUI"
-
-#: build/ui_about.h:124
-msgid "Version:"
-msgstr "Versie:"
-
-#: build/ui_about.h:125 build/ui_devinfo.h:393 build/ui_devinfo.h:398
-#: build/ui_devinfo.h:401 build/ui_parinfo.h:250
-msgid "none"
-msgstr "geen"
-
-#: build/ui_about.h:126
-msgid "(C) 2016 Jeroen van Iddekinge"
-msgstr "(c) 2016 Jeroen van Iddekinge"
-
-#: build/ui_about.h:127
-msgid "License: Gpl v2"
-msgstr "Licentie: GPL v2"
-
-#: build/ui_about.h:128 build/ui_devinfo.h:416 build/ui_parinfo.h:266
-msgid "Close"
-msgstr "Sluiten"
-
-#: build/ui_devinfo.h:383
-msgid "Device details information"
-msgstr "Device details informatie"
-
-#: build/ui_devinfo.h:384 build/ui_devinfo.h:395 build/ui_devinfo.h:404
-msgid "TextLabel"
-msgstr "Textlabel"
-
-#: build/ui_devinfo.h:385
-msgid "Scsi bus"
-msgstr ""
-
-#: build/ui_devinfo.h:386
-msgid "Vendor"
-msgstr "Producent"
-
-#: build/ui_devinfo.h:387 build/ui_parinfo.h:257
-msgid "Device name:"
-msgstr "Naam aperaat"
-
-#: build/ui_devinfo.h:388 build/ui_parinfo.h:254
-msgid "Size:"
-msgstr "Omvang:"
-
-#: build/ui_devinfo.h:389 build/ui_devinfo.h:391 build/ui_devinfo.h:396
-#: build/ui_devinfo.h:399 build/ui_parinfo.h:251 build/ui_parinfo.h:252
-#: build/ui_parinfo.h:258
-msgid "None"
-msgstr "Geen"
-
-#: build/ui_devinfo.h:390
-msgid "Model:"
-msgstr "Model:"
-
-#: build/ui_devinfo.h:392
-msgid "Removable:"
-msgstr "Verwijderbaar:"
-
-#: build/ui_devinfo.h:394
-msgid "Readonly:"
-msgstr "Alleen lezen:"
-
-#: build/ui_devinfo.h:402
-msgid "Loopback file"
-msgstr "Loopback bestand"
-
-#: build/ui_devinfo.h:403
-msgid "Iscsi host"
-msgstr ""
-
-#: build/ui_devinfo.h:405 build/ui_parinfo.h:260
-msgid "Device aliases"
-msgstr "Apparaat alias"
-
-#: build/ui_devinfo.h:406 build/ui_parinfo.h:261
-msgid "Device has no aliasses"
-msgstr "Apparaat heeft geen aliassen"
-
-#: build/ui_devinfo.h:407
-msgid "Aliases"
-msgstr "Aliassen"
-
-#: build/ui_devinfo.h:408
-msgid "Paritions"
-msgstr "Partities"
-
-#: build/ui_devinfo.h:409
-msgid "Partitions"
-msgstr "Paritities"
-
-#: build/ui_devinfo.h:410 build/ui_parinfo.h:263
-msgid "Mount points"
-msgstr "Aankoppel punt"
-
-#: build/ui_devinfo.h:411
-msgid "This devices or it's partitions are not mounted"
-msgstr "Dit apparaat of een van zijn partities zijn niet aangekoppeld"
-
-#: build/ui_devinfo.h:412 build/ui_parinfo.h:265
-msgid "Mountpoints"
-msgstr "Koppelpunt"
-
-#: build/ui_devinfo.h:414
-msgid "No slave found"
-msgstr "Geen slaaf gevonden"
-
-#: build/ui_fields.h:168
-msgid "Fields configuration"
-msgstr "Velden configuratie"
-
-#: build/ui_fields.h:169
-msgid "Up"
-msgstr "Op"
-
-#: build/ui_fields.h:170
-msgid "<"
-msgstr "<"
-
-#: build/ui_fields.h:171
-msgid ">"
-msgstr ">"
-
-#: build/ui_fields.h:172
-msgid "Down"
-msgstr "Neer"
-
-#: build/ui_main.h:255
-msgid "Device information GUI"
-msgstr "Apparaat informatie GUI"
-
-#: build/ui_main.h:256
-msgid "&Quit"
-msgstr "&Sluiten"
-
-#: build/ui_main.h:257
-msgid "&Fields"
-msgstr "&Velden"
-
-#: build/ui_main.h:258
-msgid "&About"
-msgstr "&Over"
-
-#: build/ui_main.h:259
-msgid "&Visible tabs"
-msgstr "&Zichtbare tabs"
-
-#: build/ui_main.h:260
-msgid "Refresh"
-msgstr "Verversen"
-
-#: build/ui_main.h:261
-msgid "Automatic refresh"
-msgstr "Automatisch verversen"
-
-#: build/ui_main.h:264 build/ui_visibletab.h:108 build/ui_visibletabs.h:108
-#: gui/mainwindow.cpp:359
-msgid "Disks"
-msgstr "Disk"
-
-#: build/ui_main.h:265 build/ui_visibletab.h:109 build/ui_visibletabs.h:109
-#: gui/mainwindow.cpp:360
-msgid "Raid"
-msgstr "Raid"
-
-#: build/ui_main.h:266 gui/mainwindow.cpp:361
-msgid "Fstab"
-msgstr "FSTAB"
-
-#: build/ui_main.h:267
-msgid "iscsi"
-msgstr "iscsi"
-
-#: build/ui_main.h:268
-msgid "Fi&le"
-msgstr "&Bestand"
-
-#: build/ui_main.h:269
-msgid "Setti&ngs"
-msgstr "&Configuratie"
-
-#: build/ui_main.h:270
-msgid "Help"
-msgstr "Help"
-
-#: build/ui_parinfo.h:249
-msgid "Partition details information"
-msgstr "Detail informatie over partities"
-
-#: build/ui_parinfo.h:253
-msgid "Type:"
-msgstr "Type:"
-
-#: build/ui_parinfo.h:255
-msgid "Paritition name:"
-msgstr "Partitie naam:"
-
-#: build/ui_parinfo.h:256
-msgid "Label:"
-msgstr "Label:"
-
-#: build/ui_parinfo.h:259
-msgid "Go"
-msgstr "Ga"
-
-#: build/ui_parinfo.h:262
-msgid "Aliasses"
-msgstr "Aliassen"
-
-#: build/ui_parinfo.h:264
-msgid "This partition is not mounted"
-msgstr "Deze partitie is niet aangekoppeld"
-
-#: build/ui_visibletab.h:106
-msgid "Setup visible "
-msgstr ""
-
-#: build/ui_visibletab.h:107 build/ui_visibletabs.h:107
-msgid "Visible tab pages"
-msgstr "Zichtbare tabs"
-
-#: build/ui_visibletab.h:110 build/ui_visibletabs.h:110
-msgid "FSTab"
-msgstr "FStab"
-
-#: build/ui_visibletab.h:111 build/ui_visibletabs.h:111 gui/mainwindow.cpp:362
-msgid "Iscsi"
-msgstr "IScsi"
-
-#: build/ui_visibletab.h:112 build/ui_visibletabs.h:112
-msgid "&Ok"
-msgstr "&Ok"
-
-#: build/ui_visibletab.h:113 build/ui_visibletabs.h:113
-msgid "&Cancel"
-msgstr "&Cancel"
-
-#: build/ui_visibletabs.h:106
-msgid "Setup visible tabs"
-msgstr "Zichtbare tabs"
 
 #: data/changemanager.cpp:46
 msgid "mounted"
@@ -426,7 +181,7 @@ msgstr "Gekoppeld aan een andere pad\n"
 
 #: gui/mainwindow.cpp:102
 msgid "Wrong type. Type is (%1)"
-msgstr "Verekeerde type. Type is %1"
+msgstr "Verkeerde type. Type is %1"
 
 #: gui/mainwindow.cpp:103
 msgid "Device not mountable (has partitions)"
@@ -476,6 +231,34 @@ msgstr "Apparaten"
 msgid "Labels"
 msgstr "Labels"
 
+#. i18n: file: ui/main.ui:117
+#. i18n: ectx: attribute (title), widget (QWidget, tabDisks)
+#. i18n: file: ui/visibletabs.ui:33
+#. i18n: ectx: property (text), widget (QCheckBox, checkDisk)
+#: gui/mainwindow.cpp:359 rc.cpp:150 rc.cpp:243
+msgid "Disks"
+msgstr "Disk"
+
+#. i18n: file: ui/main.ui:149
+#. i18n: ectx: attribute (title), widget (QWidget, tabRaid)
+#. i18n: file: ui/visibletabs.ui:40
+#. i18n: ectx: property (text), widget (QCheckBox, checkRaid)
+#: gui/mainwindow.cpp:360 rc.cpp:153 rc.cpp:246
+msgid "Raid"
+msgstr "Raid"
+
+#. i18n: file: ui/main.ui:181
+#. i18n: ectx: attribute (title), widget (QWidget, tabFstab)
+#: gui/mainwindow.cpp:361 rc.cpp:156
+msgid "Fstab"
+msgstr "FSTAB"
+
+#. i18n: file: ui/visibletabs.ui:54
+#. i18n: ectx: property (text), widget (QCheckBox, checkIsci)
+#: gui/mainwindow.cpp:362 rc.cpp:252
+msgid "Iscsi"
+msgstr "IScsi"
+
 #: main.cpp:20
 msgid "Disk information gui"
 msgstr "Disk informatie gui"
@@ -495,6 +278,386 @@ msgstr "x"
 #: main.cpp:29
 msgid "Jeroen van Iddekinge"
 msgstr "Jeroen van Iddekinge"
+
+#. i18n: file: ui/about.ui:20
+#. i18n: ectx: property (windowTitle), widget (QDialog, about)
+#: rc.cpp:3
+msgid "About"
+msgstr "Over"
+
+#. i18n: file: ui/about.ui:32
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:6
+msgid "Disk information GUI"
+msgstr "Disk informatie GUI"
+
+#. i18n: file: ui/about.ui:56
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: rc.cpp:9
+msgid "Version:"
+msgstr "Versie:"
+
+#. i18n: file: ui/about.ui:63
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+#. i18n: file: ui/devinfo.ui:186
+#. i18n: ectx: property (text), widget (QLabel, removeableLabel)
+#. i18n: file: ui/devinfo.ui:263
+#. i18n: ectx: property (text), widget (QLabel, typeLabel)
+#. i18n: file: ui/devinfo.ui:290
+#. i18n: ectx: property (text), widget (QLabel, vendorLabel)
+#. i18n: file: ui/parinfo.ui:28
+#. i18n: ectx: property (text), widget (QLabel, typeLabel)
+#: rc.cpp:12 rc.cpp:54 rc.cpp:69 rc.cpp:78 rc.cpp:186
+msgid "none"
+msgstr "geen"
+
+#. i18n: file: ui/about.ui:72
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:15
+msgid "(C) 2016 Jeroen van Iddekinge"
+msgstr "(c) 2016 Jeroen van Iddekinge"
+
+#. i18n: file: ui/about.ui:92
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:18
+msgid "License: Gpl v2"
+msgstr "Licentie: GPL v2"
+
+#. i18n: file: ui/about.ui:114
+#. i18n: ectx: property (text), widget (QPushButton, closeButton)
+#. i18n: file: ui/devinfo.ui:502
+#. i18n: ectx: property (text), widget (QPushButton, btnClose)
+#. i18n: file: ui/parinfo.ui:296
+#. i18n: ectx: property (text), widget (QPushButton, btnClose)
+#: rc.cpp:21 rc.cpp:123 rc.cpp:234
+msgid "Close"
+msgstr "Sluiten"
+
+#. i18n: file: ui/devinfo.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, devinfo)
+#: rc.cpp:24
+msgid "Device details information"
+msgstr "Device details informatie"
+
+#. i18n: file: ui/devinfo.ui:27
+#. i18n: ectx: property (text), widget (QLabel, scsibusLabel)
+#. i18n: file: ui/devinfo.ui:218
+#. i18n: ectx: property (text), widget (QLabel, readonlyLabel)
+#. i18n: file: ui/devinfo.ui:329
+#. i18n: ectx: property (text), widget (QLabel, iscsiHost)
+#: rc.cpp:27 rc.cpp:60 rc.cpp:87
+msgid "TextLabel"
+msgstr "Textlabel"
+
+#. i18n: file: ui/devinfo.ui:40
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: rc.cpp:30
+msgid "Scsi bus:"
+msgstr "scsi bus:"
+
+#. i18n: file: ui/devinfo.ui:59
+#. i18n: ectx: property (text), widget (QLabel, label_12)
+#: rc.cpp:33
+msgid "Vendor:"
+msgstr "Producent:"
+
+#. i18n: file: ui/devinfo.ui:90
+#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: file: ui/parinfo.ui:167
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:36 rc.cpp:207
+msgid "Device name:"
+msgstr "Naam aperaat"
+
+#. i18n: file: ui/devinfo.ui:115
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: file: ui/parinfo.ui:86
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:39 rc.cpp:198
+msgid "Size:"
+msgstr "Omvang:"
+
+#. i18n: file: ui/devinfo.ui:122
+#. i18n: ectx: property (text), widget (QLabel, sizeLabel)
+#. i18n: file: ui/devinfo.ui:154
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#. i18n: file: ui/devinfo.ui:225
+#. i18n: ectx: property (text), widget (QLabel, labelLabel)
+#. i18n: file: ui/devinfo.ui:270
+#. i18n: ectx: property (text), widget (QLabel, valLoopbackFile)
+#. i18n: file: ui/parinfo.ui:35
+#. i18n: ectx: property (text), widget (QLabel, parName)
+#. i18n: file: ui/parinfo.ui:42
+#. i18n: ectx: property (text), widget (QLabel, labelLabel)
+#. i18n: file: ui/parinfo.ui:174
+#. i18n: ectx: property (text), widget (QLabel, sizeLabel)
+#: rc.cpp:42 rc.cpp:48 rc.cpp:63 rc.cpp:72 rc.cpp:189 rc.cpp:192 rc.cpp:210
+msgid "None"
+msgstr "Geen"
+
+#. i18n: file: ui/devinfo.ui:147
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:45
+msgid "Model:"
+msgstr "Model:"
+
+#. i18n: file: ui/devinfo.ui:179
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:51
+msgid "Removable:"
+msgstr "Verwijderbaar:"
+
+#. i18n: file: ui/devinfo.ui:211
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: rc.cpp:57
+msgid "Read only:"
+msgstr "Alleen lezen:"
+
+#. i18n: file: ui/devinfo.ui:256
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: file: ui/parinfo.ui:136
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: rc.cpp:66 rc.cpp:204
+msgid "Label:"
+msgstr "Label:"
+
+#. i18n: file: ui/devinfo.ui:283
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#. i18n: file: ui/parinfo.ui:61
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: rc.cpp:75 rc.cpp:195
+msgid "Type:"
+msgstr "Type:"
+
+#. i18n: file: ui/devinfo.ui:309
+#. i18n: ectx: property (text), widget (QLabel, labLoopbackFile)
+#: rc.cpp:81
+msgid "Loopback file:"
+msgstr "Loopback bestand:"
+
+#. i18n: file: ui/devinfo.ui:322
+#. i18n: ectx: property (text), widget (QLabel, label_14)
+#: rc.cpp:84
+msgid "Iscsi host:"
+msgstr "isci host:"
+
+#. i18n: file: ui/devinfo.ui:352
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#. i18n: file: ui/parinfo.ui:204
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: rc.cpp:90 rc.cpp:216
+msgid "Aliases"
+msgstr "Aliassen"
+
+#. i18n: file: ui/devinfo.ui:364
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#. i18n: file: ui/parinfo.ui:216
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: rc.cpp:93 rc.cpp:219
+msgid "Device aliases"
+msgstr "Apparaat alias"
+
+#. i18n: file: ui/devinfo.ui:371
+#. i18n: ectx: property (text), widget (QLabel, noAliasesLabel)
+#. i18n: file: ui/parinfo.ui:223
+#. i18n: ectx: property (text), widget (QLabel, noAliasesLabel)
+#: rc.cpp:96 rc.cpp:222
+msgid "Device has no aliasses"
+msgstr "Apparaat heeft geen aliassen"
+
+#. i18n: file: ui/devinfo.ui:382
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: file: ui/devinfo.ui:394
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: rc.cpp:99 rc.cpp:102
+msgid "Partitions"
+msgstr "Paritities"
+
+#. i18n: file: ui/devinfo.ui:405
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#. i18n: file: ui/devinfo.ui:428
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#. i18n: file: ui/parinfo.ui:234
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: file: ui/parinfo.ui:246
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: rc.cpp:105 rc.cpp:108 rc.cpp:225 rc.cpp:228
+msgid "Mount points"
+msgstr "Aankoppel punt"
+
+#. i18n: file: ui/devinfo.ui:435
+#. i18n: ectx: property (text), widget (QLabel, noMountPointsLabel)
+#: rc.cpp:111
+msgid "This devices or it's partitions are not mounted"
+msgstr "Dit apparaat of een van zijn partities zijn niet aangekoppeld"
+
+#. i18n: file: ui/devinfo.ui:470
+#. i18n: ectx: property (text), widget (QLabel, noSlaveLabel)
+#: rc.cpp:120
+msgid "No slave found"
+msgstr "Geen slaaf gevonden"
+
+#. i18n: file: ui/fields.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, FieldsConfig)
+#: rc.cpp:126
+msgid "Fields configuration"
+msgstr "Velden configuratie"
+
+#. i18n: file: ui/fields.ui:87
+#. i18n: ectx: property (text), widget (QPushButton, moveUp)
+#: rc.cpp:129
+msgid "Up"
+msgstr "Op"
+
+#. i18n: file: ui/fields.ui:116
+#. i18n: ectx: property (text), widget (QPushButton, removeField)
+#: rc.cpp:132
+msgid "<"
+msgstr "<"
+
+#. i18n: file: ui/fields.ui:144
+#. i18n: ectx: property (text), widget (QPushButton, addLabel)
+#: rc.cpp:135
+msgid ">"
+msgstr ">"
+
+#. i18n: file: ui/fields.ui:192
+#. i18n: ectx: property (text), widget (QPushButton, moveDown)
+#: rc.cpp:138
+msgid "Down"
+msgstr "Neer"
+
+#. i18n: file: ui/main.ui:20
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: rc.cpp:141
+msgid "Device information GUI"
+msgstr "Apparaat informatie GUI"
+
+#. i18n: file: ui/main.ui:46
+#. i18n: ectx: property (text), widget (QPushButton, refreshButton)
+#: rc.cpp:144
+msgid "Refresh"
+msgstr "Verversen"
+
+#. i18n: file: ui/main.ui:59
+#. i18n: ectx: property (text), widget (QCheckBox, autoRefresh)
+#: rc.cpp:147
+msgid "Automatic refresh"
+msgstr "Automatisch verversen"
+
+#. i18n: file: ui/main.ui:194
+#. i18n: ectx: attribute (title), widget (QWidget, tabIscsi)
+#: rc.cpp:159
+msgid "iscsi"
+msgstr "iscsi"
+
+#. i18n: file: ui/main.ui:219
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: rc.cpp:162
+msgid "Fi&le"
+msgstr "&Bestand"
+
+#. i18n: file: ui/main.ui:225
+#. i18n: ectx: property (title), widget (QMenu, menuSss)
+#: rc.cpp:165
+msgid "Setti&ngs"
+msgstr "&Configuratie"
+
+#. i18n: file: ui/main.ui:232
+#. i18n: ectx: property (title), widget (QMenu, menuHelp)
+#: rc.cpp:168
+msgid "Help"
+msgstr "Help"
+
+#. i18n: file: ui/main.ui:243
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:171
+msgid "&Quit"
+msgstr "&Sluiten"
+
+#. i18n: file: ui/main.ui:248
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:174
+msgid "&Fields"
+msgstr "&Velden"
+
+#. i18n: file: ui/main.ui:253
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:177
+msgid "&About"
+msgstr "&Over"
+
+#. i18n: file: ui/main.ui:261
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:180
+msgid "&Visible tabs"
+msgstr "&Zichtbare tabs"
+
+#. i18n: file: ui/parinfo.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, parinfo)
+#: rc.cpp:183
+msgid "Partition details information"
+msgstr "Detail informatie over partities"
+
+#. i18n: file: ui/parinfo.ui:105
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:201
+msgid "Partition name:"
+msgstr "Partitie naam:"
+
+#. i18n: file: ui/parinfo.ui:189
+#. i18n: ectx: property (text), widget (QPushButton, gotoDevice)
+#: rc.cpp:213
+msgid "Go"
+msgstr "Ga"
+
+#. i18n: file: ui/parinfo.ui:253
+#. i18n: ectx: property (text), widget (QLabel, noMountPointsLabel)
+#: rc.cpp:231
+msgid "This partition is not mounted"
+msgstr "Deze partitie is niet aangekoppeld"
+
+#. i18n: file: ui/visibletabs.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, visibleTabs)
+#: rc.cpp:237
+msgid "Setup visible tabs"
+msgstr "Zichtbare tabs"
+
+#. i18n: file: ui/visibletabs.ui:26
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:240
+msgid "Visible tab pages"
+msgstr "Zichtbare tabs"
+
+#. i18n: file: ui/visibletabs.ui:47
+#. i18n: ectx: property (text), widget (QCheckBox, checkFsTab)
+#: rc.cpp:249
+msgid "FSTab"
+msgstr "FStab"
+
+#. i18n: file: ui/visibletabs.ui:63
+#. i18n: ectx: property (text), widget (QPushButton, pushOk)
+#: rc.cpp:255
+msgid "&Ok"
+msgstr "&Ok"
+
+#. i18n: file: ui/visibletabs.ui:70
+#. i18n: ectx: property (text), widget (QPushButton, pushCancel)
+#: rc.cpp:258
+msgid "&Cancel"
+msgstr "&Cancel"
+
+#~ msgid "Readonly:"
+#~ msgstr "Alleen lezen:"
+
+#~ msgid "Paritions"
+#~ msgstr "Partities"
+
+#~ msgid "Mountpoints"
+#~ msgstr "Koppelpunt"
+
+#~ msgid "Aliasses"
+#~ msgstr "Aliassen"
 
 #~ msgid "Disk information GUI v0.4.4"
 #~ msgstr "Disk informatie GUI v0.4.4"

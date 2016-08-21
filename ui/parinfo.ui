@@ -102,7 +102,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Paritition name:</string>
+        <string>Partition name:</string>
        </property>
       </widget>
      </item>
@@ -201,7 +201,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Aliasses</string>
+       <string>Aliases</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -231,7 +231,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Mountpoints</string>
+       <string>Mount points</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item alignment="Qt::AlignTop">
