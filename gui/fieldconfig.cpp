@@ -21,6 +21,7 @@ void TFieldsConfig::save()
 		}
 		
 		g_config.setDeviceFields(l_list);
+		g_config.setDeviceAsTree(ui.displayTree->isChecked());
 		g_config.sync();
 		close();
 		
@@ -161,7 +162,10 @@ TFieldsConfig::TFieldsConfig():QDialog()
 	connect(ui.removeField,SIGNAL(pressed()),SLOT(removeLabel()));
 	connect(ui.moveUp,SIGNAL(pressed()),SLOT(moveUp()));
 	connect(ui.moveDown,SIGNAL(pressed()),SLOT(moveDown()));
-
+	bool l_tree=g_config.getDeviceAsTree();
+	ui.displayTree->setChecked(l_tree);
+	ui.displayGrid->setChecked(!l_tree);
+	
 	fillAvailableList();
 	fillSelectedList();
 }

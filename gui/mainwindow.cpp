@@ -21,9 +21,29 @@
 #include "base/utils.h"
 #include "data/mtab.h"
 #include "data/iscsi.h"
+#include <QStyledItemDelegate>
+#include <QPainter>
 
 
 QApplication *g_app;
+
+
+class TGridDelegate : public QStyledItemDelegate
+{
+public:
+    explicit TGridDelegate(QObject* p_parent ) : QStyledItemDelegate(p_parent) { }
+ 
+    void paint(QPainter* p_painter, const QStyleOptionViewItem& p_option, const QModelIndex& p_index ) const
+    {
+        p_painter->save();
+        p_painter->setPen(QColor(Qt::lightGray));
+        p_painter->drawRect(p_option.rect);
+        p_painter->restore();
+ 
+        QStyledItemDelegate::paint(p_painter, p_option, p_index);
+    }
+};
+
 
 void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
 {
@@ -140,31 +160,46 @@ void TMainWindow::fillRaid()
 	ui.raidList->resizeColumnsToContents();
 }
 
+
+
+
+
 //Fill row with data
 // p_begin - Column 0..p_begin-1 is fixed columns from p_begin are configured
 // p_model - model for fillen data
 // p_row   - row number
 // p_list  - List with data
 
-void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list)
+void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent)
 {
 	int l_fieldId;
 	QStandardItem *l_item;
 	
 //fill fixed columns 
 	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
-		l_item=new QStandardItem(p_list[l_cnt]);		
-		p_model->setItem(p_row,l_cnt,l_item);
+		l_item=new QStandardItem(p_list[l_cnt]);	
+		if(p_parent != nullptr){
+		    p_parent->setChild(p_row,l_cnt,l_item);
+		} else {
+		    p_model->setItem(p_row,l_cnt,l_item);
+		}
 	}
 	
 //fill flexible columns
 	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
 		l_fieldId=enableDeviceFields[l_cnt].toInt();
 		if(l_fieldId+p_begin<p_list.count()){
-			p_model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));
+			if(p_parent !=nullptr){
+			    p_parent->setChild(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));			    
+			} else {
+			    p_model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));
+			}
 		}
 	}
 }
+
+
+
 
 // Fill the header of the configured columns
 void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
@@ -177,6 +212,46 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	}
 }
 
+void TMainWindow::fillDeviceTree()
+{
+    	QStringList l_deviceRow;
+	QStandardItem *l_parent;
+    	QStandardItemModel *l_model=new QStandardItemModel(0,1,this);	
+	devModel=l_model;
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Name")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Partition")));
+	fillHeader(2,l_model);
+	TLinkListIterator<TDevice> l_iter(info->getDevices());
+	TDevice *l_device;
+	TPartition *l_partition;
+	int l_cnt=0;
+	int l_partRow;
+	while(l_iter.hasNext()){
+	    l_device=l_iter.next();
+	    l_deviceRow.clear();
+	    l_device->fillDataRow(l_deviceRow);
+	    displayRow(2,l_model,l_cnt,l_deviceRow,nullptr);
+	    l_parent=l_model->item(l_cnt,0);
+	    TLinkListIterator<TPartition> l_iterPartition(l_device->getPartitions());
+	    l_model->item(l_cnt)->setData(l_device->getName());
+	    l_partRow=0;
+	    while(l_iterPartition.hasNext()){
+		l_partition=l_iterPartition.next();
+		l_deviceRow.clear();
+		l_partition->fillDataRow(l_deviceRow);
+		displayRow(2,l_model,l_partRow,l_deviceRow,l_parent);
+		l_parent->child(l_partRow)->setData(l_partition->getName());
+		l_partRow++;
+	    }
+	    l_cnt++;
+	}
+	ui.diskList->setWordWrap(false);
+	ui.diskList->setModel(l_model);
+	
+	//ui.diskList->resizeRowsToContents();
+	//ui.diskList->resizeColumnsToContents();	
+}
+
 //Fill Device tab in main main window 
 
 void TMainWindow::fillDevice()
@@ -185,7 +260,10 @@ void TMainWindow::fillDevice()
 	TDeviceList *l_devices=info->getDevices();
 	int l_selectedType=ui.itemSource->currentIndex();
 	QString l_extraLabel;
-
+	if((l_selectedType==0) && g_config.getDeviceAsTree()){
+	    fillDeviceTree();
+	    return;
+	}
 	switch(l_selectedType){
 		case 1:	l_map=l_devices->getIdIndex();
 			l_extraLabel=i18n("Id");
@@ -234,7 +312,7 @@ void TMainWindow::fillDevice()
 		
 		}
 		l_mi.value()->fillDataRow(l_deviceRow);		
-		displayRow(l_fixed,l_model,l_cnt,l_deviceRow);
+		displayRow(l_fixed,l_model,l_cnt,l_deviceRow,nullptr);
 		l_model->item(l_cnt)->setData(l_mi.value()->getName());
 		l_cnt++;
 	}
@@ -242,8 +320,8 @@ void TMainWindow::fillDevice()
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
 	
-	ui.diskList->resizeRowsToContents();
-	ui.diskList->resizeColumnsToContents();	
+	//ui.diskList->resizeRowsToContents();
+	//ui.diskList->resizeColumnsToContents();	
 }
 
 void TMainWindow::showFieldChooser(){
@@ -260,12 +338,12 @@ void TMainWindow::readConfiguation()
 
 void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 {
+	printf("Clicked\n");
 
 	if(devModel != nullptr){
 		QString l_name;
 		TDeviceBase *l_deviceBase;
-	
-		l_name=devModel->item(p_index.row(),0)->data().toString();
+		l_name=p_index.data(Qt::UserRole + 1).toString();
 		l_deviceBase=info->getDevices()->getDeviceByName(l_name);
 		if(l_deviceBase){
 			if(TPartition *l_partition=dynamic_cast<TPartition *>(l_deviceBase)){
@@ -300,7 +378,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	if((l_width>0) && (l_height>0)){
 		resize(l_width,l_height);
 	}
-	
+	ui.diskList->setItemDelegate(new TGridDelegate(ui.diskList));
 	g_app->setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	refresh();
@@ -328,6 +406,9 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setVisibleTabs();
 
 }
+//MyItem * myObj 
+//       = static_cast<MyItem*>
+//         (ui.myTreeView->currentIndex().internalPointer());
 
 //Set which tab is visible from config 
 

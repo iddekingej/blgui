@@ -33,6 +33,8 @@ public:
 	void setFsTabTab(bool p_flag);
 	bool getIscsiTab();
 	void setIscsiTab(bool p_flag);
+	bool getDeviceAsTree();
+	void setDeviceAsTree(bool p_flag);
 };
 
 extern TConfig g_config;

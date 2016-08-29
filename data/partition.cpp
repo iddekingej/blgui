@@ -14,7 +14,7 @@ TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_s
 
 void TPartition::fillDataRow(QStringList& p_list)
 {	
-	p_list 	<<device->getName()
+	p_list 	<<getDevice()->getName()
 		<<getName()
 		<<QString::number(getSize())
 		<<""

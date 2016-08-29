@@ -93,4 +93,14 @@ void TConfig::setIscsiTab(bool p_flag){
 	configGui.writeEntry(QStringLiteral("iscsiTab"),p_flag);
 }
 
+bool TConfig::getDeviceAsTree()
+{
+	return configGui.readEntry(QStringLiteral("devicetree"),true);
+}
+
+void TConfig::setDeviceAsTree(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("devicetree"),p_flag);
+}
+
 TConfig g_config;

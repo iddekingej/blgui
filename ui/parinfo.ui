@@ -225,7 +225,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="deviceAliases"/>
+        <widget class="QTableView" name="deviceAliases">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -255,7 +259,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QTableView" name="mountPoints"/>
+        <widget class="QTableView" name="mountPoints">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
