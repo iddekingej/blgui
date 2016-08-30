@@ -13,6 +13,7 @@ class TFormDevInfo:public TFormBaseDevInfo
 	Q_OBJECT
 private slots:
 	void deviceSelected(int p_index);
+	void clickPartition(const QModelIndex &p_index);
 private:
 	Ui::devinfo ui;
 	TDeviceList *deviceList;

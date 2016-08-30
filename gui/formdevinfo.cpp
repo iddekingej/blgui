@@ -12,13 +12,28 @@
 #include "base/linklist.h"
 #include "data/mount.h"
 #include "data/devicealias.h"
+#include "gui/formparinfo.h"
 
-//Iven if device selection changes
+//if device selection changes
 void TFormDevInfo::deviceSelected(int p_index)
 {	
 	TDeviceBase *l_deviceBase=deviceList->getDeviceByName(ui.deviceName->currentText());
 	if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
 		setInfo(l_device);
+	}
+}
+
+void TFormDevInfo::clickPartition(const QModelIndex &p_index)
+{
+	QString l_partition=p_index.data().toString();
+	TDeviceBase *l_device=deviceList->getDeviceByName(l_partition);
+	if(l_device !=nullptr){
+		TPartition *l_partition=dynamic_cast<TPartition*>(l_device);
+		if(l_partition != nullptr){
+			TFormParInfo l_form(deviceList,l_partition);
+			l_form.exec();
+			close();
+		}
 	}
 }
 
@@ -77,6 +92,7 @@ TFormDevInfo::TFormDevInfo(TDeviceList *p_list,TDevice *p_device):TFormBaseDevIn
 	setInfo(p_device);
 	connect(ui.btnClose,SIGNAL(clicked()),this,SLOT(close()));
 	connect(ui.deviceName,SIGNAL(currentIndexChanged(int)),this,SLOT(deviceSelected(int)));
+	connect(ui.partInfo,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(clickPartition(const QModelIndex &)));
 
 }
 
@@ -136,10 +152,13 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	
 	TLinkListIterator<TPartition> l_iter(p_device->getPartitions());
 	int l_cnt=0;
+	QStandardItem *l_item;
 	while(l_iter.hasNext()){
 		l_partition=l_iter.next();
 		l_deviceRow.clear();
-		l_model->setItem(l_cnt,0,new QStandardItem(l_partition->getName()));
+		l_item=new QStandardItem(l_partition->getName());
+		l_item->setData(l_partition->getName());
+		l_model->setItem(l_cnt,0,l_item);
 		l_model->setItem(l_cnt,1,new QStandardItem(l_partition->getType()));
 		l_model->setItem(l_cnt,2,new QStandardItem(l_partition->getReadableSize()));
 		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_partition->getStart())));

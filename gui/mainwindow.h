@@ -41,6 +41,7 @@ private:
 	void readConfiguation();
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
 	void fillDeviceTree();
+	void fillDeviceGrid();
 	void fillDevice();
 	void fillRaid();
 	void fillMtab();

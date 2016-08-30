@@ -254,16 +254,13 @@ void TMainWindow::fillDeviceTree()
 
 //Fill Device tab in main main window 
 
-void TMainWindow::fillDevice()
+void TMainWindow::fillDeviceGrid()
 {
 	const QMap<QString,TDeviceBase *> *l_map;
 	TDeviceList *l_devices=info->getDevices();
 	int l_selectedType=ui.itemSource->currentIndex();
 	QString l_extraLabel;
-	if((l_selectedType==0) && g_config.getDeviceAsTree()){
-	    fillDeviceTree();
-	    return;
-	}
+
 	switch(l_selectedType){
 		case 1:	l_map=l_devices->getIdIndex();
 			l_extraLabel=i18n("Id");
@@ -322,6 +319,15 @@ void TMainWindow::fillDevice()
 	
 	//ui.diskList->resizeRowsToContents();
 	//ui.diskList->resizeColumnsToContents();	
+}
+
+void TMainWindow::fillDevice()
+{
+	if((ui.itemSource->currentIndex()==0) && g_config.getDeviceAsTree()){
+		fillDeviceTree();	  
+	}  else {
+		fillDeviceGrid();
+	}
 }
 
 void TMainWindow::showFieldChooser(){
