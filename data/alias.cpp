@@ -4,6 +4,10 @@
 #include <QMap>
 #include <QFile>
 
+/*
+ * Start with a file follows symlinks until in reaches a non symlink (endpoint)
+ * All symlinks as stored (symlink,endpoint)
+ **/
 void TAlias::processAlias(const QString &p_file)
 {
 	QString l_currentFile=p_file;
@@ -28,23 +32,23 @@ void TAlias::processAlias(const QString &p_file)
 			
 	}
 }
-
+/*Scans all files in a folder "p_path" , if it is a symlink the 
+ * links are followed until a non symlink is found(endpoint)
+ *
+*/
 void TAlias::procesAliasses(const QString &p_path)
-{
-	QDir l_dir(p_path);
-	
-	if(l_dir.exists()){
-		
-		QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
-		while(l_iter.hasNext()){
-			l_iter.next();
-			if(l_iter.fileInfo().isSymLink()){
-				processAlias(l_iter.filePath());
-			}
+{	
+	QDirIterator l_iter(p_path,QDirIterator::NoIteratorFlags);
+	while(l_iter.hasNext()){
+		l_iter.next();
+		if(l_iter.fileInfo().isSymLink()){
+			processAlias(l_iter.filePath());
 		}
 	}
 }
-
+/*
+ * 
+ */
 
 const QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
 	QString l_path=aliasses.value(p_path);
