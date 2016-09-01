@@ -18,9 +18,8 @@ TBtrfsItem::TBtrfsItem(const QString &p_fs,const QString &p_raidLevel)
 }
 
 int TBtrfsInfo::readDevices(QString p_path,TBtrfsItem *p_info)
-{
-	QDir l_dir(p_path+"/devices/");
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+{	
+	QDirIterator l_iter(p_path+"/devices/",QDirIterator::NoIteratorFlags);
 	while(l_iter.hasNext()){
 		l_iter.next();
 		if(l_iter.fileInfo().isSymLink()){
@@ -33,9 +32,8 @@ int TBtrfsInfo::readDevices(QString p_path,TBtrfsItem *p_info)
 }
 
 void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
-{	
-	QDir l_dir(p_path+"/allocation/system/");
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+{		
+	QDirIterator l_iter(p_path+"/allocation/system/",QDirIterator::NoIteratorFlags);
 	while(l_iter.hasNext()){
 		l_iter.next();
 		if(l_iter.fileName().startsWith("raid")){
@@ -46,9 +44,8 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 	p_raidLevel="";	
 }
 int TBtrfsInfo::readInfo(TAlias *p_alias)
-{	
-	QDir l_dir("/sys/fs/btrfs");
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+{		
+	QDirIterator l_iter("/sys/fs/btrfs",QDirIterator::NoIteratorFlags);
 	QString l_fileName;
 	QString l_deviceLevel;
 	TBtrfsItem *l_info;
