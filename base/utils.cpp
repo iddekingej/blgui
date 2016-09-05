@@ -71,6 +71,14 @@ void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind)
 	p_size=l_size;
 }
 
+QString getReadableSize(TDiskSize p_value)
+{
+    TDiskSize l_size;
+    char l_ind;
+    getReadableSize(p_value,l_size,l_ind);
+    return QString::number(l_size)+l_ind;
+}
+
 
 //Compare is paths are same, ignoring end slashes
 QString normelizePath(QString p_path)

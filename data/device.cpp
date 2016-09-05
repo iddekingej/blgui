@@ -35,9 +35,11 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< (removable?"X":"")
 		<< loopbackFile
 		<<  getSlavesString()
-		<<  (!hasPartitions() && getMountText().length()>0?QString::number(getFree()):"")
+		<<  (getHasFree()?QString::number(getFree()):QStringLiteral(""))
 		<< getScsiBus()
-		<< getIScsiAddress();
+		<< getIScsiAddress()
+		<< getReadableFreeSize();
+
 }
 
 bool TDevice::hasPartitions()

@@ -18,5 +18,6 @@ const  char *g_deviceFields[]={
 ,	I18N_NOOP("scsi bus")
 ,	I18N_NOOP("iscsi host")
 ,	I18N_NOOP("Start(bytes)")
+,	I18N_NOOP("Free space (KMG)")
 };
 const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);

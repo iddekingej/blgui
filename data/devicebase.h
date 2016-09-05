@@ -16,6 +16,7 @@ private:
 	QString label;
 	TDiskSize size=0;
 	TDiskSize free=0;
+	bool hasFree=false;
 	TLinkList<TMount > mounts;
 	TLinkList<TDeviceAlias> deviceAlias;
 	QList<TDeviceBase *>    slaves;
@@ -41,6 +42,7 @@ public:
 	}
 	
 	QString getReadableSize();
+	QString getReadableFreeSize();
 	
 	inline QString getName()
 	{
@@ -64,8 +66,12 @@ public:
 		type=p_type;
 	}
 	
-	inline void setFree(TDiskSize p_free){ free=p_free;}
+	inline void setFree(TDiskSize p_free,bool p_hasFree){ 
+	    free=p_free;
+	    hasFree=p_hasFree;
+	}
 	inline TDiskSize getFree(){ return free;}
+	inline bool getHasFree(){ return hasFree;}
 	
 	inline QString  getDevPath()
 	{

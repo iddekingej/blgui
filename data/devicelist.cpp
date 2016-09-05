@@ -153,10 +153,10 @@ void TDeviceList::readFreeSpace()
 		l_device=l_iter.next().value();
 		if(l_device->isMounted()){
 			struct statvfs l_info;
-			//statvfs need some file at device. Using top directory (/.) of first mount point
+			//statvfs needs some file at device. Using top directory (/.) of first mount point
 			l_somePath=l_device->getMounts()->getStart()->getItem()->getMountPoint()+"/.";
 			if((statvfs(l_somePath.toUtf8().data(),&l_info))==0){
-				l_device->setFree(l_info.f_bsize*l_info.f_bfree);				
+				l_device->setFree(l_info.f_bsize*l_info.f_bfree,true);				
 			} 
 		}
 		

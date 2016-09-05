@@ -1,13 +1,22 @@
 #include "devicebase.h"
 #include "mount.h"
 #include <QListIterator>
+
+//Get disk size in easy to read size like 10k 10M 100G
 QString TDeviceBase::getReadableSize()
 {
-	TDiskSize l_size;
-	char l_ind;
-	::getReadableSize(getSize(),l_size,l_ind);
-	return QString::number(l_size)+l_ind;
+    return ::getReadableSize(getSize());
 }
+
+//Get freedisk size in easy to read size like 10k 10M 100G
+QString TDeviceBase::getReadableFreeSize()
+{
+    if(getHasFree()){
+	return ::getReadableSize(getFree());
+    }
+    return "";
+}
+
 
 TDeviceBase::TDeviceBase(const QString &p_name, TDiskSize p_size)
 {

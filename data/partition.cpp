@@ -26,10 +26,11 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<""
 		<<""
 		<<getSlavesString()
-		<< QString::number(getFree())
+		<< (getHasFree()?QString::number(getFree()):QStringLiteral(""))
 		<<""
 		<<""
-		<<QString::number(start);
+		<<QString::number(start)
+		<<getReadableFreeSize();
 ;
 }
 
