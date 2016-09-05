@@ -212,11 +212,43 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	}
 }
 
+
+void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
+{
+	p_list.clear();
+	if(devModel != nullptr){
+		QModelIndex l_index;		
+		for(int l_row=0;l_row<devModel->rowCount();l_row++){
+			l_index=devModel->index(l_row,0);
+			if(ui.diskList->isExpanded(l_index)){
+				p_list += l_index.data().toString();
+			}
+		}
+	}
+}
+
+void TMainWindow::setExpandedDevRows(QSet< QString >& p_list)
+{
+	QModelIndex l_index;
+	
+	for(int l_row=0;l_row<devModel->rowCount();l_row++){
+		l_index=devModel->index(l_row,0);
+		printf("Try %s \n",l_index.data().toString().toUtf8().data());
+		if(p_list.contains(l_index.data().toString())){
+			ui.diskList->setExpanded(l_index,true);
+		}
+	}
+}
+
+//Fill devices tab as a tree
 void TMainWindow::fillDeviceTree()
 {
     	QStringList l_deviceRow;
 	QStandardItem *l_parent;
     	QStandardItemModel *l_model=new QStandardItemModel(0,1,this);	
+    	QSet<QString> l_expanded;
+	
+	getExpandedDevRows(l_expanded);
 	devModel=l_model;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Name")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Partition")));
@@ -247,9 +279,7 @@ void TMainWindow::fillDeviceTree()
 	}
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
-	
-	//ui.diskList->resizeRowsToContents();
-	//ui.diskList->resizeColumnsToContents();	
+	setExpandedDevRows(l_expanded);
 }
 
 //Fill Device tab in main main window 
