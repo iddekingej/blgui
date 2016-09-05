@@ -71,3 +71,10 @@ void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind)
 	p_size=l_size;
 }
 
+
+//Compare is paths are same, ignoring end slashes
+QString normelizePath(QString p_path)
+{
+    
+    return p_path+(!p_path.endsWith("/")?"/":"");
+}

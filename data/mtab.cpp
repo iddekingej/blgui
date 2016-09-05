@@ -2,6 +2,7 @@
 #include <QString>
 #include <QFile>
 #include <QTextStream>
+#include "base/utils.h"
 
 TMTabEntry::TMTabEntry(const QString &p_device,TDeviceBase *p_realDevice,const QString &p_mountPoint,const QString &p_type,const QString &p_options)
 {
@@ -105,7 +106,7 @@ bool TMTab::processLine(const QString& p_line)
 	} else {
 		l_realDevice=devList->findDeviceByDevPath(l_device);
 	}
-	entries.append(new TMTabEntry(l_device,l_realDevice,l_items[1],l_items[2].toLower(),l_items[3]));
+	entries.append(new TMTabEntry(l_device,l_realDevice,normelizePath(l_items[1]),l_items[2].toLower(),l_items[3]));
 	
 	return true;
 }

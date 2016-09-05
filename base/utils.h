@@ -16,4 +16,7 @@ bool readString(QString p_path,QString p_name,QString &p_return);
 //convert size to readable format 1024=>1K
 void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind);
 
+//Compare is paths are same, ignoring end slashes
+QString normelizePath(QString p_path);
+
 #endif
