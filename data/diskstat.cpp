@@ -10,19 +10,17 @@ TDiskStat::TDiskStat(QString p_device,QString p_line)
 	device=p_device;
 	if(l_data.length() == 11){
 		readIO=l_data[0].toULong() ;
-		readIO=l_data[1].toULong();
-		readMerges=l_data[2].toULong();
-		readSectors=l_data[3].toULong();
-		readTicks=l_data[4].toULong();
-		writeIO=l_data[5].toULong();
-		writeMerges=l_data[6].toULong();
-		writeSectors=l_data[7].toULong();
-		writeTicks=l_data[8].toULong();
-		inFlight=l_data[9].toULong();
-		ioTicks=l_data[10].toULong();
-		//timeInQueue=l_data[11].toULong();
-	} else {
-		readIO=9;
+		readMerges=l_data[1].toULong();
+		readSectors=l_data[2].toULong();
+		readTicks=l_data[3].toULong();
+		writeIO=l_data[4].toULong();
+		writeMerges=l_data[5].toULong();
+		writeSectors=l_data[6].toULong();
+		writeTicks=l_data[7].toULong();
+		inFlight=l_data[8].toULong();
+		ioTicks=l_data[9].toULong();
+		timeInQueue=l_data[10].toULong();
+	} else {		
 		readIO=0;
 		readMerges=0;
 		readSectors=0;
