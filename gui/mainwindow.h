@@ -10,6 +10,7 @@
 #include "data/udevmonitor.h"
 #include "data/changemanager.h"
 #include "base/config.h"
+#include "data/diskstat.h"
 extern QApplication *g_app;
 
 class TMainWindow: public QMainWindow
@@ -35,6 +36,7 @@ private:
 	TChangeManager  changeManager;
 	QWidget *tabs[4];
 	QWidget *tabsVisible[4];
+	TDiskStatList *prvStats=nullptr;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);
@@ -48,6 +50,7 @@ private:
 	void fillRaid();
 	void fillMtab();
 	void fillIscsi();
+	void fillStats();
 	void setVisibleTabs();
 	
 protected:

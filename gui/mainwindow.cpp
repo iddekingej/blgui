@@ -23,7 +23,7 @@
 #include "data/iscsi.h"
 #include <QStyledItemDelegate>
 #include <QPainter>
-
+#include "data/diskstat.h"
 
 QApplication *g_app;
 
@@ -61,6 +61,7 @@ void TMainWindow::refresh()
 	fillRaid();	
 	fillMtab();
 	fillIscsi();
+	fillStats();
 }
 
 void TMainWindow::fillIscsi()
@@ -160,7 +161,40 @@ void TMainWindow::fillRaid()
 	ui.raidList->resizeColumnsToContents();
 }
 
-
+void TMainWindow::fillStats()
+{
+	int l_cnt=0;
+	QStandardItemModel *l_model=new QStandardItemModel(info->getRaidList()->getLength(),4,this);
+	TDiskStatList *l_info=new TDiskStatList();
+	l_info->readInfo();
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Read(sectors)")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Read(div)")));
+	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Write(sectors)")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Write(div)")));
+	TLinkListIterator<TDiskStat> l_iter(l_info->getList());
+	TDiskStat *l_item;
+	TDiskStat *l_prv;
+	while(l_iter.hasNext()){
+		l_item=l_iter.next();
+		l_prv=nullptr;
+		if(prvStats != nullptr){
+			l_prv=prvStats->getByName(l_item->getDevice());
+		}
+		l_model->setItem(l_cnt,0,new QStandardItem(l_item->getDevice()));
+		l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_item->getReadSectors())));
+		l_model->setItem(l_cnt,2,new QStandardItem(QString::number(l_prv!=nullptr?l_item->getReadSectors()-l_prv->getReadSectors():0)));		
+		l_model->setItem(l_cnt,3,new QStandardItem(QString::number(l_item->getWriteSectors())));
+		l_model->setItem(l_cnt,4,new QStandardItem(QString::number(l_prv != nullptr?l_item->getWriteSectors()-l_prv->getWriteSectors():0)));
+		l_cnt++;
+	}
+	ui.stats->setModel(l_model);
+	ui.stats->resizeRowsToContents();
+	ui.stats->resizeColumnsToContents();
+	if(prvStats!=nullptr) delete prvStats;
+	prvStats=l_info;
+	
+}
 
 
 
@@ -212,7 +246,9 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	}
 }
 
-
+//Collect all expanded tree items. This callled before a refresh
+//After refresh all tree items are restored with setExpandedDevRows
+//p_list ->  device names which are expanded
 void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
 {
 	p_list.clear();
@@ -227,13 +263,13 @@ void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
 	}
 }
 
+//expand all nodes for devices in set p_lists
 void TMainWindow::setExpandedDevRows(QSet< QString >& p_list)
 {
 	QModelIndex l_index;
 	
 	for(int l_row=0;l_row<devModel->rowCount();l_row++){
 		l_index=devModel->index(l_row,0);
-		printf("Try %s \n",l_index.data().toString().toUtf8().data());
 		if(p_list.contains(l_index.data().toString())){
 			ui.diskList->setExpanded(l_index,true);
 		}
@@ -505,7 +541,7 @@ void TMainWindow::timeOutCheckChange()
 {
 	QString l_what;
 
-	
+	fillStats();
 	if(refreshNext){
 		if(ui.autoRefresh->isChecked()){
 			refresh();
@@ -531,6 +567,7 @@ TMainWindow::~TMainWindow()
 {
 	if(info)delete info;
 	if(devModel) delete devModel;
+	if(prvStats != nullptr) delete prvStats;
 }
 
 void TMainWindow::showAbout()

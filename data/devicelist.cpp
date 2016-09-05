@@ -60,7 +60,6 @@ void TDeviceList::readDevices()
 				l_model="";
 				l_loopFile="";
 			}
-
 			l_device=new TDevice(l_deviceName,l_model,l_size);
 			l_device->setReadonly(l_readonly==1);
 			l_device->setRemovable(l_removable==1);
