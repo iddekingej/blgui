@@ -6,9 +6,10 @@ ABOUT
 =======
 Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
-Os       : Linux
+Os       : Linux/KDE5 or KDE4
 License  : Gpl
 Version  : 0.6
+
 
 
 BUILDING
@@ -20,21 +21,6 @@ extra-cmake-modules
 cmake and c++ 
 Gettext
 
-
-KF5 (kde) +Develop packages:
-=========================
-libKF5ConfigCore
-libKF5CoreAddons
-libKF5I18n
-
-QT5 + Develop packages
-=======================
-libQt5Core
-libQt5Core
-libQt5Core
-libQt5Gui
-libQt5Widgets
-
 Blkid+ Development packages
 ==========================
 libblkid
@@ -43,10 +29,45 @@ Libudev + development packages
 ==============================
 libudev.so.1
 
+KDE4:
+
+	LibQt
+	===================
+	libQtNetwork.so.4
+	libQtXml.so.4
+	libQtDBus.so.4
+	libQtGui.so.4
+	libQtSvg.so.4
+	libQtCore.so.4
+	When Building KDE5:
+
+	LibKDE
+	===================
+	libkdeui.so.5
+	libkdecore.so.5
+
+KDE5:
+	KF5
+	=========================
+	libKF5ConfigCore
+	libKF5CoreAddons
+	libKF5I18n
+
+	QT5 + Develop packages
+	=======================
+	libQt5Core
+	libQt5Core
+	libQt5Core
+	libQt5Gui
+	libQt5Widgets
+
+
 Building the exec_program:
 * mkdir build
 * cd build
-* cmake ..
+* Configuration
+	For KDE5: cmake .. 
+	For KDE4: cmake -Dkde=4 ..
 * make
 * make install
 
@@ -94,6 +115,7 @@ Raid:
 	
 *fstab
 *iscsi
+*Statistics
 
 File system type is determined with information under /sys/fs and from /proc/mounts and as fallback libblkid
 Libblkid can only get information from the block devices when this program is run as root, under normal user libblkid uses cashed 
