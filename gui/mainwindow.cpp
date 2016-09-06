@@ -398,6 +398,7 @@ void TMainWindow::fillDevice()
 }
 
 void TMainWindow::showFieldChooser(){
+	printf("xxx/n");
 	TFieldsConfig l_field;	
 	l_field.exec();
 	refresh();
@@ -456,8 +457,8 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	refresh();
 	
-	connect(ui.actionQuit,SIGNAL(triggerd()),g_app,SLOT(quit()));
-	connect(ui.actionFields,SIGNAL(triggerd()), this,SLOT(showFieldChooser()));
+	connect(ui.actionQuit,SIGNAL(triggered()),g_app,SLOT(quit()));
+	connect(ui.actionFields,SIGNAL(triggered()), this,SLOT(showFieldChooser()));
 	connect(ui.refreshButton,SIGNAL(pressed()),this,SLOT(refresh())); 
 	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
@@ -562,7 +563,6 @@ void TMainWindow::timeOutCheckChange()
 	}
 		
 }
-
 
 TMainWindow::~TMainWindow()
 {

@@ -13,4 +13,7 @@ operator <<(QStringList &p_list,const QString &p_string)
 }
 #endif
 
+
+
+
 #endif
