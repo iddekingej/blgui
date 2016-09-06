@@ -1,5 +1,6 @@
 #include "config.h"
 #include "globals.h"
+#include "base/compat.h"
 
 TConfig::TConfig()
 {

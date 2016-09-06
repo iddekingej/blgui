@@ -4,7 +4,7 @@
 #include "gui/formdevinfo.h"
 #include <QString>
 #include <QStandardItemModel>
-
+#include <klocalizedstring.h>
 void TFormParInfo::gotoDevice()
 {
 	TFormDevInfo l_info(deviceList, (TDevice*)partition->getDevice());
@@ -54,3 +54,5 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 	}
 
 }
+
+TFormParInfo::~TFormParInfo(){}

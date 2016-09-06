@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QIODevice>
+#include "base/compat.h"
 
 //Used for reading files in /sys/block
 //Read file containing ulong (like /sys/block/sda/size)

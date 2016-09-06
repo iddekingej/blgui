@@ -1,6 +1,7 @@
 #include <QString>
 #include "devicebase.h"
 #include "partition.h"
+#include "base/compat.h"
 
 TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size,TDiskSize p_start)
 :TDeviceBase(p_name,p_size)

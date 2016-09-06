@@ -9,7 +9,7 @@
 #include "fieldconfig.h"
 #include "base/globals.h"
 #include "base/config.h"
-
+#include <klocalizedstring.h>
 // Save configuration after pressing "Ok" button
 
 void TFieldsConfig::save()

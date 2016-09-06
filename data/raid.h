@@ -7,6 +7,7 @@
 #include "btrfs.h"
 #include "device.h"
 #include "devicelist.h"
+#include "base/compat.h"
 
 class TRaidDevice
 {

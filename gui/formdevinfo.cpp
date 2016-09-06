@@ -13,7 +13,7 @@
 #include "data/mount.h"
 #include "data/devicealias.h"
 #include "gui/formparinfo.h"
-
+#include <klocalizedstring.h>
 //if device selection changes
 void TFormDevInfo::deviceSelected(int p_index)
 {	

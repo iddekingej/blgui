@@ -2,6 +2,7 @@
 #include <QString>
 #include <QFile>
 #include <QTextStream>
+#include <QStringList>
 #include "base/utils.h"
 
 TMTabEntry::TMTabEntry(const QString &p_device,TDeviceBase *p_realDevice,const QString &p_mountPoint,const QString &p_type,const QString &p_options)
@@ -121,7 +122,8 @@ void TMTab::processInfo()
 	QTextStream l_stream(&l_file);
 	QString l_line;
 	while(true){
-		if(!l_stream.readLineInto(&l_line)) break;	
+		l_line=l_stream.readLine();
+		if(l_line.isNull()) break;		
 		if(l_line.length()>0){
 			if(l_line.at(0)=='#')continue;
 			processLine(l_line);

@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <QTextStream>
 #include <errno.h>
+#include "base/compat.h"
 
 const char* MOUNTS_PATH="/proc/mounts";
 //List of devices and retrives information about the device

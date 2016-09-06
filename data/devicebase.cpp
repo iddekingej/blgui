@@ -1,7 +1,7 @@
 #include "devicebase.h"
 #include "mount.h"
 #include <QListIterator>
-
+#include "base/compat.h"
 //Get disk size in easy to read size like 10k 10M 100G
 QString TDeviceBase::getReadableSize()
 {

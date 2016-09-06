@@ -3,6 +3,9 @@
 #include <QString>
 
 #define PAR_UNUSED __attribute__((unused))
+
+
+
 typedef unsigned long TDiskSize;
 
 //Used for reading files in /sys/block
@@ -19,5 +22,7 @@ QString getReadableSize(TDiskSize p_value);
 
 //Compare is paths are same, ignoring end slashes
 QString normelizePath(QString p_path);
+
+
 
 #endif

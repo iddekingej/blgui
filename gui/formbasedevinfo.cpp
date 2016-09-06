@@ -43,3 +43,9 @@ void TFormBaseDevInfo::fillAliases(QTableView *p_view,QLabel *p_noAlias,TDeviceB
 	}
 	
 }
+
+TFormBaseDevInfo::~TFormBaseDevInfo()
+{
+
+}
+

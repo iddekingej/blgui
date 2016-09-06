@@ -1,6 +1,8 @@
 #include <QCoreApplication>
 #include <QApplication>
+#ifdef KDE5
 #include <QCommandLineParser>
+#endif
 #include "gui/mainwindow.h"
 #include <klocalizedstring.h>
 #include <kaboutdata.h>
@@ -14,6 +16,8 @@
 int main(int argc, char **argv) {
 	
 	g_app=new QApplication(argc,argv);
+//TODO to KDE4
+#ifdef KDE5
 	KLocalizedString::setApplicationDomain("bdgui");
 	KAboutData l_aboutData(
 			"bdgui"
@@ -34,6 +38,7 @@ int main(int argc, char **argv) {
 	l_aboutData.setupCommandLine(&l_parser);
 	l_parser.process(*g_app);
 	l_aboutData.processCommandLine(&l_parser);		
+#endif
 	g_config.setup();
 	TMainWindow *l_main=new TMainWindow();
 	l_main->show();

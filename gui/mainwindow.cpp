@@ -24,6 +24,7 @@
 #include <QStyledItemDelegate>
 #include <QPainter>
 #include "data/diskstat.h"
+#include <klocalizedstring.h>
 
 QApplication *g_app;
 
@@ -455,13 +456,13 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	refresh();
 	
-	connect(ui.actionQuit,&QAction::triggered,g_app,QApplication::quit);
-	connect(ui.actionFields,&QAction::triggered, this,&TMainWindow::showFieldChooser);
+	connect(ui.actionQuit,SIGNAL(triggerd()),g_app,SLOT(quit()));
+	connect(ui.actionFields,SIGNAL(triggerd()), this,SLOT(showFieldChooser()));
 	connect(ui.refreshButton,SIGNAL(pressed()),this,SLOT(refresh())); 
 	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
-	connect(ui.actionAbout,&QAction::triggered,this,&TMainWindow::showAbout);	
-	connect(ui.visibleTabs,&QAction::triggered,this,&TMainWindow::visibleTabs);
+	connect(ui.actionAbout,SIGNAL(triggered()),this,SLOT(showAbout()));	
+	connect(ui.visibleTabs,SIGNAL(triggered()),this,SLOT(visibleTabs()));
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
 	

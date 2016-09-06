@@ -51,14 +51,14 @@ private:
 	void fillMtab();
 	void fillIscsi();
 	void fillStats();
-	void setVisibleTabs();
+	virtual void setVisibleTabs();
 	
 protected:
 	void resizeEvent(QResizeEvent *p_event);
 public:
 
 	TMainWindow(QWidget *p_parent=NULL);
-	~TMainWindow();
+	virtual ~TMainWindow();
 
 };
 #endif

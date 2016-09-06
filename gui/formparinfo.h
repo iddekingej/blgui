@@ -13,9 +13,9 @@ private:
 	TDeviceList *deviceList;
 	TPartition  *partition;
 	Ui::parinfo ui;
-	void fillMount(TPartition *p_partition);
+	virtual void fillMount(TPartition *p_partition);
 public:
 	TFormParInfo(TDeviceList *p_list, TPartition *p_partition);
-	
+	virtual ~TFormParInfo();
 };
 #endif
