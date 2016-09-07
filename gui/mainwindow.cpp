@@ -473,10 +473,12 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabs[1]=ui.tabRaid;
 	tabs[2]=ui.tabFstab;
 	tabs[3]=ui.tabIscsi;
+	tabs[4]=ui.tabStats;
 	tabsVisible[0]=nullptr;
 	tabsVisible[1]=nullptr;
 	tabsVisible[2]=nullptr;
 	tabsVisible[3]=nullptr;
+	tabsVisible[4]=nullptr;
 	setVisibleTabs();
 
 }
@@ -515,8 +517,7 @@ void TMainWindow::setVisibleTabs(){
 	setTabVisible(1,g_config.getRaidTab(),i18n("Raid"));
 	setTabVisible(2,g_config.getFsTabTab(),i18n("Fstab"));
 	setTabVisible(3,g_config.getIscsiTab(),i18n("Iscsi"));
-
-
+	setTabVisible(4,g_config.getStatsTab(),i18n("Stats"));
 }
 
 //Display "Visible tab" dialog when menu option is l_selected

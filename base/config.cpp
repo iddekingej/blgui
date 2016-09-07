@@ -94,6 +94,17 @@ void TConfig::setIscsiTab(bool p_flag){
 	configGui.writeEntry(QStringLiteral("iscsiTab"),p_flag);
 }
 
+bool TConfig::getStatsTab()
+{
+	return configGui.readEntry(QStringLiteral("statsTab"),true);
+}
+
+
+void TConfig::setStatsTab(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("statsTab"),p_flag);
+}
+
 bool TConfig::getDeviceAsTree()
 {
 	return configGui.readEntry(QStringLiteral("devicetree"),true);

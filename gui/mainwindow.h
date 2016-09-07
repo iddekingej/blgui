@@ -34,8 +34,8 @@ private:
 	QTimer checkChange;
 	
 	TChangeManager  changeManager;
-	QWidget *tabs[4];
-	QWidget *tabsVisible[4];
+	QWidget *tabs[5];
+	QWidget *tabsVisible[5];
 	TDiskStatList *prvStats=nullptr;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);

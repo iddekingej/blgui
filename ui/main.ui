@@ -256,7 +256,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tab">
+        <widget class="QWidget" name="tabStats">
          <attribute name="title">
           <string>Stats</string>
          </attribute>
