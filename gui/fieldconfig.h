@@ -29,6 +29,7 @@ private:
 	void enableRemoveButton();
 	void fillAvailableList();
 	void fillSelectedList();
+	int getFAVisibleRow(int p_index);
 public:
 	TFieldsConfig();
 	~TFieldsConfig();

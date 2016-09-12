@@ -86,17 +86,49 @@ void TFieldsConfig::removeLabel()
 	enableRemoveButton();	
 }
 
+/*
+ * When field is selected in ui.fieldsAvailable and moved to the visible field
+ * The field is hidden in ui.fieldsAvailable and the 'next' field in fieldsAvailable must be selected
+ * Find first nearest visible row in ui.fieldsAvailable relative to index p_index
+ * first look downward and thant up
+ 
+*/
+
+int TFieldsConfig::getFAVisibleRow(int p_index)
+{
+	int l_cnt=p_index+1;
+	while(l_cnt<ui.fieldsAvailable->model()->rowCount()){
+		if(!ui.fieldsAvailable->isRowHidden(l_cnt)) return l_cnt;
+		l_cnt++;
+	}
+	l_cnt=p_index-1;
+	while(l_cnt>=0){
+		if(!ui.fieldsAvailable->isRowHidden(l_cnt)) return l_cnt;
+		l_cnt--;
+	}
+	return -1;
+}
+
 void TFieldsConfig::addLabel()
 {
 	QModelIndexList l_list=ui.fieldsAvailable->selectionModel()->selectedIndexes();
-	QListIterator<QModelIndex> l_iter=QListIterator<QModelIndex>(l_list);
 	QModelIndex l_item;
 	QStandardItem *l_itemSource;
 	QModelIndex     l_newSelection;
 
-	if(l_iter.hasNext()){
-		l_item=l_iter.next();	
+	if(l_list.size()>0){
+		l_item=l_list[0];
+		
 		ui.fieldsAvailable->setRowHidden(l_item.row(),true);
+		int l_row=l_item.row();
+		ui.fieldsAvailable->clearSelection();
+		int l_newIndex=getFAVisibleRow(l_row);
+		if(l_newIndex>=0){
+			l_newSelection=ui.fieldsAvailable->model()->index(l_newIndex,0);
+			if(l_newSelection.isValid()){
+				ui.fieldsAvailable->selectionModel()->select(l_newSelection,QItemSelectionModel::Select);
+			}
+		}
 		l_itemSource=modelAvailable->item(l_item.row());			
 		modelSelected->appendRow(l_itemSource->clone());
 		l_newSelection=modelSelected->index(modelSelected->rowCount()-1,0);
