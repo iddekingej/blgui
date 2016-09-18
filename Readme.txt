@@ -8,7 +8,7 @@ Function : This program list information about all block devices in a nice GUI.
            Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux/KDE5 or KDE4
 License  : Gpl
-Version  : 0.6
+Version  : 0.7
 
 
 
@@ -94,7 +94,7 @@ It support the following type of block devices:
 * BTRFS
 
 
-Devices:
+Disks:
 	* Device name
 	* Partition name
 	* Drive model
@@ -124,27 +124,19 @@ information(if available).
 Other functions:
 * Pressing the "Refresh" button will refresh the information 
 * Auto refresh: on (un)mount/remove medium
-* Settings=>Fields: For configuring the fields shown under the "Disk" tab. (There is no field configuration for the raid and fstab tab yet)
-* Double clicking the row in the "Disk" tab will show more information about the selected device
+* Settings=>Fields: For configuring the fields shown under the "Disks" tab. (There is no field configuration for the raid and fstab tab yet)
+                    And switch between tree and grid view for "Disks" tab
+* Double clicking the row in the "Disks" tab will show more information about the selected device
 
 Changes:
 =======
 
 
-0.6<=0.5
-* Code cleanup
-	- Linklist iterators
-	- Configuration manager
-* Configure which tabs are visible
-* New columns:
-	-Start of partition
-* Device details:
-	-Redone partition tab: Add start of partition
-        -Select different device
-        -Display scsi bus
-        -Display iscsi host
-* Partition details:
-	-Navigate to device.
-* Fix: free size
-* Fix: raid level
-* Fix: few memory leaks
+0.7<=0.6
+* Under disks:Treeview or grid view
+* Compiles under kde4
+* Device statistics
+* Better navigation between partition details and device details
+* Fix: Double clicking field sometimes add field twice
+* Fix: Disable editing grid cells.
+* Fix: Sometimes false "Mounted on different path"

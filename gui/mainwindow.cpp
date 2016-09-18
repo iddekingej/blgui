@@ -316,6 +316,8 @@ void TMainWindow::fillDeviceTree()
 	}
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
+	ui.diskList->setSortingEnabled(true);
+	
 	setExpandedDevRows(l_expanded);
 }
 
@@ -479,6 +481,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabsVisible[2]=nullptr;
 	tabsVisible[3]=nullptr;
 	tabsVisible[4]=nullptr;
+	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
 	setVisibleTabs();
 
 }

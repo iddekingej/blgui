@@ -131,7 +131,7 @@
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="sortingEnabled">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="expandsOnDoubleClick">
                <bool>false</bool>
@@ -278,7 +278,7 @@
      <x>0</x>
      <y>0</y>
      <width>846</width>
-     <height>30</height>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
