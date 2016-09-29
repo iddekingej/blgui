@@ -27,6 +27,9 @@
 #include <klocalizedstring.h>
 #include <QModelIndexList>
 #include "mountdialog.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include <QMessageBox>
 
 QApplication *g_app;
 
@@ -51,6 +54,13 @@ public:
 void TMainWindow::handleMount()
 {	
 	QModelIndexList l_list=ui.diskList->selectionModel()->selectedIndexes();
+	if(getuid()!=0){
+		QMessageBox l_box;
+		l_box.setText(i18n("Only root can mount"));
+		l_box.setStandardButtons(QMessageBox::Ok);		
+		l_box.exec();
+		return;
+	}
 	if(l_list.length()>0){
 		QModelIndex l_index=l_list[0];		
 		QString l_name=l_index.data().toString().toUtf8().data();
