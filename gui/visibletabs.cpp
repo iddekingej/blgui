@@ -1,6 +1,7 @@
 #include "visibletabs.h"
 #include "base/config.h"
 
+
 TVisibleTabs::TVisibleTabs():QDialog()
 {
 	ui.setupUi(this);

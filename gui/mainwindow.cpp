@@ -25,6 +25,8 @@
 #include <QPainter>
 #include "data/diskstat.h"
 #include <klocalizedstring.h>
+#include <QModelIndexList>
+#include "mountdialog.h"
 
 QApplication *g_app;
 
@@ -32,7 +34,7 @@ QApplication *g_app;
 class TGridDelegate : public QStyledItemDelegate
 {
 public:
-    explicit TGridDelegate(QObject* p_parent ) : QStyledItemDelegate(p_parent) { }
+    TGridDelegate(QObject* p_parent ) : QStyledItemDelegate(p_parent) { }
  
     void paint(QPainter* p_painter, const QStyleOptionViewItem& p_option, const QModelIndex& p_index ) const
     {
@@ -45,6 +47,18 @@ public:
     }
 };
 
+
+void TMainWindow::handleMount()
+{	
+	QModelIndexList l_list=ui.diskList->selectionModel()->selectedIndexes();
+	if(l_list.length()>0){
+		QModelIndex l_index=l_list[0];		
+		QString l_name=l_index.data().toString().toUtf8().data();
+		TDeviceBase *l_device=info->getDevices()->getDeviceByName(l_name);
+		TMountDialog l_dialog(l_device);
+		l_dialog.exec();
+	}
+}
 
 void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
 {
@@ -385,9 +399,6 @@ void TMainWindow::fillDeviceGrid()
 
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
-	
-	//ui.diskList->resizeRowsToContents();
-	//ui.diskList->resizeColumnsToContents();	
 }
 
 void TMainWindow::fillDevice()
@@ -466,6 +477,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
 	connect(ui.actionAbout,SIGNAL(triggered()),this,SLOT(showAbout()));	
 	connect(ui.visibleTabs,SIGNAL(triggered()),this,SLOT(visibleTabs()));
+	connect(ui.mountButton,SIGNAL(pressed()),this,SLOT(handleMount()));
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
 	

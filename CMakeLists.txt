@@ -16,6 +16,7 @@ set(bdgui_ui
 	ui/parinfo.ui 
 	ui/about.ui 
 	ui/visibletabs.ui
+	ui/mount.ui
 )
 
 set(bdgui_RESOURCES 
@@ -50,6 +51,7 @@ set(bdgui_SRCS
 	gui/fieldconfig.cpp 	
 	gui/mainwindow.cpp 
 	gui/visibletabs.cpp
+	gui/mountdialog.cpp
 )
 
 find_path(INC_BLKID blkid/blkid.h)

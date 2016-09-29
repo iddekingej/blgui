@@ -26,6 +26,7 @@ private slots:
 	void timeOutCheckChange();
 	void clearChangeMessage();
 	void visibleTabs();
+	void handleMount();
 private:
 	TDeviceInfo        *info;
 	QStandardItemModel *devModel;

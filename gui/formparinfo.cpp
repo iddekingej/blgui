@@ -33,7 +33,7 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 	QStandardItemModel *l_model=new QStandardItemModel(1,1,this);
 	
 	if(!p_partition->isMounted()){
-		ui.mountPoints->setVisible(false);
+		ui.mountPoints->setVisible(false);		
 	} else {
 		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Mountpoint")));
 		l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Fs. type")));
@@ -50,7 +50,8 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 		ui.mountPoints->setModel(l_model);
 		ui.mountPoints->resizeRowsToContents();
 		ui.mountPoints->resizeColumnsToContents();	
-		ui.noMountPointsLabel->setVisible(false);
+		ui.noMountPoints->setVisible(false);
+		
 	}
 
 }
