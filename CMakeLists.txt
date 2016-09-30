@@ -44,6 +44,7 @@ set(bdgui_SRCS
 	data/iscsi.cpp
 	data/udevmonitor.cpp
 	data/diskstat.cpp
+	data/filesystems.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 

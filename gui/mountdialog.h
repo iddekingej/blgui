@@ -9,8 +9,11 @@ class TMountDialog:public QDialog
 {
 	Q_OBJECT
 private slots:
-	void mountDevice();
+	void handleAction();
+	void actionClicked();
 private:
+	void unmountDevice();
+	void mountDevice();
 	Ui::MountDialog ui;
 	TDeviceBase *device;
 public:

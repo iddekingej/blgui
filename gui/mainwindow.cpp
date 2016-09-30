@@ -54,19 +54,33 @@ public:
 void TMainWindow::handleMount()
 {	
 	QModelIndexList l_list=ui.diskList->selectionModel()->selectedIndexes();
+	TDeviceBase *l_device=nullptr;
+	QString l_message="";
 	if(getuid()!=0){
+		l_message=i18n("Only root can mount");
+	}  else if(l_list.length()==0){
+		l_message=i18n("No device selected");
+	} else {
+		QModelIndex l_index=l_list[0];		
+		QString l_name=l_index.data(Qt::UserRole + 1).toString().toUtf8().data();
+		l_device=info->getDevices()->getDeviceByName(l_name);
+		if(l_device==nullptr){
+			l_message=i18n("Device not found");
+		} else if(l_device->hasPartitions()){
+			l_message=i18n("Can't mount device");
+		}
+	}
+	if(l_message.length()>0){
 		QMessageBox l_box;
-		l_box.setText(i18n("Only root can mount"));
+		l_box.setText(l_message);
 		l_box.setStandardButtons(QMessageBox::Ok);		
 		l_box.exec();
 		return;
 	}
-	if(l_list.length()>0){
-		QModelIndex l_index=l_list[0];		
-		QString l_name=l_index.data().toString().toUtf8().data();
-		TDeviceBase *l_device=info->getDevices()->getDeviceByName(l_name);
+	if(l_device !=nullptr){
 		TMountDialog l_dialog(l_device);
 		l_dialog.exec();
+		refresh();
 	}
 }
 

@@ -4,6 +4,10 @@
 
 #define PAR_UNUSED __attribute__((unused))
 
+/** \brief function to easy convert QString to const QString
+ *  \param p_string QString to convert
+ */
+#define qstr(p_string) ((p_string).toUtf8().data())
 
 
 typedef unsigned long TDiskSize;
@@ -22,7 +26,6 @@ QString getReadableSize(TDiskSize p_value);
 
 //Compare is paths are same, ignoring end slashes
 QString normelizePath(QString p_path);
-
 
 
 #endif

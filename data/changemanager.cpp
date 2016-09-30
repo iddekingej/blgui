@@ -42,6 +42,7 @@ void TChangeManager::getChanged(QString &p_what,bool &p_changed)
 		
 			
 		if(l_tab->notInOther(prvMounted,mounted)) p_changed=true;
+		if(prvMounted->notInOther(l_tab,unmounted)) p_changed=true;
 		if(changeMonitor.isSomethingChanged()) p_changed=true;
 		getStringOfSet(mounted,i18n("mounted"),p_what);
 		getStringOfSet(unmounted,i18n("unmounted"),p_what);
