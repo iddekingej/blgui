@@ -39,7 +39,9 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<<  (getHasFree()?QString::number(getFree()):QStringLiteral(""))
 		<< getScsiBus()
 		<< getIScsiAddress()
-		<< getReadableFreeSize();
+		<< ""
+		<< getReadableFreeSize()
+		<< (getRotational()?"X":"");
 
 }
 

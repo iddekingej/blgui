@@ -55,10 +55,8 @@ TMountDialog::TMountDialog(TDeviceBase* p_device)
 			ui.unmountWhat->addItem(l_item->getMountPoint());
 		}
 	}
-	connect(ui.optionChange,SIGNAL(clicked()),this,SLOT(actionClicked()));
 	connect(ui.optionMount,SIGNAL(clicked()),this,SLOT(actionClicked()));
 	connect(ui.optionUnmount,SIGNAL(clicked()),this,SLOT(actionClicked()));
-	connect(ui.optionMove,SIGNAL(clicked()),this,SLOT(actionClicked()));
 	actionClicked();
 }
 
@@ -111,7 +109,7 @@ void TMountDialog::mountDevice()
 		case 2:l_flags |= MS_STRICTATIME;break;
 	}
 	
-	bool l_ret=qmount(device->getDevPath(),ui.mountpoint->text(),ui.fsType->currentText(),l_flags,QStringLiteral(""));
+	bool l_ret=qmount(device->getDevPath(),ui.mountpoint->text(),ui.fsType->currentText(),l_flags,qstr(ui.extraOptions->text()));
 	
 	if(!l_ret){
 		int l_err=errno;

@@ -40,7 +40,7 @@ void TDeviceList::readDevices()
 	TDiskSize    l_size;
 	unsigned long  l_removable;
 	unsigned long  l_readonly;
-	
+	unsigned long  l_rotational;
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_deviceName=l_iter.fileName();
@@ -50,6 +50,7 @@ void TDeviceList::readDevices()
 			l_size=l_size*512;
 			readLong(l_iter.filePath(),"removable",l_removable);
 			readLong(l_iter.filePath(),"ro",l_readonly);
+			readLong(l_iter.filePath(),"queue/rotational",l_rotational);
 			if(l_dir.exists("device")==1){
 				readString(l_iter.filePath(),"device/model",l_model);					
 				readString(l_iter.filePath(),"device/vendor",l_vendor);
@@ -67,6 +68,7 @@ void TDeviceList::readDevices()
 			l_device->setLoopbackFile(l_loopFile);
 			l_device->setScsiBus(l_scsiBus);
 			l_device->setVendor(l_vendor.trimmed());
+			l_device->setRotational(l_rotational==1);
 
 //finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
 //set device scsibus and add device to scsibus index

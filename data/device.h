@@ -15,7 +15,24 @@ private:
 	QString loopbackFile;
 	QString scsiBus;
 	QString iscsiAddress;
+	bool    rotational;
 public:
+	/** \brief  flag is device is rotational (has spinning disk) flags probably means it's a ssd
+	 * 
+	 */
+	inline bool getRotational()
+	{
+		return rotational;
+	}
+	
+	/** \brief set rotational true=>Disk has a spinning disk false it is probably a ssd. read from \sys\block\??\queue\rotational
+	 *  \param p_rotanional  boolean, value of the flag
+	 */
+	
+	inline void setRotational(bool p_rotational)
+	{
+		rotational=p_rotational;
+	}
 	
 	inline const QString &getIScsiAddress(){
 		return iscsiAddress;
