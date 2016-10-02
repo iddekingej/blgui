@@ -4,9 +4,7 @@
 #include <QStringList>
 #include <QString>
 #include "base/linklist.h"
-#include "btrfs.h"
-#include "device.h"
-#include "devicelist.h"
+#include "devicebase.h"
 #include "base/compat.h"
 
 class TRaidDevice
@@ -71,8 +69,7 @@ public:
 	}	
 	
 	TRaidDevice *AddRaidDevice(TDeviceBase *p_device,const QString &p_type,const QString &p_raidLevel);
-	void processMD(TDeviceList *p_list);
-	void processBtrfs(TBtrfsInfo *p_info,TDeviceList *p_list);
+	void addRaid(TDeviceBase *p_device,const QString &p_type,const QString &p_level,QList<TDeviceBase *>p_members);
 }
 ;
 #endif

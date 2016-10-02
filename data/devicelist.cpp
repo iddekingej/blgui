@@ -15,6 +15,7 @@
 #include <errno.h>
 #include "base/compat.h"
 
+
 const char* MOUNTS_PATH="/proc/mounts";
 //List of devices and retrives information about the device
 //Information about the devices are read from the /sys/block /dev/disk /proc/mounts/ proc/swap 

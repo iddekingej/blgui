@@ -22,7 +22,6 @@
 class TDeviceInfo
 {
 private:
-	TBtrfsInfo        *btrfsInfo;
 	TDeviceList       *devices;
 	TAlias            *aliasses;
 	TRaidInfo         *raidList;
@@ -38,10 +37,6 @@ private:
 public:
 	inline TDeviceList *getDevices(){
 		return devices;
-	}
-	
-	inline TBtrfsInfo *getBtrfsInfo(){
-		return btrfsInfo;
 	}
 	
 	QDateTime *getSbTime()

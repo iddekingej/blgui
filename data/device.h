@@ -26,7 +26,7 @@ public:
 	}
 	
 	/** \brief set rotational true=>Disk has a spinning disk false it is probably a ssd. read from \sys\block\??\queue\rotational
-	 *  \param p_rotanional  boolean, value of the flag
+	 *  \param p_rotational  boolean, value of the flag
 	 */
 	
 	inline void setRotational(bool p_rotational)

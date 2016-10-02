@@ -14,6 +14,7 @@
 #include "partition.h"
 #include "mtab.h"
 #include "iscsi.h"
+#include "linuxraid.h"
 
 
 QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
@@ -21,19 +22,15 @@ QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
 	QString l_type;	
 	char *l_value;
 	QString l_devName= p_device->getDevPath();
-	
-
-	if(btrfsInfo->isBtrfs(p_device->getName())){
-		l_type="btrfs";
-	} else{ 				
-		l_value=blkid_get_tag_value(blkidCache,"TYPE",l_devName.toUtf8().data());				
-		if(l_value != NULL){
-			l_type=l_value;
-			free(l_value);
-		} else{
-			l_type="??";
-		}
+		
+	l_value=blkid_get_tag_value(blkidCache,"TYPE",l_devName.toUtf8().data());				
+	if(l_value != NULL){
+		l_type=l_value;
+		free(l_value);
+	} else{
+		l_type="??";
 	}
+
 	return l_type;
 }
 
@@ -54,18 +51,17 @@ void TDeviceInfo::getDisks()
 	 }	
 	aliasses->readInfo();
 	devices->readInfo();
-	btrfsInfo->readInfo(aliasses);
-
 	mtab->processInfo();
 	TMTab *l_mtab2=new TMTab(devices);
 	l_mtab2->setSourceFile("/proc/mounts");
 	l_mtab2->processInfo();
 	l_mtab2->addMountTODevices();
 	delete l_mtab2;
-	raidList->processMD(devices);
-	raidList->processBtrfs(btrfsInfo,devices);	
+	TBtrfsInfo::processInfo(devices,raidList);
+	TLinuxRaid::processInfo(devices,raidList);
 	devices->readFreeSpace();
 	iscsi->processInfo(devices);
+	
 	
 	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
 	while(l_mi.hasNext()){
@@ -90,8 +86,7 @@ void TDeviceInfo::getDisks()
 
 TDeviceInfo::TDeviceInfo()
 {	
-	btrfsInfo=new TBtrfsInfo();
-	
+
 	aliasses = new TAlias();
 	devices  = new TDeviceList(aliasses);
 	raidList = new TRaidInfo();
@@ -99,7 +94,6 @@ TDeviceInfo::TDeviceInfo()
 	iscsi    = new TIScsiSessionList();
 }
 TDeviceInfo::~TDeviceInfo(){
-	delete btrfsInfo;
 	delete devices;
 	delete aliasses;
 	delete raidList;

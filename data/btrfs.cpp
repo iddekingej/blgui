@@ -3,34 +3,14 @@
 #include <QSet>
 #include <QString>
 #include "btrfs.h"
+#include "devicelist.h"
+#include "raid.h"
 
 
-void TBtrfsItem::appendDevice(const QString &p_device)
-{
-	devices.append(p_device);
-}
-
-
-TBtrfsItem::TBtrfsItem(const QString &p_fs,const QString &p_raidLevel)
-{
-	fs=p_fs;
-	raidLevel=p_raidLevel;
-}
-
-int TBtrfsInfo::readDevices(QString p_path,TBtrfsItem *p_info)
-{	
-	QDirIterator l_iter(p_path+"/devices/",QDirIterator::NoIteratorFlags);
-	while(l_iter.hasNext()){
-		l_iter.next();
-		if(l_iter.fileInfo().isSymLink()){
-			p_info->appendDevice(l_iter.fileName());
-			btrfsDevices << l_iter.fileName();
-
-		}
-	}
-	return 0;
-}
-
+/**Get raid level
+ * \param p_path  path to /sys/fs/btrf entry for raid device
+ * \param p_raidLevel  raid level is returned (directory name in /sys/fs/bfrfs/xxx/allocation/system sarting with 'raid')
+ */
 void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 {		
 	QDirIterator l_iter(p_path+"/allocation/system/",QDirIterator::NoIteratorFlags);
@@ -43,39 +23,41 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 	}
 	p_raidLevel="";	
 }
-int TBtrfsInfo::readInfo(TAlias *p_alias)
-{		
-	QDirIterator l_iter("/sys/fs/btrfs",QDirIterator::NoIteratorFlags);
+
+/** parses btrfs info (under /sys/fs/btrfs).
+ *  The fs type, mount points are copied to all raid members and raid information is set
+ * 
+ * \param p_list   Devicelist used to convert device name to device objects
+ * \param p_raid   Entries with multiple btrfs devices are added to the raid list.
+ */
+
+void TBtrfsInfo::processInfo(TDeviceList *p_list,TRaidInfo *p_raid)
+{
+	QDirIterator l_iter("/sys/fs/btrfs/",QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	QString l_fileName;
-	QString l_deviceLevel;
-	TBtrfsItem *l_info;
-	while(l_iter.hasNext()){
+	while(l_iter.hasNext())
+	{
 		l_iter.next();
 		l_fileName=l_iter.fileName();
 		if(l_iter.fileInfo().isDir() && (l_fileName != "features") && (l_fileName != ".") && (l_fileName != "..")){
-			getRaidLevel(l_iter.filePath(),l_deviceLevel);
-			l_info=new TBtrfsItem( p_alias->getDeviceNameFromAliasPath("/dev/disk/by-uuid/"+l_fileName),l_deviceLevel);
-			readDevices(l_iter.filePath(), l_info);
-			btrfsDeviceList.append(l_info);
+			printf("%s \n",qstr(l_iter.fileInfo().filePath()));
+			QDirIterator l_deviceIter(l_iter.fileInfo().filePath()+"/devices/",QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+			QList<TDeviceBase *> l_btrfsMembers;
+			while(l_deviceIter.hasNext()){
+				l_deviceIter.next();
+				TDeviceBase *l_device=p_list->getDeviceByName(l_deviceIter.fileName());
+				if(l_device!=nullptr){
+					l_btrfsMembers.append(l_device);
+					l_device->setType("btrfs");
+				}
+			}
+			if(l_btrfsMembers.length()>1){
+				p_list->sameMountPoint(l_btrfsMembers);
+				QString l_raidLevel="";
+				getRaidLevel(l_iter.fileInfo().filePath(),l_raidLevel);
+				p_raid->addRaid(l_btrfsMembers[0],"btrfs",l_raidLevel,l_btrfsMembers);
+			}
 		}
-		
 	}
-	return 0;
-}
-
-int TBtrfsInfo::getNumberMultiDevices()
-{
-		TLinkListIterator<TBtrfsItem> l_iter(&btrfsDeviceList);
-		
-		int l_return=0;
-		while(l_iter.hasNext()){
-			if(l_iter.next()->isMultiDev()) l_return++;
-		}
-		return l_return;		
-}
-
-bool TBtrfsInfo::isBtrfs(const QString &p_name)
-{
-	return btrfsDevices.contains(p_name);
 }
 
