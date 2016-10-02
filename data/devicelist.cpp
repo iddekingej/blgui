@@ -110,14 +110,13 @@ void TDeviceList::readSwap()
 	TDeviceBase *l_device;
 	l_line=l_stream.readLine();
 	while(true){		
-		if(l_stream.atEnd()) break;
 		l_line=l_stream.readLine();
+		if(l_line==nullptr) break;
 		l_dev=l_line.left(l_line.indexOf(' '));
 		l_device=findDeviceByDevPath(l_dev);
 		if(l_device){
 			l_device->setType("swap");
 		}		
-		if(l_stream.atEnd()) break;
 	}
 }
 
