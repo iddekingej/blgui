@@ -132,7 +132,15 @@ void TMTab::processInfo()
 	}
 
 }
-
+void TMTab::copyFileType()
+{
+	TMTabEntry *l_entry;
+	TLinkListIterator<TMTabEntry> l_iter(&entries);
+	while(l_iter.hasNext()){
+		l_entry=l_iter.next();	
+		if(l_entry->getRealDevice()!=nullptr)l_entry->getRealDevice()->setType(l_entry->getType());
+	}
+}
 //Add mount to the TDeviceBase mount list
 void TMTab::addMountTODevices()
 {	
