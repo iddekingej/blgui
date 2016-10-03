@@ -15,7 +15,7 @@
 #include "mtab.h"
 #include "iscsi.h"
 #include "linuxraid.h"
-
+#include "base/utils.h"
 
 QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
 {
@@ -23,7 +23,7 @@ QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
 	char *l_value;
 	QString l_devName= p_device->getDevPath();
 		
-	l_value=blkid_get_tag_value(blkidCache,"TYPE",l_devName.toUtf8().data());				
+	l_value=blkid_get_tag_value(blkidCache,"TYPE",qstr(l_devName));				
 	if(l_value != NULL){
 		l_type=l_value;
 		free(l_value);
@@ -76,7 +76,7 @@ void TDeviceInfo::getDisks()
 		}
 		if(l_db->getLabel().length()==0){
 			l_devicePath=l_db->getDevPath();
-			l_label=blkid_get_tag_value(blkidCache,"PARTLABEL",l_devicePath.toUtf8().data());
+			l_label=blkid_get_tag_value(blkidCache,"PARTLABEL",qstr(l_devicePath));
 			l_partLabel=l_label;
 			free(l_label);
 			l_db->setLabel(l_partLabel);

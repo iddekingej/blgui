@@ -57,7 +57,7 @@ void TIScsiSessionList::processInfo(TDeviceList* p_list)
 	QString l_conPath;	
 	QStringList l_list;
 	l_list.append("session*");
-	QDirIterator l_si(QString("/sys/class/iscsi_session"),l_list);
+	QDirIterator l_si(QStringLiteral("/sys/class/iscsi_session"),l_list);
 	QString l_address;
 	QString l_port;
 	QString l_target;

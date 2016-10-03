@@ -62,7 +62,7 @@ void TMainWindow::handleMount()
 		l_message=i18n("No device selected");
 	} else {
 		QModelIndex l_index=l_list[0];		
-		QString l_name=l_index.data(Qt::UserRole + 1).toString().toUtf8().data();
+		QString l_name=l_index.data(Qt::UserRole + 1).toString();
 		l_device=info->getDevices()->getDeviceByName(l_name);
 		if(l_device==nullptr){
 			l_message=i18n("Device not found");
@@ -449,8 +449,6 @@ void TMainWindow::readConfiguation()
 
 void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 {
-	printf("Clicked\n");
-
 	if(devModel != nullptr){
 		QString l_name;
 		TDeviceBase *l_deviceBase;
@@ -553,7 +551,7 @@ void TMainWindow::setTabVisible(int p_indx,bool p_flag,const QString &p_label)
 
 void TMainWindow::setVisibleTabs(){
 	setTabVisible(0,g_config.getDisksTab(),i18n("Disks"));
-	setTabVisible(1,g_config.getRaidTab(),i18n("Raid"));
+	setTabVisible(1,g_config.getRaidTab() ,i18n("Raid"));
 	setTabVisible(2,g_config.getFsTabTab(),i18n("Fstab"));
 	setTabVisible(3,g_config.getIscsiTab(),i18n("Iscsi"));
 	setTabVisible(4,g_config.getStatsTab(),i18n("Stats"));
@@ -572,7 +570,7 @@ void TMainWindow::visibleTabs()
 //Clear "change message" (Mounts/Unmounts/new device/remove etc..)
 void TMainWindow::clearChangeMessage()
 {
-	ui.arInfo->setText("");
+	ui.arInfo->setText(QStringLiteral(""));
 	ui.deleteChangeMessage->setVisible(false);
 	changeManager.clear();
 }
