@@ -15,15 +15,15 @@ void TAlias::processAlias(const QString &p_file)
 	QStringList l_paths;	
 	bool l_linked=false;
 	while(true){			
-			if(aliasses.contains(l_currentFile)){
-				l_currentFile=aliasses.value(l_currentFile);
-				break;
-			}
-			l_target=QFile::symLinkTarget(l_currentFile);
-			if(l_target=="") break;
-			l_paths << l_currentFile;
-			l_currentFile=l_target;
-			l_linked=true;
+		if(aliasses.contains(l_currentFile)){
+			l_currentFile=aliasses.value(l_currentFile);
+			break;
+		}
+		l_target=QFile::symLinkTarget(l_currentFile);
+		if(l_target=="") break;
+		l_paths << l_currentFile;
+		l_currentFile=l_target;
+		l_linked=true;
 	}
 	if(l_linked){
 		foreach(QString l_found, l_paths){

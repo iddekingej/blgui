@@ -47,11 +47,7 @@ void TChangeManager::getChanged(QString &p_what,bool &p_changed)
 		getStringOfSet(mounted,i18n("mounted"),p_what);
 		getStringOfSet(unmounted,i18n("unmounted"),p_what);
 		getStringOfSet(changeMonitor.getAdded(),i18n("added"),p_what);
-		getStringOfSet(changeMonitor.getRemoved(),i18n("removed"),p_what);
-		
-
-		
-		//Check udev for any device new or remove block devices 
+		getStringOfSet(changeMonitor.getRemoved(),i18n("removed"),p_what);		
 		delete prvMounted;
 		prvMounted=l_tab;		
 	}

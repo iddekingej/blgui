@@ -11,10 +11,7 @@ class TBtrfsInfo
 {
 private:
 	static void getRaidLevel(const QString &p_path,QString &p_raidLevel);
-public:
-
-
-	
+public:	
 	static void processInfo(TDeviceList *p_list,TRaidInfo *p_raid);
 };
 
