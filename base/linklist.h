@@ -83,7 +83,6 @@ public:
 
 };
 
-
 template<class T>
 class TLinkListIterator{
 private:

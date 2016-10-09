@@ -49,5 +49,8 @@ public:
 	bool notInOther(TMTab *p_other,QSet<QString>&p_return);
 	void processInfo();
 	void addMountTODevices();
+	void copyFileType();
+
+
 };
 #endif

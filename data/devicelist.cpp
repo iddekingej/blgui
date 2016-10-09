@@ -14,7 +14,7 @@
 #include <QTextStream>
 #include <errno.h>
 #include "base/compat.h"
-
+#include "base/utils.h"
 
 const char* MOUNTS_PATH="/proc/mounts";
 //List of devices and retrives information about the device
@@ -158,7 +158,7 @@ void TDeviceList::readFreeSpace()
 			struct statvfs l_info;
 			//statvfs needs some file at device. Using top directory (/.) of first mount point
 			l_somePath=l_device->getMounts()->getStart()->getItem()->getMountPoint()+"/.";
-			if((statvfs(l_somePath.toUtf8().data(),&l_info))==0){
+			if((statvfs(qstr(l_somePath),&l_info))==0){
 				l_device->setFree(l_info.f_bsize*l_info.f_bfree,true);				
 			} 
 		}

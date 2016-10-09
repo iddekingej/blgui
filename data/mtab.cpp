@@ -65,7 +65,11 @@ void TMTab::nextItem(const QString& p_text, QString& p_out, int& p_cnt)
 	p_out=p_text.mid(l_begin);
 }
 
-//Scan until next field in fstab or mtab file line (scan until char is no space
+/**Scan until next field in fstab or mtab file line (scan until char is no space
+ * \param  p_text  Current line to proces
+ * \param  p_cnt   Position. This variable is incremented until next field (until character is not a space of tab) 
+ * \return true if non space character found(=field found)
+ */
 bool TMTab::untilNext(const QString& p_text, int& p_cnt)
 {
 	int l_length=p_text.length();
@@ -132,7 +136,15 @@ void TMTab::processInfo()
 	}
 
 }
-
+void TMTab::copyFileType()
+{
+	TMTabEntry *l_entry;
+	TLinkListIterator<TMTabEntry> l_iter(&entries);
+	while(l_iter.hasNext()){
+		l_entry=l_iter.next();	
+		if(l_entry->getRealDevice()!=nullptr)l_entry->getRealDevice()->setType(l_entry->getType());
+	}
+}
 //Add mount to the TDeviceBase mount list
 void TMTab::addMountTODevices()
 {	
