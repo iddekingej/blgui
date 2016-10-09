@@ -115,4 +115,15 @@ void TConfig::setDeviceAsTree(bool p_flag)
 	configGui.writeEntry(QStringLiteral("devicetree"),p_flag);
 }
 
+bool TConfig::getExpandByDefault()
+{
+	return configGui.readEntry(QStringLiteral("expanddefault"),true);
+}
+
+void TConfig::setExpandByDefault(bool p_expand)
+{
+	configGui.writeEntry(QStringLiteral("expanddefault"),p_expand);
+}
+
+
 TConfig g_config;

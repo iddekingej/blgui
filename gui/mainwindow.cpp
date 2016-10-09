@@ -518,6 +518,9 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabsVisible[3]=nullptr;
 	tabsVisible[4]=nullptr;
 	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
+	if(g_config.getExpandByDefault()){
+		ui.diskList->expandAll();
+	}
 	setVisibleTabs();
 
 }

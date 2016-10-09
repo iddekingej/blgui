@@ -10,7 +10,8 @@
 #include "base/globals.h"
 #include "base/config.h"
 #include <klocalizedstring.h>
-// Save configuration after pressing "Ok" button
+/** Save configuration after pressing "Ok" button
+ */
 
 void TFieldsConfig::save()
 {
@@ -22,13 +23,15 @@ void TFieldsConfig::save()
 		
 		g_config.setDeviceFields(l_list);
 		g_config.setDeviceAsTree(ui.displayTree->isChecked());
+		g_config.setExpandByDefault(ui.expandDefault->checkState()==Qt::Checked);
 		g_config.sync();
 		close();
 		
 }
 
-// Move current selected item up (p_diff=-1) or down (p_diff=+1)
-
+/** Move current selected item 
+ *  \param p_diff  move up (p_diff=-1) or down (p_diff=+1)
+*/
 void TFieldsConfig::moveItem(int p_diff)
 {
 	QModelIndexList l_list=ui.fieldsSelected->selectionModel()->selectedIndexes();
@@ -63,11 +66,14 @@ void TFieldsConfig::moveDown()
 	moveItem(+1);
 }
 
-
+/* Display remove (selected items) button  when there is at least one item in selected list
+ */
 void TFieldsConfig::enableRemoveButton()
 {
 	ui.removeField->setEnabled(modelSelected->rowCount()>0);	
 }
+
+
 void TFieldsConfig::removeLabel()
 {
 	QModelIndexList l_list=ui.fieldsSelected->selectionModel()->selectedIndexes();
@@ -91,7 +97,7 @@ void TFieldsConfig::removeLabel()
  * The field is hidden in ui.fieldsAvailable and the 'next' field in fieldsAvailable must be selected
  * Find first nearest visible row in ui.fieldsAvailable relative to index p_index
  * first look downward and thant up
- 
+ * \param  p_index 
 */
 
 int TFieldsConfig::getFAVisibleRow(int p_index)
@@ -181,6 +187,20 @@ void TFieldsConfig::fillSelectedList()
 	enableRemoveButton();
 	ui.fieldsSelected->setModel(modelSelected);
 }
+
+void TFieldsConfig::displayAsGridClicked()
+{
+	ui.expandDefault->hide();
+}
+
+
+void TFieldsConfig::displayAsTreeClicked()
+{
+	ui.expandDefault->show();
+}
+
+/* Setup form
+ */
 TFieldsConfig::TFieldsConfig():QDialog()
 {
 
@@ -194,10 +214,16 @@ TFieldsConfig::TFieldsConfig():QDialog()
 	connect(ui.removeField,SIGNAL(pressed()),SLOT(removeLabel()));
 	connect(ui.moveUp,SIGNAL(pressed()),SLOT(moveUp()));
 	connect(ui.moveDown,SIGNAL(pressed()),SLOT(moveDown()));
+	connect(ui.displayTree,SIGNAL(pressed()),SLOT(displayAsTreeClicked()));
+	connect(ui.displayGrid,SIGNAL(pressed()),SLOT(displayAsGridClicked()));
 	bool l_tree=g_config.getDeviceAsTree();
 	ui.displayTree->setChecked(l_tree);
 	ui.displayGrid->setChecked(!l_tree);
+	if(!l_tree){
+		ui.expandDefault->hide();
+	}
 	
+	ui.expandDefault->setCheckState(g_config.getExpandByDefault()?Qt::Checked:Qt::Unchecked);
 	fillAvailableList();
 	fillSelectedList();
 }

@@ -19,6 +19,8 @@ private slots:
 	void removeLabel();
 	void moveUp();
 	void moveDown();
+	void displayAsTreeClicked();
+	void displayAsGridClicked();
 private:
 	QStandardItemModel *modelAvailable;
 	QStandardItemModel *modelSelected;
