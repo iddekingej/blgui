@@ -64,7 +64,7 @@ void TDeviceInfo::getDisks()
 	iscsi->processInfo(devices);
 	
 	
-	QMapIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
+	QHashIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
 	while(l_mi.hasNext()){
 		l_mi.next();
 		l_db=l_mi.value();

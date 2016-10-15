@@ -5,6 +5,7 @@
 #include <KConfigGroup>
 #include <KConfig>
 #include <QVariantList>
+#include <QVector>
 /*
  * Singelton to manage configuration
  */
@@ -15,13 +16,14 @@ class TConfig
 private:
 	KSharedConfig::Ptr config;
 	KConfigGroup configGui;
+	QVector<int> *deviceFields;
 	
 public:
 	TConfig();
 	void setup();
 	void sync();
 	void setDeviceFields(QVariantList p_list);
-	QVariantList getDeviceFields();
+	QVector<int>* getDeviceFields();
 	void setMainWindowSize(int p_width,int p_height);
 	int getMainWindowWidth();
 	int getMainWindowHeight();

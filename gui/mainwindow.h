@@ -30,7 +30,7 @@ private slots:
 private:
 	TDeviceInfo        *info;
 	QStandardItemModel *devModel;
-	QVariantList enableDeviceFields;
+	QVector<int> *enableDeviceFields;
 	Ui::MainWindow ui;
 	QTimer checkChange;
 	

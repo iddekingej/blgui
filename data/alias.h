@@ -1,12 +1,12 @@
 #ifndef __ALIAS_H_
 #define __ALIAS_H_
-#include <QMap>
+#include <QHash>
 #include <QString>
 
 class TAlias
 {
 private:
-	QMap<QString,QString> aliasses;
+	QHash<QString,QString> aliasses;
 	void processAlias(const QString &p_file);
 	void procesAliasses(const QString &p_path);
 public:

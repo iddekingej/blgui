@@ -138,7 +138,6 @@ void TMainWindow::fillMtab()
 	QString l_note;
 	int l_cnt=0;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Comments")));
-
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Real device")));
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Mount point")));
@@ -156,7 +155,7 @@ void TMainWindow::fillMtab()
 			case TMTabEntry::NOTMOUNTED : l_note = i18n("Not mounted\n");break;
 			case TMTabEntry::DIFMOUNTED : l_note = i18n("Mounted on different path \n");break;
 			default:
-				l_note="";
+				l_note.clear();
 		}
 		if(l_info->getRealDevice() != nullptr){	
 			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_info->getRealDevice()->getType());
@@ -247,7 +246,7 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 {
 	int l_fieldId;
 	QStandardItem *l_item;
-	
+	int l_itemSize=p_list.count();	
 //fill fixed columns 
 	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
 		l_item=new QStandardItem(p_list[l_cnt]);	
@@ -259,9 +258,9 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 	}
 	
 //fill flexible columns
-	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
-		l_fieldId=enableDeviceFields[l_cnt].toInt();
-		if(l_fieldId+p_begin<p_list.count()){
+	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
+		l_fieldId=(*enableDeviceFields)[l_cnt];		
+		if(l_fieldId+p_begin<l_itemSize){
 			if(p_parent !=nullptr){
 			    p_parent->setChild(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));			    
 			} else {
@@ -277,8 +276,8 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 // Fill the header of the configured columns
 void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	int l_fieldId;
-	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
-		l_fieldId=enableDeviceFields[l_cnt].toInt();
+	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
+		l_fieldId=(*enableDeviceFields)[l_cnt];
 		if(l_fieldId<g_numDeviceFields){
 			p_model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));
 		}
@@ -363,7 +362,7 @@ void TMainWindow::fillDeviceTree()
 
 void TMainWindow::fillDeviceGrid()
 {
-	const QMap<QString,TDeviceBase *> *l_map;
+	const QHash<QString,TDeviceBase *> *l_map;
 	TDeviceList *l_devices=info->getDevices();
 	int l_selectedType=ui.itemSource->currentIndex();
 	QString l_extraLabel;
@@ -407,7 +406,7 @@ void TMainWindow::fillDeviceGrid()
 
 	fillHeader(l_fixed,l_model);
 	
-	QMapIterator<QString,TDeviceBase *> l_mi(*l_map);
+	QHashIterator<QString,TDeviceBase *> l_mi(*l_map);
 	while(l_mi.hasNext()){
 		l_mi.next();		
 		l_deviceRow.clear();
@@ -443,7 +442,6 @@ void TMainWindow::showFieldChooser(){
 
 void TMainWindow::readConfiguation()
 {
-	enableDeviceFields.clear();	
 	enableDeviceFields=g_config.getDeviceFields();
 }
 

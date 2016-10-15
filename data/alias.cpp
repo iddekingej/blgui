@@ -1,7 +1,7 @@
 #include "alias.h"
 #include <QDir>
 #include <QDirIterator>
-#include <QMap>
+#include <QHash>
 #include <QFile>
 
 /*

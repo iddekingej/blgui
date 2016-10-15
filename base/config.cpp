@@ -1,6 +1,7 @@
 #include "config.h"
 #include "globals.h"
 #include "base/compat.h"
+#include <QListIterator>
 
 TConfig::TConfig()
 {
@@ -32,14 +33,26 @@ void TConfig::sync()
 }
 
 // Return QVariant list with enabled fields=>is integer
-QVariantList TConfig::getDeviceFields()
+QVector<int>* TConfig::getDeviceFields()
 {
-	return configGui.readEntry("devicefields",QVariantList());;
+	if(deviceFields==nullptr){
+		
+		QVariantList l_list=configGui.readEntry("devicefields",QVariantList());
+		deviceFields=new QVector<int>(l_list.size());
+		QListIterator<QVariant> l_iter(l_list);
+		int l_cnt=0;
+		while(l_iter.hasNext()){
+			(*deviceFields)[l_cnt]=l_iter.next().toInt();
+			l_cnt++;
+		}
+	}
+	return deviceFields;
 }
 
 //Set enabled fields in device list
 void TConfig::setDeviceFields(QVariantList p_list)
 {
+	deviceFields=nullptr;
 	configGui.writeEntry("devicefields",p_list);
 }
 

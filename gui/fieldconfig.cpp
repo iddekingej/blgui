@@ -173,9 +173,9 @@ void TFieldsConfig::fillAvailableList()
 void TFieldsConfig::fillSelectedList()
 {
 	QStandardItem *l_item;
-	QVariantList l_enabledFields=g_config.getDeviceFields();
-	for(int l_cnt=0;l_cnt<l_enabledFields.count();l_cnt++){
-		int l_selectedId=l_enabledFields[l_cnt].toInt();
+	QVector<int> *l_enabledFields=g_config.getDeviceFields();
+	for(int l_cnt=0;l_cnt<l_enabledFields->count();l_cnt++){
+		int l_selectedId=(*l_enabledFields)[l_cnt];
 		if(l_selectedId<g_numDeviceFields){
 			l_item=new QStandardItem(i18n(g_deviceFields[l_selectedId]));
 			l_item->setData(l_selectedId);

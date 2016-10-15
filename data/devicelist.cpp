@@ -30,9 +30,8 @@ const char* MOUNTS_PATH="/proc/mounts";
 
 void TDeviceList::readDevices()
 {
-	QString      l_deviceName;
-	QDir         l_dir(QStringLiteral("/sys/block"));
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+	QString      l_deviceName;	
+	QDirIterator l_iter("/sys/block",QDirIterator::NoIteratorFlags);
 	TDevice      *l_device;
 	QString      l_model;
 	QString      l_loopFile;
@@ -124,8 +123,7 @@ void TDeviceList::readSwap()
 //Read data from partitions belonging to block device p_device
 void TDeviceList::readPartitions(TDevice* p_device)
 {
-	QDir         l_dir("/sys/block/"+p_device->getName());
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter("/sys/block/"+p_device->getName(),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	TDiskSize    l_size;
 	QString      l_deviceName;
 	QString      l_sizeStr("size");
@@ -149,7 +147,7 @@ void TDeviceList::readPartitions(TDevice* p_device)
 //Read from all mounted devices the free size through statvfs
 void TDeviceList::readFreeSpace()
 {
-	QMapIterator<QString,TDeviceBase *> l_iter(nameIndex);
+	QHashIterator<QString,TDeviceBase *> l_iter(nameIndex);
 	TDeviceBase *l_device;
 	QString l_somePath;
 	while(l_iter.hasNext()){
@@ -182,20 +180,21 @@ void TDeviceList::readAliases()
 	
 }
 
-void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,QMap<QString,TDeviceBase *> &p_index)
-{
-	QDir l_dir(p_path);
-	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
+void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,QHash<QString,TDeviceBase *> &p_index)
+{	
+	QDirIterator l_iter(p_path,QDirIterator::NoIteratorFlags);
 	TDeviceBase *l_device;
 	QString l_other;
+	QString l_fileName;
 	while(l_iter.hasNext()){		
 		l_iter.next();
 		if(l_iter.fileInfo().isSymLink()){
 			l_other=aliasses->getDeviceNameFromAliasPath(l_iter.filePath());			
 			l_device=nameIndex.value(l_other);
 			if(l_device !=nullptr){
-				p_index.insert(l_iter.fileName() ,l_device);			
-				l_device->addAlias(p_type,l_iter.fileName());
+				l_fileName=l_iter.fileName();
+				p_index.insert(l_fileName ,l_device);			
+				l_device->addAlias(p_type,l_fileName);
 			}
 		}
 	}
@@ -203,7 +202,7 @@ void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,
 
 void TDeviceList::readLabels()
 {
-	QMapIterator<QString,TDeviceBase*> l_iter(labelIndex);
+	QHashIterator<QString,TDeviceBase*> l_iter(labelIndex);
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_iter.value()->setLabel(l_iter.key());

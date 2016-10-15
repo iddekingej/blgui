@@ -30,9 +30,8 @@ bool readLong(QString p_path,QString p_name,unsigned long &p_value)
 
 bool readString(QString p_path,QString p_name,QString &p_value)
 {
-	bool l_succes;
-	QDir l_dir=QDir(p_path);	
-	QFile l_file(l_dir.absoluteFilePath(p_name));
+	bool l_succes;	
+	QFile l_file(p_path+"/"+p_name);
 	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
 		p_value= QStringLiteral("");
 		return false;

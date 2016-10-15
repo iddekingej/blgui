@@ -6,4 +6,5 @@ extern const  int g_numDeviceFields;
 
 
 extern const  char *g_deviceFields[];
+
 #endif
