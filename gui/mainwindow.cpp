@@ -58,9 +58,7 @@ void TMainWindow::handleMount()
 	QString l_message="";
 	if(getuid()!=0){
 		l_message=i18n("Only root can mount");
-	}  else if(l_list.length()==0){
-		l_message=i18n("No device selected");
-	} else {
+	}  else if(l_list.length()>0 && ui.info->currentIndex()==0){
 		QModelIndex l_index=l_list[0];		
 		QString l_name=l_index.data(Qt::UserRole + 1).toString();
 		l_device=info->getDevices()->getDeviceByName(l_name);
@@ -77,11 +75,10 @@ void TMainWindow::handleMount()
 		l_box.exec();
 		return;
 	}
-	if(l_device !=nullptr){
-		TMountDialog l_dialog(l_device);
-		l_dialog.exec();
-		refresh();
-	}
+	TMountDialog l_dialog(l_device,info->getDevices()->getNameIndex());
+	l_dialog.exec();
+	refresh();
+	
 }
 
 void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)

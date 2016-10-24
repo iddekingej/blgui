@@ -43,7 +43,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Mount</string>
+           <string>(Un)mount</string>
           </property>
          </widget>
         </item>

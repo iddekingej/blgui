@@ -11,13 +11,18 @@ class TMountDialog:public QDialog
 private slots:
 	void handleAction();
 	void actionClicked();
+	void fillDeviceSelectList();
+	void onDevChange(int p_index);
 private:
-	void unmountDevice();
-	void mountDevice();
 	Ui::MountDialog ui;
 	TDeviceBase *device;
+	void unmountDevice();
+	void mountDevice();
+	inline TDeviceBase *getCurrentDevice(){ return devices->value(ui.mountDevice->currentText());}
+
+	const QHash<QString,TDeviceBase *> *devices;
 public:
-	TMountDialog(TDeviceBase *p_device);
+	TMountDialog(TDeviceBase *p_device,const QHash<QString,TDeviceBase *> *p_devices);
 };
 
 #endif
