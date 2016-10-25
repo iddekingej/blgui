@@ -484,7 +484,7 @@
            <item alignment="Qt::AlignTop">
             <widget class="QLabel" name="noMountPointsLabel">
              <property name="text">
-              <string>This devices or it's partitions are not mounted</string>
+              <string>This device or it's partitions are not mounted</string>
              </property>
             </widget>
            </item>
