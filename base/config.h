@@ -20,6 +20,7 @@ private:
 	
 public:
 	TConfig();
+	~TConfig();
 	void setup();
 	void sync();
 	void setDeviceFields(QVariantList p_list);

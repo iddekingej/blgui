@@ -7,6 +7,12 @@ TConfig::TConfig()
 {
 }
 
+TConfig::~TConfig()
+{
+	if(deviceFields != nullptr) delete deviceFields;
+}
+
+
 /* Initialize config =>called in main after setting up QApplication*/
 void TConfig::setup()
 {
