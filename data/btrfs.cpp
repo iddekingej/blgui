@@ -40,7 +40,6 @@ void TBtrfsInfo::processInfo(TDeviceList *p_list,TRaidInfo *p_raid)
 		l_iter.next();
 		l_fileName=l_iter.fileName();
 		if(l_iter.fileInfo().isDir() && (l_fileName != "features") && (l_fileName != ".") && (l_fileName != "..")){
-			printf("%s \n",qstr(l_iter.fileInfo().filePath()));
 			QDirIterator l_deviceIter(l_iter.fileInfo().filePath()+"/devices/",QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 			QList<TDeviceBase *> l_btrfsMembers;
 			while(l_deviceIter.hasNext()){
