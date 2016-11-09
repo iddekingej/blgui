@@ -420,7 +420,9 @@ void TMainWindow::fillDeviceGrid()
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
 }
-
+/** Fill device list with data
+ * 
+ */
 void TMainWindow::fillDevice()
 {
 	if((ui.itemSource->currentIndex()==0) && g_config.getDeviceAsTree()){
@@ -431,10 +433,19 @@ void TMainWindow::fillDevice()
 }
 
 void TMainWindow::showFieldChooser(){
-	printf("xxx/n");
 	TFieldsConfig l_field;	
+	bool l_expand=g_config.getExpandByDefault();
+	bool l_asTree=g_config.getDeviceAsTree();
 	l_field.exec();
 	refresh();
+/* When device list is displayed as a tree and epand by default it changed from false to true, expand tree after dialog is closed
+ * or when devicelist was previous a list and now a tree and expand by default is set , then expand
+ */		
+	if(g_config.getDeviceAsTree()){
+		if(g_config.getExpandByDefault()){
+			if(!l_expand|| !l_asTree) expandDeviceAll();
+		}
+	}	
 }
 
 void TMainWindow::readConfiguation()
@@ -462,6 +473,10 @@ void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 	
 }
 
+void TMainWindow::expandDeviceAll()
+{
+	ui.diskList->expandAll();
+}
 
 
 TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
@@ -512,7 +527,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabsVisible[4]=nullptr;
 	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
 	if(g_config.getExpandByDefault()){
-		ui.diskList->expandAll();
+		expandDeviceAll();
 	}
 	setVisibleTabs();
 
@@ -555,7 +570,9 @@ void TMainWindow::setVisibleTabs(){
 	setTabVisible(4,g_config.getStatsTab(),i18n("Stats"));
 }
 
-//Display "Visible tab" dialog when menu option is l_selected
+/** Display dialog for selecting which tab is visible
+ * 
+ */
 
 void TMainWindow::visibleTabs()
 {
@@ -565,7 +582,9 @@ void TMainWindow::visibleTabs()
 }
 
 
-//Clear "change message" (Mounts/Unmounts/new device/remove etc..)
+/*Clear "change message" (Mounts/Unmounts/new device/remove etc..)
+ */
+
 void TMainWindow::clearChangeMessage()
 {
 	ui.arInfo->setText(QStringLiteral(""));
@@ -573,7 +592,8 @@ void TMainWindow::clearChangeMessage()
 	changeManager.clear();
 }
 
-//Check periodically  if there is any device change
+/*Check periodically  if there is any device change
+ */
 
 void TMainWindow::timeOutCheckChange()
 {
