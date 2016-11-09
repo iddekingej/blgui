@@ -17,7 +17,7 @@
 #include "linuxraid.h"
 #include "base/utils.h"
 
-QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
+void TDeviceInfo::getTypeByDevice(TDeviceBase *p_device,QString &p_type)
 {
 	QString l_type;	
 	char *l_value;
@@ -30,8 +30,8 @@ QString TDeviceInfo::getTypeByDevice(TDeviceBase *p_device)
 	} else{
 		l_type="??";
 	}
-
-	return l_type;
+	p_type=l_type;
+	
 }
 
 
@@ -70,7 +70,7 @@ void TDeviceInfo::getDisks()
 		l_db=l_mi.value();
 		if(!l_db->hasPartitions()){
 			if(l_db->getType().length()==0){
-				l_type=getTypeByDevice(l_db);
+				getTypeByDevice(l_db,l_type);
 				l_db->setType(l_type);
 			}
 		}

@@ -134,6 +134,7 @@ void TMainWindow::fillMtab()
 	TMTabEntry *l_info;
 	QString l_note;
 	int l_cnt=0;
+	TDeviceBase *l_realDevice;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Comments")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Real device")));
@@ -154,9 +155,10 @@ void TMainWindow::fillMtab()
 			default:
 				l_note.clear();
 		}
-		if(l_info->getRealDevice() != nullptr){	
-			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_info->getRealDevice()->getType());
-			if(l_info->getRealDevice()->hasPartitions()) l_note+=i18n("Device not mountable (has partitions)");
+		l_realDevice=l_info->getRealDevice();
+		if(l_realDevice != nullptr){	
+			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_realDevice->getType());
+			if(l_realDevice->hasPartitions()) l_note+=i18n("Device not mountable (has partitions)");
 		}
 		l_model->setItem(l_cnt,0,new QStandardItem(l_note));		
 		l_cnt++;

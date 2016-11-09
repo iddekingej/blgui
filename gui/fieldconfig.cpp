@@ -92,7 +92,7 @@ void TFieldsConfig::removeLabel()
 	enableRemoveButton();	
 }
 
-/*
+/**
  * When field is selected in ui.fieldsAvailable and moved to the visible field
  * The field is hidden in ui.fieldsAvailable and the 'next' field in fieldsAvailable must be selected
  * Find first nearest visible row in ui.fieldsAvailable relative to index p_index

@@ -33,7 +33,7 @@ private:
 
 	void procesAliasses(const QString &p_path);
 	void processAlias(const QString &p_file);
-	QString getTypeByDevice(TDeviceBase *p_device);
+	void getTypeByDevice(TDeviceBase *p_device,QString &p_type);
 public:
 	inline TDeviceList *getDevices(){
 		return devices;
