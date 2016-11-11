@@ -1,4 +1,5 @@
 #include "iscsi.h"
+#include "base/compat.h"
 #include <QDir>
 #include <QDirIterator>
 
