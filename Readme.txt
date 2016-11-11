@@ -1,14 +1,13 @@
 WARNING
 =======
-This is version is an early 0.6 development version. It is not yet feature complete or bug free.
+This is version is an early 0.8 development version. It is not yet feature complete or bug free.
 
 ABOUT
 =======
 Function : This program list information about all block devices in a nice GUI.
-           Note: This program is only for displaying information, it is not possible to mount or change the drives.
 Os       : Linux/KDE5 or KDE4
 License  : Gpl
-Version  : 0.7
+Version  : 0.8
 
 
 
@@ -77,12 +76,13 @@ Note: When there is an unmounted disk in a cd-rom/dvd drive, the program will ta
 
 FUNCTIONS
 ==================
-This program displays the follow information
+This program has the following features:
 
 * Information over all devices and partitions
 * Raid
 * Iscsi
 * Fstab
+* Mounting devices
 
 It support the following type of block devices:
 * Physical drives
@@ -132,11 +132,11 @@ Changes:
 =======
 
 
-0.7<=0.6
-* Under disks:Treeview or grid view
-* Compiles under kde4
-* Device statistics
-* Better navigation between partition details and device details
-* Fix: Double clicking field sometimes add field twice
-* Fix: Disable editing grid cells.
-* Fix: Sometimes false "Mounted on different path"
+Version 0.8:
+
+* Mounting of devices
+* Display if device is rotational or SSD
+* Fix speed and memory leaks and code cleanup
+* Some small gui fixes (disable grid edit,label etc)
+
+

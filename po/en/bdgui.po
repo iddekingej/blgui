@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-10-24 13:39+0200\n"
+"POT-Creation-Date: 2016-11-11 09:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,8 +25,8 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: base/globals.cpp:9 gui/formbasedevinfo.cpp:30 gui/formdevinfo.cpp:147
-#: gui/mainwindow.cpp:141
+#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:147
+#: gui/mainwindow.cpp:142
 msgid "Type"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Mounted"
 msgstr ""
 
-#: base/globals.cpp:11 gui/mainwindow.cpp:372
+#: base/globals.cpp:11 gui/mainwindow.cpp:374
 msgid "Label"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgstr ""
 msgid "LVM Member"
 msgstr ""
 
-#: gui/formbasedevinfo.cpp:31
+#: gui/formbasedevinfo.cpp:38
 msgid "Alias"
 msgstr ""
 
@@ -122,12 +122,12 @@ msgstr ""
 msgid "SSD"
 msgstr ""
 
-#: gui/formdevinfo.cpp:122 gui/mainwindow.cpp:111 gui/mainwindow.cpp:138
-#: gui/mainwindow.cpp:176 gui/mainwindow.cpp:205
+#: gui/formdevinfo.cpp:122 gui/mainwindow.cpp:111 gui/mainwindow.cpp:139
+#: gui/mainwindow.cpp:178 gui/mainwindow.cpp:207
 msgid "Device"
 msgstr ""
 
-#: gui/formdevinfo.cpp:123 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:140
+#: gui/formdevinfo.cpp:123 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:141
 msgid "Mount point"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Fs. type"
 msgstr ""
 
-#: gui/formdevinfo.cpp:146 gui/mainwindow.cpp:324 gui/mainwindow.cpp:399
+#: gui/formdevinfo.cpp:146 gui/mainwindow.cpp:326 gui/mainwindow.cpp:401
 msgid "Name"
 msgstr ""
 
@@ -179,111 +179,111 @@ msgstr ""
 msgid "Iscsi bus"
 msgstr ""
 
-#: gui/mainwindow.cpp:137
+#: gui/mainwindow.cpp:138
 msgid "Comments"
 msgstr ""
 
-#: gui/mainwindow.cpp:139
+#: gui/mainwindow.cpp:140
 msgid "Real device"
 msgstr ""
 
-#: gui/mainwindow.cpp:142
+#: gui/mainwindow.cpp:143
 msgid "Options"
 msgstr ""
 
-#: gui/mainwindow.cpp:152
+#: gui/mainwindow.cpp:153
 msgid "Not mounted\n"
 msgstr ""
 
-#: gui/mainwindow.cpp:153
+#: gui/mainwindow.cpp:154
 msgid "Mounted on different path \n"
 msgstr ""
 
-#: gui/mainwindow.cpp:158
+#: gui/mainwindow.cpp:160
 msgid "Wrong type. Type is (%1)"
 msgstr ""
 
-#: gui/mainwindow.cpp:159
+#: gui/mainwindow.cpp:161
 msgid "Device not mountable (has partitions)"
 msgstr ""
 
-#: gui/mainwindow.cpp:177
+#: gui/mainwindow.cpp:179
 msgid "Raid members"
 msgstr ""
 
-#: gui/mainwindow.cpp:178
+#: gui/mainwindow.cpp:180
 msgid "Raid level"
 msgstr ""
 
-#: gui/mainwindow.cpp:179
+#: gui/mainwindow.cpp:181
 msgid "Raid type"
 msgstr ""
 
-#: gui/mainwindow.cpp:180
+#: gui/mainwindow.cpp:182
 msgid "Mounted point"
 msgstr ""
 
-#: gui/mainwindow.cpp:206
+#: gui/mainwindow.cpp:208
 msgid "Read(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:207
+#: gui/mainwindow.cpp:209
 msgid "Read(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:208
+#: gui/mainwindow.cpp:210
 msgid "Write(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:209
+#: gui/mainwindow.cpp:211
 msgid "Write(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:325 gui/mainwindow.cpp:401
+#: gui/mainwindow.cpp:327 gui/mainwindow.cpp:403
 msgid "Partition"
 msgstr ""
 
-#: gui/mainwindow.cpp:369 gui/mainwindow.cpp:474
+#: gui/mainwindow.cpp:371 gui/mainwindow.cpp:491
 msgid "Id"
 msgstr ""
 
-#: gui/mainwindow.cpp:375 gui/mainwindow.cpp:476
+#: gui/mainwindow.cpp:377 gui/mainwindow.cpp:493
 msgid "Uuid"
 msgstr ""
 
-#: gui/mainwindow.cpp:378 gui/mainwindow.cpp:477
+#: gui/mainwindow.cpp:380 gui/mainwindow.cpp:494
 msgid "Path"
 msgstr ""
 
-#: gui/mainwindow.cpp:381
+#: gui/mainwindow.cpp:383
 msgid "LVM"
 msgstr ""
 
-#: gui/mainwindow.cpp:473
+#: gui/mainwindow.cpp:490
 msgid "Devices"
 msgstr ""
 
-#: gui/mainwindow.cpp:475
+#: gui/mainwindow.cpp:492
 msgid "Labels"
 msgstr ""
 
-#: gui/mainwindow.cpp:551
+#: gui/mainwindow.cpp:568
 msgid "Disks"
 msgstr ""
 
-#: gui/mainwindow.cpp:552
+#: gui/mainwindow.cpp:569
 msgid "Raid"
 msgstr ""
 
-#: gui/mainwindow.cpp:553
+#: gui/mainwindow.cpp:570
 msgid "Fstab"
 msgstr ""
 
-#: gui/mainwindow.cpp:554
+#: gui/mainwindow.cpp:571
 msgid "Iscsi"
 msgstr ""
 
-#: gui/mainwindow.cpp:555
+#: gui/mainwindow.cpp:572
 msgid "Stats"
 msgstr ""
 
