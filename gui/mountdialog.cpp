@@ -6,6 +6,7 @@
 #include <string.h>
 #include "data/filesystems.h"
 #include "base/linklist.h"
+#include "base/compat.h"
 
 
 /** TMount Dialog constructor
