@@ -41,6 +41,7 @@ set(bdgui_SRCS
 	data/devicebase.cpp 
 	data/deviceinfo.cpp 
 	data/raid.cpp 
+	data/usb.cpp
 	data/iscsi.cpp
 	data/udevmonitor.cpp
 	data/diskstat.cpp

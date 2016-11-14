@@ -15,6 +15,7 @@
 #include <errno.h>
 #include "base/compat.h"
 #include "base/utils.h"
+#include "usb.h"
 
 const char* MOUNTS_PATH="/proc/mounts";
 //List of devices and retrives information about the device
@@ -41,6 +42,7 @@ void TDeviceList::readDevices()
 	unsigned long  l_removable;
 	unsigned long  l_readonly;
 	unsigned long  l_rotational;
+	usbInfo.readInfo();
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_deviceName=l_iter.fileName();
@@ -61,6 +63,10 @@ void TDeviceList::readDevices()
 			} else{
 				l_model="";
 				l_loopFile="";
+			}
+			QString l_usbBus="";
+			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
+				l_device->setUsbBus(l_usbBus);
 			}
 			l_device=new TDevice(l_deviceName,l_model,l_size);
 			l_device->setReadonly(l_readonly==1);
@@ -299,6 +305,8 @@ void TDeviceList::readInfo()
 	readLabels();
 	readLVM();
 	readSwap();
+	TUsbInfo l_info;
+	l_info.readInfo();
 }
 
 

@@ -69,6 +69,7 @@ void TFormDevInfo::setInfo(TDevice* p_device)
 	ui.typeLabel->setText(p_device->getType());
 	ui.vendorLabel->setText(p_device->getVendor());
 	ui.scsibusLabel->setText(p_device->getScsiBus());
+	ui.usbBusLabel->setText(p_device->getUsbBus());
 	ui.iscsiHost->setText(p_device->getIScsiAddress());
 	ui.ssdLabel->setText(p_device->getRotational()?i18n("Rotational"):i18n("SSD"));
 	if(p_device->getLoopbackFile().length()>0){

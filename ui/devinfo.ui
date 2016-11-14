@@ -21,6 +21,19 @@
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_16">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Usb bus</string>
+         </property>
+        </widget>
+       </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_15">
          <property name="font">
@@ -297,6 +310,9 @@
          </property>
         </widget>
        </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="deviceName"/>
+       </item>
        <item row="6" column="1">
         <widget class="QLabel" name="vendorLabel">
          <property name="text">
@@ -323,10 +339,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="deviceName"/>
-       </item>
-       <item row="11" column="0">
+       <item row="12" column="0">
         <widget class="QLabel" name="label_14">
          <property name="font">
           <font>
@@ -339,7 +352,7 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
+       <item row="12" column="1">
         <widget class="QLabel" name="iscsiHost">
          <property name="text">
           <string>TextLabel</string>
@@ -350,6 +363,13 @@
         <widget class="QLabel" name="ssdLabel">
          <property name="text">
           <string>none</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <widget class="QLabel" name="usbBusLabel">
+         <property name="text">
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>

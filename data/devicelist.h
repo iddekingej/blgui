@@ -6,12 +6,13 @@
 #include "alias.h"
 #include <QString>
 #include <QHash>
-
+#include "usb.h"
 class TDeviceList:public TLinkList<TDevice>
 {
 	
 private:
 	TAlias *aliasses;
+	TUsbInfo usbInfo;
 	QHash<QString,TDeviceBase *> nameIndex;		//name=>Device or partition
 	QHash<QString,TDeviceBase *> deviceByDevPath;
 	QHash<QString,TDeviceBase *> labelIndex;

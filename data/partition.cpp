@@ -32,6 +32,7 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<""
 		<<QString::number(start)
 		<<getReadableFreeSize()
+		<<""
 		<<"";
 ;
 }

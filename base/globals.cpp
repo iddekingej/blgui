@@ -20,5 +20,6 @@ const  char *g_deviceFields[]={
 ,	I18N_NOOP("Start(bytes)")
 ,	I18N_NOOP("Free space (KMG)")
 ,	I18N_NOOP("Rotational")
+,	I18N_NOOP("USB bus")
 };
 const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);

@@ -41,7 +41,8 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< getIScsiAddress()
 		<< ""
 		<< getReadableFreeSize()
-		<< (getRotational()?"X":"");
+		<< (getRotational()?"X":"")
+		<< getUsbBus();
 
 }
 
