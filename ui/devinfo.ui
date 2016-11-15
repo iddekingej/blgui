@@ -238,6 +238,13 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="labelLabel">
+         <property name="text">
+          <string>None</string>
+         </property>
+        </widget>
+       </item>
        <item row="9" column="1">
         <widget class="QLabel" name="readonlyLabel">
          <property name="text">
@@ -245,8 +252,15 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="labelLabel">
+       <item row="3" column="1">
+        <widget class="QLabel" name="typeLabel">
+         <property name="text">
+          <string>none</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="valLoopbackFile">
          <property name="text">
           <string>None</string>
          </property>
@@ -283,17 +297,13 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="typeLabel">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="deviceName"/>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="vendorLabel">
          <property name="text">
           <string>none</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="valLoopbackFile">
-         <property name="text">
-          <string>None</string>
          </property>
         </widget>
        </item>
@@ -310,13 +320,10 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="deviceName"/>
-       </item>
-       <item row="6" column="1">
-        <widget class="QLabel" name="vendorLabel">
+       <item row="13" column="1">
+        <widget class="QLabel" name="iscsiHost">
          <property name="text">
-          <string>none</string>
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>
@@ -339,7 +346,14 @@
          </property>
         </widget>
        </item>
-       <item row="12" column="0">
+       <item row="4" column="1">
+        <widget class="QLabel" name="ssdLabel">
+         <property name="text">
+          <string>none</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
         <widget class="QLabel" name="label_14">
          <property name="font">
           <font>
@@ -352,22 +366,28 @@
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
-        <widget class="QLabel" name="iscsiHost">
+       <item row="11" column="1">
+        <widget class="QLabel" name="usbBusLabel">
          <property name="text">
           <string>TextLabel</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QLabel" name="ssdLabel">
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_17">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
-          <string>none</string>
+          <string>PCI bus</string>
          </property>
         </widget>
        </item>
-       <item row="11" column="1">
-        <widget class="QLabel" name="usbBusLabel">
+       <item row="12" column="1">
+        <widget class="QLabel" name="pciBusLabel">
          <property name="text">
           <string>TextLabel</string>
          </property>

@@ -43,6 +43,7 @@ void TDeviceList::readDevices()
 	unsigned long  l_readonly;
 	unsigned long  l_rotational;
 	usbInfo.readInfo();
+	pciInfo.readInfo();
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_deviceName=l_iter.fileName();
@@ -64,9 +65,13 @@ void TDeviceList::readDevices()
 				l_model="";
 				l_loopFile="";
 			}
-			QString l_usbBus="";
+			QString l_usbBus;
 			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
 				l_device->setUsbBus(l_usbBus);
+			}
+			QString l_pciBus;
+			if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
+				l_device->setPciBus(l_pciBus);
 			}
 			l_device=new TDevice(l_deviceName,l_model,l_size);
 			l_device->setReadonly(l_readonly==1);

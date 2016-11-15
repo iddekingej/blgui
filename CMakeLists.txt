@@ -47,6 +47,7 @@ set(bdgui_SRCS
 	data/diskstat.cpp
 	data/filesystems.cpp
 	data/linuxraid.cpp
+	data/pci.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 

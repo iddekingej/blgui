@@ -16,6 +16,7 @@ private:
 	QString scsiBus;
 	QString iscsiAddress;
 	QString usbBus;
+	QString pciBus;
 	bool    rotational;
 public:
 	/** \brief  flag is device is rotational (has spinning disk) flags probably means it's a ssd
@@ -47,13 +48,22 @@ public:
 		return usbBus;
 	}
 	
-	inline void setUsbBus(const QString p_usbBus)
+	inline void setUsbBus(const QString &p_usbBus)
 	{
 		usbBus=p_usbBus;
 	}
 	
 	inline const QString &getScsiBus(){
 		return scsiBus;
+	}
+	
+	inline void setPciBus(const QString &p_pciBus)
+	{
+		pciBus=p_pciBus;
+	}
+	
+	inline const QString &getPciBus(){
+		return pciBus;
 	}
 	
 	void setScsiBus(const QString &p_scsiBus)
