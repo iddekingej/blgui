@@ -20,6 +20,7 @@ private slots:
 	
 	void showFieldChooser();
 	void showAbout();
+	void showUserDefinedTabs();
 	void sourceChanged(int p_index);
 	void doubleClickedDevGrid(const QModelIndex &p_index);
 	void refresh();

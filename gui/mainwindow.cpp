@@ -29,6 +29,7 @@
 #include "mountdialog.h"
 #include <unistd.h>
 #include <sys/types.h>
+#include "gui/formtabdef.h"
 #include <QMessageBox>
 
 QApplication *g_app;
@@ -434,6 +435,11 @@ void TMainWindow::fillDevice()
 	}
 }
 
+void TMainWindow::showUserDefinedTabs(){
+	TFormTabDef l_form;
+	l_form.exec();
+}
+
 void TMainWindow::showFieldChooser(){
 	TFieldsConfig l_field;	
 	bool l_expand=g_config.getExpandByDefault();
@@ -510,6 +516,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.itemSource,SIGNAL(currentIndexChanged(int)),this,SLOT(sourceChanged(int)));	
 	connect(ui.diskList,SIGNAL(doubleClicked(const QModelIndex &)),this,SLOT(doubleClickedDevGrid(const QModelIndex &)));	
 	connect(ui.actionAbout,SIGNAL(triggered()),this,SLOT(showAbout()));	
+	connect(ui.actionUserDefinedTabs,SIGNAL(triggered()),this,SLOT(showUserDefinedTabs()));
 	connect(ui.visibleTabs,SIGNAL(triggered()),this,SLOT(visibleTabs()));
 	connect(ui.mountButton,SIGNAL(pressed()),this,SLOT(handleMount()));
 	checkChange.start(1000);
