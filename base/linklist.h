@@ -18,6 +18,7 @@ protected:
 public:		
 	inline T *getItem(){ return item;} //GetItem from container
 	inline TLinkListItem<T> *getNext(){ return next;} //Next item in linked list
+	
 	~TLinkListItem()
 	{
 		delete item;

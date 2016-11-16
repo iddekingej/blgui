@@ -70,8 +70,13 @@ void TFormTabDef::selectTabDev(QModelIndex p_index)
 	QVariant l_idv=p_index.data(Qt::UserRole+1);
 	int l_id=l_idv.toInt();
 	TTabDef *l_def=tabDefs->getByPosition(l_id);
-	if(current != nullptr) formToCurrentTabDef();
+	if(current != nullptr){
+		formToCurrentTabDef();
+		tabDefModel->setItem(currentRow,0,new QStandardItem(ui.tabLabel->text()));
+	}
+	currentRow=p_index.row();
 	if(l_def != nullptr) fillFormByTabDef(l_def);
+
 }
 
 void TFormTabDef::saveTabDef()
@@ -101,6 +106,13 @@ void TFormTabDef::fillTabDef()
 		tabDefModel->setItem(l_cnt,0,l_item);
 		l_cnt++;
 	}
+}
+
+
+void TFormTabDef::refreshList()
+{
+	fillTabDef();
+	
 }
 
 

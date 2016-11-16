@@ -11,11 +11,13 @@ private slots:
 	void newTab();
 	void selectTabDev(QModelIndex p_index);
 	void saveTabDef();
+	void refreshList();
 private:
 	Ui::tabdef ui;
 	QStandardItemModel *tabDefModel;
 	TTabDefList *tabDefs;
 	TTabDef *current;
+	int currentRow;
 	void fillConditionField();
 	void fillConditionType();
 	void fillFormByTabDef(TTabDef *p_def);
