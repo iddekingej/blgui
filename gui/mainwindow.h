@@ -11,6 +11,8 @@
 #include "data/changemanager.h"
 #include "base/config.h"
 #include "data/diskstat.h"
+#include "data/tabdef.h"
+#include "gui/usertabdef.h"
 extern QApplication *g_app;
 
 class TMainWindow: public QMainWindow
@@ -28,6 +30,7 @@ private slots:
 	void clearChangeMessage();
 	void visibleTabs();
 	void handleMount();
+	void setupUserTabs();
 private:
 	TDeviceInfo        *info;
 	QStandardItemModel *devModel;
@@ -39,6 +42,8 @@ private:
 	QWidget *tabs[5];
 	QWidget *tabsVisible[5];
 	TDiskStatList *prvStats=nullptr;
+	TTabDefList userTabs;
+	QList<TUserTabDef *> userTabWidgets;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);
@@ -53,6 +58,7 @@ private:
 	void fillMtab();
 	void fillIscsi();
 	void fillStats();
+	void fillUserTabDef();
 	void expandDeviceAll();
 	virtual void setVisibleTabs();
 	

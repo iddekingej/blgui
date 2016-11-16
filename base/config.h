@@ -6,6 +6,7 @@
 #include <KConfig>
 #include <QVariantList>
 #include <QVector>
+#include <QJsonArray>
 /*
  * Singelton to manage configuration
  */
@@ -25,6 +26,8 @@ public:
 	void sync();
 	void setDeviceFields(QVariantList p_list);
 	QVector<int>* getDeviceFields();
+	void getTabDef(QJsonArray &p_list);
+	void setTabDef(QJsonArray &p_list);
 	void setMainWindowSize(int p_width,int p_height);
 	int getMainWindowWidth();
 	int getMainWindowHeight();

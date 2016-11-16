@@ -16,6 +16,7 @@
 #include "gui/formdevinfo.h"
 #include "gui/formparinfo.h"
 #include "gui/visibletabs.h"
+#include "gui/usertabdef.h"
 #include "mainwindow.h"
 #include "about.h"
 #include "base/utils.h"
@@ -99,6 +100,7 @@ void TMainWindow::refresh()
 	fillMtab();
 	fillIscsi();
 	fillStats();
+	fillUserTabDef();
 }
 
 void TMainWindow::fillIscsi()
@@ -436,8 +438,10 @@ void TMainWindow::fillDevice()
 }
 
 void TMainWindow::showUserDefinedTabs(){
-	TFormTabDef l_form;
+	TFormTabDef l_form(&userTabs);
 	l_form.exec();
+	setupUserTabs();
+	fillUserTabDef();
 }
 
 void TMainWindow::showFieldChooser(){
@@ -486,13 +490,49 @@ void TMainWindow::expandDeviceAll()
 	ui.diskList->expandAll();
 }
 
+void TMainWindow::fillUserTabDef()
+{	
+	TLinkListIterator<TTabDef> l_iterDef(&userTabs);
+	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
+	TTabDef *l_def;
+	while(l_iterDef.hasNext() && l_widgetIter.hasNext()){
+		l_def=l_iterDef.next();
+		l_widgetIter.next()->fillGrid(l_def,info);
+	}	
+}
+
+
+void TMainWindow::setupUserTabs()
+{
+	TLinkListIterator<TTabDef> l_iter(&userTabs);
+	TTabDef *l_def;
+	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
+	TUserTabDef *l_widget;
+	while(l_widgetIter.hasNext()){
+		l_widget=l_widgetIter.next();
+		l_widget->close();
+		delete l_widget;		
+	}
+	
+	userTabWidgets.clear();
+	
+	
+	while(l_iter.hasNext()){
+		l_def=l_iter.next();
+		l_widget=new TUserTabDef(nullptr);
+		ui.info->addTab(l_widget,l_def->getName());
+		userTabWidgets.append(l_widget);
+	}
+	
+}
+
 
 TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 {
 	ui.setupUi(this);
 	info=nullptr;
 	devModel=nullptr;
-
+	userTabs.read();
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));
 	ui.itemSource->addItem(i18n("Labels"));
@@ -508,7 +548,6 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	ui.diskList->setItemDelegate(new TGridDelegate(ui.diskList));
 	g_app->setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
 	setWindowIcon(QIcon(QStringLiteral(":/icons/mainicon.png")));
-	refresh();
 	
 	connect(ui.actionQuit,SIGNAL(triggered()),g_app,SLOT(quit()));
 	connect(ui.actionFields,SIGNAL(triggered()), this,SLOT(showFieldChooser()));
@@ -539,7 +578,8 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 		expandDeviceAll();
 	}
 	setVisibleTabs();
-
+	setupUserTabs();
+	refresh();
 }
 //MyItem * myObj 
 //       = static_cast<MyItem*>

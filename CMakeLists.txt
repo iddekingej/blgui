@@ -17,7 +17,9 @@ set(bdgui_ui
 	ui/about.ui 
 	ui/visibletabs.ui
 	ui/mount.ui
+	ui/newtab.ui
 	ui/tabconfig.ui
+	ui/usertabdef.ui
 )
 
 set(bdgui_RESOURCES 
@@ -59,6 +61,8 @@ set(bdgui_SRCS
 	gui/visibletabs.cpp
 	gui/mountdialog.cpp
 	gui/formtabdef.cpp
+	gui/formnewtab.cpp
+	gui/usertabdef.cpp
 )
 
 find_path(INC_BLKID blkid/blkid.h)

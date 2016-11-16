@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>605</width>
-    <height>557</height>
+    <height>687</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -60,7 +60,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="addTab">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -119,10 +119,19 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>Title Label</string>
+           <string>Tab label</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="tabLabel"/>
         </item>
         <item>
          <widget class="QLabel" name="label_3">
@@ -162,7 +171,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="filePartition">
+              <widget class="QRadioButton" name="filterPartition">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                  <horstretch>0</horstretch>
