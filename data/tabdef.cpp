@@ -4,6 +4,7 @@
 #include "base/config.h"
 #include <QJsonValueRef>
 #include "base/utils.h"
+#include "base/doublelinkedlist.h"
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
@@ -39,7 +40,7 @@ void TTabDef::toJson(QJsonArray& p_document)
 }
 
 
-//TODO: Exception when allready exists
+//TODO: Exception when already exists
 TTabDef * TTabDefList::createTabDef(const QString& p_name)
 {
 	TTabDef *l_item=new TTabDef(p_name);
@@ -55,7 +56,7 @@ TTabDef * TTabDefList::createTabDef(const QString& p_name)
  */
 TTabDef * TTabDefList::getByName(QString& p_name)
 {
-	TLinkListIterator<TTabDef> l_iter(this);
+	TDoubleLinkedListIterator<TTabDef> l_iter(this);
 	TTabDef *l_item;
 	while(l_iter.hasNext()){
 		l_item=l_iter.next();
@@ -64,15 +65,14 @@ TTabDef * TTabDefList::getByName(QString& p_name)
 	return nullptr;
 }
 
-TTabDef* TTabDefList::getByPosition(int p_pos)
+TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(int p_pos)
 {
-	TLinkListIterator<TTabDef> l_iter(this);
 	int l_pos=0;
-	TTabDef *l_item;
-	while(l_iter.hasNext()){		
-		l_item=l_iter.next();
+	TDoubleLinkedListItem<TTabDef> *l_item=this->getStart();
+	while(l_item != nullptr){				
 		if(l_pos==p_pos) return l_item;
 		l_pos++;
+		l_item=l_item->getNext();
 	}
 	return nullptr;
 }
@@ -98,7 +98,7 @@ void TTabDefList::read()
 void TTabDefList::save()
 {
 	QJsonArray l_data;
-	TLinkListIterator<TTabDef> l_iter(this);	
+	TDoubleLinkedListIterator<TTabDef> l_iter(this);	
 	while(l_iter.hasNext()){
 		l_iter.next()->toJson(l_data);		
 	}

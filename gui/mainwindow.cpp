@@ -492,7 +492,7 @@ void TMainWindow::expandDeviceAll()
 
 void TMainWindow::fillUserTabDef()
 {	
-	TLinkListIterator<TTabDef> l_iterDef(&userTabs);
+	TDoubleLinkedListIterator<TTabDef> l_iterDef(userTabs);
 	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
 	TTabDef *l_def;
 	while(l_iterDef.hasNext() && l_widgetIter.hasNext()){
@@ -504,7 +504,7 @@ void TMainWindow::fillUserTabDef()
 
 void TMainWindow::setupUserTabs()
 {
-	TLinkListIterator<TTabDef> l_iter(&userTabs);
+	TDoubleLinkedListIterator<TTabDef> l_iter(userTabs);
 	TTabDef *l_def;
 	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
 	TUserTabDef *l_widget;

@@ -49,7 +49,7 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	}	
 	ui.conditionField->setCurrentIndex(p_def->getConditionField()+1);
 	ui.conditionValue->setText(p_def->getConditionValue());
-	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);
+	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);	
 }
 
 void TFormTabDef::formToCurrentTabDef()
@@ -60,22 +60,27 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setConditionField(ui.conditionField->currentIndex()-1);
 		current->setConditionType((TConditionType)(ui.conditionType->currentIndex()-1));
 		current->setConditionValue(ui.conditionValue->text());
-		
+		current=nullptr;
 	}
 }
 
 
-void TFormTabDef::selectTabDev(QModelIndex p_index)
+void TFormTabDef::selectTabDev(const QItemSelection & p_selected, const QItemSelection & p_deselected)
 {
-	QVariant l_idv=p_index.data(Qt::UserRole+1);
-	int l_id=l_idv.toInt();
-	TTabDef *l_def=tabDefs->getByPosition(l_id);
-	if(current != nullptr){
-		formToCurrentTabDef();
-		tabDefModel->setItem(currentRow,0,new QStandardItem(ui.tabLabel->text()));
+	QModelIndex l_index=ui.tabList->currentIndex();
+	int l_id=l_index.row();	
+	TDoubleLinkedListItem<TTabDef> *l_item=tabDefs->getByPosition(l_id);
+	if(l_item != nullptr){
+		ui.upDef->setEnabled(l_item->getPrv() != nullptr );
+		ui.downDef->setEnabled(l_item->getNext() != nullptr);
+		TTabDef *l_def=l_item->getItem();
+		if(current != nullptr){
+			formToCurrentTabDef();
+			tabDefModel->setItem(currentRow,0,new QStandardItem(ui.tabLabel->text()));
+		}
+		currentRow= l_id;
+		fillFormByTabDef(l_def);
 	}
-	currentRow=p_index.row();
-	if(l_def != nullptr) fillFormByTabDef(l_def);
 
 }
 
@@ -84,6 +89,14 @@ void TFormTabDef::saveTabDef()
 	formToCurrentTabDef();
 	tabDefs->save();
 	accept();
+}
+
+
+void TFormTabDef::cancelDef()
+{	
+	tabDefs->clear();
+	tabDefs->read();
+	reject();
 }
 
 TFormTabDef::~TFormTabDef()
@@ -95,7 +108,7 @@ void TFormTabDef::fillTabDef()
 {
 	tabDefModel->clear();
 	tabDefModel->setRowCount(tabDefs->getLength());
-	TLinkListIterator<TTabDef> l_iter(tabDefs);
+	TDoubleLinkedListIterator<TTabDef> l_iter(tabDefs);
 	int l_cnt=0;
 	QStandardItem *l_item;
 	TTabDef *l_def;
@@ -109,10 +122,54 @@ void TFormTabDef::fillTabDef()
 }
 
 
-void TFormTabDef::refreshList()
+void TFormTabDef::refreshList(int p_move)
 {
+	QModelIndex l_index=ui.tabList->currentIndex();
+	int l_row=l_index.row()+p_move;
 	fillTabDef();
-	
+	QModelIndex l_newIndex=tabDefModel->index(l_row,0);
+	ui.tabList->setCurrentIndex(l_newIndex);
+}
+
+TDoubleLinkedListItem<TTabDef> * TFormTabDef::getCurrentItem()
+{
+	QModelIndex l_index=ui.tabList->currentIndex();
+	QVariant l_idv=l_index.data(Qt::UserRole+1);
+	int l_id=l_idv.toInt();
+	TDoubleLinkedListItem<TTabDef> *l_item=tabDefs->getByPosition(l_id);
+	return l_item;
+}
+
+
+void TFormTabDef::delDef()
+{	
+	TDoubleLinkedListItem<TTabDef> *l_item=getCurrentItem();
+	if(l_item != nullptr){
+		tabDefs->del(l_item);
+		refreshList();
+		current=nullptr;
+	}
+}
+
+
+void TFormTabDef::upDef()
+{
+	formToCurrentTabDef();
+	TDoubleLinkedListItem<TTabDef> *l_item=getCurrentItem();
+	if(l_item != nullptr){
+		tabDefs->moveDown(l_item);
+	}
+	refreshList(-1);
+}
+
+void TFormTabDef::downDef()
+{
+	formToCurrentTabDef();
+	TDoubleLinkedListItem<TTabDef> *l_item=getCurrentItem();
+	if(l_item != nullptr){
+		tabDefs->moveUp(l_item);
+	}
+	refreshList(1);
 }
 
 
@@ -129,7 +186,13 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	fillTabDef();
 	connect(ui.conditionType,SIGNAL(currentIndexChanged(int)),this,SLOT(changeConditionType(int)));
 	connect(ui.addTab, SIGNAL(clicked()),this,SLOT(newTab()));
-	connect(ui.tabList,SIGNAL(clicked(QModelIndex)),this,SLOT(selectTabDev(QModelIndex)));
+	connect(ui.tabList->selectionModel() ,SIGNAL(selectionChanged(const QItemSelection &,const QItemSelection &)),this,SLOT(selectTabDev(const QItemSelection &,const QItemSelection &)));
 	connect(ui.okButton,SIGNAL(clicked()),this,SLOT(saveTabDef()));
+	connect(ui.cancelButton,SIGNAL(clicked()),this,SLOT(cancelDef()));
+	connect(ui.delDef,SIGNAL(clicked()),this,SLOT(delDef()));
+	connect(ui.upDef,SIGNAL(clicked()),this,SLOT(upDef()));
+	connect(ui.downDef,SIGNAL(clicked()),this,SLOT(downDef()));
+	ui.upDef->setDisabled(true);
+	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
 }

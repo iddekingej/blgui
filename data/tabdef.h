@@ -3,7 +3,7 @@
 #include <QString>
 #include <QLinkedList>
 #include <QJsonDocument>
-#include "../base/linklist.h"
+#include "../base/doublelinkedlist.h"
 
 typedef enum{
 	TT_Device=0
@@ -42,11 +42,11 @@ public:
 	TTabDef(QJsonObject &p_json);
 };
 
-class TTabDefList:public TLinkList<TTabDef>{
+class TTabDefList:public TDoubleLinkedList<TTabDef>{
 public:
 	TTabDef *createTabDef(const QString &p_name);
 	TTabDef *getByName(QString &p_name);
-	TTabDef *getByPosition(int p_pos);
+	TDoubleLinkedListItem<TTabDef> *getByPosition(int p_pos);
 	void save();
 	void read();
 };

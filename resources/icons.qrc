@@ -3,5 +3,7 @@
     <file>../icons/add.png</file>
     <file>../icons/mainicon.png</file>
     <file>../icons/close.png</file>
+    <file>../icons/up.png</file>
+    <file>../icons/down.png</file>
   </qresource>
 </RCC>
