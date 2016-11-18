@@ -3,6 +3,7 @@
 #include "data/tabdef.h"
 #include "formnewtab.h"
 #include "base/utils.h"
+#include <QMessageBox>
 void TFormTabDef::fillConditionField()
 {
 	ui.conditionField->addItem("");
@@ -10,6 +11,19 @@ void TFormTabDef::fillConditionField()
 		ui.conditionField->addItem(g_deviceFields[l_cnt]);
 	}
 }
+
+
+void TFormTabDef::fillFields()
+{
+	ui.fieldSelector->clear();
+	ui.fieldSelector->addItem("",-1);
+	if(current != nullptr){
+		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
+			if(!current->hasFieldInSelected(l_cnt))	ui.fieldSelector->addItem(g_deviceFields[l_cnt],l_cnt);
+		}	
+	}
+}
+
 
 void TFormTabDef::fillConditionType()
 {
@@ -38,6 +52,18 @@ void TFormTabDef::newTab()
 	
 }
 
+void TFormTabDef::fillSelectedFields()
+{
+	fieldListModel->clear();
+	   QVector<int> *l_fields=current->getSelectedList();
+	for(int l_cnt=0;l_cnt<l_fields->size();l_cnt++){
+		int l_field=(*l_fields)[l_cnt];
+		addFieldToFieldListModel(l_field);
+		
+	}
+	
+}
+
 void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 {
 	current=p_def;
@@ -50,6 +76,7 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.conditionField->setCurrentIndex(p_def->getConditionField()+1);
 	ui.conditionValue->setText(p_def->getConditionValue());
 	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);	
+	fillSelectedFields();
 }
 
 void TFormTabDef::formToCurrentTabDef()
@@ -61,6 +88,7 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setConditionType((TConditionType)(ui.conditionType->currentIndex()-1));
 		current->setConditionValue(ui.conditionValue->text());
 		current=nullptr;
+		ui.editTabDef->setVisible(false);
 	}
 }
 
@@ -78,8 +106,10 @@ void TFormTabDef::selectTabDev(const QItemSelection & p_selected, const QItemSel
 			formToCurrentTabDef();
 			tabDefModel->setItem(currentRow,0,new QStandardItem(ui.tabLabel->text()));
 		}
+		ui.editTabDef->setVisible(true);
 		currentRow= l_id;
 		fillFormByTabDef(l_def);
+		fillFields();
 	}
 
 }
@@ -102,6 +132,7 @@ void TFormTabDef::cancelDef()
 TFormTabDef::~TFormTabDef()
 {
 	delete tabDefModel;
+	delete fieldListModel;
 }
 
 void TFormTabDef::fillTabDef()
@@ -172,13 +203,38 @@ void TFormTabDef::downDef()
 	refreshList(1);
 }
 
+void TFormTabDef::addFieldToFieldListModel(int p_index)
+{
+	auto l_item=new QStandardItem(g_deviceFields[p_index]);
+	l_item->setData(p_index);
+	fieldListModel->appendRow(l_item);
+}
+
+
+void TFormTabDef::addField()
+{
+	QVariant l_userData=ui.fieldSelector->currentData();
+	int l_index=l_userData.toInt();
+	if(l_index==-1){
+		QMessageBox::information(nullptr,i18n("Error"),i18n("Please select a field to add"));
+	} else{
+		addFieldToFieldListModel(l_index);
+		if(current != nullptr){
+			current->addSelectedList(l_index);
+		}
+		fillFields();
+	}
+
+}
+
 
 TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 {
 	ui.setupUi(this);
 	tabDefModel=new QStandardItemModel(0,1);
 	ui.tabList->setModel(tabDefModel);
-
+	fieldListModel=new QStandardItemModel(0,1);
+	ui.fieldList->setModel(fieldListModel);
 	tabDefs=p_list;	
 	current=nullptr;
 	fillConditionField();
@@ -192,7 +248,9 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	connect(ui.delDef,SIGNAL(clicked()),this,SLOT(delDef()));
 	connect(ui.upDef,SIGNAL(clicked()),this,SLOT(upDef()));
 	connect(ui.downDef,SIGNAL(clicked()),this,SLOT(downDef()));
+	connect(ui.addField,SIGNAL(clicked()),this,SLOT(addField()));
 	ui.upDef->setDisabled(true);
 	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
+	ui.editTabDef->setVisible(false);
 }

@@ -14,14 +14,44 @@ TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 	ui.dataView->setModel(model);	
 }
 
+
+void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
+	int l_fieldId;
+	for(int l_cnt=0;l_cnt<p_fields->length();l_cnt++){
+		l_fieldId=(*p_fields)[l_cnt];
+		if(l_fieldId<g_numDeviceFields){
+			model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));
+		}
+	}
+}
+
+void TUserTabDef::displayRow(int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list)
+{
+	int l_fieldId;
+	QStandardItem *l_item;
+	int l_itemSize=p_list.count();	
+//fill fixed columns 
+	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
+		l_item=new QStandardItem(p_list[l_cnt]);	
+		model->setItem(p_row,l_cnt,l_item);
+		
+	}
+	
+//fill flexible columns
+	for(int l_cnt=0;l_cnt<p_enabledFields->count();l_cnt++){
+		l_fieldId=(*p_enabledFields)[l_cnt];		
+		if(l_fieldId+p_begin<l_itemSize){
+		    model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));		
+		}
+	}
+}
+
 void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 {
 	model->clear();
 	model->setHorizontalHeaderItem(0,new QStandardItem("Device"));
 	model->setHorizontalHeaderItem(1,new QStandardItem("Partition"));
-	for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
-		model->setHorizontalHeaderItem(2+l_cnt,new QStandardItem(g_deviceFields[l_cnt]));
-	}	
+	fillHeader(2,p_def->getSelectedList());
 	const QHash<QString,TDeviceBase*> *l_map=p_info->getDevices()->getNameIndex();
 	QHashIterator<QString,TDeviceBase *> l_iter(*l_map);
 	TDeviceBase *l_device;
@@ -30,7 +60,7 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	TConditionType l_conditionType=p_def->getConditionType();
 	bool l_ok;
 	QString l_value;
-	
+	int l_row=0;
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_device=l_iter.value();
@@ -47,14 +77,8 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 			
 		}
 		if(l_ok){
-			
-			QList<QStandardItem *>l_list;
-			l_list << new QStandardItem(l_info[0]);
-			l_list << new QStandardItem(l_info[1]);
-			for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
-				l_list << new QStandardItem(l_info[l_cnt+2]);
-			}
-			model->appendRow(l_list);
+			displayRow(2,l_row,p_def->getSelectedList(),l_info);
+			l_row++;
 		}
 	}
 }

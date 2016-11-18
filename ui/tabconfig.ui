@@ -310,13 +310,47 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <property name="spacing">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
            <number>10</number>
           </property>
           <item>
            <widget class="QComboBox" name="fieldSelector"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="upField">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources/icons.qrc">
+              <normaloff>:/icons/up.png</normaloff>:/icons/up.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources/icons.qrc">
+              <normaloff>:/icons/down.png</normaloff>:/icons/down.png</iconset>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="addField">
@@ -335,17 +369,27 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="delField">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../resources/icons.qrc">
+              <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
-         <widget class="QWidget" name="fieldList" native="true">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
+         <widget class="QListView" name="fieldList"/>
         </item>
        </layout>
       </widget>

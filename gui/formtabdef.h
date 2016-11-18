@@ -17,11 +17,14 @@ private slots:
 	void delDef();
 	void upDef();
 	void downDef();	
+	void addField();
+	
 private:
 	Ui::tabdef ui;
 	QStandardItemModel *tabDefModel;
+	QStandardItemModel *fieldListModel;
 	TTabDefList *tabDefs;
-	TTabDef *current;
+	TTabDef     *current;
 	
 	int currentRow;
 	void fillConditionField();
@@ -29,6 +32,9 @@ private:
 	void fillFormByTabDef(TTabDef *p_def);
 	void formToCurrentTabDef();
 	void fillTabDef();
+	void fillFields();
+	void fillSelectedFields();
+	void addFieldToFieldListModel(int p_int);
 	TDoubleLinkedListItem<TTabDef> *getCurrentItem();
 public:
 	TFormTabDef(TTabDefList *p_tabDefs);

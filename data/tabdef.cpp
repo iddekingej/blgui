@@ -5,6 +5,7 @@
 #include <QJsonValueRef>
 #include "base/utils.h"
 #include "base/doublelinkedlist.h"
+#include <QJsonArray>
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
@@ -19,6 +20,10 @@ TTabDef::TTabDef(QJsonObject& p_json)
 	conditionType=(TConditionType)(p_json["conditionType"].toInt());
 	conditionValue=p_json["conditionValue"].toString();	
 	conditionField=p_json["conditionField"].toInt();
+	QJsonArray l_fields=p_json["selectedFields"].toArray();
+	for(int l_cnt=0;l_cnt<l_fields.size();l_cnt++){
+		selectedList.append(l_fields[l_cnt].toInt());
+	}
 }
 
 
@@ -36,6 +41,11 @@ void TTabDef::toJson(QJsonArray& p_document)
 	l_object["conditionType"]=conditionType;
 	l_object["conditionValue"]=conditionValue;
 	l_object["conditionField"]=conditionField;
+	QJsonArray l_arr;
+	for(int l_field:selectedList){
+		l_arr.push_back(QJsonValue(l_field));
+	}
+	l_object["selectedFields"]=l_arr;
 	p_document.push_back(l_object);
 }
 
