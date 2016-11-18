@@ -16,7 +16,6 @@ void TPCIInfo::readInfo()
 	QDirIterator l_iter("/sys/bus/pci/drivers/ahci/",QStringList() << "[0-9]*",QDir::Dirs,QDirIterator::NoIteratorFlags);
 	while(l_iter.hasNext()){		
 		l_iter.next();
-		printf("%s \n",qstr(l_iter.fileName()));
 		processBus(l_iter.filePath(),l_iter.fileName());
 	}
 }
