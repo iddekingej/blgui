@@ -2,7 +2,8 @@
 #define __TABDEF_H_
 #include <QString>
 #include <QVector>
-#include <QJsonDocument>
+#include "qjsonwrapper/Json.h"
+
 #include "../base/doublelinkedlist.h"
 
 typedef enum{
@@ -36,12 +37,13 @@ public:
 	inline QString &getConditionValue(){ return conditionValue;}
 	inline void setConditionValue(QString p_value){ conditionValue=p_value;}
 	inline QVector<int> *getSelectedList(){ return &selectedList;};
-	void toJson(QJsonArray &o_p_document);
+	void toJson(QList<QVariant> &p_variant);
+	TTabDef(QVariant &p_json);
 	void addSelectedList(int p_field);
 	inline bool hasFieldInSelected(int p_field){ return selectedList.indexOf(p_field) != -1;}
 	
 	TTabDef(const QString &p_name);
-	TTabDef(QJsonObject &p_json);
+	
 };
 
 class TTabDefList:public TDoubleLinkedList<TTabDef>{

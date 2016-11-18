@@ -1,26 +1,29 @@
 #include "tabdef.h"
-#include <QJsonArray>
-#include <QJsonObject>
 #include "base/config.h"
-#include <QJsonValueRef>
 #include "base/utils.h"
 #include "base/doublelinkedlist.h"
-#include <QJsonArray>
+#include <QMap>
+#include <QVariant>
+#include <QList>
+#include <QListIterator>
+
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
 }
 
 
-TTabDef::TTabDef(QJsonObject& p_json)
+TTabDef::TTabDef(QVariant& p_json)
 {
-	name=p_json["name"].toString();
-	int l_co=p_json["conditionObject"].toInt();
+	QMap<QString,QVariant> l_map=p_json.toMap();
+	
+	name=l_map["name"].toString();
+	int l_co=l_map["conditionObject"].toInt();
 	conditionObject=(l_co==TT_Device)?TT_Device:TT_Partition;
-	conditionType=(TConditionType)(p_json["conditionType"].toInt());
-	conditionValue=p_json["conditionValue"].toString();	
-	conditionField=p_json["conditionField"].toInt();
-	QJsonArray l_fields=p_json["selectedFields"].toArray();
+	conditionType=(TConditionType)(l_map["conditionType"].toInt());
+	conditionValue=l_map["conditionValue"].toString();	
+	conditionField=l_map["conditionField"].toInt();
+	QList<QVariant> l_fields=l_map["selectedFields"].toList();
 	for(int l_cnt=0;l_cnt<l_fields.size();l_cnt++){
 		selectedList.append(l_fields[l_cnt].toInt());
 	}
@@ -33,19 +36,19 @@ void TTabDef::addSelectedList(int p_field)
 }
 
 
-void TTabDef::toJson(QJsonArray& p_document)
+void TTabDef::toJson(QList<QVariant>& p_document)
 {
-	QJsonObject l_object;
-	l_object["name"]=name;
-	l_object["conditionObject"]=conditionObject;
-	l_object["conditionType"]=conditionType;
-	l_object["conditionValue"]=conditionValue;
-	l_object["conditionField"]=conditionField;
-	QJsonArray l_arr;
+	QMap<QString,QVariant> l_object;
+	l_object["name"]=QVariant(name);
+	l_object["conditionObject"]=QVariant(conditionObject);
+	l_object["conditionType"]=QVariant(conditionType);
+	l_object["conditionValue"]=QVariant(conditionValue);
+	l_object["conditionField"]=QVariant(conditionField);
+	QList<QVariant> l_arr;
 	for(int l_field:selectedList){
-		l_arr.push_back(QJsonValue(l_field));
+		l_arr.push_back(QVariant(l_field));
 	}
-	l_object["selectedFields"]=l_arr;
+	l_object["selectedFields"]=QVariant(l_arr);
 	p_document.push_back(l_object);
 }
 
@@ -89,30 +92,28 @@ TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(int p_pos)
 
 void TTabDefList::read()
 {
-	QJsonArray l_data;
+	QVariant l_data;
+	QVariant l_value;
 	g_config.getTabDef(l_data);
-	QJsonObject l_object;	
-	for(int l_cnt=0;l_cnt<l_data.size();l_cnt++){
-		QJsonValue l_value=l_data[l_cnt];
-		if(l_value.isObject()){			
-			l_object=l_value.toObject();
-			TTabDef *l_def=new TTabDef(l_object);
-			append(l_def);
-		} else {
-			printf("Not an object \n");
-		}
+	QList<QVariant> l_list=l_data.toList();
+	QListIterator<QVariant> l_iter(l_list);
+	while(l_iter.hasNext()){
+		l_value=l_iter.next();
+		TTabDef *l_def=new TTabDef(l_value);
+		append(l_def);
 	}
 	
 }
 
 void TTabDefList::save()
 {
-	QJsonArray l_data;
+	QList<QVariant> l_data;
 	TDoubleLinkedListIterator<TTabDef> l_iter(this);	
 	while(l_iter.hasNext()){
 		l_iter.next()->toJson(l_data);		
 	}
-	g_config.setTabDef(l_data);
+	QVariant l_value(l_data);
+	g_config.setTabDef(l_value);
 	g_config.sync();
 }
 

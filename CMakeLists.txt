@@ -63,6 +63,7 @@ set(bdgui_SRCS
 	gui/formtabdef.cpp
 	gui/formnewtab.cpp
 	gui/usertabdef.cpp
+	qjsonwrapper/Json.cpp
 )
 
 find_path(INC_BLKID blkid/blkid.h)

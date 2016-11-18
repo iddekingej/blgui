@@ -1,5 +1,6 @@
 #include "formnewtab.h"
 #include <QMessageBox>
+#include <klocalizedstring.h>
 
 TFormNewTab::TFormNewTab(QString p_name):QDialog()
 {

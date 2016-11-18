@@ -6,6 +6,7 @@
 #include <QList>
 #include "data/devicebase.h"
 #include "base/globals.h"
+#include <klocalizedstring.h>
 TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 {
 	ui.setupUi(this);
@@ -17,7 +18,7 @@ TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 
 void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
 	int l_fieldId;
-	for(int l_cnt=0;l_cnt<p_fields->length();l_cnt++){
+	for(int l_cnt=0;l_cnt<p_fields->size();l_cnt++){
 		l_fieldId=(*p_fields)[l_cnt];
 		if(l_fieldId<g_numDeviceFields){
 			model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));

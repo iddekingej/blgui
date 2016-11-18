@@ -4,6 +4,7 @@
 #include "formnewtab.h"
 #include "base/utils.h"
 #include <QMessageBox>
+#include <klocalizedstring.h>
 void TFormTabDef::fillConditionField()
 {
 	ui.conditionField->addItem("");
@@ -213,7 +214,7 @@ void TFormTabDef::addFieldToFieldListModel(int p_index)
 
 void TFormTabDef::addField()
 {
-	QVariant l_userData=ui.fieldSelector->currentData();
+	QVariant l_userData=ui.fieldSelector->itemData(ui.fieldSelector->currentIndex());
 	int l_index=l_userData.toInt();
 	if(l_index==-1){
 		QMessageBox::information(nullptr,i18n("Error"),i18n("Please select a field to add"));

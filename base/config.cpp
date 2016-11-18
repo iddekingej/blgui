@@ -2,9 +2,8 @@
 #include "globals.h"
 #include "base/compat.h"
 #include "base/utils.h"
-#include <QJsonObject>
-#include <QListIterator>
-#include <QJsonDocument>
+#include "qjsonwrapper/Json.h"
+#include <QVariant>
 
 TConfig::TConfig()
 {
@@ -35,21 +34,15 @@ void TConfig::setup()
 
 }
 	
-void TConfig::getTabDef(QJsonArray& p_list)
+void TConfig::getTabDef(QVariant& p_list)
 {
 	QByteArray l_data=configGui.readEntry("tabdef",QByteArray());
-	QJsonParseError l_err;
-	QJsonDocument l_doc=QJsonDocument::fromJson(l_data,&l_err);
-	if(l_doc.isArray()){
-		p_list=l_doc.array();
-	} 
-	
+	p_list=QJsonWrapper::parseJson(l_data);
 }
 
-void TConfig::setTabDef(QJsonArray& p_list)
-{
-	QJsonDocument l_document(p_list);
-	configGui.writeEntry("tabdef",l_document.toJson());
+void TConfig::setTabDef(QVariant& p_list)
+{	
+	configGui.writeEntry("tabdef",QJsonWrapper::toJson(p_list));
 }
 
 	
