@@ -9,6 +9,7 @@
 typedef enum{
 	TT_Device=0
 ,	TT_Partition=1
+,	TT_BOTH=2
 } TObjectType;
 
 typedef enum{

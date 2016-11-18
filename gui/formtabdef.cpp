@@ -71,8 +71,10 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.tabLabel->setText(p_def->getName());
 	if(p_def->getConditionObject()==TT_Partition){
 		ui.filterPartition->setChecked(true);
-	} else {
+	} else if(p_def->getConditionObject()==TT_Device) {
 		ui.filterDevice->setChecked(true);
+	} else {
+		ui.filterBoth->setChecked(true);
 	}	
 	ui.conditionField->setCurrentIndex(p_def->getConditionField()+1);
 	ui.conditionValue->setText(p_def->getConditionValue());
@@ -84,7 +86,13 @@ void TFormTabDef::formToCurrentTabDef()
 {
 	if(current != nullptr){
 		current->setName(ui.tabLabel->text());
-		current->setConditionObject(ui.filterPartition->isChecked()?TT_Partition:TT_Device);
+		TObjectType l_type=TT_Partition;
+		if(ui.filterDevice->isChecked()){
+			l_type=TT_Device;
+		} else if(ui.filterBoth->isChecked()){
+			l_type=TT_BOTH;
+		}
+		current->setConditionObject(l_type);
 		current->setConditionField(ui.conditionField->currentIndex()-1);
 		current->setConditionType((TConditionType)(ui.conditionType->currentIndex()-1));
 		current->setConditionValue(ui.conditionValue->text());

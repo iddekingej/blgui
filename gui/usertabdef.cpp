@@ -65,6 +65,12 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_device=l_iter.value();
+		if(p_def->getConditionObject()==TT_Device){
+			if(dynamic_cast<TDevice *>(l_device)==nullptr) continue;
+		}
+		if(p_def->getConditionObject()==TT_Partition){
+			if(dynamic_cast<TPartition *>(l_device)==nullptr) continue;
+		}
 		l_info.clear();
 		l_device->fillDataRow(l_info);
 		l_ok=true;

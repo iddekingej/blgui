@@ -221,6 +221,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QRadioButton" name="filterBoth">
+               <property name="text">
+                <string>Both</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
