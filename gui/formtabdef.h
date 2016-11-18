@@ -5,12 +5,15 @@
 #include <QItemSelection>
 #include "ui_tabconfig.h"
 #include "data/tabdef.h"
+#include <QCloseEvent>
+
 class TFormTabDef:public QDialog{
 	Q_OBJECT
 private slots:
 	void changeConditionType(int p_index);
 	void newTab();
 	void selectTabDev(const QItemSelection & p_selected, const QItemSelection & p_deselected);
+	void selectField(const QItemSelection & p_selected, const QItemSelection & p_deselected);
 	void saveTabDef();
 	void cancelDef();
 	void refreshList(int p_move=0);
@@ -18,6 +21,9 @@ private slots:
 	void upDef();
 	void downDef();	
 	void addField();
+	void delField();
+	void upField();
+	void downField();
 	
 private:
 	Ui::tabdef ui;
@@ -35,7 +41,10 @@ private:
 	void fillFields();
 	void fillSelectedFields();
 	void addFieldToFieldListModel(int p_int);
+	void moveField(int p_dir);
 	TDoubleLinkedListItem<TTabDef> *getCurrentItem();
+protected:
+	virtual void closeEvent(QCloseEvent *p_event) override;
 public:
 	TFormTabDef(TTabDefList *p_tabDefs);
 	~TFormTabDef();

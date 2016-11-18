@@ -90,6 +90,7 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setConditionValue(ui.conditionValue->text());
 		current=nullptr;
 		ui.editTabDef->setVisible(false);
+		ui.delField->setDisabled(false);
 	}
 }
 
@@ -111,6 +112,9 @@ void TFormTabDef::selectTabDev(const QItemSelection & p_selected, const QItemSel
 		currentRow= l_id;
 		fillFormByTabDef(l_def);
 		fillFields();
+		ui.delField->setDisabled(true);
+		ui.upField->setEnabled(false);
+		ui.downField->setEnabled(false);
 	}
 
 }
@@ -129,6 +133,14 @@ void TFormTabDef::cancelDef()
 	tabDefs->read();
 	reject();
 }
+
+void TFormTabDef::closeEvent(QCloseEvent* p_event)
+{
+	tabDefs->clear();
+	tabDefs->read();
+	p_event->accept();
+}
+
 
 TFormTabDef::~TFormTabDef()
 {
@@ -212,6 +224,16 @@ void TFormTabDef::addFieldToFieldListModel(int p_index)
 }
 
 
+void TFormTabDef::selectField(const QItemSelection& p_selected, const QItemSelection& p_deselected)
+{
+	ui.delField->setEnabled(true);
+	QModelIndex l_index=ui.fieldList->currentIndex();
+	int l_row=l_index.row();
+	ui.upField->setEnabled(l_row>0);
+	ui.downField->setEnabled(l_row+1<fieldListModel->rowCount());
+}
+
+
 void TFormTabDef::addField()
 {
 	QVariant l_userData=ui.fieldSelector->itemData(ui.fieldSelector->currentIndex());
@@ -229,6 +251,55 @@ void TFormTabDef::addField()
 }
 
 
+void TFormTabDef::delField()
+{
+	QModelIndex l_index=ui.fieldList->currentIndex();
+	if(l_index.isValid() && current != nullptr){
+		int l_row=l_index.row();
+		current->getSelectedList()->remove(l_row);
+		fieldListModel->removeRow(l_row);
+		if(fieldListModel->rowCount()==0) ui.delField->setEnabled(false);
+	}
+}
+
+void TFormTabDef::moveField(int p_dir)
+{
+	QModelIndex l_index=ui.fieldList->currentIndex();
+	if(l_index.isValid() && current != nullptr){
+		int l_row=l_index.row();
+		int l_newRow=l_row+p_dir;
+		if(l_newRow>=0 && l_newRow < fieldListModel->rowCount()){
+			QVector<int> *l_list=current->getSelectedList();
+			
+			int l_item1=(*l_list)[l_row];
+			int l_item2=(*l_list)[l_newRow];
+			(*l_list)[l_row]=l_item2;
+			(*l_list)[l_newRow]=l_item1;
+			QStandardItem *l_item=new QStandardItem(g_deviceFields[l_item1]);
+			l_item->setData(l_item1);
+			fieldListModel->setItem(l_newRow,0,l_item);
+			l_item=new QStandardItem(g_deviceFields[l_item2]);
+			l_item->setData(l_item2);
+			fieldListModel->setItem(l_row,0,l_item);
+			ui.fieldList->setCurrentIndex(fieldListModel->index(l_newRow,0));
+			
+		}
+		
+	}
+}
+
+
+void TFormTabDef::downField()
+{
+	moveField(1);
+}
+void TFormTabDef::upField()
+{
+	moveField(-1);
+}
+
+
+
 TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 {
 	ui.setupUi(this);
@@ -244,14 +315,21 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	connect(ui.conditionType,SIGNAL(currentIndexChanged(int)),this,SLOT(changeConditionType(int)));
 	connect(ui.addTab, SIGNAL(clicked()),this,SLOT(newTab()));
 	connect(ui.tabList->selectionModel() ,SIGNAL(selectionChanged(const QItemSelection &,const QItemSelection &)),this,SLOT(selectTabDev(const QItemSelection &,const QItemSelection &)));
+	connect(ui.fieldList->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &,const QItemSelection &)),this,SLOT(selectField(const QItemSelection &,const QItemSelection &)));
 	connect(ui.okButton,SIGNAL(clicked()),this,SLOT(saveTabDef()));
 	connect(ui.cancelButton,SIGNAL(clicked()),this,SLOT(cancelDef()));
 	connect(ui.delDef,SIGNAL(clicked()),this,SLOT(delDef()));
 	connect(ui.upDef,SIGNAL(clicked()),this,SLOT(upDef()));
 	connect(ui.downDef,SIGNAL(clicked()),this,SLOT(downDef()));
 	connect(ui.addField,SIGNAL(clicked()),this,SLOT(addField()));
+	connect(ui.delField,SIGNAL(clicked()),this,SLOT(delField()));
+	connect(ui.upField,SIGNAL(clicked()),this,SLOT(upField()));
+	connect(ui.downField,SIGNAL(clicked()),this,SLOT(downField()));
 	ui.upDef->setDisabled(true);
 	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
 	ui.editTabDef->setVisible(false);
+	ui.upField->setEnabled(false);
+	ui.downField->setEnabled(false);
+	
 }
