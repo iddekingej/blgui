@@ -26,13 +26,13 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
 	}
 }
 
-void TUserTabDef::displayRow(int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list)
+void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list)
 {
 	int l_fieldId;
 	QStandardItem *l_item;
 	int l_itemSize=p_list.count();	
 //fill fixed columns 
-	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
+	for(int l_cnt=0;l_cnt<p_fixedEnd;l_cnt++){
 		l_item=new QStandardItem(p_list[l_cnt]);	
 		model->setItem(p_row,l_cnt,l_item);
 		
@@ -42,7 +42,7 @@ void TUserTabDef::displayRow(int p_begin,int p_row,QVector<int> *p_enabledFields
 	for(int l_cnt=0;l_cnt<p_enabledFields->count();l_cnt++){
 		l_fieldId=(*p_enabledFields)[l_cnt];		
 		if(l_fieldId+p_begin<l_itemSize){
-		    model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));		
+		    model->setItem(p_row,l_cnt+p_fixedEnd,new QStandardItem(p_list[l_fieldId+p_begin]));		
 		}
 	}
 }
@@ -51,8 +51,14 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 {
 	model->clear();
 	model->setHorizontalHeaderItem(0,new QStandardItem("Device"));
-	model->setHorizontalHeaderItem(1,new QStandardItem("Partition"));
-	fillHeader(2,p_def->getSelectedList());
+	if(p_def->getConditionObject()!=TT_Device){
+		model->setHorizontalHeaderItem(1,new QStandardItem("Partition"));
+	}
+	int l_fixedEnd=2;
+	if(p_def->getConditionObject()==TT_Device){
+		l_fixedEnd=1;
+	}	
+	fillHeader(l_fixedEnd,p_def->getSelectedList());
 	const QHash<QString,TDeviceBase*> *l_map=p_info->getDevices()->getNameIndex();
 	QHashIterator<QString,TDeviceBase *> l_iter(*l_map);
 	TDeviceBase *l_device;
@@ -62,9 +68,11 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	bool l_ok;
 	QString l_value;
 	int l_row=0;
+
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_device=l_iter.value();
+		
 		if(p_def->getConditionObject()==TT_Device){
 			if(dynamic_cast<TDevice *>(l_device)==nullptr) continue;
 		}
@@ -84,9 +92,11 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 			
 		}
 		if(l_ok){
-			displayRow(2,l_row,p_def->getSelectedList(),l_info);
+			displayRow(l_fixedEnd,2,l_row,p_def->getSelectedList(),l_info);
 			l_row++;
 		}
 	}
+	ui.dataView->sortByColumn(0,Qt::AscendingOrder);
+
 }
 

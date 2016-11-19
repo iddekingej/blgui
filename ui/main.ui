@@ -348,7 +348,7 @@
   </action>
   <action name="actionUserDefinedTabs">
    <property name="text">
-    <string>User defined tabs</string>
+    <string>&amp;User defined tabs</string>
    </property>
   </action>
  </widget>

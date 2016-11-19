@@ -134,7 +134,11 @@
              </layout>
             </item>
             <item>
-             <widget class="QListView" name="tabList"/>
+             <widget class="QListView" name="tabList">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -396,7 +400,11 @@
          </layout>
         </item>
         <item>
-         <widget class="QListView" name="fieldList"/>
+         <widget class="QListView" name="fieldList">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
