@@ -18,6 +18,7 @@
 #include "mtab.h"
 #include "iscsi.h"
 #include "base/compat.h"
+#include "lvm.h"
 
 class TDeviceInfo
 {
@@ -27,6 +28,7 @@ private:
 	TRaidInfo         *raidList;
 	TMTab             *mtab;
 	TIScsiSessionList *iscsi;
+	TLinkList<TPVInfo> *pvInfo;
 	blkid_cache blkidCache;
 	QDateTime   sbTime;
 	
@@ -57,6 +59,11 @@ public:
 	inline TIScsiSessionList *getIscsiSessions()
 	{
 		return iscsi;
+	}
+	
+	inline TLinkList<TPVInfo> *getPvInfo()
+	{
+		return pvInfo;
 	}
 	
 	void getDisks();	

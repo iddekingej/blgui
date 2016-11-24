@@ -59,6 +59,7 @@ private:
 	void fillIscsi();
 	void fillStats();
 	void fillUserTabDef();
+	void fillLvm();
 	void expandDeviceAll();
 	virtual void setVisibleTabs();
 	

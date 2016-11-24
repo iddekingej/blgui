@@ -100,7 +100,33 @@ void TMainWindow::refresh()
 	fillMtab();
 	fillIscsi();
 	fillStats();
+	fillLvm();
 	fillUserTabDef();
+	fillLvm();
+}
+
+void TMainWindow::fillLvm()
+{
+	QStandardItemModel *l_model=new QStandardItemModel(0,3,this);
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Devive")));
+	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Size")));
+	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
+	TLinkList<TPVInfo> *l_pvs=info->getPvInfo();
+	TLinkListIterator<TPVInfo> l_pvIter(l_pvs);
+	TPVInfo *l_pvInfo;
+	int l_cnt=0;
+	while(l_pvIter.hasNext()){
+		l_pvInfo=l_pvIter.next();
+		
+		
+		l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?"":l_pvInfo->getRealDevice()->getName()));
+		l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_pvInfo->getDevSize())));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_pvInfo->getVgName()));
+		l_cnt++;
+	}
+	ui.pvInfo->setModel(l_model);
+	ui.pvInfo->resizeRowsToContents();
+	ui.pvInfo->resizeColumnsToContents();
 }
 
 void TMainWindow::fillIscsi()

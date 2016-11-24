@@ -18,8 +18,26 @@
 #include "usb.h"
 
 const char* MOUNTS_PATH="/proc/mounts";
+
 //List of devices and retrives information about the device
 //Information about the devices are read from the /sys/block /dev/disk /proc/mounts/ proc/swap 
+
+
+void TDeviceList::handleDevNo(QString p_path,TDeviceBase *p_device){
+	QString      l_dev;
+	int l_minor;
+	int l_major;
+
+	readString(p_path,"dev",l_dev);
+	QStringList l_devNos=l_dev.split(":");
+	if(l_devNos.size()==2){
+		l_major=l_devNos[0].toLong();
+		l_minor=l_devNos[1].toLong();
+		p_device->setDeviceNo(l_major,l_minor);
+		devNoIndex.insert(l_major*256+l_minor,p_device);
+		
+	}	
+}
 
 
 //Read all block devices (not the partitions) by scanning /sys/block
@@ -51,9 +69,11 @@ void TDeviceList::readDevices()
 			QDir l_dir(l_iter.filePath());
 			readLong(l_iter.filePath(),"size",l_size);
 			l_size=l_size*512;
+			
 			readLong(l_iter.filePath(),"removable",l_removable);
 			readLong(l_iter.filePath(),"ro",l_readonly);
 			readLong(l_iter.filePath(),"queue/rotational",l_rotational);
+
 			if(l_dir.exists("device")==1){
 				readString(l_iter.filePath(),"device/model",l_model);					
 				readString(l_iter.filePath(),"device/vendor",l_vendor);
@@ -80,6 +100,7 @@ void TDeviceList::readDevices()
 			l_device->setScsiBus(l_scsiBus);
 			l_device->setVendor(l_vendor.trimmed());
 			l_device->setRotational(l_rotational==1);
+			handleDevNo(l_iter.filePath(),l_device);
 
 //finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
 //set device scsibus and add device to scsibus index
@@ -140,6 +161,8 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	QString      l_sizeStr("size");
 	TPartition   *l_partition;
 	TDiskSize    l_start;
+	QString     l_dev;
+	
 	while(l_iter.hasNext()){
 		l_iter.next();
 		if(l_iter.fileInfo().isDir() && l_iter.fileName().startsWith(p_device->getName())){
@@ -150,6 +173,8 @@ void TDeviceList::readPartitions(TDevice* p_device)
 			l_partition=p_device->addParition(l_deviceName,l_size,l_start);	
 			nameIndex.insert(l_deviceName,l_partition);
 			deviceByDevPath.insert(l_partition->getDevPath(),l_partition);
+			handleDevNo(l_iter.filePath(),l_partition);
+		
 		}
 	}	
 }

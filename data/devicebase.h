@@ -20,8 +20,18 @@ private:
 	TLinkList<TMount > mounts;
 	TLinkList<TDeviceAlias> deviceAlias;
 	QList<TDeviceBase *>    slaves;
+	int minor;
+	int major;
 
 public:
+	inline void setDeviceNo(int p_major,int p_minor){
+		minor=p_minor;
+		major=p_major;
+	}
+	
+	inline int getMinor(){ return minor;}
+	inline int getMajor(){ return major;}
+	
 	inline TLinkList<TDeviceAlias> *getDeviceAlias(){
 		return &deviceAlias;
 	}

@@ -52,6 +52,7 @@ set(bdgui_SRCS
 	data/linuxraid.cpp
 	data/pci.cpp
 	data/tabdef.cpp
+	data/lvm.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 
