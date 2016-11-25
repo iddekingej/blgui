@@ -23,5 +23,6 @@ const  char *g_deviceFields[]={
 ,	I18N_NOOP("USB bus")
 ,	I18N_NOOP("PCI bus")
 ,	I18N_NOOP("Volume group name")
+,	I18N_NOOP("Lvm name")
 };
 const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);

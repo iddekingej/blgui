@@ -17,8 +17,22 @@ private:
 	QString iscsiAddress;
 	QString usbBus;
 	QString pciBus;
+	QString LVMName;
 	bool    rotational;
 public:
+	/** Set lvm name
+	 *\param p_lvmName  name of lvm 
+	 */
+	
+	inline void setLVMName(QString &p_LVMName)
+	{
+		LVMName=p_LVMName;
+	}
+	
+	inline QString &getLVMName(){
+		return LVMName;
+	}
+	
 	/** \brief  flag is device is rotational (has spinning disk) flags probably means it's a ssd
 	 * 
 	 */

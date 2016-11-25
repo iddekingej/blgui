@@ -11,7 +11,31 @@
 #include <iostream>
 #include "base/stringlineiterator.h"
 #include "base/utils.h"
+#include <QFile>
+
 using namespace std;
+
+TPhysicalVolume::TPhysicalVolume()
+{
+	volumeGroup=nullptr;
+}
+
+
+void TPhysicalVolumeList::processList(TVolumeGroupList* p_vgList)
+{
+	TLinkListIterator<TPhysicalVolume> l_iter(this);
+	TPhysicalVolume *l_item;
+	TVolumeGroup    *l_vg;
+	while(l_iter.hasNext()){
+		l_item=l_iter.next();
+		l_vg=p_vgList->getVolumeGroupById(l_item->getVgId());
+		l_item->setVolumeGroup(l_vg);
+		if(l_item->getRealDevice() !=nullptr){
+			l_item->getRealDevice()->setVGName(l_item->getVgName());
+		}		
+	}
+}
+
 
 TLVMResponseParser::TLVMResponseParser(QString& p_text)
 {
@@ -83,7 +107,7 @@ void TLVMResponseParser::parse()
 
 TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser(p_text)
 {
-	items=new TLinkList<TPVInfo>();
+	items=new TPhysicalVolumeList();
 	current=nullptr;
 	devList=p_devList;
 }
@@ -95,7 +119,7 @@ bool TPVParser::chapter(QString p_item)
 		sectionType=st_data;
 	} else if(sectionType==st_data){
 		sectionType=st_pv;
-		current=new TPVInfo();
+		current=new TPhysicalVolume();
 		current->setKey(p_item);
 		items->append(current);		
 	} else if(sectionType==st_pv){
@@ -132,7 +156,7 @@ void TPVParser::setVar(QString& p_name, QString& p_value)
 
 TVGMainParser::TVGMainParser(QString& p_text):TLVMResponseParser(p_text)
 {
-	items=new TLinkList<TVGInfo>();
+	items=new TVolumeGroupList();
 }
 
 
@@ -142,7 +166,7 @@ bool TVGMainParser::chapter(QString p_item)
 		sectionType=st_data;
 	} else if(sectionType==st_data){
 		sectionType=st_vg;
-		current=new TVGInfo();
+		current=new TVolumeGroup();
 		items->append(current);
 		current->setKey(p_item);
 		cout <<qstr(p_item) <<endl;
@@ -174,6 +198,8 @@ bool TVGParser::chapter(class QString p_item)
 }
 
 
+
+
 void TVGParser::setVar(class QString& p_name, class QString& p_value)
 {
 	if(sectionType==st_lv){
@@ -182,20 +208,32 @@ void TVGParser::setVar(class QString& p_name, class QString& p_value)
 }
 
 
-TVGParser::TVGParser(TVGInfo* p_item, QString& p_text):TLVMResponseParser(p_text)
+TVGParser::TVGParser(TVolumeGroup* p_item, QString& p_text):TLVMResponseParser(p_text)
 {
 	current=p_item;
 }
 
 
+TLogicalVolume * TVolumeGroup::getLVByName(QString& p_name)
+{
+	QString l_name=getName();
+	TLinkListIterator<TLogicalVolume> l_iter(&logicalVolumns);
+	TLogicalVolume *l_lv;
+	while(l_iter.hasNext()){
+		l_lv=l_iter.next();
+		if(l_name+"-"+l_lv->getName()==p_name) return l_lv;
+	}
+	return nullptr;
+}
 
-TVGInfo::TVGInfo()
+
+TVolumeGroup::TVolumeGroup()
 {
 	key="";
 	name="";
 }
 
-TLogicalVolume * TVGInfo::addLv(QString& p_name)
+TLogicalVolume * TVolumeGroup::addLv(QString& p_name)
 {
 	TLogicalVolume *l_logicalVolume=new TLogicalVolume(p_name,this);
 	logicalVolumns.append(l_logicalVolume);
@@ -203,10 +241,47 @@ TLogicalVolume * TVGInfo::addLv(QString& p_name)
 }
 
 
-TLogicalVolume::TLogicalVolume(QString& p_name,TVGInfo *p_volumeGroup)
+void TVolumeGroupList::processInfo(TDeviceList* p_list)
+{
+	TLinkListIterator<TVolumeGroup> l_iter(this);
+	TVolumeGroup   *l_vg;
+	TLogicalVolume *l_lv;
+	QString l_target;
+	TDeviceBase *l_deviceBase;
+	TDevice *l_device;
+	while(l_iter.hasNext()){
+		l_vg=l_iter.next();
+		TLinkListIterator<TLogicalVolume> l_lvIter(l_vg->getLogicalVolumns());
+		while(l_lvIter.hasNext()){
+			l_lv=l_lvIter.next();
+			l_target=QFile::symLinkTarget(QString("/dev/")+l_vg->getName()+"/"+l_lv->getName());
+			l_deviceBase=p_list->findDeviceByDevPath(l_target);
+			if((l_device=dynamic_cast<TDevice *>(l_deviceBase))!=nullptr){
+				l_device->setVGName(l_vg->getName());				
+				l_lv->setRealDevice(l_device);
+			}
+		}
+	}
+}
+
+TVolumeGroup * TVolumeGroupList::getVolumeGroupById(QString& p_id)
+{
+	TLinkListIterator<TVolumeGroup> l_iter(this);
+	TVolumeGroup *l_item;
+	while(l_iter.hasNext()){
+		l_item=l_iter.next();
+		if(l_item->getKey()==p_id) return l_item;
+	}
+	return nullptr;
+}
+
+
+
+TLogicalVolume::TLogicalVolume(QString& p_name,TVolumeGroup *p_volumeGroup)
 {
 	name=p_name;
 	volumeGroup=p_volumeGroup;
+	realDevice=nullptr;
 }
 
 
@@ -253,30 +328,29 @@ bool TLVMHandler::sendMessage(const char *p_message,QString &p_return)
 	return true;
 }
  
-TLinkList< TPVInfo >* TLVMHandler::pvList(TDeviceList* p_devList)
+TPhysicalVolumeList* TLVMHandler::pvList(TDeviceList* p_devList)
 {
 	QString l_return;
 	bool l_ok=sendMessage("request = \"pv_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
 	if(l_ok){
 		TPVParser l_parser(p_devList,l_return);
 		l_parser.parse();
-		TLinkList<TPVInfo> *l_return=l_parser.getItems();
-		return l_return;
+		return l_parser.getItems();		
 	}
 	return nullptr;
 }
 
-TLinkList<TVGInfo> * TLVMHandler::vgList()
+TVolumeGroupList *TLVMHandler::vgList()
 {
 	QString l_return;
-	TLinkList<TVGInfo> *l_items=nullptr;
+	TVolumeGroupList *l_items=nullptr;
 	bool l_ok=sendMessage("request = \"vg_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
 	if(l_ok){
 		TVGMainParser l_parser(l_return);
 		l_parser.parse();
 		l_items=l_parser.getItems();
-		TLinkListIterator<TVGInfo> l_iter(l_items);
-		TVGInfo *l_item;
+		TLinkListIterator<TVolumeGroup> l_iter(l_items);
+		TVolumeGroup *l_item;
 		QString l_format="request = \"vg_lookup\"\nuuid = \"%1\"\ntoken=\"filter:0\"\n\n##\n";
 		while(l_iter.hasNext()){
 			l_item=l_iter.next();
@@ -309,23 +383,18 @@ void TLVMHandler::closeLVMSocket()
 }
 
 
+
+
 void TLVM::processInfo(TDeviceList* p_devList)
-{
-	TPVInfo *l_info;
+{	
 	pvList=nullptr;
 	vgList=nullptr;
 	TLVMHandler l_handler;
 	if(l_handler.openLVMSocket()){
 		vgList=l_handler.vgList();
 		pvList=l_handler.pvList(p_devList);
-		TLinkListIterator<TPVInfo> l_iter(pvList);
-		while(l_iter.hasNext()){
-			l_info=l_iter.next();
-			if(l_info->getRealDevice() !=nullptr){
-				pvIndexByDevice.insert(l_info->getRealDevice()->getName(),l_info);
-				l_info->getRealDevice()->setVGName(l_info->getVgName());
-			}
-		}
+		vgList->processInfo(p_devList);
+		pvList->processList(vgList);
 		l_handler.closeLVMSocket();
 	}
 	

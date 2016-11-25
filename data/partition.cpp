@@ -35,7 +35,8 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<""
 		<<""
 		<<""
-		<< getVGName();
+		<< getVGName()
+		<< "";
 ;
 }
 

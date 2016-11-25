@@ -93,6 +93,8 @@ void TDeviceList::readDevices()
 			if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
 				l_device->setPciBus(l_pciBus);
 			}
+			QString l_lvmName;
+			readString(l_iter.filePath(),"dm/name",l_lvmName);
 			l_device=new TDevice(l_deviceName,l_model,l_size);
 			l_device->setReadonly(l_readonly==1);
 			l_device->setRemovable(l_removable==1);
@@ -100,6 +102,7 @@ void TDeviceList::readDevices()
 			l_device->setScsiBus(l_scsiBus);
 			l_device->setVendor(l_vendor.trimmed());
 			l_device->setRotational(l_rotational==1);
+			l_device->setLVMName(l_lvmName);
 			handleDevNo(l_iter.filePath(),l_device);
 
 //finds scsi bus in /sys/bock/<dev>/device/scsi_device/	

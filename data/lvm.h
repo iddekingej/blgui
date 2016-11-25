@@ -17,8 +17,10 @@ typedef enum{
 ,       st_lv
 } TSectionType;
 
+class TVolumeGroup;
+class TVolumeGroupList;
 
-class TPVInfo{
+class TPhysicalVolume {
 private:
 	QString key;
 	int device;
@@ -35,10 +37,13 @@ private:
 	QString vgid;
 	QString vgName;
 	TDeviceBase *realDevice;
+	   TVolumeGroup *volumeGroup;
 public:
+	inline TVolumeGroup *getVolumeGroup(){ return volumeGroup;}
+	inline void setVolumeGroup(TVolumeGroup *p_volumeGroup){ volumeGroup=p_volumeGroup;}
 	inline TDeviceBase *getRealDevice(){ return realDevice;}
 	inline void setRealDevice(TDeviceBase *p_realDevice){ realDevice=p_realDevice;}
-	inline QString getVgId(){ return vgid;}
+	inline QString &getVgId(){ return vgid;}
 	inline void setVgId(QString &p_vgid){ vgid=p_vgid;}
 	inline QString getVgName(){ return vgName;}
 	inline void setVgName(QString &p_vgName){ vgName=p_vgName;}
@@ -67,6 +72,57 @@ public:
 	inline void setDevice(int p_device){ device=p_device;}
 	inline QString getKey(){ return key;}
 	inline void setKey(QString &p_key){ key=p_key;}
+	   TPhysicalVolume();
+};
+
+class TPhysicalVolumeList:public TLinkList<TPhysicalVolume>{
+public:
+	void processList(TVolumeGroupList *p_lie);
+};
+
+
+
+class TVolumeGroup;
+
+class TLogicalVolume{
+private:
+	QString id;
+	QString name;
+	   TVolumeGroup *volumeGroup;
+	TDevice *realDevice;
+public:
+	inline TDevice *getRealDevice(){ return realDevice;}
+	inline void setRealDevice(TDevice *p_device)
+	{
+		realDevice=p_device;
+	}
+	inline QString getId(){return id;}
+	inline void setId(QString p_id){id=p_id;}
+	inline QString getName(){return name;}
+	inline TVolumeGroup *getVolumeGroup(){ return volumeGroup;}
+	TLogicalVolume(QString &p_name,TVolumeGroup *p_volumeGroup);
+};
+
+class TVolumeGroup {
+private:
+	QString key;
+	QString name;
+	TLinkList<TLogicalVolume> logicalVolumns;
+public:
+	inline void setKey(QString &p_key){ key=p_key;}
+	inline QString &getKey(){ return key;}
+	inline void setName(QString &p_name){ name=p_name;}
+	inline QString &getName(){ return name;}
+	inline TLogicalVolume *getLVByName(QString &p_name);
+	TLogicalVolume *addLv(QString &p_name);
+	TLinkList<TLogicalVolume> *getLogicalVolumns(){ return &logicalVolumns;}
+	   TVolumeGroup();
+};
+
+class TVolumeGroupList:public TLinkList<TVolumeGroup>{
+public:
+	TVolumeGroup *getVolumeGroupById(QString &p_name);
+	void processInfo(TDeviceList *p_list);
 };
 
 class TLVMResponseParser{
@@ -89,68 +145,37 @@ public:
 
 class TPVParser:public TLVMResponseParser{
 private:
-	TLinkList<TPVInfo> *items;
-	TPVInfo *current;
+	   TPhysicalVolumeList *items;
+	   TPhysicalVolume *current;
 	TDeviceList *devList;
 public:
 	TPVParser(TDeviceList *p_devList,QString &p_text);
 	virtual bool chapter(QString p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
-	TLinkList<TPVInfo> *getItems(){ return items;}	
+	   TPhysicalVolumeList *getItems(){ return items;}	
 
 };
-
-class TVGInfo;
-
-class TLogicalVolume{
-private:
-	QString id;
-	QString name;
-	TVGInfo *volumeGroup;
-public:
-	inline QString getId(){return id;}
-	inline void setId(QString p_id){id=p_id;}
-	inline QString getName(){return name;}
-	inline TVGInfo *getVolumeGroup(){ return volumeGroup;}
-	TLogicalVolume(QString &p_name,TVGInfo *p_volumeGroup);
-};
-
-class TVGInfo{
-private:
-	QString key;
-	QString name;
-	TLinkList<TLogicalVolume> logicalVolumns;
-public:
-	inline void setKey(QString &p_key){ key=p_key;}
-	inline QString &getKey(){ return key;}
-	inline void setName(QString &p_name){ name=p_name;}
-	inline QString &getName(){ return name;}
-	TLogicalVolume *addLv(QString &p_name);
-	TLinkList<TLogicalVolume> *getLogicalVolumns(){ return &logicalVolumns;}
-	TVGInfo();
-};
-
 
 
 class TVGMainParser:public TLVMResponseParser{
 private:
-	TLinkList<TVGInfo> *items;
-	TVGInfo *current;
+	TVolumeGroupList *items;
+	TVolumeGroup *current;
 public:
 	TVGMainParser(QString &p_text);
 	virtual bool chapter(QString p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
-	TLinkList<TVGInfo> *getItems(){ return items;}	
+	TVolumeGroupList *getItems(){ return items;}	
 
 };
 
 
 class TVGParser:public TLVMResponseParser{
 private:
-	TVGInfo *current;
+	   TVolumeGroup *current;
 	TLogicalVolume *currentLv;
 public:
-	TVGParser(TVGInfo *p_item,QString &p_text);
+	TVGParser(TVolumeGroup *p_item,QString &p_text);
 	virtual bool chapter(QString p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 };
@@ -165,8 +190,8 @@ private:
 public:
 	bool openLVMSocket();	
 	void closeLVMSocket();
-	TLinkList<TPVInfo> *pvList(TDeviceList *p_devList);	
-	TLinkList<TVGInfo> *vgList();
+	TPhysicalVolumeList *pvList(TDeviceList *p_devList);	
+	TVolumeGroupList *vgList();
 	TLVMHandler();
 	~TLVMHandler();
 };
@@ -174,13 +199,11 @@ public:
 
 class TLVM{
 private:
-	TLinkList<TPVInfo> *pvList;
-	TLinkList<TVGInfo> *vgList;
-	QHash<QString,TPVInfo *> pvIndexByDevice;
+	TPhysicalVolumeList *pvList;
+	TVolumeGroupList    *vgList;
 public:
-	inline TLinkList<TPVInfo> *getPvList(){ return pvList;}
-	inline TPVInfo *getByDevice(QString &p_name){ return pvIndexByDevice.value(p_name);}
-	inline TLinkList<TVGInfo> *getVgList(){return vgList;}
+	inline TLinkList<TPhysicalVolume> *getPvList(){ return pvList;}
+	inline TLinkList<TVolumeGroup> *getVgList(){return vgList;}
 	void processInfo(TDeviceList *p_devList);
 };
 

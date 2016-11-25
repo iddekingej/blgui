@@ -44,7 +44,8 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< (getRotational()?"X":"")
 		<< getUsbBus()
 		<< getPciBus()
-		<< getVGName();
+		<< getVGName()
+		<< getLVMName() ;
 
 }
 
