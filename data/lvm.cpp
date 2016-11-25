@@ -16,6 +16,7 @@ using namespace std;
 TLVMResponseParser::TLVMResponseParser(QString& p_text)
 {
 	text=p_text;
+	sectionType=st_top;
 	iter=new TStringLineIterator(p_text);
 }
 
@@ -25,22 +26,60 @@ TLVMResponseParser::~TLVMResponseParser()
 }
 
 
-void TLVMResponseParser::chapter(QString p_item)
+bool TLVMResponseParser::chapter(QString p_item)
 {
+	return false;
 }
-
-void TLVMResponseParser::section(QString& p_section)
-{
-}
-
-void TLVMResponseParser::main(QString& p_code)
-{
-}
-
 
 void TLVMResponseParser::setVar(QString &p_name, QString &p_value)
 {
 }
+
+
+void TLVMResponseParser::parseChapter()
+{
+	QString l_oldPrefix;
+	TSectionType l_oldType;
+	bool l_namespace;
+	while(iter->hasNext()){
+		QString l_str=iter->next();
+		
+		if(l_str.endsWith("{")){				
+			l_oldPrefix=prefix;
+			l_oldType=sectionType;
+			QString l_key=l_str.mid(0,l_str.length()-1).trimmed();
+			l_namespace=chapter(l_key);
+			if(l_namespace){
+				if(prefix.length()>0) prefix += "_";
+				prefix += l_key;
+			}
+			parseChapter();
+			prefix=l_oldPrefix;
+			sectionType=l_oldType;
+		} else 	if(l_str.trimmed()=="}"){
+			return;
+		} else {
+			int l_split=l_str.indexOf("=");
+			if(l_split>=0){
+				QString l_pre=l_str.mid(0,l_split).trimmed();
+				if(prefix.length()>0) l_pre=prefix+"_"+l_pre;
+				QString l_after=l_str.mid(l_split+1).trimmed();
+				if(l_after.startsWith('"') && l_after.endsWith('"')){
+					l_after=l_after.mid(1,l_after.length()-2);
+				}
+				setVar(l_pre,l_after);
+			}
+				
+		}
+	}
+}
+
+
+void TLVMResponseParser::parse()
+{
+	parseChapter();
+}
+
 
 TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser(p_text)
 {
@@ -49,11 +88,21 @@ TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser
 	devList=p_devList;
 }
 
-void TPVParser::chapter(QString p_item)
+bool TPVParser::chapter(QString p_item)
 {
-	current=new TPVInfo();
-	current->setKey(p_item);
-	items->append(current);
+	bool l_namespace=false;
+	if(sectionType==st_top){
+		sectionType=st_data;
+	} else if(sectionType==st_data){
+		sectionType=st_pv;
+		current=new TPVInfo();
+		current->setKey(p_item);
+		items->append(current);		
+	} else if(sectionType==st_pv){
+		sectionType=st_da0;
+		l_namespace=true;
+	}
+	return l_namespace;
 }
 
 void TPVParser::setVar(QString& p_name, QString& p_value)
@@ -80,55 +129,88 @@ void TPVParser::setVar(QString& p_name, QString& p_value)
 }
 
 
-void TLVMResponseParser::parseChapter()
+
+TVGMainParser::TVGMainParser(QString& p_text):TLVMResponseParser(p_text)
 {
-	QString l_oldPrefix;
-	while(iter->hasNext()){
-		QString l_str=iter->next();
-		
-		if(l_str.endsWith("{")){
-			l_oldPrefix=prefix;
-			if(prefix.length()>0) prefix += "_";
-			prefix += l_str.mid(0,l_str.length()-1).trimmed();
-			section(prefix);
-			parseChapter();
-			prefix=l_oldPrefix;
-		} else 	if(l_str.trimmed()=="}"){
-			return;
-		} else {
-			int l_split=l_str.indexOf("=");
-			if(l_split>=0){
-				QString l_pre=l_str.mid(0,l_split).trimmed();
-				if(prefix.length()>0) l_pre=prefix+"_"+l_pre;
-				QString l_after=l_str.mid(l_split+1).trimmed();
-				if(l_after.startsWith('"') && l_after.endsWith('"')){
-					l_after=l_after.mid(1,l_after.length()-2);
-				}
-				setVar(l_pre,l_after);
-			}
-				
+	items=new TLinkList<TVGInfo>();
+}
+
+
+bool TVGMainParser::chapter(QString p_item)
+{
+	if(sectionType==st_top){
+		sectionType=st_data;
+	} else if(sectionType==st_data){
+		sectionType=st_vg;
+		current=new TVGInfo();
+		items->append(current);
+		current->setKey(p_item);
+		cout <<qstr(p_item) <<endl;
+  	}
+	return false;
+}
+
+
+void TVGMainParser::setVar(QString& p_name, QString& p_value)
+{
+	if(p_name=="name")current->setName(p_value);
+}
+
+
+
+bool TVGParser::chapter(class QString p_item)
+{
+	if(sectionType==st_top){
+		sectionType=st_vg;
+	} else if(sectionType==st_vg){
+		if(p_item=="logical_volumes"){
+			sectionType=st_lvsection;
 		}
+	} else if(sectionType==st_lvsection){
+		currentLv=current->addLv(p_item);
+		sectionType=st_lv;
+	}
+	return false;
+}
+
+
+void TVGParser::setVar(class QString& p_name, class QString& p_value)
+{
+	if(sectionType==st_lv){
+		if(p_name=="id") currentLv->setId(p_value);
 	}
 }
 
 
-void TLVMResponseParser::parse()
+TVGParser::TVGParser(TVGInfo* p_item, QString& p_text):TLVMResponseParser(p_text)
 {
-	QString l_token;
-	while(iter->hasNext()){
-		QString l_str=iter->next();
-		if(l_str.endsWith("{")){
-			while(iter->hasNext()){
-				l_token=iter->next();
-				if(l_token.endsWith('{')){
-					chapter(l_token.mid(0,l_token.length()-1).trimmed());
-					prefix="";
-					parseChapter();
-				}
-			}
-		}
-	}
+	current=p_item;
 }
+
+
+
+TVGInfo::TVGInfo()
+{
+	key="";
+	name="";
+}
+
+TLogicalVolume * TVGInfo::addLv(QString& p_name)
+{
+	TLogicalVolume *l_logicalVolume=new TLogicalVolume(p_name);
+	logicalVolumns.append(l_logicalVolume);
+	return l_logicalVolume;
+}
+
+
+TLogicalVolume::TLogicalVolume(QString& p_name)
+{
+	name=p_name;
+}
+
+
+
+
 
 
 
@@ -183,6 +265,31 @@ TLinkList< TPVInfo >* TLVMHandler::pvList(TDeviceList* p_devList)
 	return nullptr;
 }
 
+TLinkList<TVGInfo> * TLVMHandler::vgList()
+{
+	QString l_return;
+	TLinkList<TVGInfo> *l_items=nullptr;
+	bool l_ok=sendMessage("request = \"vg_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
+	if(l_ok){
+		TVGMainParser l_parser(l_return);
+		l_parser.parse();
+		l_items=l_parser.getItems();
+		TLinkListIterator<TVGInfo> l_iter(l_items);
+		TVGInfo *l_item;
+		QString l_format="request = \"vg_lookup\"\nuuid = \"%1\"\ntoken=\"filter:0\"\n\n##\n";
+		while(l_iter.hasNext()){
+			l_item=l_iter.next();
+			l_ok=sendMessage(qstr(l_format.arg(l_item->getKey())),l_return);
+			if(l_ok){
+				TVGParser l_parser(l_item,l_return);
+				l_parser.parse();
+			}
+		}
+	}
+	return l_items;
+}
+
+
 TLVMHandler::TLVMHandler()
 {
 	readSocket=-1;
@@ -205,8 +312,10 @@ void TLVM::processInfo(TDeviceList* p_devList)
 {
 	TPVInfo *l_info;
 	pvList=nullptr;
+	vgList=nullptr;
 	TLVMHandler l_handler;
 	if(l_handler.openLVMSocket()){
+		vgList=l_handler.vgList();
 		pvList=l_handler.pvList(p_devList);
 		TLinkListIterator<TPVInfo> l_iter(pvList);
 		while(l_iter.hasNext()){

@@ -20,6 +20,7 @@ set(bdgui_ui
 	ui/newtab.ui
 	ui/tabconfig.ui
 	ui/usertabdef.ui
+	ui/vginfo.ui
 )
 
 set(bdgui_RESOURCES 
@@ -64,6 +65,7 @@ set(bdgui_SRCS
 	gui/formtabdef.cpp
 	gui/formnewtab.cpp
 	gui/usertabdef.cpp
+	gui/vginfo.cpp
 	qjsonwrapper/Json.cpp
 )
 

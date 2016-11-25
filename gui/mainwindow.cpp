@@ -32,6 +32,7 @@
 #include <sys/types.h>
 #include "gui/formtabdef.h"
 #include <QMessageBox>
+#include "vginfo.h"
 
 QApplication *g_app;
 
@@ -129,6 +130,22 @@ void TMainWindow::fillLvm()
 	ui.pvInfo->setModel(l_model);
 	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->resizeColumnsToContents();
+	TLinkList<TVGInfo> *l_vg=info->getLVM()->getVgList();
+	TLinkListIterator<TVGInfo> l_vgIter(l_vg);
+	TVGInfo *l_info;
+	TVgInfoWidget *l_widget;
+	QLayoutItem *l_li;
+	while(true){
+		l_li=ui.vgInfo->takeAt(0);
+		if(l_li==nullptr) break;
+		delete l_li->widget();
+		delete l_li;
+	}	
+	while(l_vgIter.hasNext()){
+		l_info=l_vgIter.next();
+		l_widget=new TVgInfoWidget(l_info);
+		ui.vgInfo->addWidget(l_widget);
+	}
 }
 
 void TMainWindow::fillIscsi()

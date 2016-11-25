@@ -287,9 +287,27 @@
          <attribute name="title">
           <string>LVM</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="lvmLayout">
           <item>
            <widget class="QTableView" name="pvInfo"/>
+          </item>
+          <item>
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>808</width>
+               <height>240</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="vgInfo"/>
+            </widget>
+           </widget>
           </item>
          </layout>
         </widget>

@@ -6,23 +6,16 @@
 #include "devicelist.h"
 using namespace std;
 
-class TLVMResponseParser{
-private:
-	QString text;
-	QString prefix;
-	TStringLineIterator *iter;
-public:
-	TLVMResponseParser(QString &p_text);
-	virtual ~TLVMResponseParser();
-	void main(QString &p_code);
-	virtual void chapter(QString p_item);
-	void parseChapter();
-	void section(QString &p_section);
-	virtual void setVar(QString &p_name,QString &p_value);
-	void parse();
-	
-};
-
+typedef enum{
+	st_top
+,	st_data
+,	st_pv
+,	st_vg
+,	st_da0
+,	st_pvsection
+,       st_lvsection
+,       st_lv
+} TSectionType;
 
 
 class TPVInfo{
@@ -76,6 +69,24 @@ public:
 	inline void setKey(QString &p_key){ key=p_key;}
 };
 
+class TLVMResponseParser{
+private:
+	QString text;
+	QString prefix;
+	TStringLineIterator *iter;
+protected:
+	TSectionType sectionType;
+public:
+	TLVMResponseParser(QString &p_text);
+	virtual ~TLVMResponseParser();
+	virtual bool chapter(QString p_item);
+	void parseChapter();	
+	virtual void setVar(QString &p_name,QString &p_value);
+	void parse();
+	
+};
+
+
 class TPVParser:public TLVMResponseParser{
 private:
 	TLinkList<TPVInfo> *items;
@@ -83,11 +94,64 @@ private:
 	TDeviceList *devList;
 public:
 	TPVParser(TDeviceList *p_devList,QString &p_text);
-	virtual void chapter(QString p_item) override;
+	virtual bool chapter(QString p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 	TLinkList<TPVInfo> *getItems(){ return items;}	
 
 };
+
+
+class TLogicalVolume{
+private:
+	QString id;
+	QString name;
+public:
+	inline QString getId(){return id;}
+	inline void setId(QString p_id){id=p_id;}
+	inline QString getName(){return name;}
+	TLogicalVolume(QString &p_name);
+};
+
+class TVGInfo{
+private:
+	QString key;
+	QString name;
+	TLinkList<TLogicalVolume> logicalVolumns;
+public:
+	inline void setKey(QString &p_key){ key=p_key;}
+	inline QString &getKey(){ return key;}
+	inline void setName(QString &p_name){ name=p_name;}
+	inline QString &getName(){ return name;}
+	TLogicalVolume *addLv(QString &p_name);
+	TLinkList<TLogicalVolume> *getLogicalVolumns(){ return &logicalVolumns;}
+	TVGInfo();
+};
+
+
+
+class TVGMainParser:public TLVMResponseParser{
+private:
+	TLinkList<TVGInfo> *items;
+	TVGInfo *current;
+public:
+	TVGMainParser(QString &p_text);
+	virtual bool chapter(QString p_item) override;
+	virtual void setVar(QString &p_name,QString &p_value) override;
+	TLinkList<TVGInfo> *getItems(){ return items;}	
+
+};
+
+
+class TVGParser:public TLVMResponseParser{
+private:
+	TVGInfo *current;
+	TLogicalVolume *currentLv;
+public:
+	TVGParser(TVGInfo *p_item,QString &p_text);
+	virtual bool chapter(QString p_item) override;
+	virtual void setVar(QString &p_name,QString &p_value) override;
+};
+
 
 class TLVMHandler {
 private:
@@ -99,6 +163,7 @@ public:
 	bool openLVMSocket();	
 	void closeLVMSocket();
 	TLinkList<TPVInfo> *pvList(TDeviceList *p_devList);	
+	TLinkList<TVGInfo> *vgList();
 	TLVMHandler();
 	~TLVMHandler();
 };
@@ -107,10 +172,12 @@ public:
 class TLVM{
 private:
 	TLinkList<TPVInfo> *pvList;
+	TLinkList<TVGInfo> *vgList;
 	QHash<QString,TPVInfo *> pvIndexByDevice;
 public:
 	inline TLinkList<TPVInfo> *getPvList(){ return pvList;}
 	inline TPVInfo *getByDevice(QString &p_name){ return pvIndexByDevice.value(p_name);}
+	inline TLinkList<TVGInfo> *getVgList(){return vgList;}
 	void processInfo(TDeviceList *p_devList);
 };
 
