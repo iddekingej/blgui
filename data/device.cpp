@@ -43,7 +43,8 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<< getReadableFreeSize()
 		<< (getRotational()?"X":"")
 		<< getUsbBus()
-		<< getPciBus();
+		<< getPciBus()
+		<< getVGName();
 
 }
 

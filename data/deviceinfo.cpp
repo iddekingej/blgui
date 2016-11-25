@@ -63,10 +63,9 @@ void TDeviceInfo::getDisks()
 	TLinuxRaid::processInfo(devices,raidList);
 	devices->readFreeSpace();
 	iscsi->processInfo(devices);
-	TLVM l_lvm;
-	if(l_lvm.openLVMSocket()){
-		pvInfo=l_lvm.PvList(devices);
-	}
+	lvm->processInfo(devices);	
+	
+	
 	
 	
 	QHashIterator<QString,TDeviceBase *> l_mi(*devices->getNameIndex());
@@ -98,7 +97,7 @@ TDeviceInfo::TDeviceInfo()
 	raidList = new TRaidInfo();
 	mtab     = new TMTab(devices);	
 	iscsi    = new TIScsiSessionList();
-	pvInfo   = nullptr;
+	lvm      = new TLVM();
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete devices;
@@ -106,6 +105,5 @@ TDeviceInfo::~TDeviceInfo(){
 	delete raidList;
 	delete mtab;
 	delete iscsi;
-	if(pvInfo) delete pvInfo;
 	blkid_put_cache(blkidCache);
 }

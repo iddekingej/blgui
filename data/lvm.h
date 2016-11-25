@@ -52,7 +52,7 @@ public:
 	inline long long getDaoSize(){ return dao_size;}
 	inline void setDaoSize(long long p_daoSize){ dao_size=p_daoSize;}
 	inline long long getDaoOffset(){ return dao_offset;}
-	inline void setDaoOffset(int p_daoOffset){ dao_offset=p_daoOffset;}
+	inline void setDaoOffset(long long p_daoOffset){ dao_offset=p_daoOffset;}
 	inline long long getMdaoFreeSectors(){ return mdao_free_sectors;}
 	inline void setMdaoFreeSectors(long long p_mdaoFreeSectors){ mdao_free_sectors=p_mdaoFreeSectors;}
 	inline long long getMdaoSize(){ return mdao_start;}
@@ -89,15 +89,29 @@ public:
 
 };
 
-class TLVM{
+class TLVMHandler {
 private:
 	int readSocket;
-	bool hasData();
 	bool writeSocket(const char *p_str);
 	bool sendMessage(const char *p_message,QString &p_return);
 
 public:
 	bool openLVMSocket();	
-	TLinkList<TPVInfo> *PvList(TDeviceList *p_devList);
+	void closeLVMSocket();
+	TLinkList<TPVInfo> *pvList(TDeviceList *p_devList);	
+	TLVMHandler();
+	~TLVMHandler();
 };
+
+
+class TLVM{
+private:
+	TLinkList<TPVInfo> *pvList;
+	QHash<QString,TPVInfo *> pvIndexByDevice;
+public:
+	inline TLinkList<TPVInfo> *getPvList(){ return pvList;}
+	inline TPVInfo *getByDevice(QString &p_name){ return pvIndexByDevice.value(p_name);}
+	void processInfo(TDeviceList *p_devList);
+};
+
 #endif

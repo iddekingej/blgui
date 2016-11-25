@@ -14,6 +14,7 @@ private:
 	QString devPath;
 	QString type;
 	QString label;
+	QString vgName;
 	TDiskSize size=0;
 	TDiskSize free=0;
 	bool hasFree=false;
@@ -24,6 +25,8 @@ private:
 	int major;
 
 public:
+	inline void setVGName(QString p_name){ vgName=p_name;}
+	inline QString &getVGName(){ return vgName;}
 	inline void setDeviceNo(int p_major,int p_minor){
 		minor=p_minor;
 		major=p_major;

@@ -34,7 +34,8 @@ void TPartition::fillDataRow(QStringList& p_list)
 		<<getReadableFreeSize()
 		<<""
 		<<""
-		<<"";
+		<<""
+		<< getVGName();
 ;
 }
 

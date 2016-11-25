@@ -54,20 +54,29 @@ void TPVParser::chapter(QString p_item)
 	current=new TPVInfo();
 	current->setKey(p_item);
 	items->append(current);
-	printf("***ADD\n");
 }
 
 void TPVParser::setVar(QString& p_name, QString& p_value)
-{
-	cout <<current  <<endl;
+{	
 	if(p_name=="id") current->setId(p_value);
 	else if(p_name=="device"){
 		TDeviceBase *l_db=devList->getDeviceByDeviceNo(p_value.toLong());
 		current->setDevice(p_value.toLong());
 		current->setRealDevice(l_db);
 	}
-	else if(p_name=="dev_size") current->setDevSize(p_value.toLong());
+	else if(p_name=="dev_size") current->setDevSize(p_value.toLongLong());
 	else if(p_name=="vgname") current->setVgName(p_value);
+	else if(p_name=="vgid") current->setVgId(p_value);
+	else if(p_name=="dao_size") current->setDaoSize(p_value.toLongLong());
+	else if(p_name=="dao_offset") current->setDaoOffset(p_value.toLongLong());
+	else if(p_name=="mdao_freesectors") current->setMdaoFreeSectors(p_value.toLongLong());
+	else if(p_name=="mdao_size") current->setMdaoSize(p_value.toLongLong());
+	else if(p_name=="mdao_start") current->setMdaoStart(p_value.toLongLong());
+	else if(p_name=="mdao_ignore") current->setMdaoIgnore(p_value.toLongLong());
+	else if(p_name=="id") current->setId(p_value);
+	else if(p_name=="label_sector") current->setLabelSector(p_value.toLongLong());
+	else if(p_name=="format")  current->setFormat(p_value);
+	
 }
 
 
@@ -112,7 +121,6 @@ void TLVMResponseParser::parse()
 			while(iter->hasNext()){
 				l_token=iter->next();
 				if(l_token.endsWith('{')){
-					printf("QQQQ\n");
 					chapter(l_token.mid(0,l_token.length()-1).trimmed());
 					prefix="";
 					parseChapter();
@@ -124,34 +132,13 @@ void TLVMResponseParser::parse()
 
 
 
-bool TLVM::writeSocket(const char* p_str)
+bool TLVMHandler::writeSocket(const char* p_str)
 {
 	int l_return=write(readSocket,p_str,strlen(p_str));
 	return l_return >=0;
 }
 
-bool TLVM::hasData()
-{
-	fd_set l_readFds;
-	fd_set l_writeFds;
-	fd_set l_errorFds;
-	struct timeval l_timeVal;
-	FD_ZERO(&l_readFds);
-	FD_SET(readSocket,&l_readFds);
-	FD_ZERO(&l_writeFds);
-	FD_SET(readSocket,&l_writeFds);
-	FD_ZERO(&l_errorFds);
-	FD_SET(readSocket,&l_errorFds);
-	l_timeVal.tv_sec=1;
-	l_timeVal.tv_usec=0;
-	int l_return=select(readSocket+1,&l_readFds,&l_writeFds,&l_errorFds,&l_timeVal);
-	if(l_return<=0) return false;
-	return FD_ISSET(readSocket,&l_readFds);
-	
-}
-
-
-bool TLVM::openLVMSocket()
+bool TLVMHandler::openLVMSocket()
 {
 	struct sockaddr_un l_addr;
 	readSocket=socket(PF_LOCAL,SOCK_STREAM,0);
@@ -167,7 +154,7 @@ bool TLVM::openLVMSocket()
 	return true;
 }
 
-bool TLVM::sendMessage(const char *p_message,QString &p_return)
+bool TLVMHandler::sendMessage(const char *p_message,QString &p_return)
 {
 	if(!writeSocket(p_message)) return false;
 	char l_buffer[1024];
@@ -177,12 +164,13 @@ bool TLVM::sendMessage(const char *p_message,QString &p_return)
 		l_num=read(readSocket,l_buffer,sizeof(l_buffer)-1);
 		l_buffer[l_num]=0;
 		p_return += l_buffer;
-		if(l_num<sizeof(l_buffer)-1) break;
+		cout << l_buffer <<endl;
+		if(l_num+1<sizeof(l_buffer)) break;
 	}
 	return true;
 }
  
-TLinkList< TPVInfo >* TLVM::PvList(TDeviceList* p_devList)
+TLinkList< TPVInfo >* TLVMHandler::pvList(TDeviceList* p_devList)
 {
 	QString l_return;
 	bool l_ok=sendMessage("request = \"pv_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
@@ -193,4 +181,42 @@ TLinkList< TPVInfo >* TLVM::PvList(TDeviceList* p_devList)
 		return l_return;
 	}
 	return nullptr;
+}
+
+TLVMHandler::TLVMHandler()
+{
+	readSocket=-1;
+}
+
+TLVMHandler::~TLVMHandler()
+{
+	closeLVMSocket();
+}
+
+
+void TLVMHandler::closeLVMSocket()
+{
+	if(readSocket !=-1) close(readSocket);
+	readSocket=-1;
+}
+
+
+void TLVM::processInfo(TDeviceList* p_devList)
+{
+	TPVInfo *l_info;
+	pvList=nullptr;
+	TLVMHandler l_handler;
+	if(l_handler.openLVMSocket()){
+		pvList=l_handler.pvList(p_devList);
+		TLinkListIterator<TPVInfo> l_iter(pvList);
+		while(l_iter.hasNext()){
+			l_info=l_iter.next();
+			if(l_info->getRealDevice() !=nullptr){
+				pvIndexByDevice.insert(l_info->getRealDevice()->getName(),l_info);
+				l_info->getRealDevice()->setVGName(l_info->getVgName());
+			}
+		}
+		l_handler.closeLVMSocket();
+	}
+	
 }

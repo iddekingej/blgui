@@ -28,7 +28,7 @@ private:
 	TRaidInfo         *raidList;
 	TMTab             *mtab;
 	TIScsiSessionList *iscsi;
-	TLinkList<TPVInfo> *pvInfo;
+	TLVM              *lvm;
 	blkid_cache blkidCache;
 	QDateTime   sbTime;
 	
@@ -61,9 +61,9 @@ public:
 		return iscsi;
 	}
 	
-	inline TLinkList<TPVInfo> *getPvInfo()
+	inline TLVM *getLVM()
 	{
-		return pvInfo;
+		return lvm;
 	}
 	
 	void getDisks();	

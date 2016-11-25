@@ -111,7 +111,9 @@ void TMainWindow::fillLvm()
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Devive")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Size")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
-	TLinkList<TPVInfo> *l_pvs=info->getPvInfo();
+	
+	TLinkList<TPVInfo> *l_pvs=info->getLVM()->getPvList();
+	if( l_pvs==nullptr) return; 
 	TLinkListIterator<TPVInfo> l_pvIter(l_pvs);
 	TPVInfo *l_pvInfo;
 	int l_cnt=0;
