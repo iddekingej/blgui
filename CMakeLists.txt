@@ -4,11 +4,6 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 set(KDE_VERSION ${kde})
 
-#if(KDE_OPTION EQUAL "4")
-#	message("bla")
-#endif()
-
-
 set(bdgui_ui
 	ui/main.ui 
 	ui/fields.ui 
@@ -20,7 +15,6 @@ set(bdgui_ui
 	ui/newtab.ui
 	ui/tabconfig.ui
 	ui/usertabdef.ui
-	ui/vginfo.ui
 )
 
 set(bdgui_RESOURCES 
@@ -65,7 +59,6 @@ set(bdgui_SRCS
 	gui/formtabdef.cpp
 	gui/formnewtab.cpp
 	gui/usertabdef.cpp
-	gui/vginfo.cpp
 	qjsonwrapper/Json.cpp
 )
 

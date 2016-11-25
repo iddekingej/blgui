@@ -197,15 +197,16 @@ TVGInfo::TVGInfo()
 
 TLogicalVolume * TVGInfo::addLv(QString& p_name)
 {
-	TLogicalVolume *l_logicalVolume=new TLogicalVolume(p_name);
+	TLogicalVolume *l_logicalVolume=new TLogicalVolume(p_name,this);
 	logicalVolumns.append(l_logicalVolume);
 	return l_logicalVolume;
 }
 
 
-TLogicalVolume::TLogicalVolume(QString& p_name)
+TLogicalVolume::TLogicalVolume(QString& p_name,TVGInfo *p_volumeGroup)
 {
 	name=p_name;
+	volumeGroup=p_volumeGroup;
 }
 
 

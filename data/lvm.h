@@ -100,16 +100,19 @@ public:
 
 };
 
+class TVGInfo;
 
 class TLogicalVolume{
 private:
 	QString id;
 	QString name;
+	TVGInfo *volumeGroup;
 public:
 	inline QString getId(){return id;}
 	inline void setId(QString p_id){id=p_id;}
 	inline QString getName(){return name;}
-	TLogicalVolume(QString &p_name);
+	inline TVGInfo *getVolumeGroup(){ return volumeGroup;}
+	TLogicalVolume(QString &p_name,TVGInfo *p_volumeGroup);
 };
 
 class TVGInfo{

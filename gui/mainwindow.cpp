@@ -32,7 +32,6 @@
 #include <sys/types.h>
 #include "gui/formtabdef.h"
 #include <QMessageBox>
-#include "vginfo.h"
 
 QApplication *g_app;
 
@@ -114,38 +113,59 @@ void TMainWindow::fillLvm()
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
 	
 	TLinkList<TPVInfo> *l_pvs=info->getLVM()->getPvList();
-	if( l_pvs==nullptr) return; 
-	TLinkListIterator<TPVInfo> l_pvIter(l_pvs);
 	TPVInfo *l_pvInfo;
 	int l_cnt=0;
-	while(l_pvIter.hasNext()){
-		l_pvInfo=l_pvIter.next();
-		
-		
-		l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?"":l_pvInfo->getRealDevice()->getName()));
-		l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_pvInfo->getDevSize())));
-		l_model->setItem(l_cnt,2,new QStandardItem(l_pvInfo->getVgName()));
-		l_cnt++;
+	if(l_pvs != nullptr){
+		TLinkListIterator<TPVInfo> l_pvIter(l_pvs);
+		while(l_pvIter.hasNext()){
+			l_pvInfo=l_pvIter.next();
+			
+			
+			l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?"":l_pvInfo->getRealDevice()->getName()));
+			l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_pvInfo->getDevSize())));
+			l_model->setItem(l_cnt,2,new QStandardItem(l_pvInfo->getVgName()));
+			l_cnt++;
+		}
 	}
 	ui.pvInfo->setModel(l_model);
 	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->resizeColumnsToContents();
 	TLinkList<TVGInfo> *l_vg=info->getLVM()->getVgList();
-	TLinkListIterator<TVGInfo> l_vgIter(l_vg);
-	TVGInfo *l_info;
-	TVgInfoWidget *l_widget;
-	QLayoutItem *l_li;
-	while(true){
-		l_li=ui.vgInfo->takeAt(0);
-		if(l_li==nullptr) break;
-		delete l_li->widget();
-		delete l_li;
-	}	
-	while(l_vgIter.hasNext()){
-		l_info=l_vgIter.next();
-		l_widget=new TVgInfoWidget(l_info);
-		ui.vgInfo->addWidget(l_widget);
+	TVGInfo *l_vgInfo;
+	TLogicalVolume *l_lvInfo;
+	QStandardItemModel *l_vgModel=new QStandardItemModel(0,2,this);
+	QStandardItemModel *l_lvModel=new QStandardItemModel(0,3,this);
+	l_vgModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Volume group")));
+	l_vgModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Id")));
+	l_lvModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Logical volume")));
+	l_lvModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Volume group")));
+	l_lvModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Id")));
+	l_cnt=0;
+	int l_lvCnt=0;
+	if(l_vg != nullptr){
+		TLinkListIterator<TVGInfo> l_vgIter(l_vg);
+		while(l_vgIter.hasNext()){
+			l_vgInfo=l_vgIter.next();
+			l_vgModel->setItem(l_cnt,0,new QStandardItem(l_vgInfo->getName()));
+			l_vgModel->setItem(l_cnt,1,new QStandardItem(l_vgInfo->getKey()));
+			l_cnt++;
+			TLinkListIterator<TLogicalVolume> l_iterLv(l_vgInfo->getLogicalVolumns());
+			while(l_iterLv.hasNext()){
+				l_lvInfo=l_iterLv.next();
+				l_lvModel->setItem(l_lvCnt,0,new QStandardItem(l_lvInfo->getName()));
+				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_vgInfo->getName()));
+				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getId()));
+				l_lvCnt++;
+			}
+		}
 	}
+	l_lvModel->setRowCount(l_lvCnt);
+	l_vgModel->setRowCount(l_cnt);
+	ui.vgList->setModel(l_vgModel);
+	ui.vgList->resizeColumnsToContents();
+	ui.lvList->setModel(l_lvModel);
+	ui.lvList->resizeColumnsToContents();
+
 }
 
 void TMainWindow::fillIscsi()
