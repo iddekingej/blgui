@@ -6,20 +6,15 @@ class TStringLineIterator{
 private: 
 	QString text;
 	int pos=0;
-	QString current;
 public:
 	inline TStringLineIterator(QString &p_text){ 
 		text=p_text;
-		current="";
 	}
 	
-	inline QString &getCurrent(){ return current;}
-	
-	inline QString next(){		
+	inline QStringRef next(){		
 		int l_newPos=text.indexOf("\n",pos);
-		QString l_return;
-		l_return=text.mid(pos,l_newPos-pos);
-		current=l_return;
+		QStringRef l_return;
+		l_return=text.midRef(pos,l_newPos-pos);
 		if(l_newPos>=0){
 			pos=l_newPos+1;
 		} else {

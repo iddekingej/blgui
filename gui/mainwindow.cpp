@@ -650,10 +650,11 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	if(g_config.getExpandByDefault()){
 		expandDeviceAll();
 	}
+	
+	 ui.lvmRootWarning->setVisible((getuid()!=0));
+	
+	
 }
-//MyItem * myObj 
-//       = static_cast<MyItem*>
-//         (ui.myTreeView->currentIndex().internalPointer());
 
 //Set which tab is visible from config 
 

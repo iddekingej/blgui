@@ -292,6 +292,16 @@
          </attribute>
          <layout class="QVBoxLayout" name="lvmLayout">
           <item>
+           <widget class="QLabel" name="lvmRootWarning">
+            <property name="styleSheet">
+             <string notr="true">color:rgb(255,0,0)</string>
+            </property>
+            <property name="text">
+             <string>LVM information on this page can only be retrieved when bdgui is run as root.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QLabel" name="label">
             <property name="font">
              <font>

@@ -37,7 +37,7 @@ private:
 	QString vgid;
 	QString vgName;
 	TDeviceBase *realDevice;
-	   TVolumeGroup *volumeGroup;
+	TVolumeGroup *volumeGroup;
 public:
 	inline TVolumeGroup *getVolumeGroup(){ return volumeGroup;}
 	inline void setVolumeGroup(TVolumeGroup *p_volumeGroup){ volumeGroup=p_volumeGroup;}
@@ -97,7 +97,7 @@ public:
 		realDevice=p_device;
 	}
 	inline QString getId(){return id;}
-	inline void setId(QString p_id){id=p_id;}
+	inline void setId(QString &p_id){id=p_id;}
 	inline QString getName(){return name;}
 	inline TVolumeGroup *getVolumeGroup(){ return volumeGroup;}
 	TLogicalVolume(QString &p_name,TVolumeGroup *p_volumeGroup);
@@ -135,7 +135,7 @@ protected:
 public:
 	TLVMResponseParser(QString &p_text);
 	virtual ~TLVMResponseParser();
-	virtual bool chapter(QString p_item);
+	virtual bool chapter(QStringRef &p_item);
 	void parseChapter();	
 	virtual void setVar(QString &p_name,QString &p_value);
 	void parse();
@@ -150,9 +150,9 @@ private:
 	TDeviceList *devList;
 public:
 	TPVParser(TDeviceList *p_devList,QString &p_text);
-	virtual bool chapter(QString p_item) override;
+	virtual bool chapter(QStringRef &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
-	   TPhysicalVolumeList *getItems(){ return items;}	
+	TPhysicalVolumeList *getItems(){ return items;}	
 
 };
 
@@ -163,7 +163,7 @@ private:
 	TVolumeGroup *current;
 public:
 	TVGMainParser(QString &p_text);
-	virtual bool chapter(QString p_item) override;
+	virtual bool chapter(QStringRef &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 	TVolumeGroupList *getItems(){ return items;}	
 
@@ -176,7 +176,7 @@ private:
 	TLogicalVolume *currentLv;
 public:
 	TVGParser(TVolumeGroup *p_item,QString &p_text);
-	virtual bool chapter(QString p_item) override;
+	virtual bool chapter(QStringRef &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 };
 
