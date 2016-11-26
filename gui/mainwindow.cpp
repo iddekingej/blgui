@@ -102,13 +102,12 @@ void TMainWindow::refresh()
 	fillStats();
 	fillLvm();
 	fillUserTabDef();
-	fillLvm();
 }
 
 void TMainWindow::fillLvm()
 {
 	QStandardItemModel *l_model=new QStandardItemModel(0,3,this);
-	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Devive")));
+	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Size")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
 	
@@ -491,6 +490,7 @@ void TMainWindow::fillDeviceGrid()
 
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
+	
 }
 /** Fill device list with data
  * 

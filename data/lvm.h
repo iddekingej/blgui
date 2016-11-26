@@ -205,6 +205,8 @@ public:
 	inline TLinkList<TPhysicalVolume> *getPvList(){ return pvList;}
 	inline TLinkList<TVolumeGroup> *getVgList(){return vgList;}
 	void processInfo(TDeviceList *p_devList);
+	TLVM();
+	~TLVM();
 };
 
 #endif

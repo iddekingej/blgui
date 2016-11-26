@@ -105,5 +105,6 @@ TDeviceInfo::~TDeviceInfo(){
 	delete raidList;
 	delete mtab;
 	delete iscsi;
+	delete lvm;
 	blkid_put_cache(blkidCache);
 }

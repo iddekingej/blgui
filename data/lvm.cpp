@@ -387,8 +387,7 @@ void TLVMHandler::closeLVMSocket()
 
 void TLVM::processInfo(TDeviceList* p_devList)
 {	
-	pvList=nullptr;
-	vgList=nullptr;
+
 	TLVMHandler l_handler;
 	if(l_handler.openLVMSocket()){
 		vgList=l_handler.vgList();
@@ -398,4 +397,16 @@ void TLVM::processInfo(TDeviceList* p_devList)
 		l_handler.closeLVMSocket();
 	}
 	
+}
+
+TLVM::TLVM()
+{
+	pvList=nullptr;
+	vgList=nullptr;
+}
+
+TLVM::~TLVM()
+{
+	if(pvList != nullptr)delete pvList;
+	if(vgList != nullptr)delete vgList;
 }
