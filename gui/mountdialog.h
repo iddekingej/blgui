@@ -2,6 +2,7 @@
 #define __MOUNTDIALOG_H__
 
 #include <QDialog>
+#include <QString>
 #include "ui_mount.h"
 #include "data/devicebase.h"
 
@@ -13,6 +14,7 @@ private slots:
 	void actionClicked();
 	void fillDeviceSelectList();
 	void onDevChange(int p_index);
+	void mountpointChanged(const QString &p_text);
 private:
 	Ui::MountDialog ui;
 	TDeviceBase *device;

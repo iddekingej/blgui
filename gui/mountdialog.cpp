@@ -2,6 +2,7 @@
 #include "gui/mountdialog.h"
 #include <klocalizedstring.h>
 #include <QMessageBox>
+#include <QFileInfo>
 #include <sys/mount.h>
 #include <string.h>
 #include "data/filesystems.h"
@@ -33,7 +34,26 @@ TMountDialog::TMountDialog(TDeviceBase* p_device,const QHash<QString,TDeviceBase
 	connect(ui.mountDevice,SIGNAL(currentIndexChanged(int)),this,SLOT(onDevChange(int)));
 	connect(ui.optionMount,SIGNAL(clicked()),this,SLOT(actionClicked()));
 	connect(ui.optionUnmount,SIGNAL(clicked()),this,SLOT(actionClicked()));
+	connect(ui.mountpoint,SIGNAL(textChanged(const QString &)),this, SLOT(mountpointChanged(const QString& )));
+	ui.errorLabel->setVisible(false);
 	actionClicked();
+}
+
+void TMountDialog::mountpointChanged(const QString& p_text)
+{
+	QFileInfo l_info(p_text);
+	QString l_text="";
+	if(!l_info.exists()){
+		l_text=i18n("Path doesn't exists.");		
+	} else if (!l_info.isDir()){
+		l_text=i18n("Path is not a directory but a file");
+	}
+	if(l_text.length()>0){
+		ui.errorLabel->setText(l_text);
+		ui.errorLabel->setVisible(true);		
+	} else {
+		ui.errorLabel->setVisible(false);
+	}
 }
 
 void TMountDialog::onDevChange(int p_index)
@@ -141,6 +161,10 @@ void TMountDialog::unmountDevice()
 		}
 	}
 }
+
+
+
+
 void TMountDialog::mountDevice()
 {
 	TDeviceBase *l_device;

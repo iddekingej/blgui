@@ -41,6 +41,8 @@ public:
 	void setIscsiTab(bool p_flag);
 	bool getStatsTab();
 	void setStatsTab(bool p_flag);
+	bool getLVMTab();
+	void setLVMTab(bool p_flag);
 	bool getDeviceAsTree();
 	void setDeviceAsTree(bool p_flag);
 	bool getExpandByDefault();

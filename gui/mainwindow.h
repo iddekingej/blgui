@@ -39,8 +39,8 @@ private:
 	QTimer checkChange;
 	
 	TChangeManager  changeManager;
-	QWidget *tabs[5];
-	QWidget *tabsVisible[5];
+	QWidget *tabs[6];
+	QWidget *tabsVisible[6];
 	TDiskStatList *prvStats=nullptr;
 	TTabDefList userTabs;
 	QList<TUserTabDef *> userTabWidgets;

@@ -133,10 +133,23 @@ bool TConfig::getStatsTab()
 }
 
 
+
+
 void TConfig::setStatsTab(bool p_flag)
 {
 	configGui.writeEntry(QStringLiteral("statsTab"),p_flag);
 }
+
+bool TConfig::getLVMTab()
+{
+	return configGui.readEntry(QStringLiteral("lvmTab"),true);
+}
+
+void TConfig::setLVMTab(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("lvmTab"),p_flag);
+}
+
 
 bool TConfig::getDeviceAsTree()
 {

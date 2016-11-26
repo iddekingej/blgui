@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>559</width>
-    <height>641</height>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -130,14 +130,14 @@
          <item row="0" column="1">
           <widget class="QLineEdit" name="mountpoint"/>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
             <string>filesystem type</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="2" column="1">
           <widget class="QComboBox" name="fsType">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -150,71 +150,81 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
+         <item row="5" column="1">
           <widget class="QCheckBox" name="readOnly">
            <property name="text">
             <string>Readonly</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="1">
+         <item row="6" column="1">
           <widget class="QCheckBox" name="noExec">
            <property name="text">
             <string>No execute</string>
            </property>
           </widget>
          </item>
-         <item row="6" column="1">
+         <item row="7" column="1">
           <widget class="QCheckBox" name="noSuid">
            <property name="text">
             <string>No suid</string>
            </property>
           </widget>
          </item>
-         <item row="7" column="1">
+         <item row="8" column="1">
           <widget class="QCheckBox" name="noDevices">
            <property name="text">
             <string>No device</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="0">
+         <item row="9" column="0">
           <widget class="QLabel" name="label_6">
            <property name="text">
             <string>Access time</string>
            </property>
           </widget>
          </item>
-         <item row="8" column="1">
+         <item row="9" column="1">
           <widget class="QComboBox" name="accesTimeSet">
            <property name="editable">
             <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item row="9" column="1">
+         <item row="10" column="1">
           <widget class="QCheckBox" name="noAccessDir">
            <property name="text">
             <string>No directorty access time</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="4" column="0">
           <widget class="QLabel" name="label_13">
            <property name="text">
             <string>Security:</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="label_3">
            <property name="text">
             <string>Extra mount options</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
+         <item row="3" column="1">
           <widget class="QLineEdit" name="extraOptions"/>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="errorLabel">
+           <property name="styleSheet">
+            <string notr="true">color:rgb(170, 0, 0)</string>
+           </property>
+           <property name="text">
+            <string notr="true" extracomment="Err messages regarding mount point are displayed here">TextLabel</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

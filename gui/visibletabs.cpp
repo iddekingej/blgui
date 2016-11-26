@@ -12,7 +12,7 @@ TVisibleTabs::TVisibleTabs():QDialog()
 	ui.checkIsci->setCheckState(g_config.getIscsiTab()?Qt::Checked:Qt::Unchecked);
 	ui.checkRaid->setCheckState(g_config.getRaidTab()?Qt::Checked:Qt::Unchecked);
 	ui.checkStats->setCheckState(g_config.getStatsTab()?Qt::Checked:Qt::Unchecked);
-
+	ui.checkLVM->setCheckState(g_config.getLVMTab()?Qt::Checked:Qt::Unchecked);
 }
 
 void TVisibleTabs::okPressed()
@@ -22,6 +22,7 @@ void TVisibleTabs::okPressed()
 	g_config.setIscsiTab(ui.checkIsci->checkState()==Qt::Checked);
 	g_config.setRaidTab(ui.checkRaid->checkState()==Qt::Checked);
 	g_config.setStatsTab(ui.checkStats->checkState()==Qt::Checked);
+	g_config.setLVMTab(ui.checkLVM->checkState()==Qt::Checked);
 	close();
 }
 

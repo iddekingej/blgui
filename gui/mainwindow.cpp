@@ -635,11 +635,13 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabs[2]=ui.tabFstab;
 	tabs[3]=ui.tabIscsi;
 	tabs[4]=ui.tabStats;
+	tabs[5]=ui.lvmInfo;
 	tabsVisible[0]=nullptr;
 	tabsVisible[1]=nullptr;
 	tabsVisible[2]=nullptr;
 	tabsVisible[3]=nullptr;
 	tabsVisible[4]=nullptr;
+	tabsVisible[5]=nullptr;
 	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
 
 	setVisibleTabs();
@@ -662,7 +664,7 @@ void TMainWindow::setTabVisible(int p_indx,bool p_flag,const QString &p_label)
 		if(tabsVisible[p_indx] != nullptr){
 			int l_cnt;
 			int l_pos=0;
-			for(l_cnt=0;l_cnt<4 && tabs[l_cnt]!= l_tab;l_cnt++){
+			for(l_cnt=0;l_cnt<5 && tabs[l_cnt]!= l_tab;l_cnt++){
 				if(ui.info->indexOf(tabs[l_cnt])>=0) l_pos++;
 			}	
 			ui.info->insertTab(l_pos,l_tab,p_label);
@@ -685,6 +687,7 @@ void TMainWindow::setVisibleTabs(){
 	setTabVisible(2,g_config.getFsTabTab(),i18n("Fstab"));
 	setTabVisible(3,g_config.getIscsiTab(),i18n("Iscsi"));
 	setTabVisible(4,g_config.getStatsTab(),i18n("Stats"));
+	setTabVisible(5,g_config.getLVMTab(),i18n("LVM"));
 }
 
 /** Display dialog for selecting which tab is visible
