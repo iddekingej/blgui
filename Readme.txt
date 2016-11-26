@@ -66,7 +66,7 @@ Building the exec_program:
 * cd build
 * Configuration
 	For KDE5: cmake .. 
-	For KDE4: cmake -Dkde=4 ..
+	For KDE4: cmake -Dkde=4  -DQT_QMAKE_EXECUTABLE=<qmake 4 exec>  ..
 * make
 * make install
 

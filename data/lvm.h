@@ -3,6 +3,7 @@
 #include <QString>
 #include "base/stringlineiterator.h"
 #include "base/linklist.h"
+#include "base/compat.h"
 #include "devicelist.h"
 using namespace std;
 
@@ -135,7 +136,7 @@ protected:
 public:
 	TLVMResponseParser(QString &p_text);
 	virtual ~TLVMResponseParser();
-	virtual bool chapter(QStringRef &p_item);
+	virtual bool chapter(QSTRINGREF &p_item);
 	void parseChapter();	
 	virtual void setVar(QString &p_name,QString &p_value);
 	void parse();
@@ -161,7 +162,7 @@ private:
 	TDeviceList *devList;
 public:
 	TPVParser(TDeviceList *p_devList,QString &p_text);
-	virtual bool chapter(QStringRef &p_item) override;
+	virtual bool chapter(QSTRINGREF &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 	TPhysicalVolumeList *getItems(){ return items;}	
 
@@ -174,7 +175,7 @@ private:
 	TVolumeGroup *current;
 public:
 	TVGMainParser(QString &p_text);
-	virtual bool chapter(QStringRef &p_item) override;
+	virtual bool chapter(QSTRINGREF &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 	TVolumeGroupList *getItems(){ return items;}	
 
@@ -187,7 +188,7 @@ private:
 	TLogicalVolume *currentLv;
 public:
 	TVGParser(TVolumeGroup *p_item,QString &p_text);
-	virtual bool chapter(QStringRef &p_item) override;
+	virtual bool chapter(QSTRINGREF &p_item) override;
 	virtual void setVar(QString &p_name,QString &p_value) override;
 };
 
