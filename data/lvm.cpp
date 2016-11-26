@@ -104,6 +104,18 @@ void TLVMResponseParser::parse()
 	parseChapter();
 }
 
+void TTokenParser::setVar(QString& p_name, QString& p_value)
+{
+	if(p_name=="expected"){
+		token=p_value;
+	}
+}
+
+
+TTokenParser::TTokenParser(QString& p_text):TLVMResponseParser(p_text)
+{
+}
+
 
 TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser(p_text)
 {
@@ -257,7 +269,7 @@ void TVolumeGroupList::processInfo(TDeviceList* p_list)
 		TLinkListIterator<TLogicalVolume> l_lvIter(l_vg->getLogicalVolumns());
 		while(l_lvIter.hasNext()){
 			l_lv=l_lvIter.next();
-			l_target=QFile::symLinkTarget(QStringLiteral("/dev/")+l_vg->getName()+"/"+l_lv->getName());
+			l_target=QFile::symLinkTarget(QString("/dev/")+l_vg->getName()+"/"+l_lv->getName());
 			l_deviceBase=p_list->findDeviceByDevPath(l_target);
 			if((l_device=dynamic_cast<TDevice *>(l_deviceBase))!=nullptr){
 				l_device->setVGName(l_vg->getName());				
@@ -331,10 +343,25 @@ bool TLVMHandler::sendMessage(const char *p_message,QString &p_return)
 	return true;
 }
  
+void TLVMHandler::getToken()
+{
+	QString l_return;
+	bool l_ok=sendMessage("request = \"pv_list\"\ntoken = \"QQQQQQ\"\n\n##\n",l_return);
+	if(l_ok){
+		TTokenParser l_parser(l_return);
+		l_parser.parse();
+		token=l_parser.getToken();
+	} else {
+		token="filter:0";
+	}
+}
+
+ 
 TPhysicalVolumeList* TLVMHandler::pvList(TDeviceList* p_devList)
 {
 	QString l_return;
-	bool l_ok=sendMessage("request = \"pv_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
+	QString l_cmd="request = \"pv_list\"\ntoken = \""+token+"\n\n##\n";
+	bool l_ok=sendMessage(qstr(l_cmd),l_return);
 	if(l_ok){
 		TPVParser l_parser(p_devList,l_return);
 		l_parser.parse();
@@ -347,17 +374,19 @@ TVolumeGroupList *TLVMHandler::vgList()
 {
 	QString l_return;
 	TVolumeGroupList *l_items=nullptr;
-	bool l_ok=sendMessage("request = \"vg_list\"\ntoken = \"filter:0\"\n\n##\n",l_return);
+	QString l_cmd="request = \"vg_list\"\ntoken = \""+token+"\n\n##\n";
+	bool l_ok=sendMessage(qstr(l_cmd),l_return);
 	if(l_ok){
 		TVGMainParser l_parser(l_return);
 		l_parser.parse();
 		l_items=l_parser.getItems();
 		TLinkListIterator<TVolumeGroup> l_iter(l_items);
 		TVolumeGroup *l_item;
-		QString l_format="request = \"vg_lookup\"\nuuid = \"%1\"\ntoken=\"filter:0\"\n\n##\n";
+		l_cmd="request = \"vg_lookup\"\nuuid = \"%1\"\ntoken=\""+token+"\"\n\n##\n";
+		
 		while(l_iter.hasNext()){
 			l_item=l_iter.next();
-			l_ok=sendMessage(qstr(l_format.arg(l_item->getKey())),l_return);
+			l_ok=sendMessage(qstr(l_cmd.arg(l_item->getKey())),l_return);
 			if(l_ok){
 				TVGParser l_parser(l_item,l_return);
 				l_parser.parse();
@@ -393,6 +422,7 @@ void TLVM::processInfo(TDeviceList* p_devList)
 
 	TLVMHandler l_handler;
 	if(l_handler.openLVMSocket()){
+		l_handler.getToken();
 		vgList=l_handler.vgList();
 		pvList=l_handler.pvList(p_devList);
 		vgList->processInfo(p_devList);

@@ -142,11 +142,22 @@ public:
 	
 };
 
+class TTokenParser:public TLVMResponseParser{
+private:
+	QString token;	
+public:
+	TTokenParser(QString &p_text);
+	virtual void setVar(QString &p_name,QString &p_value) override;
+	inline QString  getToken(){ return token;}
+};
+
+
+
 
 class TPVParser:public TLVMResponseParser{
 private:
-	   TPhysicalVolumeList *items;
-	   TPhysicalVolume *current;
+	TPhysicalVolumeList *items;
+	TPhysicalVolume *current;
 	TDeviceList *devList;
 public:
 	TPVParser(TDeviceList *p_devList,QString &p_text);
@@ -186,10 +197,11 @@ private:
 	int readSocket;
 	bool writeSocket(const char *p_str);
 	bool sendMessage(const char *p_message,QString &p_return);
-
+	QString token;
 public:
 	bool openLVMSocket();	
 	void closeLVMSocket();
+	void getToken();
 	TPhysicalVolumeList *pvList(TDeviceList *p_devList);	
 	TVolumeGroupList *vgList();
 	TLVMHandler();
@@ -201,7 +213,9 @@ class TLVM{
 private:
 	TPhysicalVolumeList *pvList;
 	TVolumeGroupList    *vgList;
+	QString token;
 public:
+	
 	inline TLinkList<TPhysicalVolume> *getPvList(){ return pvList;}
 	inline TLinkList<TVolumeGroup> *getVgList(){return vgList;}
 	void processInfo(TDeviceList *p_devList);
