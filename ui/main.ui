@@ -144,7 +144,7 @@
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
               <property name="sortingEnabled">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <property name="expandsOnDoubleClick">
                <bool>false</bool>
@@ -279,6 +279,9 @@
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
             </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -302,7 +305,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="pvInfo"/>
+           <widget class="QTableView" name="pvInfo">
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_2">
@@ -318,7 +325,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="vgList"/>
+           <widget class="QTableView" name="vgList">
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_xx">
@@ -334,7 +345,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="lvList"/>
+           <widget class="QTableView" name="lvList">
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

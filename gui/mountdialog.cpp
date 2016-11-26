@@ -11,6 +11,7 @@
 
 
 /** TMount Dialog constructor
+ * 
 * \param p_device   This device will be selected in device selection list (mount device)
 * \parem p_devices  device list=>Used to fill "mount device" selection list
 */
@@ -39,9 +40,16 @@ TMountDialog::TMountDialog(TDeviceBase* p_device,const QHash<QString,TDeviceBase
 	actionClicked();
 }
 
-void TMountDialog::mountpointChanged(const QString& p_text)
+/**
+ * When the mount point is changed in the mount dialog , this routine checks if the path is correct. 
+ * The following checks are done: Exists path, is path a directory.
+ * 
+ * \param p_path  Entered path.
+ */
+
+void TMountDialog::mountpointChanged(const QString& p_path)
 {
-	QFileInfo l_info(p_text);
+	QFileInfo l_info(p_path);
 	QString l_text="";
 	if(!l_info.exists()){
 		l_text=i18n("Path doesn't exists.");		
