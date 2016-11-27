@@ -112,7 +112,7 @@ void TMainWindow::fillLvm()
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
 	
 	TLinkList<TPhysicalVolume> *l_pvs=info->getLVM()->getPvList();
-	   TPhysicalVolume *l_pvInfo;
+	TPhysicalVolume *l_pvInfo;
 	int l_cnt=0;
 	if(l_pvs != nullptr){
 		TLinkListIterator<TPhysicalVolume> l_pvIter(l_pvs);
@@ -126,9 +126,13 @@ void TMainWindow::fillLvm()
 			l_cnt++;
 		}
 	}
+	int l_sortHeader=ui.pvInfo->horizontalHeader()->sortIndicatorSection();
+	Qt::SortOrder l_sortOrder=ui.pvInfo->horizontalHeader()->sortIndicatorOrder();		
 	ui.pvInfo->setModel(l_model);
 	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->resizeColumnsToContents();
+	ui.pvInfo->sortByColumn(l_sortHeader,l_sortOrder);
+	
 	TLinkList<TVolumeGroup> *l_vg=info->getLVM()->getVgList();
 	   TVolumeGroup *l_vgInfo;
 	TLogicalVolume *l_lvInfo;
@@ -137,8 +141,8 @@ void TMainWindow::fillLvm()
 	l_vgModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Volume group")));
 	l_vgModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Id")));
 	l_lvModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Logical volume")));
-	l_lvModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
 	l_lvModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
+	l_lvModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));	
 	l_lvModel->setHorizontalHeaderItem(3,new QStandardItem(i18n("Id")));
 	l_cnt=0;
 	int l_lvCnt=0;
@@ -153,25 +157,33 @@ void TMainWindow::fillLvm()
 			while(l_iterLv.hasNext()){
 				l_lvInfo=l_iterLv.next();
 				l_lvModel->setItem(l_lvCnt,0,new QStandardItem(l_lvInfo->getName()));
-				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():""));
-				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_vgInfo->getName()));
+				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_vgInfo->getName()));
+				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():""));
 				l_lvModel->setItem(l_lvCnt,3,new QStandardItem(l_lvInfo->getId()));
 				l_lvCnt++;
 			}
 		}
 	}
+	
 	l_lvModel->setRowCount(l_lvCnt);
 	l_vgModel->setRowCount(l_cnt);
+	l_sortHeader=ui.vgList->horizontalHeader()->sortIndicatorSection();
+	l_sortOrder=ui.vgList->horizontalHeader()->sortIndicatorOrder();		
 	ui.vgList->setModel(l_vgModel);
 	ui.vgList->resizeColumnsToContents();
+	ui.vgList->sortByColumn(l_sortHeader,l_sortOrder);
+	l_sortHeader=ui.lvList->horizontalHeader()->sortIndicatorSection();
+	l_sortOrder=ui.lvList->horizontalHeader()->sortIndicatorOrder();		
 	ui.lvList->setModel(l_lvModel);
 	ui.lvList->resizeColumnsToContents();
+	ui.lvList->sortByColumn(l_sortHeader,l_sortOrder);
 
 }
 
 void TMainWindow::fillIscsi()
 {
-	
+	int l_sortHeader=ui.iscsiTable->horizontalHeader()->sortIndicatorSection();
+	Qt::SortOrder l_sortOrder=ui.iscsiTable->horizontalHeader()->sortIndicatorOrder();		
 	QStandardItemModel *l_model=new QStandardItemModel(0,4,this);
 	TDevice            *l_device;
 	int                l_cnt=0;
@@ -196,9 +208,12 @@ void TMainWindow::fillIscsi()
 	ui.iscsiTable->setModel(l_model);
 	ui.iscsiTable->resizeRowsToContents();
 	ui.iscsiTable->resizeColumnsToContents();
+	ui.iscsiTable->sortByColumn(l_sortHeader,l_sortOrder);
 }
 void TMainWindow::fillMtab()
 {
+	int l_sortHeader=ui.mtabList->horizontalHeader()->sortIndicatorSection();
+	Qt::SortOrder l_sortOrder=ui.mtabList->horizontalHeader()->sortIndicatorOrder();	
 	QStandardItemModel *l_model=new QStandardItemModel(0,6,this);
 	TMTabEntry *l_info;
 	QString l_note;
@@ -235,6 +250,8 @@ void TMainWindow::fillMtab()
 	ui.mtabList->setModel(l_model);
 	ui.mtabList->resizeRowsToContents();
 	ui.mtabList->resizeColumnsToContents();
+	ui.mtabList->sortByColumn(l_sortHeader,l_sortOrder);
+
 }
 
 //Fill Raid TAb
@@ -242,6 +259,8 @@ void TMainWindow::fillMtab()
 void TMainWindow::fillRaid()
 {
 	int l_cnt=0;
+	int l_sortHeader=ui.raidList->horizontalHeader()->sortIndicatorSection();
+	Qt::SortOrder l_sortOrder=ui.raidList->horizontalHeader()->sortIndicatorOrder();
 	QStandardItemModel *l_model=new QStandardItemModel(info->getRaidList()->getLength(),4,this);
 
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
@@ -265,12 +284,18 @@ void TMainWindow::fillRaid()
 	ui.raidList->setModel(l_model);
 	ui.raidList->resizeRowsToContents();
 	ui.raidList->resizeColumnsToContents();
+	ui.raidList->sortByColumn(l_sortHeader,l_sortOrder);
+
 }
 
 void TMainWindow::fillStats()
 {
 	int l_cnt=0;
-	QStandardItemModel *l_model=new QStandardItemModel(info->getRaidList()->getLength(),4,this);
+	int l_sortHeader=ui.stats->horizontalHeader()->sortIndicatorSection();
+	Qt::SortOrder l_sortOrder=ui.stats->horizontalHeader()->sortIndicatorOrder();
+	QStandardItemModel *l_model=statsModel;
+	l_model->blockSignals(true);
+	statsModel->clear();
 	TDiskStatList *l_info=new TDiskStatList();
 	l_info->readInfo();
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
@@ -294,9 +319,10 @@ void TMainWindow::fillStats()
 		l_model->setItem(l_cnt,4,new QStandardItem(QString::number(l_prv != nullptr?l_item->getWriteSectors()-l_prv->getWriteSectors():0)));
 		l_cnt++;
 	}
-	ui.stats->setModel(l_model);
+	l_model->blockSignals(false);
 	ui.stats->resizeRowsToContents();
 	ui.stats->resizeColumnsToContents();
+	ui.stats->sortByColumn(l_sortHeader,l_sortOrder);
 	if(prvStats!=nullptr) delete prvStats;
 	prvStats=l_info;
 	
@@ -600,6 +626,9 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	info=nullptr;
 	devModel=nullptr;
 	userTabs.read();
+	statsModel=new QStandardItemModel(0,4);
+	ui.stats->setModel(statsModel);
+
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));
 	ui.itemSource->addItem(i18n("Labels"));
@@ -643,7 +672,13 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabsVisible[4]=nullptr;
 	tabsVisible[5]=nullptr;
 	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
-
+	ui.pvInfo->sortByColumn(0,Qt::AscendingOrder);
+	ui.vgList->sortByColumn(0,Qt::AscendingOrder);
+	ui.lvList->sortByColumn(0,Qt::AscendingOrder);
+	ui.stats->sortByColumn(0,Qt::AscendingOrder);
+	ui.mtabList->sortByColumn(1,Qt::AscendingOrder);
+	ui.iscsiTable->sortByColumn(0,Qt::AscendingOrder);
+	ui.raidList->sortByColumn(0,Qt::AscendingOrder);
 	setVisibleTabs();
 	setupUserTabs();
 	refresh();

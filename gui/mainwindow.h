@@ -33,6 +33,7 @@ private slots:
 	void setupUserTabs();
 private:
 	TDeviceInfo        *info;
+	QStandardItemModel *statsModel;
 	QStandardItemModel *devModel;
 	QVector<int> *enableDeviceFields;
 	Ui::MainWindow ui;
