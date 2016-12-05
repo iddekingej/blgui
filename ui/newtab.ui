@@ -29,7 +29,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Name of tab</string>
+      <string>Label of new tab:</string>
      </property>
     </widget>
    </item>

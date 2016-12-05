@@ -168,7 +168,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Tab label</string>
+           <string>Tab label:</string>
           </property>
          </widget>
         </item>
@@ -246,7 +246,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Condition field</string>
+           <string>Condition field:</string>
           </property>
          </widget>
         </item>
@@ -268,7 +268,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Condition</string>
+           <string>Condition:</string>
           </property>
          </widget>
         </item>
