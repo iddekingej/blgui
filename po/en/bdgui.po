@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-11-11 09:22+0100\n"
+"POT-Creation-Date: 2016-12-05 21:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/globals.cpp:7 gui/formdevinfo.cpp:148
+#: base/globals.cpp:7 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:111
 msgid "Size"
 msgstr ""
 
@@ -25,8 +25,8 @@ msgstr ""
 msgid "Model"
 msgstr ""
 
-#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:147
-#: gui/mainwindow.cpp:142
+#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:150
+#: gui/mainwindow.cpp:232
 msgid "Type"
 msgstr ""
 
@@ -34,7 +34,7 @@ msgstr ""
 msgid "Mounted"
 msgstr ""
 
-#: base/globals.cpp:11 gui/mainwindow.cpp:374
+#: base/globals.cpp:11 gui/mainwindow.cpp:475
 msgid "Label"
 msgstr ""
 
@@ -63,11 +63,11 @@ msgid "Free space"
 msgstr ""
 
 #: base/globals.cpp:18
-msgid "scsi bus"
+msgid "Scsi bus"
 msgstr ""
 
 #: base/globals.cpp:19
-msgid "iscsi host"
+msgid "Iscsi host"
 msgstr ""
 
 #: base/globals.cpp:20
@@ -78,8 +78,24 @@ msgstr ""
 msgid "Free space (KMG)"
 msgstr ""
 
-#: base/globals.cpp:22 gui/formdevinfo.cpp:73
+#: base/globals.cpp:22 gui/formdevinfo.cpp:76
 msgid "Rotational"
+msgstr ""
+
+#: base/globals.cpp:23
+msgid "USB bus"
+msgstr ""
+
+#: base/globals.cpp:24
+msgid "PCI bus"
+msgstr ""
+
+#: base/globals.cpp:25
+msgid "Volume group name"
+msgstr ""
+
+#: base/globals.cpp:26
+msgid "Lvm name"
 msgstr ""
 
 #: data/changemanager.cpp:47
@@ -98,11 +114,11 @@ msgstr ""
 msgid "removed"
 msgstr ""
 
-#: data/devicelist.cpp:231
+#: data/devicelist.cpp:270
 msgid "LVM Device"
 msgstr ""
 
-#: data/devicelist.cpp:240
+#: data/devicelist.cpp:279
 msgid "LVM Member"
 msgstr ""
 
@@ -110,221 +126,259 @@ msgstr ""
 msgid "Alias"
 msgstr ""
 
-#: gui/formdevinfo.cpp:66 gui/formdevinfo.cpp:67
+#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
 msgid "Yes"
 msgstr ""
 
-#: gui/formdevinfo.cpp:66 gui/formdevinfo.cpp:67
+#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
 msgid "No"
 msgstr ""
 
-#: gui/formdevinfo.cpp:73
+#: gui/formdevinfo.cpp:76
 msgid "SSD"
 msgstr ""
 
-#: gui/formdevinfo.cpp:122 gui/mainwindow.cpp:111 gui/mainwindow.cpp:139
-#: gui/mainwindow.cpp:178 gui/mainwindow.cpp:207
+#: gui/formdevinfo.cpp:125 gui/mainwindow.cpp:110 gui/mainwindow.cpp:145
+#: gui/mainwindow.cpp:198 gui/mainwindow.cpp:229 gui/mainwindow.cpp:272
+#: gui/mainwindow.cpp:307
 msgid "Device"
 msgstr ""
 
-#: gui/formdevinfo.cpp:123 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:141
+#: gui/formdevinfo.cpp:126 gui/formdevinfo.cpp:154 gui/mainwindow.cpp:231
 msgid "Mount point"
 msgstr ""
 
-#: gui/formdevinfo.cpp:124 gui/formparinfo.cpp:39
+#: gui/formdevinfo.cpp:127 gui/formparinfo.cpp:39
 msgid "Fs. type"
 msgstr ""
 
-#: gui/formdevinfo.cpp:146 gui/mainwindow.cpp:326 gui/mainwindow.cpp:401
+#: gui/formdevinfo.cpp:149 gui/mainwindow.cpp:427 gui/mainwindow.cpp:502
 msgid "Name"
 msgstr ""
 
-#: gui/formdevinfo.cpp:149
+#: gui/formdevinfo.cpp:152
 msgid "Start(Bytes)"
 msgstr ""
 
-#: gui/formdevinfo.cpp:150
+#: gui/formdevinfo.cpp:153
 msgid "Available"
 msgstr ""
 
-#: gui/formdevinfo.cpp:189
+#: gui/formdevinfo.cpp:192
 msgid "Slave name"
+msgstr ""
+
+#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:274 gui/mountdialog.cpp:155
+#: gui/mountdialog.cpp:163 gui/mountdialog.cpp:183 gui/mountdialog.cpp:187
+msgid "Error"
+msgstr ""
+
+#: gui/formnewtab.cpp:17
+msgid "Name can't be empty"
 msgstr ""
 
 #: gui/formparinfo.cpp:38
 msgid "Mountpoint"
 msgstr ""
 
-#: gui/mainwindow.cpp:60
+#: gui/formtabdef.cpp:274
+msgid "Please select a field to add"
+msgstr ""
+
+#: gui/mainwindow.cpp:62
 msgid "Only root can mount"
 msgstr ""
 
-#: gui/mainwindow.cpp:66
+#: gui/mainwindow.cpp:68
 msgid "Device not found"
 msgstr ""
 
-#: gui/mainwindow.cpp:68
+#: gui/mainwindow.cpp:70
 msgid "Can't mount device"
 msgstr ""
 
-#: gui/mainwindow.cpp:109
-msgid "Session"
+#: gui/mainwindow.cpp:112 gui/mainwindow.cpp:141 gui/mainwindow.cpp:144
+msgid "Volume group"
 msgstr ""
 
-#: gui/mainwindow.cpp:110
-msgid "Address"
-msgstr ""
-
-#: gui/mainwindow.cpp:112
-msgid "Iscsi bus"
-msgstr ""
-
-#: gui/mainwindow.cpp:138
-msgid "Comments"
-msgstr ""
-
-#: gui/mainwindow.cpp:140
-msgid "Real device"
-msgstr ""
-
-#: gui/mainwindow.cpp:143
-msgid "Options"
-msgstr ""
-
-#: gui/mainwindow.cpp:153
-msgid "Not mounted\n"
-msgstr ""
-
-#: gui/mainwindow.cpp:154
-msgid "Mounted on different path \n"
-msgstr ""
-
-#: gui/mainwindow.cpp:160
-msgid "Wrong type. Type is (%1)"
-msgstr ""
-
-#: gui/mainwindow.cpp:161
-msgid "Device not mountable (has partitions)"
-msgstr ""
-
-#: gui/mainwindow.cpp:179
-msgid "Raid members"
-msgstr ""
-
-#: gui/mainwindow.cpp:180
-msgid "Raid level"
-msgstr ""
-
-#: gui/mainwindow.cpp:181
-msgid "Raid type"
-msgstr ""
-
-#: gui/mainwindow.cpp:182
-msgid "Mounted point"
-msgstr ""
-
-#: gui/mainwindow.cpp:208
-msgid "Read(sectors)"
-msgstr ""
-
-#: gui/mainwindow.cpp:209
-msgid "Read(div)"
-msgstr ""
-
-#: gui/mainwindow.cpp:210
-msgid "Write(sectors)"
-msgstr ""
-
-#: gui/mainwindow.cpp:211
-msgid "Write(div)"
-msgstr ""
-
-#: gui/mainwindow.cpp:327 gui/mainwindow.cpp:403
-msgid "Partition"
-msgstr ""
-
-#: gui/mainwindow.cpp:371 gui/mainwindow.cpp:491
+#: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:472
+#: gui/mainwindow.cpp:639
 msgid "Id"
 msgstr ""
 
-#: gui/mainwindow.cpp:377 gui/mainwindow.cpp:493
+#: gui/mainwindow.cpp:143
+msgid "Logical volume"
+msgstr ""
+
+#: gui/mainwindow.cpp:147
+msgid "Read"
+msgstr ""
+
+#: gui/mainwindow.cpp:148
+msgid "Write"
+msgstr ""
+
+#: gui/mainwindow.cpp:149
+msgid "Visible"
+msgstr ""
+
+#: gui/mainwindow.cpp:196
+msgid "Session"
+msgstr ""
+
+#: gui/mainwindow.cpp:197
+msgid "Address"
+msgstr ""
+
+#: gui/mainwindow.cpp:199
+msgid "Iscsi bus"
+msgstr ""
+
+#: gui/mainwindow.cpp:228
+msgid "Comments"
+msgstr ""
+
+#: gui/mainwindow.cpp:230
+msgid "Real device"
+msgstr ""
+
+#: gui/mainwindow.cpp:233
+msgid "Options"
+msgstr ""
+
+#: gui/mainwindow.cpp:243
+msgid "Not mounted\n"
+msgstr ""
+
+#: gui/mainwindow.cpp:244
+msgid "Mounted on different path \n"
+msgstr ""
+
+#: gui/mainwindow.cpp:250
+msgid "Wrong type. Type is (%1)"
+msgstr ""
+
+#: gui/mainwindow.cpp:251
+msgid "Device not mountable (has partitions)"
+msgstr ""
+
+#: gui/mainwindow.cpp:273
+msgid "Raid members"
+msgstr ""
+
+#: gui/mainwindow.cpp:274
+msgid "Raid level"
+msgstr ""
+
+#: gui/mainwindow.cpp:275
+msgid "Raid type"
+msgstr ""
+
+#: gui/mainwindow.cpp:276
+msgid "Mounted point"
+msgstr ""
+
+#: gui/mainwindow.cpp:308
+msgid "Read(sectors)"
+msgstr ""
+
+#: gui/mainwindow.cpp:309
+msgid "Read(div)"
+msgstr ""
+
+#: gui/mainwindow.cpp:310
+msgid "Write(sectors)"
+msgstr ""
+
+#: gui/mainwindow.cpp:311
+msgid "Write(div)"
+msgstr ""
+
+#: gui/mainwindow.cpp:428 gui/mainwindow.cpp:504
+msgid "Partition"
+msgstr ""
+
+#: gui/mainwindow.cpp:478 gui/mainwindow.cpp:641
 msgid "Uuid"
 msgstr ""
 
-#: gui/mainwindow.cpp:380 gui/mainwindow.cpp:494
+#: gui/mainwindow.cpp:481 gui/mainwindow.cpp:642
 msgid "Path"
 msgstr ""
 
-#: gui/mainwindow.cpp:383
+#: gui/mainwindow.cpp:484 gui/mainwindow.cpp:732
 msgid "LVM"
 msgstr ""
 
-#: gui/mainwindow.cpp:490
+#: gui/mainwindow.cpp:638
 msgid "Devices"
 msgstr ""
 
-#: gui/mainwindow.cpp:492
+#: gui/mainwindow.cpp:640
 msgid "Labels"
 msgstr ""
 
-#: gui/mainwindow.cpp:568
+#: gui/mainwindow.cpp:727
 msgid "Disks"
 msgstr ""
 
-#: gui/mainwindow.cpp:569
+#: gui/mainwindow.cpp:728
 msgid "Raid"
 msgstr ""
 
-#: gui/mainwindow.cpp:570
+#: gui/mainwindow.cpp:729
 msgid "Fstab"
 msgstr ""
 
-#: gui/mainwindow.cpp:571
+#: gui/mainwindow.cpp:730
 msgid "Iscsi"
 msgstr ""
 
-#: gui/mainwindow.cpp:572
+#: gui/mainwindow.cpp:731
 msgid "Stats"
 msgstr ""
 
-#: gui/mountdialog.cpp:25
+#: gui/mountdialog.cpp:29
 msgid "Do not update access time"
 msgstr ""
 
-#: gui/mountdialog.cpp:26
+#: gui/mountdialog.cpp:30
 msgid "Only later then mod. time"
 msgstr ""
 
-#: gui/mountdialog.cpp:27
+#: gui/mountdialog.cpp:31
 msgid "Always"
 msgstr ""
 
-#: gui/mountdialog.cpp:125 gui/mountdialog.cpp:133 gui/mountdialog.cpp:149
-#: gui/mountdialog.cpp:153
-msgid "Error"
+#: gui/mountdialog.cpp:56
+msgid "Path doesn't exists."
 msgstr ""
 
-#: gui/mountdialog.cpp:125
+#: gui/mountdialog.cpp:58
+msgid "Path is not a directory but a file"
+msgstr ""
+
+#: gui/mountdialog.cpp:155
 msgid "Please select operation"
 msgstr ""
 
-#: gui/mountdialog.cpp:133
+#: gui/mountdialog.cpp:163
 msgid "Please select what to unmount"
 msgstr ""
 
-#: gui/mountdialog.cpp:139
+#: gui/mountdialog.cpp:169
 msgid "Unmounting failed"
 msgstr ""
 
-#: gui/mountdialog.cpp:149
+#: gui/mountdialog.cpp:183
 msgid "No device selected"
 msgstr ""
 
-#: gui/mountdialog.cpp:153
+#: gui/mountdialog.cpp:187
 msgid "Mount point is empty"
 msgstr ""
 
-#: gui/mountdialog.cpp:172
+#: gui/mountdialog.cpp:206
 msgid "Error during mounting"
 msgstr ""
 

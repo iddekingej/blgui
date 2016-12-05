@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-11-11 09:22+0100\n"
-"PO-Revision-Date: 2016-10-24 13:56+0200\n"
+"POT-Creation-Date: 2016-12-05 21:22+0100\n"
+"PO-Revision-Date: 2016-12-05 21:52+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.9\n"
 
-#: base/globals.cpp:7 gui/formdevinfo.cpp:148
+#: base/globals.cpp:7 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:111
 msgid "Size"
 msgstr "Omvang"
 
@@ -25,8 +25,8 @@ msgstr "Omvang"
 msgid "Model"
 msgstr "Model"
 
-#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:147
-#: gui/mainwindow.cpp:142
+#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:150
+#: gui/mainwindow.cpp:232
 msgid "Type"
 msgstr "Type"
 
@@ -34,7 +34,7 @@ msgstr "Type"
 msgid "Mounted"
 msgstr "Gekoppeld"
 
-#: base/globals.cpp:11 gui/mainwindow.cpp:374
+#: base/globals.cpp:11 gui/mainwindow.cpp:475
 msgid "Label"
 msgstr "Label"
 
@@ -63,12 +63,12 @@ msgid "Free space"
 msgstr "Vrije ruimte"
 
 #: base/globals.cpp:18
-msgid "scsi bus"
-msgstr "scsi bus"
+msgid "Scsi bus"
+msgstr "scsi bus:"
 
 #: base/globals.cpp:19
-msgid "iscsi host"
-msgstr "iscsi host"
+msgid "Iscsi host"
+msgstr "isci host:"
 
 #: base/globals.cpp:20
 msgid "Start(bytes)"
@@ -78,9 +78,25 @@ msgstr "Start(bytes)"
 msgid "Free space (KMG)"
 msgstr "Vrije ruimte(KMG)"
 
-#: base/globals.cpp:22 gui/formdevinfo.cpp:73
+#: base/globals.cpp:22 gui/formdevinfo.cpp:76
 msgid "Rotational"
 msgstr "Draaiend"
+
+#: base/globals.cpp:23
+msgid "USB bus"
+msgstr "USB bus"
+
+#: base/globals.cpp:24
+msgid "PCI bus"
+msgstr "PCI bus"
+
+#: base/globals.cpp:25
+msgid "Volume group name"
+msgstr "Naam van de volume groep"
+
+#: base/globals.cpp:26
+msgid "Lvm name"
+msgstr "LVM naam"
 
 #: data/changemanager.cpp:47
 msgid "mounted"
@@ -98,11 +114,11 @@ msgstr "toegevoegd"
 msgid "removed"
 msgstr "verwijderd"
 
-#: data/devicelist.cpp:231
+#: data/devicelist.cpp:270
 msgid "LVM Device"
 msgstr "LVM Apparaat"
 
-#: data/devicelist.cpp:240
+#: data/devicelist.cpp:279
 msgid "LVM Member"
 msgstr "LVM Lid"
 
@@ -110,221 +126,259 @@ msgstr "LVM Lid"
 msgid "Alias"
 msgstr "Alias"
 
-#: gui/formdevinfo.cpp:66 gui/formdevinfo.cpp:67
+#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
 msgid "Yes"
 msgstr "Ja"
 
-#: gui/formdevinfo.cpp:66 gui/formdevinfo.cpp:67
+#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
 msgid "No"
 msgstr "Nee"
 
-#: gui/formdevinfo.cpp:73
+#: gui/formdevinfo.cpp:76
 msgid "SSD"
 msgstr "SSD"
 
-#: gui/formdevinfo.cpp:122 gui/mainwindow.cpp:111 gui/mainwindow.cpp:139
-#: gui/mainwindow.cpp:178 gui/mainwindow.cpp:207
+#: gui/formdevinfo.cpp:125 gui/mainwindow.cpp:110 gui/mainwindow.cpp:145
+#: gui/mainwindow.cpp:198 gui/mainwindow.cpp:229 gui/mainwindow.cpp:272
+#: gui/mainwindow.cpp:307
 msgid "Device"
 msgstr "Apparaat"
 
-#: gui/formdevinfo.cpp:123 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:141
+#: gui/formdevinfo.cpp:126 gui/formdevinfo.cpp:154 gui/mainwindow.cpp:231
 msgid "Mount point"
 msgstr "Koppel punt"
 
-#: gui/formdevinfo.cpp:124 gui/formparinfo.cpp:39
+#: gui/formdevinfo.cpp:127 gui/formparinfo.cpp:39
 msgid "Fs. type"
 msgstr "Fs. type"
 
-#: gui/formdevinfo.cpp:146 gui/mainwindow.cpp:326 gui/mainwindow.cpp:401
+#: gui/formdevinfo.cpp:149 gui/mainwindow.cpp:427 gui/mainwindow.cpp:502
 msgid "Name"
 msgstr "Naam"
 
-#: gui/formdevinfo.cpp:149
+#: gui/formdevinfo.cpp:152
 msgid "Start(Bytes)"
 msgstr "Start(bytes)"
 
-#: gui/formdevinfo.cpp:150
+#: gui/formdevinfo.cpp:153
 msgid "Available"
 msgstr "Beschikbaar"
 
-#: gui/formdevinfo.cpp:189
+#: gui/formdevinfo.cpp:192
 msgid "Slave name"
 msgstr "Naam slaaf"
+
+#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:274 gui/mountdialog.cpp:155
+#: gui/mountdialog.cpp:163 gui/mountdialog.cpp:183 gui/mountdialog.cpp:187
+msgid "Error"
+msgstr "fout"
+
+#: gui/formnewtab.cpp:17
+msgid "Name can't be empty"
+msgstr "De naam mag niet leeg zijn"
 
 #: gui/formparinfo.cpp:38
 msgid "Mountpoint"
 msgstr "Koppelpunt"
 
-#: gui/mainwindow.cpp:60
+#: gui/formtabdef.cpp:274
+msgid "Please select a field to add"
+msgstr "Select a.u.b. een veld die toegevoegd moet worden"
+
+#: gui/mainwindow.cpp:62
 msgid "Only root can mount"
 msgstr "Alleen \"root\"  kan een device koppelen"
 
-#: gui/mainwindow.cpp:66
+#: gui/mainwindow.cpp:68
 msgid "Device not found"
 msgstr "Apparaat niet gevonden"
 
-#: gui/mainwindow.cpp:68
+#: gui/mainwindow.cpp:70
 msgid "Can't mount device"
 msgstr "Can apparaat niet koppelen."
 
-#: gui/mainwindow.cpp:109
-msgid "Session"
-msgstr "Sessie"
+#: gui/mainwindow.cpp:112 gui/mainwindow.cpp:141 gui/mainwindow.cpp:144
+msgid "Volume group"
+msgstr "Volumegroep"
 
-#: gui/mainwindow.cpp:110
-msgid "Address"
-msgstr "Adres"
-
-#: gui/mainwindow.cpp:112
-msgid "Iscsi bus"
-msgstr "Iscsi bus"
-
-#: gui/mainwindow.cpp:138
-msgid "Comments"
-msgstr "Opmerkingen"
-
-#: gui/mainwindow.cpp:140
-msgid "Real device"
-msgstr "Werkelijke apparaat"
-
-#: gui/mainwindow.cpp:143
-msgid "Options"
-msgstr "Optie"
-
-#: gui/mainwindow.cpp:153
-msgid "Not mounted\n"
-msgstr "Niet gekoppeld\n"
-
-#: gui/mainwindow.cpp:154
-msgid "Mounted on different path \n"
-msgstr "Gekoppeld aan een andere pad\n"
-
-#: gui/mainwindow.cpp:160
-msgid "Wrong type. Type is (%1)"
-msgstr "Verkeerde type. Type is %1"
-
-#: gui/mainwindow.cpp:161
-msgid "Device not mountable (has partitions)"
-msgstr "Apparaat is niet te koppelbaar (heeft partities)"
-
-#: gui/mainwindow.cpp:179
-msgid "Raid members"
-msgstr "Raid leden"
-
-#: gui/mainwindow.cpp:180
-msgid "Raid level"
-msgstr "Raid niveau"
-
-#: gui/mainwindow.cpp:181
-msgid "Raid type"
-msgstr "Raid type"
-
-#: gui/mainwindow.cpp:182
-msgid "Mounted point"
-msgstr "Aankoppel punt"
-
-#: gui/mainwindow.cpp:208
-msgid "Read(sectors)"
-msgstr "Lezen(sectors)"
-
-#: gui/mainwindow.cpp:209
-msgid "Read(div)"
-msgstr "Read(Verschil)"
-
-#: gui/mainwindow.cpp:210
-msgid "Write(sectors)"
-msgstr "Schrijven(Sectors)"
-
-#: gui/mainwindow.cpp:211
-msgid "Write(div)"
-msgstr "Schrijven(verschil)"
-
-#: gui/mainwindow.cpp:327 gui/mainwindow.cpp:403
-msgid "Partition"
-msgstr "Partitie"
-
-#: gui/mainwindow.cpp:371 gui/mainwindow.cpp:491
+#: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:472
+#: gui/mainwindow.cpp:639
 msgid "Id"
 msgstr "Id"
 
-#: gui/mainwindow.cpp:377 gui/mainwindow.cpp:493
+#: gui/mainwindow.cpp:143
+msgid "Logical volume"
+msgstr "Logische volumes"
+
+#: gui/mainwindow.cpp:147
+msgid "Read"
+msgstr "Lezen"
+
+#: gui/mainwindow.cpp:148
+msgid "Write"
+msgstr "Schrijven"
+
+#: gui/mainwindow.cpp:149
+msgid "Visible"
+msgstr "Zichtbaar"
+
+#: gui/mainwindow.cpp:196
+msgid "Session"
+msgstr "Sessie"
+
+#: gui/mainwindow.cpp:197
+msgid "Address"
+msgstr "Adres"
+
+#: gui/mainwindow.cpp:199
+msgid "Iscsi bus"
+msgstr "Iscsi bus"
+
+#: gui/mainwindow.cpp:228
+msgid "Comments"
+msgstr "Opmerkingen"
+
+#: gui/mainwindow.cpp:230
+msgid "Real device"
+msgstr "Werkelijke apparaat"
+
+#: gui/mainwindow.cpp:233
+msgid "Options"
+msgstr "Optie"
+
+#: gui/mainwindow.cpp:243
+msgid "Not mounted\n"
+msgstr "Niet gekoppeld\n"
+
+#: gui/mainwindow.cpp:244
+msgid "Mounted on different path \n"
+msgstr "Gekoppeld aan een andere pad\n"
+
+#: gui/mainwindow.cpp:250
+msgid "Wrong type. Type is (%1)"
+msgstr "Verkeerde type. Type is %1"
+
+#: gui/mainwindow.cpp:251
+msgid "Device not mountable (has partitions)"
+msgstr "Apparaat is niet te koppelbaar (heeft partities)"
+
+#: gui/mainwindow.cpp:273
+msgid "Raid members"
+msgstr "Raid leden"
+
+#: gui/mainwindow.cpp:274
+msgid "Raid level"
+msgstr "Raid niveau"
+
+#: gui/mainwindow.cpp:275
+msgid "Raid type"
+msgstr "Raid type"
+
+#: gui/mainwindow.cpp:276
+msgid "Mounted point"
+msgstr "Aankoppel punt"
+
+#: gui/mainwindow.cpp:308
+msgid "Read(sectors)"
+msgstr "Lezen(sectors)"
+
+#: gui/mainwindow.cpp:309
+msgid "Read(div)"
+msgstr "Read(Verschil)"
+
+#: gui/mainwindow.cpp:310
+msgid "Write(sectors)"
+msgstr "Schrijven(Sectors)"
+
+#: gui/mainwindow.cpp:311
+msgid "Write(div)"
+msgstr "Schrijven(verschil)"
+
+#: gui/mainwindow.cpp:428 gui/mainwindow.cpp:504
+msgid "Partition"
+msgstr "Partitie"
+
+#: gui/mainwindow.cpp:478 gui/mainwindow.cpp:641
 msgid "Uuid"
 msgstr "Uuid"
 
-#: gui/mainwindow.cpp:380 gui/mainwindow.cpp:494
+#: gui/mainwindow.cpp:481 gui/mainwindow.cpp:642
 msgid "Path"
 msgstr "Paden"
 
-#: gui/mainwindow.cpp:383
+#: gui/mainwindow.cpp:484 gui/mainwindow.cpp:732
 msgid "LVM"
 msgstr "LVM"
 
-#: gui/mainwindow.cpp:490
+#: gui/mainwindow.cpp:638
 msgid "Devices"
 msgstr "Apparaten"
 
-#: gui/mainwindow.cpp:492
+#: gui/mainwindow.cpp:640
 msgid "Labels"
 msgstr "Labels"
 
-#: gui/mainwindow.cpp:568
+#: gui/mainwindow.cpp:727
 msgid "Disks"
 msgstr "Disk"
 
-#: gui/mainwindow.cpp:569
+#: gui/mainwindow.cpp:728
 msgid "Raid"
 msgstr "Raid"
 
-#: gui/mainwindow.cpp:570
+#: gui/mainwindow.cpp:729
 msgid "Fstab"
 msgstr "FSTAB"
 
-#: gui/mainwindow.cpp:571
+#: gui/mainwindow.cpp:730
 msgid "Iscsi"
 msgstr "IScsi"
 
-#: gui/mainwindow.cpp:572
+#: gui/mainwindow.cpp:731
 msgid "Stats"
 msgstr "Statistiek"
 
-#: gui/mountdialog.cpp:25
+#: gui/mountdialog.cpp:29
 msgid "Do not update access time"
 msgstr "Wijzig niet de lees tijden."
 
-#: gui/mountdialog.cpp:26
+#: gui/mountdialog.cpp:30
 msgid "Only later then mod. time"
 msgstr "Alleen later dan wijzig datum."
 
-#: gui/mountdialog.cpp:27
+#: gui/mountdialog.cpp:31
 msgid "Always"
 msgstr "Altijd"
 
-#: gui/mountdialog.cpp:125 gui/mountdialog.cpp:133 gui/mountdialog.cpp:149
-#: gui/mountdialog.cpp:153
-msgid "Error"
-msgstr "fout"
+#: gui/mountdialog.cpp:56
+msgid "Path doesn't exists."
+msgstr "Map bestaan niet"
 
-#: gui/mountdialog.cpp:125
+#: gui/mountdialog.cpp:58
+msgid "Path is not a directory but a file"
+msgstr "Invoeri is geen map, maar een bestand"
+
+#: gui/mountdialog.cpp:155
 msgid "Please select operation"
 msgstr "Selecteer bewerking eerst."
 
-#: gui/mountdialog.cpp:133
+#: gui/mountdialog.cpp:163
 msgid "Please select what to unmount"
 msgstr "Selecteer wat er ontkoppelt moet worden."
 
-#: gui/mountdialog.cpp:139
+#: gui/mountdialog.cpp:169
 msgid "Unmounting failed"
 msgstr "ontkoppelen is mislukt."
 
-#: gui/mountdialog.cpp:149
+#: gui/mountdialog.cpp:183
 msgid "No device selected"
 msgstr "Geen apparaat geselecteerd."
 
-#: gui/mountdialog.cpp:153
+#: gui/mountdialog.cpp:187
 msgid "Mount point is empty"
 msgstr "Aankoppel punt is leeg."
 
-#: gui/mountdialog.cpp:172
+#: gui/mountdialog.cpp:206
 msgid "Error during mounting"
 msgstr "Fout tijdens het koppelen"
 
@@ -347,6 +401,12 @@ msgstr "x"
 #: main.cpp:33
 msgid "Jeroen van Iddekinge"
 msgstr "Jeroen van Iddekinge"
+
+#~ msgid "scsi bus"
+#~ msgstr "scsi bus"
+
+#~ msgid "iscsi host"
+#~ msgstr "iscsi host"
 
 #~ msgid "About"
 #~ msgstr "Over"
@@ -374,9 +434,6 @@ msgstr "Jeroen van Iddekinge"
 
 #~ msgid "TextLabel"
 #~ msgstr "Textlabel"
-
-#~ msgid "Scsi bus:"
-#~ msgstr "scsi bus:"
 
 #~ msgid "Vendor:"
 #~ msgstr "Producent:"
@@ -407,9 +464,6 @@ msgstr "Jeroen van Iddekinge"
 
 #~ msgid "Loopback file:"
 #~ msgstr "Loopback bestand:"
-
-#~ msgid "Iscsi host:"
-#~ msgstr "isci host:"
 
 #~ msgid "Aliases"
 #~ msgstr "Aliassen"
@@ -474,9 +528,6 @@ msgstr "Jeroen van Iddekinge"
 #~ msgid "&About"
 #~ msgstr "&Over"
 
-#~ msgid "&Visible tabs"
-#~ msgstr "&Zichtbare tabs"
-
 #~ msgid "Partition details information"
 #~ msgstr "Detail informatie over partities"
 
@@ -524,9 +575,6 @@ msgstr "Jeroen van Iddekinge"
 
 #~ msgid "Partition information"
 #~ msgstr "Partitie informatie"
-
-#~ msgid "Readonly"
-#~ msgstr "Alleen lezen"
 
 #~ msgid "Dialog"
 #~ msgstr "Dialoog"
