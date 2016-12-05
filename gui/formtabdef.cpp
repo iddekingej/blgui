@@ -158,7 +158,7 @@ TFormTabDef::~TFormTabDef()
 
 void TFormTabDef::fillTabDef()
 {
-	tabDefModel->clear();
+	tabDefModel->clear();	
 	tabDefModel->setRowCount(tabDefs->getLength());
 	TDoubleLinkedListIterator<TTabDef> l_iter(tabDefs);
 	int l_cnt=0;

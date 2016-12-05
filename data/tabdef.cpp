@@ -10,6 +10,10 @@
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
+	conditionObject=TT_Device;
+	conditionType=CT_Empty;
+	conditionField=-1;
+	conditionValue="";
 }
 
 

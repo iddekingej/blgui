@@ -80,6 +80,7 @@ public:
 		}
 		end=nullptr;
 		start=nullptr;
+		length=0;
 	}
 	
 	void insertAfter(TDoubleLinkedListItem<T> *p_at,TDoubleLinkedListItem<T> *p_item)
@@ -128,12 +129,14 @@ public:
 		if(p_item==end) end=p_item->prv;
 		p_item->prv=nullptr;
 		p_item->next=nullptr;
+		length--;
 	}
 	
 	void del(TDoubleLinkedListItem<T> *p_item)
 	{
 		cutOut(p_item);
 		delete p_item;
+		length--;
 	}
 	
 	void append(T *p_item)

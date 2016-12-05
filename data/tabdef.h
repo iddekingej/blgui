@@ -16,6 +16,7 @@ typedef enum{
 	CT_IsEmpty=0
 ,	CT_IsNotEmpty=1
 ,	CT_IsValue=2
+,       CT_Empty=-1
 } TConditionType;
 
 class TTabDef{
