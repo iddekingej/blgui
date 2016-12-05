@@ -8,6 +8,7 @@
 #include "data/filesystems.h"
 #include "base/linklist.h"
 #include "base/compat.h"
+#include "base/utils.h"
 
 
 /** TMount Dialog constructor
@@ -64,7 +65,7 @@ void TMountDialog::mountpointChanged(const QString& p_path)
 	}
 }
 
-void TMountDialog::onDevChange(int p_index)
+void TMountDialog::onDevChange(UNUSEDPAR int p_index)
 {
 	QStringList l_fileSystems;
 

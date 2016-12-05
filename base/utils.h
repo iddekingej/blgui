@@ -27,5 +27,6 @@ QString getReadableSize(TDiskSize p_value);
 //Compare is paths are same, ignoring end slashes
 QString normelizePath(QString p_path);
 
+#define UNUSEDPAR __attribute__((unused))
 
 #endif

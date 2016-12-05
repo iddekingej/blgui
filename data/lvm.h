@@ -89,9 +89,18 @@ class TLogicalVolume{
 private:
 	QString id;
 	QString name;
-	   TVolumeGroup *volumeGroup;
+	TVolumeGroup *volumeGroup;
 	TDevice *realDevice;
+	bool readFlag;
+	bool writeFlag;
+	bool visibleFlag;
 public:
+	inline bool getReadFlag(){ return readFlag;}
+	inline bool getWriteFlag(){ return writeFlag;}
+	inline bool getVisibleFlag(){ return visibleFlag;}
+	void setReadFlag(bool p_flag){ readFlag=p_flag;}
+	void setWriteFlag(bool p_flag){ writeFlag=p_flag;}
+	void setVisibleFlag(bool p_flag){ visibleFlag=p_flag;}
 	inline TDevice *getRealDevice(){ return realDevice;}
 	inline void setRealDevice(TDevice *p_device)
 	{

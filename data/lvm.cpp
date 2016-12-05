@@ -50,12 +50,12 @@ TLVMResponseParser::~TLVMResponseParser()
 }
 
 
-bool TLVMResponseParser::chapter(QSTRINGREF& p_item)
+bool TLVMResponseParser::chapter(UNUSEDPAR QSTRINGREF& p_item)
 {
 	return false;
 }
 
-void TLVMResponseParser::setVar(QString &p_name, QString &p_value)
+void TLVMResponseParser::setVar(UNUSEDPAR QString &p_name, UNUSEDPAR QString &p_value)
 {
 }
 
@@ -219,6 +219,19 @@ void TVGParser::setVar(class QString& p_name, class QString& p_value)
 {
 	if(sectionType==st_lv){
 		if(p_name=="id") currentLv->setId(p_value);
+		else if(p_name=="status"){
+			if(p_value.startsWith('[')  && p_value.endsWith(']')){
+				QStringList l_data=p_value.mid(1,p_value.length()-2).split(",");
+				QStringListIterator l_iter(l_data);
+				QString l_key;
+				while(l_iter.hasNext()){
+					l_key=l_iter.next().trimmed();					
+					if(l_key=="\"READ\"") currentLv->setReadFlag(true);
+					if(l_key=="\"WRITE\"") currentLv->setWriteFlag(true);
+					if(l_key=="\"VISIBLE\"") currentLv->setVisibleFlag(true);
+				}
+			}
+		}
 	}
 }
 
@@ -246,6 +259,7 @@ TVolumeGroup::TVolumeGroup()
 {
 	key="";
 	name="";
+
 }
 
 TLogicalVolume * TVolumeGroup::addLv(QString& p_name)
@@ -297,6 +311,9 @@ TLogicalVolume::TLogicalVolume(QString& p_name,TVolumeGroup *p_volumeGroup)
 	name=p_name;
 	volumeGroup=p_volumeGroup;
 	realDevice=nullptr;
+	readFlag=false;
+	writeFlag=false;
+	visibleFlag=false;
 }
 
 

@@ -137,13 +137,16 @@ void TMainWindow::fillLvm()
 	   TVolumeGroup *l_vgInfo;
 	TLogicalVolume *l_lvInfo;
 	QStandardItemModel *l_vgModel=new QStandardItemModel(0,2,this);
-	QStandardItemModel *l_lvModel=new QStandardItemModel(0,4,this);
+	QStandardItemModel *l_lvModel=new QStandardItemModel(0,7,this);
 	l_vgModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Volume group")));
 	l_vgModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Id")));
 	l_lvModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Logical volume")));
-	l_lvModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Volume group")));
-	l_lvModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));	
+	l_lvModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Volume group")));
+	l_lvModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Device")));	
 	l_lvModel->setHorizontalHeaderItem(3,new QStandardItem(i18n("Id")));
+	l_lvModel->setHorizontalHeaderItem(4,new QStandardItem(i18n("Read")));
+	l_lvModel->setHorizontalHeaderItem(5,new QStandardItem(i18n("Write")));
+	l_lvModel->setHorizontalHeaderItem(6,new QStandardItem(i18n("Visible")));
 	l_cnt=0;
 	int l_lvCnt=0;
 	if(l_vg != nullptr){
@@ -160,6 +163,9 @@ void TMainWindow::fillLvm()
 				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_vgInfo->getName()));
 				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():""));
 				l_lvModel->setItem(l_lvCnt,3,new QStandardItem(l_lvInfo->getId()));
+				if(l_lvInfo->getReadFlag())l_lvModel->setItem(l_lvCnt,4,new QStandardItem("X"));
+				if(l_lvInfo->getWriteFlag())l_lvModel->setItem(l_lvCnt,5,new QStandardItem("X"));
+				if(l_lvInfo->getVisibleFlag())l_lvModel->setItem(l_lvCnt,6,new QStandardItem("X"));
 				l_lvCnt++;
 			}
 		}

@@ -25,7 +25,9 @@ void TFormTabDef::fillFields()
 	}
 }
 
-
+/** This method fills condition type combo box with options
+ * 
+ */
 void TFormTabDef::fillConditionType()
 {
 	ui.conditionType->addItem("");
@@ -39,6 +41,9 @@ void TFormTabDef::changeConditionType(int p_index)
 	ui.conditionValue->setVisible(p_index==3);
 }
 
+/** Event handler when  "new tab def" button is pressed. 
+ *  The user enters a new label and a new tab def object is added to the list with defined tab defs.
+ */
 void TFormTabDef::newTab()
 {
 	TFormNewTab l_form("");
@@ -53,10 +58,14 @@ void TFormTabDef::newTab()
 	
 }
 
+/** Fill widget with selected field from tab definition object
+ * 
+ */
+
 void TFormTabDef::fillSelectedFields()
 {
 	fieldListModel->clear();
-	   QVector<int> *l_fields=current->getSelectedList();
+	QVector<int> *l_fields=current->getSelectedList();
 	for(int l_cnt=0;l_cnt<l_fields->size();l_cnt++){
 		int l_field=(*l_fields)[l_cnt];
 		addFieldToFieldListModel(l_field);
@@ -64,6 +73,10 @@ void TFormTabDef::fillSelectedFields()
 	}
 	
 }
+
+/** Fills tab def list widget from list with defined tab defs
+ * \param p_def -List with defined tab defs  (read from configuration file)
+ */
 
 void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 {
@@ -81,7 +94,9 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);	
 	fillSelectedFields();
 }
-
+/**
+ * Updates tabdef object with data from form (saves data in object).
+ */
 void TFormTabDef::formToCurrentTabDef()
 {
 	if(current != nullptr){
@@ -102,8 +117,12 @@ void TFormTabDef::formToCurrentTabDef()
 	}
 }
 
+/**If tab is selected, this method setup form with tab definition
+ * \param p_selected - UNUSED
+ * \param p_deselected - UNUSED
+ */
 
-void TFormTabDef::selectTabDev(const QItemSelection & p_selected, const QItemSelection & p_deselected)
+void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSEDPAR const QItemSelection & p_deselected)
 {
 	QModelIndex l_index=ui.tabList->currentIndex();
 	int l_id=l_index.row();	
@@ -232,7 +251,7 @@ void TFormTabDef::addFieldToFieldListModel(int p_index)
 }
 
 
-void TFormTabDef::selectField(const QItemSelection& p_selected, const QItemSelection& p_deselected)
+void TFormTabDef::selectField(UNUSEDPAR const QItemSelection& p_selected,UNUSEDPAR const QItemSelection& p_deselected)
 {
 	ui.delField->setEnabled(true);
 	QModelIndex l_index=ui.fieldList->currentIndex();
@@ -267,6 +286,7 @@ void TFormTabDef::delField()
 		current->getSelectedList()->remove(l_row);
 		fieldListModel->removeRow(l_row);
 		if(fieldListModel->rowCount()==0) ui.delField->setEnabled(false);
+		fillFields();
 	}
 }
 

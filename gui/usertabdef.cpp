@@ -88,6 +88,7 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
 				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
 				case CT_IsValue:l_ok=(l_value==p_def->getConditionValue());break;
+				case CT_Empty:l_ok=true;break;
 			}
 			
 		}

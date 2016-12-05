@@ -10,12 +10,13 @@
 #include "data/devicelist.h"
 #include "data/partition.h"
 #include "base/linklist.h"
+#include "base/utils.h"
 #include "data/mount.h"
 #include "data/devicealias.h"
 #include "gui/formparinfo.h"
 #include <klocalizedstring.h>
 //if device selection changes
-void TFormDevInfo::deviceSelected(int p_index)
+void TFormDevInfo::deviceSelected(UNUSEDPAR int p_index)
 {	
 	TDeviceBase *l_deviceBase=deviceList->getDeviceByName(ui.deviceName->currentText());
 	if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
