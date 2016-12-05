@@ -5,6 +5,9 @@
 #include "base/utils.h"
 #include <QMessageBox>
 #include <klocalizedstring.h>
+#include <QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
+#include <QSortFilterProxyModel>
 void TFormTabDef::fillConditionField()
 {
 	ui.conditionField->addItem("");
@@ -22,7 +25,9 @@ void TFormTabDef::fillFields()
 		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
 			if(!current->hasFieldInSelected(l_cnt))	ui.fieldSelector->addItem(g_deviceFields[l_cnt],l_cnt);
 		}	
+		ui.fieldSelector->model()->sort(0);
 	}
+	
 }
 
 /** This method fills condition type combo box with options
@@ -333,8 +338,15 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	ui.setupUi(this);
 	tabDefModel=new QStandardItemModel(0,1);
 	ui.tabList->setModel(tabDefModel);
+	
 	fieldListModel=new QStandardItemModel(0,1);
 	ui.fieldList->setModel(fieldListModel);
+//For sorting field selection combobox	
+	QSortFilterProxyModel *l_proxy=new QSortFilterProxyModel(ui.fieldSelector);
+	l_proxy->setSourceModel(ui.fieldSelector->model());
+	ui.fieldSelector->model()->setParent(l_proxy);
+	ui.fieldSelector->setModel(l_proxy);
+	l_proxy->setSortCaseSensitivity(Qt::CaseInsensitive );
 	tabDefs=p_list;	
 	current=nullptr;
 	fillConditionField();
@@ -359,5 +371,6 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	ui.editTabDef->setVisible(false);
 	ui.upField->setEnabled(false);
 	ui.downField->setEnabled(false);
+	
 	
 }
