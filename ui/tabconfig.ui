@@ -176,6 +176,13 @@
          <widget class="QLineEdit" name="tabLabel"/>
         </item>
         <item>
+         <widget class="QCheckBox" name="isactive">
+          <property name="text">
+           <string>Tab is active?</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_3">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">

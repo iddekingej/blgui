@@ -14,6 +14,7 @@ TTabDef::TTabDef(const QString &p_name)
 	conditionType=CT_Empty;
 	conditionField=-1;
 	conditionValue="";
+	isActive=true;
 }
 
 
@@ -27,6 +28,11 @@ TTabDef::TTabDef(QVariant& p_json)
 	conditionType=(TConditionType)(l_map["conditionType"].toInt());
 	conditionValue=l_map["conditionValue"].toString();	
 	conditionField=l_map["conditionField"].toInt();
+	if(l_map.find("isactive")==l_map.end()){
+		isActive=true;		
+	} else {
+		isActive=l_map["isactive"].toBool();
+	}
 	QList<QVariant> l_fields=l_map["selectedFields"].toList();
 	for(int l_cnt=0;l_cnt<l_fields.size();l_cnt++){
 		selectedList.append(l_fields[l_cnt].toInt());
@@ -48,6 +54,7 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 	l_object["conditionType"]=QVariant(conditionType);
 	l_object["conditionValue"]=QVariant(conditionValue);
 	l_object["conditionField"]=QVariant(conditionField);
+	l_object["isactive"]=QVariant(isActive);
 	QList<QVariant> l_arr;
 	for(int l_field:selectedList){
 		l_arr.push_back(QVariant(l_field));

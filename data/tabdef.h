@@ -27,6 +27,7 @@ private:
 	TConditionType conditionType;
 	QString        conditionValue;
 	QVector<int>   selectedList;
+	bool           isActive;
 public:
 	inline void setName(const QString &p_name){name=p_name;}
 	inline QString &getName(){ return name;}
@@ -39,6 +40,8 @@ public:
 	inline QString &getConditionValue(){ return conditionValue;}
 	inline void setConditionValue(QString p_value){ conditionValue=p_value;}
 	inline QVector<int> *getSelectedList(){ return &selectedList;};
+	inline bool getIsActive(){ return isActive;}
+	inline void setIsActive(bool p_isActive){ isActive=p_isActive;}
 	void toJson(QList<QVariant> &p_variant);
 	TTabDef(QVariant &p_json);
 	void addSelectedList(int p_field);

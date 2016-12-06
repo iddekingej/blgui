@@ -618,9 +618,11 @@ void TMainWindow::setupUserTabs()
 	
 	while(l_iter.hasNext()){
 		l_def=l_iter.next();
-		l_widget=new TUserTabDef(nullptr);
-		ui.info->addTab(l_widget,l_def->getName());
-		userTabWidgets.append(l_widget);
+		if(l_def->getIsActive()){
+			l_widget=new TUserTabDef(nullptr);
+			ui.info->addTab(l_widget,l_def->getName());
+			userTabWidgets.append(l_widget);
+		}
 	}
 	
 }

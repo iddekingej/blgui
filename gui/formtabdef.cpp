@@ -3,6 +3,7 @@
 #include "data/tabdef.h"
 #include "formnewtab.h"
 #include "base/utils.h"
+#include <iostream>
 #include <QMessageBox>
 #include <klocalizedstring.h>
 #include <QSortFilterProxyModel>
@@ -97,6 +98,7 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.conditionField->setCurrentIndex(p_def->getConditionField()+1);
 	ui.conditionValue->setText(p_def->getConditionValue());
 	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);	
+	ui.isactive->setCheckState(p_def->getIsActive()?Qt::Checked:Qt::Unchecked);
 	fillSelectedFields();
 }
 /**
@@ -116,6 +118,7 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setConditionField(ui.conditionField->currentIndex()-1);
 		current->setConditionType((TConditionType)(ui.conditionType->currentIndex()-1));
 		current->setConditionValue(ui.conditionValue->text());
+		current->setIsActive(ui.isactive->checkState()==Qt::Checked);
 		current=nullptr;
 		ui.editTabDef->setVisible(false);
 		ui.delField->setDisabled(false);
@@ -147,6 +150,7 @@ void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSE
 		ui.delField->setDisabled(true);
 		ui.upField->setEnabled(false);
 		ui.downField->setEnabled(false);
+		
 	}
 
 }
