@@ -60,6 +60,8 @@ void TFormTabDef::newTab()
 		QStandardItem *l_si=new QStandardItem(l_name);
 		l_si->setData(l_id);
 		tabDefModel->appendRow(l_si);		
+		int l_rc=tabDefModel->rowCount();
+		ui.tabList->setCurrentIndex(tabDefModel->index(l_rc-1,0));		
 	}
 	
 }
@@ -155,6 +157,9 @@ void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSE
 
 }
 
+/** Save tab definition in configuration file
+ * 
+ */
 void TFormTabDef::saveTabDef()
 {
 	formToCurrentTabDef();
@@ -162,7 +167,9 @@ void TFormTabDef::saveTabDef()
 	accept();
 }
 
-
+/** Cancel dialog. Reread current configuration file
+ * 
+ */
 void TFormTabDef::cancelDef()
 {	
 	tabDefs->clear();
@@ -227,8 +234,10 @@ void TFormTabDef::delDef()
 	if(l_item != nullptr){
 		tabDefs->del(l_item);
 		refreshList();
-		current=nullptr;
+		current=nullptr;		
+		ui.editTabDef->setVisible(false);
 	}
+	
 }
 
 
