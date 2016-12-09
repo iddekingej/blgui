@@ -634,7 +634,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	info=nullptr;
 	devModel=nullptr;
 	userTabs.read();
-	statsModel=new QStandardItemModel(0,4);
+	statsModel=new QStandardItemModel(0,4,this);
 	ui.stats->setModel(statsModel);
 
 	ui.itemSource->addItem(i18n("Devices"));
