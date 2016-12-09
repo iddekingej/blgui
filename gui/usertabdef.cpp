@@ -10,7 +10,7 @@
 TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 {
 	ui.setupUi(this);
-	model=new QStandardItemModel(0,g_numDeviceFields+2);
+	model=new QStandardItemModel(0,g_numDeviceFields+2,this);
 
 	ui.dataView->setModel(model);	
 }

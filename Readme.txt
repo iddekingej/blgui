@@ -38,6 +38,8 @@ KDE4:
 	libQtGui.so.4
 	libQtSvg.so.4
 	libQtCore.so.4
+	qjson
+	
 	When Building KDE5:
 
 	LibKDE
@@ -69,6 +71,11 @@ Building the exec_program:
 	For KDE4: cmake -Dkde=4  -DQT_QMAKE_EXECUTABLE=<qmake 4 exec>  ..
 * make
 * make install
+
+Problems:
+* If you get message like 'Compile your code with -fPIC or -fPIE' ,remove the contents of the build folder and run cmake again. This will happen 
+  when first build for kde5 and then for kde4.
+* If you get an error message that "QT_QT_INCLUDE_DIR" is used in this project but not found than add -DQT_QMAKE_EXECUTABLE=<qmake executable> to the cmake command line
 
 Running:
 This program can run as normal user, but running under root (with kdesu) will show slightly more information (see next section).
