@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-12-05 21:22+0100\n"
+"POT-Creation-Date: 2016-12-10 10:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,7 +168,7 @@ msgstr ""
 msgid "Slave name"
 msgstr ""
 
-#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:274 gui/mountdialog.cpp:155
+#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:287 gui/mountdialog.cpp:155
 #: gui/mountdialog.cpp:163 gui/mountdialog.cpp:183 gui/mountdialog.cpp:187
 msgid "Error"
 msgstr ""
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Mountpoint"
 msgstr ""
 
-#: gui/formtabdef.cpp:274
+#: gui/formtabdef.cpp:287
 msgid "Please select a field to add"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgid "Volume group"
 msgstr ""
 
 #: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:472
-#: gui/mainwindow.cpp:639
+#: gui/mainwindow.cpp:641
 msgid "Id"
 msgstr ""
 
@@ -298,43 +298,43 @@ msgstr ""
 msgid "Partition"
 msgstr ""
 
-#: gui/mainwindow.cpp:478 gui/mainwindow.cpp:641
+#: gui/mainwindow.cpp:478 gui/mainwindow.cpp:643
 msgid "Uuid"
 msgstr ""
 
-#: gui/mainwindow.cpp:481 gui/mainwindow.cpp:642
+#: gui/mainwindow.cpp:481 gui/mainwindow.cpp:644
 msgid "Path"
 msgstr ""
 
-#: gui/mainwindow.cpp:484 gui/mainwindow.cpp:732
+#: gui/mainwindow.cpp:484 gui/mainwindow.cpp:734
 msgid "LVM"
 msgstr ""
 
-#: gui/mainwindow.cpp:638
+#: gui/mainwindow.cpp:640
 msgid "Devices"
 msgstr ""
 
-#: gui/mainwindow.cpp:640
+#: gui/mainwindow.cpp:642
 msgid "Labels"
 msgstr ""
 
-#: gui/mainwindow.cpp:727
+#: gui/mainwindow.cpp:729
 msgid "Disks"
 msgstr ""
 
-#: gui/mainwindow.cpp:728
+#: gui/mainwindow.cpp:730
 msgid "Raid"
 msgstr ""
 
-#: gui/mainwindow.cpp:729
+#: gui/mainwindow.cpp:731
 msgid "Fstab"
 msgstr ""
 
-#: gui/mainwindow.cpp:730
+#: gui/mainwindow.cpp:732
 msgid "Iscsi"
 msgstr ""
 
-#: gui/mainwindow.cpp:731
+#: gui/mainwindow.cpp:733
 msgid "Stats"
 msgstr ""
 
