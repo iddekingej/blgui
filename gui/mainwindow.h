@@ -68,7 +68,7 @@ protected:
 	void resizeEvent(QResizeEvent *p_event);
 public:
 
-	TMainWindow(QWidget *p_parent=NULL);
+	TMainWindow(QWidget *p_parent=nullptr);
 	virtual ~TMainWindow();
 
 };

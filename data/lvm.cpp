@@ -354,8 +354,7 @@ bool TLVMHandler::sendMessage(const char *p_message,QString &p_return)
 		l_num=read(readSocket,l_buffer,sizeof(l_buffer)-1);
 		l_buffer[l_num]=0;
 		p_return += l_buffer;
-		cout << l_buffer <<endl;
-		if(l_num+1<sizeof(l_buffer)) break;
+		if(l_num+1<static_cast<ssize_t>(sizeof(l_buffer))) break;
 	}
 	return true;
 }

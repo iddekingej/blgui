@@ -215,7 +215,7 @@ public:
 	TPhysicalVolumeList *pvList(TDeviceList *p_devList);	
 	TVolumeGroupList *vgList();
 	TLVMHandler();
-	~TLVMHandler();
+	 ~TLVMHandler();
 };
 
 
