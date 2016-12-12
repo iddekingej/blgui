@@ -12,6 +12,7 @@
 #include "base/stringlineiterator.h"
 #include "base/utils.h"
 #include <QFile>
+#include <QFileInfo>
 
 using namespace std;
 
@@ -316,12 +317,6 @@ TLogicalVolume::TLogicalVolume(QString& p_name,TVolumeGroup *p_volumeGroup)
 	visibleFlag=false;
 }
 
-
-
-
-
-
-
 bool TLVMHandler::writeSocket(const char* p_str)
 {
 	int l_return=write(readSocket,p_str,strlen(p_str));
@@ -459,4 +454,9 @@ TLVM::~TLVM()
 {
 	if(pvList != nullptr)delete pvList;
 	if(vgList != nullptr)delete vgList;
+}
+
+bool TLVM::deamonRunning()
+{
+	return QFileInfo("/run/lvm/lvmetad.socket").exists();
 }

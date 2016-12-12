@@ -695,7 +695,11 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	}
 	
 	 ui.lvmRootWarning->setVisible((getuid()!=0));
-	
+	 if(getuid()==0){
+		ui.lvmetadNotRunning->setVisible(!TLVM::deamonRunning());
+	 } else {
+		 ui.lvmetadNotRunning->setVisible(false);
+	 }
 	
 }
 
