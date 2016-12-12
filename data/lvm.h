@@ -68,7 +68,6 @@ public:
 	inline void setFormat(QString &p_format){ format=p_format;}
 	inline long getDevSize(){ return dev_size;}
 	inline void setDevSize(long long p_devSize){ dev_size=p_devSize;}
-	
 	inline int getDevice(){ return device;}
 	inline void setDevice(int p_device){ device=p_device;}
 	inline QString getKey(){ return key;}
@@ -229,6 +228,8 @@ public:
 	inline TLinkList<TPhysicalVolume> *getPvList(){ return pvList;}
 	inline TLinkList<TVolumeGroup> *getVgList(){return vgList;}
 	void processInfo(TDeviceList *p_devList);
+	static bool deamonRunning();
+
 	TLVM();
 	~TLVM();
 };
