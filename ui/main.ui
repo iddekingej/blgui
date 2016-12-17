@@ -117,7 +117,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tabDisks">
          <property name="sizePolicy">
@@ -343,7 +343,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Volume groeps</string>
+             <string>Volume groups</string>
             </property>
            </widget>
           </item>

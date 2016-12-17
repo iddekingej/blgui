@@ -35,7 +35,7 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 	if(!p_partition->isMounted()){
 		ui.mountPoints->setVisible(false);		
 	} else {
-		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Mountpoint")));
+		l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Mount point")));
 		l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Fs. type")));
 		int l_cnt=0;
 		TLinkListIterator<TMount> l_iter(p_partition->getMounts());

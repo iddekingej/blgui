@@ -197,7 +197,7 @@
            </font>
           </property>
           <property name="text">
-           <string>File on:</string>
+           <string>Display what?</string>
           </property>
          </widget>
         </item>

@@ -40,7 +40,6 @@ KDE4:
 	libQtCore.so.4
 	qjson
 	
-	When Building KDE5:
 
 	LibKDE
 	===================
@@ -56,8 +55,6 @@ KDE5:
 
 	QT5 + Develop packages
 	=======================
-	libQt5Core
-	libQt5Core
 	libQt5Core
 	libQt5Gui
 	libQt5Widgets
