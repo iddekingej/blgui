@@ -1,6 +1,7 @@
 #ifndef __LINKLIST_H_
 #define __LINKLIST_H_
 #include <stdio.h>
+
 template<class T>
 class TLinkList;
 
