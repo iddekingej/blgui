@@ -3,6 +3,7 @@ sudo: required
 matrix:
         include:
         - compiler: gcc
+          env: GCC="48"
           addons: 
                 apt:
                         sources:
@@ -11,6 +12,10 @@ matrix:
                         - gcc-4.8
                         - g++-4.8
 before_script:
+- if [ "$GCC" == "gcc5" ]; then
+      sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50;
+      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50;
+  fi        
 - sudo apt-get update -qq
 - sudo apt-get install -y libblkid-dev
 - sudo apt-get install -y libudev-dev
