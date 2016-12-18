@@ -17,10 +17,7 @@ add_definitions(-DKDE4)
 SET(CMAKE_CXX_FLAGS -std=c++11)
 
 
-find_path(INC_QJSON qjson/parser.h)
-find_library(LIB_QJSON NAMES qjson)
-if(NOT INC_QJSON OR NOT LIB_QJSON)
-	message(FATAL_ERROR "Can't find qjson")
-endif()
+find_package(QJSON "0.8.1" CONFIG REQUIRED)
 
-set(bdgui_LIBS ${bdgui_LIBS} ${LIB_QJSON})
+
+set(bdgui_LIBS ${bdgui_LIBS} ${QJSON_LIBRARIES})
