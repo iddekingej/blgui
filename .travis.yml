@@ -14,8 +14,8 @@ matrix:
                         - gcc-4.8
                         - g++-4.8
         - compiler: gcc
-          os:linux
-          dist:precise
+          os: linux
+          dist: precise
           env: GCC="48"
           addons: 
                 apt:
