@@ -3,8 +3,8 @@ sudo: required
 matrix:
         include:
         - compiler: gcc
-          os:linux
-          dist:trusty
+          os: linux
+          dist: trusty
           env: GCC="48"
           addons: 
                 apt:
@@ -25,6 +25,8 @@ matrix:
                         - gcc-4.8
                         - g++-4.8
         - compiler: gcc
+          os: linux
+          dist: trusty
           env: GCC="50"
           addons: 
                 apt:
