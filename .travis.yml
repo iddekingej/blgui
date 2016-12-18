@@ -1,9 +1,9 @@
 language: cpp
 g++:
- - 5.0
- - 4.8
- - 4.7
- - 4.6
+- 5.0
+- 4.8
+- 4.7
+- 4.6
  
- script:
-  - mkdir build && cd build && cmake .. && make
+script:
+- mkdir build && cd build && cmake .. && make
