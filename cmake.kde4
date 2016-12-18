@@ -14,7 +14,7 @@ QT4_WRAP_UI(bdgui_ui_h ${bdgui_ui})
 
 qt4_add_resources(bdgui_rcc_h ${bdgui_RESOURCES})
 add_definitions(-DKDE4)
-SET(CMAKE_CXX_FLAGS -std=c++11)
+SET(CMAKE_CXX_FLAGS -std=c+11)
 
 
 find_path(INC_QJSON qjson/parser.h)
