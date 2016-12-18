@@ -12,7 +12,7 @@ matrix:
                         - gcc-4.8
                         - g++-4.8
 before_script:
-- if [ "$GCC" == "gcc5" ]; then
+- if [ "$GCC" == "48" ]; then
       sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50;
       sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50;
   fi        
