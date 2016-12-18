@@ -8,8 +8,8 @@ sudo: required
 
 before_script:
 - sudo apt-get update -qq
-- sudo apt-get install -y libblkid1 libblkid-dev
-- sudo apt-get install -y libudev-dev libudev1
+- sudo apt-get install -y libblkid-dev
+- sudo apt-get install -y libudev-dev
 - sudo apt get install -y libqt4-dev
 - sudo apt-get install -y kdebase-workspace-dev
 - sudo apt-get install -y libqjson-dev
