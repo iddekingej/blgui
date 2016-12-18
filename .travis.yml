@@ -2,8 +2,6 @@ language: cpp
 g++:
 - 5.0
 - 4.8
-- 4.7
-- 4.6
 sudo: required
 
 before_script:
