@@ -3,24 +3,13 @@ sudo: required
 matrix:
         include:
         - compiler: gcc
-                addons: 
-                        apt:
-                                sources:
-                                - ubuntu-toolchain-r-test
-                                packages:    
-                                - gcc-4.8
-                                - g++-4.8
-matrix:
-        include:
-        - compiler: gcc
-                addons: 
-                        apt:
-                                sources:
-                                - ubuntu-toolchain-r-test
-                                packages:    
-                                - gcc-5.0
-                                - g++-5.0
-
+          addons: 
+                apt:
+                        sources:
+                        - ubuntu-toolchain-r-test
+                        packages:    
+                        - gcc-4.8
+                        - g++-4.8
 before_script:
 - sudo apt-get update -qq
 - sudo apt-get install -y libblkid-dev
