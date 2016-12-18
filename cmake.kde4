@@ -17,7 +17,7 @@ add_definitions(-DKDE4)
 SET(CMAKE_CXX_FLAGS -std=c++11)
 
 
-find_package(QJSON "0.8.1" CONFIG REQUIRED)
+find_package(QJSON "0.8.1" REQUIRED)
 
 
 set(bdgui_LIBS ${bdgui_LIBS} ${QJSON_LIBRARIES})
