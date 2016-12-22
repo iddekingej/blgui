@@ -1,8 +1,9 @@
 project (bdgui)
 
-cmake_minimum_required(VERSION 2.8.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 set(KDE_VERSION ${kde})
+set(RUN_TEST ${run_test})
 
 set(bdgui_ui
 	ui/main.ui 
@@ -22,7 +23,6 @@ set(bdgui_RESOURCES
 )
 
 set(bdgui_SRCS   
-	main.cpp 
 	base/globals.cpp 
 	base/linklist.cpp 
 	base/utils.cpp
@@ -82,9 +82,11 @@ endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
+MESSAGE(STATUS ${bdgui_rcc_h})
+
 set(bdgui_SRCS ${bdgui_rcc_h} ${bdgui_SRCS} ${bdgui_ui_h})
 
-add_executable(bdgui ${bdgui_SRCS})
+add_executable(bdgui 	main.cpp ${bdgui_SRCS})
 
 
 target_link_libraries(bdgui
@@ -94,7 +96,28 @@ target_link_libraries(bdgui
 )
 
 
+
 install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
+if(RUN_TEST EQUAL "1")
+
+set(test_SRCS   test/lib/testclass.cpp
+		test/lib/runner.cpp
+		test/base/test01.cpp
+		test/base/run_base.cpp
+)
+
+add_executable(bdgui_test test/test.cpp ${test_SRCS} ${bdgui_SRCS})
+
+target_link_libraries(bdgui_test
+    ${bdgui_LIBS}
+    ${LIB_BLKID}    
+    ${LIB_UDEV}
+)
+
+
+install(TARGETS bdgui_test  ${INSTALL_TARGETS_DEFAULT_ARGS})
+add_subdirectory(test)
+endif()
