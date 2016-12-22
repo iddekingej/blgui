@@ -1,9 +1,15 @@
 project (bdgui)
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 set(KDE_VERSION ${kde})
 set(RUN_TEST ${run_test})
+
+if(KDE_VERSION EQUAL "4")
+	cmake_minimum_required(VERSION 2.8.7 FATAL_ERROR)
+else()
+	cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+endif()
+
 
 set(bdgui_ui
 	ui/main.ui 
