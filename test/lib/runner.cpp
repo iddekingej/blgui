@@ -7,9 +7,16 @@ bool TRunner::run()
 	return failed;
 }
 
+TRunner::TRunner(TTestConfig* p_config)
+{
+	config=p_config;
+}
+
+
 void TRunner::runner(TTestClass *p_object)
 {
-	if(p_object->run()) failed=true;
+	p_object->setConfig(config);
+	if(p_object->run()) failed=true;	
 	delete p_object;
 }
 

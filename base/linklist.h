@@ -53,6 +53,7 @@ private:
 public:
 		
 	inline TLinkListItem<T> *getStart(){ return start;} //start of linked list
+	inline TLinkListItem<T> *getEnd(){ return end;} //end of linked list
 	inline long getLength(){ return length;}
 	inline bool isEmpty(){ return start==nullptr;}
 	

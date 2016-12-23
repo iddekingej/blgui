@@ -113,8 +113,11 @@ enable_testing()
 message(STATUS "Testing enabled")
 set(test_SRCS   test/lib/testclass.cpp
 		test/lib/runner.cpp
+		test/lib/testconfig.cpp
 		test/base/test01.cpp
 		test/base/run_base.cpp
+		test/data/test_btrfs.cpp
+		test/data/run_data.cpp
 )
 
 add_executable(bdgui_test test/test.cpp ${test_SRCS} ${bdgui_SRCS})

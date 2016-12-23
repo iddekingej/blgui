@@ -15,11 +15,14 @@ class TTest01:public TTestClass
 {
 private:
 	TLinkList<TTestItem> *list;
+	TTestItem *item1=nullptr;
+	TTestItem *item2=nullptr;
 protected:
 	void doRun();		
 public:
 	void test01();
 	void test02();
+	void test03();
 	TTest01();
 	virtual ~TTest01();
 };
