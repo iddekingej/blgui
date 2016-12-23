@@ -3,14 +3,16 @@
 
 class TRunBaseRunner:public TRunner
 {
-	void doRun()
+protected:
+	virtual void doRun()
 	{
-		runner(TTest01());
+		runner(new TTest01());
 	}
 };
 
 bool run_base()
 {
+
 	TRunBaseRunner l_run;
 	return l_run.run();
 }

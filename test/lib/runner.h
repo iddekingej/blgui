@@ -6,10 +6,11 @@ class TRunner
 {
 private:
 	bool failed=false;
+protected:
+	virtual void doRun()=0;
 public:
 	bool run();
-	void runner(TTestClass p_object);
-	virtual void doRun()=0;
+	void runner(TTestClass *p_object);
 	virtual ~TRunner(){};
 };
 #endif

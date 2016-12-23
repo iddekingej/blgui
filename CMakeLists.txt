@@ -107,7 +107,7 @@ install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
-if(RUN_TEST EQUAL "1")
+if(BUILD_TESTING)
 
 set(test_SRCS   test/lib/testclass.cpp
 		test/lib/runner.cpp
