@@ -88,7 +88,6 @@ endif()
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-MESSAGE(STATUS ${bdgui_rcc_h})
 
 set(bdgui_SRCS ${bdgui_rcc_h} ${bdgui_SRCS} ${bdgui_ui_h})
 
@@ -107,8 +106,11 @@ install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
-if(BUILD_TESTING)
+message(STATUS ${RUN_TEST})
+if(${RUN_TEST} EQUAL "1")
+enable_testing()
 
+message(STATUS "Testing enabled")
 set(test_SRCS   test/lib/testclass.cpp
 		test/lib/runner.cpp
 		test/base/test01.cpp

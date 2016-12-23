@@ -1,4 +1,4 @@
-cd ../bduild
+cd ../build
 make test 
 if [ $? -eq "2" ];
 then
