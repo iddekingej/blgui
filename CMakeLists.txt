@@ -117,6 +117,7 @@ set(test_SRCS   test/lib/testclass.cpp
 		test/base/test01.cpp
 		test/base/run_base.cpp
 		test/data/test_btrfs.cpp
+		test/data/test_device.cpp
 		test/data/run_data.cpp
 )
 

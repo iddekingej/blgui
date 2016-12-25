@@ -10,10 +10,11 @@ void TTestBtrfs::doRun()
 {
 	test01();
 	if(getFailed()) return;
+	test02();
 }
 
 void TTestBtrfs::test01()
-{
+{	
 	std::string l_dir=getConfig()->getTempDir();
 	getConfig()->tmpMkDir("allocation");
 	getConfig()->tmpMkDir("allocation/system");
@@ -28,6 +29,7 @@ void TTestBtrfs::test01()
 void TTestBtrfs::test02()
 {
 	std::string l_dir=getConfig()->getTempDir();
+	getConfig()->tmpMkDir("allocation/system/aaa");
 	getConfig()->tmpMkDir("allocation/system/xxx");
 	getConfig()->tmpMkDir("allocation/system/raid13");
 	QString l_return;

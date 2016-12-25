@@ -1,6 +1,7 @@
 
 #include "run_data.h"
 #include "test_btrfs.h"
+#include "test_device.h"
 
 class TDataRunner:public TRunner
 {
@@ -9,6 +10,7 @@ protected:
 	virtual void doRun()
 	{
 		runner(new TTestBtrfs());
+		runner(new TTestDevice());
 	}
 	
 public:

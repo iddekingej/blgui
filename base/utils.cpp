@@ -5,12 +5,14 @@
 #include <QIODevice>
 #include "base/compat.h"
 
-//Used for reading files in /sys/block
-//Read file containing ulong (like /sys/block/sda/size)
-//p_path  - Path 
-//p_name  - File name under path to read
-//p_value - Returned value
-//Return    true when successful  false file reading error
+/**
+ * Used for reading files in /sys/block
+ * Read file containing ulong (like /sys/block/sda/size)
+ * \param p_path  - Path 
+ * \param p_name  - File name under path to read
+ * \param p_value - Returned value
+ * \Return    true when successful  false file reading error
+*/
 
 bool readLong(QString p_path,QString p_name,unsigned long &p_value)
 {
@@ -21,13 +23,14 @@ bool readLong(QString p_path,QString p_name,unsigned long &p_value)
 	return true;
 }
 
-//Used for reading files in /sys/block
-//Read file containing string (like /sys/block/sda/mode)
-//p_path  - Path 
-//p_name  - File name under path to read
-//p_value - Returned value
-//Return    true when successful  false file reading error
-
+/**
+ * Used for reading files in /sys/block
+ * Read file containing string (like /sys/block/sda/mode)
+ * \param p_path  - Path 
+ * \param p_name  - File name under path to read
+ * \param p_value - Returned value
+ * \return        true when successful  false file reading error
+*/
 bool readString(QString p_path,QString p_name,QString &p_value)
 {
 	bool l_succes;	
