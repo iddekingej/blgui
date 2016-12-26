@@ -32,6 +32,7 @@
 #include <sys/types.h>
 #include "gui/formtabdef.h"
 #include <QMessageBox>
+#include <iostream>
 
 QApplication *g_app;
 
@@ -564,12 +565,20 @@ void TMainWindow::readConfiguation()
 	enableDeviceFields=g_config.getDeviceFields();
 }
 
+/** Displays device or partition information dialog
+ *  Event handle when double clicked on device grid.  First, the name of the device/partition is retrieved (stored at column 0 of the row)
+ *  next the device object is retrieved by name. If it is a partition, than partition details dialog is displayed.If it is a device object
+ *  the device dialog is displayed
+ * 
+ *  \param p_index   Index to the cell where the user double clicks
+ */
+
 void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 {
 	if(devModel != nullptr){
 		QString l_name;
-		TDeviceBase *l_deviceBase;
-		l_name=p_index.data(Qt::UserRole + 1).toString();
+		TDeviceBase *l_deviceBase;		
+		l_name=p_index.sibling(p_index.row() ,0).data(Qt::UserRole+1).toString();//get device or partition name
 		l_deviceBase=info->getDevices()->getDeviceByName(l_name);
 		if(l_deviceBase){
 			if(TPartition *l_partition=dynamic_cast<TPartition *>(l_deviceBase)){
