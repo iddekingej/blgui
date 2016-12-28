@@ -86,7 +86,7 @@ void TMainWindow::handleMount()
 
 void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
 {
-	refresh();
+	fillDevice(true);
 }
 
 void TMainWindow::refresh()
@@ -96,7 +96,7 @@ void TMainWindow::refresh()
 	info=new TDeviceInfo();
 	info->getDisks();
 	changeManager.setInfo(info);
-	fillDevice();
+	fillDevice(false);
 	fillRaid();	
 	fillMtab();
 	fillIscsi();
@@ -457,6 +457,7 @@ void TMainWindow::fillDeviceTree()
 	ui.diskList->setSortingEnabled(true);
 	
 	setExpandedDevRows(l_expanded);
+	deviceAsTree=true;
 }
 
 //Fill Device tab in main main window 
@@ -523,16 +524,20 @@ void TMainWindow::fillDeviceGrid()
 
 	ui.diskList->setWordWrap(false);
 	ui.diskList->setModel(l_model);
+	deviceAsTree=false;
 	
 }
 /** Fill device list with data
  * 
  */
-void TMainWindow::fillDevice()
+void TMainWindow::fillDevice(bool p_sourceChanged)
 {
 	if((ui.itemSource->currentIndex()==0) && g_config.getDeviceAsTree()){
 		fillDeviceTree();	  
+		if(p_sourceChanged)setExpandedDevRows(expandedDevices);
+
 	}  else {
+		if(p_sourceChanged && deviceAsTree)getExpandedDevRows(expandedDevices);		
 		fillDeviceGrid();
 	}
 }

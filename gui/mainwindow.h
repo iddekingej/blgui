@@ -45,6 +45,8 @@ private:
 	TDiskStatList *prvStats=nullptr;
 	TTabDefList userTabs;
 	QList<TUserTabDef *> userTabWidgets;
+	QSet< QString > expandedDevices;
+	bool deviceAsTree=false;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
 	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);
@@ -54,7 +56,7 @@ private:
 	void fillHeader(int p_begin,QStandardItemModel *p_model);
 	void fillDeviceTree();
 	void fillDeviceGrid();
-	void fillDevice();
+	void fillDevice(bool p_sourceChanged);
 	void fillRaid();
 	void fillMtab();
 	void fillIscsi();
