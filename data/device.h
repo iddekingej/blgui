@@ -21,7 +21,7 @@ private:
 	bool    rotational;
 public:
 	/** Set lvm name
-	 *\param p_lvmName  name of lvm 
+	 *\param p_LVMName  name of lvm 
 	 */
 	
 	inline void setLVMName(QString &p_LVMName)

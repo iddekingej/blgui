@@ -609,22 +609,32 @@ void TMainWindow::fillUserTabDef()
 	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
 	TTabDef *l_def;
 	while(l_iterDef.hasNext() && l_widgetIter.hasNext()){
-		l_def=l_iterDef.next();
-		l_widgetIter.next()->fillGrid(l_def,info);
+		l_def=l_iterDef.next();		
+		if(l_def->getIsActive()){
+			l_widgetIter.next()->fillGrid(l_def,info);
+		}
 	}	
 }
 
 
 void TMainWindow::setupUserTabs()
 {
+	unsigned long l_no=-1;
+	QWidget *l_widget=ui.info->currentWidget();
+	TUserTabDef *l_defWidget;
+	if(l_widget != nullptr){
+		l_defWidget=dynamic_cast<TUserTabDef *>(l_widget);
+		if(l_defWidget!=nullptr){
+			l_no=l_defWidget->getNo();
+		}
+	}
 	TDoubleLinkedListIterator<TTabDef> l_iter(userTabs);
-	TTabDef *l_def;
-	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);
-	TUserTabDef *l_widget;
+	TTabDef *l_def;	
+	QListIterator<TUserTabDef *> l_widgetIter(userTabWidgets);	
 	while(l_widgetIter.hasNext()){
-		l_widget=l_widgetIter.next();
-		l_widget->close();
-		delete l_widget;		
+		l_defWidget=l_widgetIter.next();
+		l_defWidget->close();
+		delete l_defWidget;
 	}
 	
 	userTabWidgets.clear();
@@ -633,9 +643,11 @@ void TMainWindow::setupUserTabs()
 	while(l_iter.hasNext()){
 		l_def=l_iter.next();
 		if(l_def->getIsActive()){
-			l_widget=new TUserTabDef(nullptr);
-			ui.info->addTab(l_widget,l_def->getName());
-			userTabWidgets.append(l_widget);
+			l_defWidget=new TUserTabDef(nullptr);
+			ui.info->addTab(l_defWidget,l_def->getName());
+			userTabWidgets.append(l_defWidget);
+
+			if(l_def->getNo()==l_no)ui.info->setCurrentWidget(l_defWidget);
 		}
 	}
 	

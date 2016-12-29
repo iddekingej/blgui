@@ -49,6 +49,7 @@ void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *
 
 void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 {
+	no=p_def->getNo();
 	model->clear();
 	model->setHorizontalHeaderItem(0,new QStandardItem("Device"));
 	if(p_def->getConditionObject()!=TT_Device){

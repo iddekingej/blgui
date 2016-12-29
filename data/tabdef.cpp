@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QList>
 #include <QListIterator>
+#include <sys/time.h>
 
 TTabDef::TTabDef(const QString &p_name)
 {
@@ -15,6 +16,9 @@ TTabDef::TTabDef(const QString &p_name)
 	conditionField=-1;
 	conditionValue="";
 	isActive=true;
+	struct timeval l_time;
+	gettimeofday(&l_time,nullptr);
+	no=((unsigned long)l_time.tv_sec)*1000000+l_time.tv_usec;
 }
 
 
@@ -28,10 +32,15 @@ TTabDef::TTabDef(QVariant& p_json)
 	conditionType=(TConditionType)(l_map["conditionType"].toInt());
 	conditionValue=l_map["conditionValue"].toString();	
 	conditionField=l_map["conditionField"].toInt();
-	if(l_map.find("isactive")==l_map.end()){
-		isActive=true;		
-	} else {
+	if(l_map.contains("isactive")){
 		isActive=l_map["isactive"].toBool();
+	} else {		
+		isActive=true;		
+	}
+	if(l_map.contains("no")){
+		no=l_map["no"].toInt();
+	} else {
+		no=-1;
 	}
 	QList<QVariant> l_fields=l_map["selectedFields"].toList();
 	for(int l_cnt=0;l_cnt<l_fields.size();l_cnt++){
@@ -55,6 +64,7 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 	l_object["conditionValue"]=QVariant(conditionValue);
 	l_object["conditionField"]=QVariant(conditionField);
 	l_object["isactive"]=QVariant(isActive);
+	l_object["no"]=QVariant((unsigned long long)no);
 	QList<QVariant> l_arr;
 	for(int l_field:selectedList){
 		l_arr.push_back(QVariant(l_field));
@@ -89,6 +99,17 @@ TTabDef * TTabDefList::getByName(QString& p_name)
 	return nullptr;
 }
 
+
+TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(int p_no)
+{
+	TDoubleLinkedListItem<TTabDef> *l_item=this->getStart();
+	while(l_item != nullptr){				
+		if(l_item->getItem()->getNo() == p_no) return l_item;
+		l_item=l_item->getNext();
+	}
+	return nullptr;
+}
+
 TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(int p_pos)
 {
 	int l_pos=0;
@@ -108,10 +129,13 @@ void TTabDefList::read()
 	g_config.getTabDef(l_data);
 	QList<QVariant> l_list=l_data.toList();
 	QListIterator<QVariant> l_iter(l_list);
+	int l_no=0;
 	while(l_iter.hasNext()){
 		l_value=l_iter.next();
 		TTabDef *l_def=new TTabDef(l_value);
+		if(l_def->getNo()==-1)l_def->setNo(l_no);
 		append(l_def);
+		l_no++;
 	}
 	
 }
