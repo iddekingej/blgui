@@ -92,6 +92,9 @@ private:
 	TLinkListItem<T> *current;
 	
 public:
+	inline TLinkListIterator(TLinkList<T> &p_list){
+		current=p_list.getStart();
+	}
 	inline TLinkListIterator(TLinkList<T> *p_list){
 		current=p_list->getStart();
 	}

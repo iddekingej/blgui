@@ -33,7 +33,7 @@
 #include "gui/formtabdef.h"
 #include <QMessageBox>
 #include <iostream>
-
+#include <QListIterator>
 QApplication *g_app;
 
 
@@ -653,6 +653,10 @@ void TMainWindow::setupUserTabs()
 	
 }
 
+void TMainWindow::fillMessages()
+{
+}
+
 
 TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 {
@@ -662,7 +666,10 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	userTabs.read();
 	statsModel=new QStandardItemModel(0,4,this);
 	ui.stats->setModel(statsModel);
-
+	notificationsModel=new QStandardItemModel(0,3,this);
+	ui.notificationsList->setModel(notificationsModel);
+	ui.notifications->setVisible(false);
+	
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));
 	ui.itemSource->addItem(i18n("Labels"));
@@ -690,8 +697,6 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.mountButton,SIGNAL(pressed()),this,SLOT(handleMount()));
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
-	
-	ui.deleteChangeMessage->setVisible(false);
 	connect(ui.deleteChangeMessage,SIGNAL(pressed()),this,SLOT(clearChangeMessage()));
 	tabs[0]=ui.tabDisks;
 	tabs[1]=ui.tabRaid;
@@ -780,9 +785,9 @@ void TMainWindow::visibleTabs()
  */
 
 void TMainWindow::clearChangeMessage()
-{
-	ui.arInfo->setText(QStringLiteral(""));
-	ui.deleteChangeMessage->setVisible(false);
+{	
+	notificationsModel->clear();
+	ui.notifications->setVisible(false);
 	changeManager.clear();
 }
 
@@ -791,7 +796,7 @@ void TMainWindow::clearChangeMessage()
 
 void TMainWindow::timeOutCheckChange()
 {
-	QString l_what;
+	TLinkList<TChangeItem> l_what;
 
 	fillStats();
 	if(refreshNext){
@@ -807,9 +812,27 @@ void TMainWindow::timeOutCheckChange()
 
 	changeManager.getChanged(l_what,refreshNext);
 
-	if(refreshNext){
-		ui.arInfo->setText(l_what);
-		ui.deleteChangeMessage->setVisible(true);		
+	if(refreshNext){	
+		TChangeItem *l_change;
+		TLinkListIterator<TChangeItem> l_ci(l_what);
+		int l_row=notificationsModel->rowCount();
+		if(l_row==0){
+			notificationsModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Date")));
+			notificationsModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
+			notificationsModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Change")));
+		}
+		while(l_ci.hasNext()){
+			l_change=l_ci.next();		
+			QList<QStandardItem *> l_list;
+			l_list	<< new QStandardItem(l_change->getDate().toString(Qt::SystemLocaleLongDate))
+				<< new QStandardItem(l_change->getDevice())
+				<< new QStandardItem(l_change->getMessage());
+			notificationsModel->insertRow(0,l_list);
+			l_row++;
+		}
+		ui.notifications->setVisible(true);
+		ui.notificationsList->resizeColumnsToContents();
+		ui.notificationsList->resizeRowsToContents();		
 	}
 		
 }

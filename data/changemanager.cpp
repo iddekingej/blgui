@@ -2,6 +2,13 @@
 #include <klocalizedstring.h>
 
 
+TChangeItem::TChangeItem(QDateTime p_date, QString& p_device, QString& p_message)
+{
+	date=p_date;
+	device=p_device;
+	message=p_message;
+}
+
 void TChangeManager::clear()
 {
 	mounted.clear();
@@ -14,18 +21,21 @@ TChangeManager::~TChangeManager()
 	if(prvMounted != nullptr)delete prvMounted;
 }
 
-void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_text,QString &p_return)
+void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_message,TLinkList<TChangeItem> &p_what)
 {
 	
 	QSetIterator<QString> l_iter(p_set);
+	TChangeItem *l_change;
+	QString     l_device;
 	while(l_iter.hasNext()){
-		if(p_return.length()>0) p_return += ",";
-		p_return += l_iter.next()+" "+p_text;
+		l_device=l_iter.next();
+		l_change=new TChangeItem(QDateTime::currentDateTime(),l_device,p_message );
+		p_what.append(l_change);
 	}
 }
 
 
-void TChangeManager::getChanged(QString &p_what,bool &p_changed)
+void TChangeManager::getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed)
 {
 	QString l_what;
 	
@@ -33,7 +43,6 @@ void TChangeManager::getChanged(QString &p_what,bool &p_changed)
 	l_tab->setSourceFile(QStringLiteral("/proc/mounts"));
 	l_tab->processInfo();
 	
-	p_what="";
 	p_changed=false;
 	if(prvMounted==nullptr){
 		prvMounted=l_tab;

@@ -35,6 +35,7 @@ private:
 	TDeviceInfo        *info;
 	QStandardItemModel *statsModel;
 	QStandardItemModel *devModel;
+	QStandardItemModel *notificationsModel;
 	QVector<int> *enableDeviceFields;
 	Ui::MainWindow ui;
 	QTimer checkChange;
@@ -63,6 +64,7 @@ private:
 	void fillStats();
 	void fillUserTabDef();
 	void fillLvm();
+	void fillMessages();
 	void expandDeviceAll();
 	virtual void setVisibleTabs();
 	
