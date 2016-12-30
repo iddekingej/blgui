@@ -47,6 +47,8 @@ public:
 	void setDeviceAsTree(bool p_flag);
 	bool getExpandByDefault();
 	void setExpandByDefault(bool p_flag);
+	bool getShowNotifications();
+	void setShowNotification(bool p_flag);
 };
 
 extern TConfig g_config;

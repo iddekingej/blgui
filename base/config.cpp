@@ -171,5 +171,15 @@ void TConfig::setExpandByDefault(bool p_expand)
 	configGui.writeEntry(QStringLiteral("expanddefault"),p_expand);
 }
 
+bool TConfig::getShowNotifications()
+{
+	return configGui.readEntry(QStringLiteral("shownotifications"),true);
+}
+
+void TConfig::setShowNotification(bool p_flag)
+{
+	configGui.writeEntry(QStringLiteral("shownotifications"),p_flag);
+}
+
 
 TConfig g_config;

@@ -31,6 +31,7 @@ private slots:
 	void visibleTabs();
 	void handleMount();
 	void setupUserTabs();
+	void checkSetNotifications();
 private:
 	TDeviceInfo        *info;
 	QStandardItemModel *statsModel;

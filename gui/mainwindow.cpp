@@ -337,12 +337,14 @@ void TMainWindow::fillStats()
 
 
 
-//Fill row with data
-// p_begin - Column 0..p_begin-1 is fixed columns from p_begin are configured
-// p_model - model for fillen data
-// p_row   - row number
-// p_list  - List with data
-
+/**
+* Fill row with data
+* \param p_begin - Column 0..p_begin-1 is fixed columns from p_begin are configured
+* \param p_model - model for filled data
+* \param p_row   - row number
+* \param p_list  - List with data
+* \param p_parent - parent row (for hierarchical display)
+*/
 void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent)
 {
 	int l_fieldId;
@@ -695,6 +697,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	connect(ui.actionUserDefinedTabs,SIGNAL(triggered()),this,SLOT(showUserDefinedTabs()));
 	connect(ui.visibleTabs,SIGNAL(triggered()),this,SLOT(visibleTabs()));
 	connect(ui.mountButton,SIGNAL(pressed()),this,SLOT(handleMount()));
+	connect(ui.shownotifications,SIGNAL(clicked()),this,SLOT(checkSetNotifications()));
 	checkChange.start(1000);
 	connect(&checkChange,SIGNAL(timeout()),this,SLOT(timeOutCheckChange()));
 	connect(ui.deleteChangeMessage,SIGNAL(pressed()),this,SLOT(clearChangeMessage()));
@@ -724,7 +727,9 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	if(g_config.getExpandByDefault()){
 		expandDeviceAll();
 	}
-	
+	if(g_config.getShowNotifications()){
+		ui.shownotifications->setCheckState(Qt::Checked);
+	}
 	 ui.lvmRootWarning->setVisible((getuid()!=0));
 	 if(getuid()==0){
 		ui.lvmetadNotRunning->setVisible(!TLVM::deamonRunning());
@@ -781,7 +786,8 @@ void TMainWindow::visibleTabs()
 }
 
 
-/*Clear "change message" (Mounts/Unmounts/new device/remove etc..)
+/**
+ * Clear "change message" (Mounts/Unmounts/new device/remove etc..)
  */
 
 void TMainWindow::clearChangeMessage()
@@ -791,7 +797,20 @@ void TMainWindow::clearChangeMessage()
 	changeManager.clear();
 }
 
-/*Check periodically  if there is any device change
+void TMainWindow::checkSetNotifications()
+{	
+	if(ui.shownotifications->checkState()==Qt::Checked){
+		g_config.setShowNotification(true);
+	} else {
+		g_config.setShowNotification(false);
+		clearChangeMessage();
+	}
+	g_config.sync();
+}
+
+
+/**
+ * Check periodically  if there is any device change
  */
 
 void TMainWindow::timeOutCheckChange()
@@ -806,35 +825,32 @@ void TMainWindow::timeOutCheckChange()
 		}
 	}
 
-//Read all current mountes  and compares is there is any changes
-//All changes are collected in mount and umount set until the user presses the "clear message" button
+	if(g_config.getShowNotifications()){
+		changeManager.getChanged(l_what,refreshNext);
 
-
-	changeManager.getChanged(l_what,refreshNext);
-
-	if(refreshNext){	
-		TChangeItem *l_change;
-		TLinkListIterator<TChangeItem> l_ci(l_what);
-		int l_row=notificationsModel->rowCount();
-		if(l_row==0){
-			notificationsModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Date")));
-			notificationsModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
-			notificationsModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Change")));
+		if(refreshNext){	
+			TChangeItem *l_change;
+			TLinkListIterator<TChangeItem> l_ci(l_what);
+			int l_row=notificationsModel->rowCount();
+			if(l_row==0){
+				notificationsModel->setHorizontalHeaderItem(0,new QStandardItem(i18n("Date")));
+				notificationsModel->setHorizontalHeaderItem(1,new QStandardItem(i18n("Device")));
+				notificationsModel->setHorizontalHeaderItem(2,new QStandardItem(i18n("Change")));
+			}
+			while(l_ci.hasNext()){
+				l_change=l_ci.next();		
+				QList<QStandardItem *> l_list;
+				l_list	<< new QStandardItem(l_change->getDate().toString(Qt::SystemLocaleLongDate))
+					<< new QStandardItem(l_change->getDevice())
+					<< new QStandardItem(l_change->getMessage());
+				notificationsModel->insertRow(0,l_list);
+				l_row++;
+			}
+			ui.notifications->setVisible(true);
+			ui.notificationsList->resizeColumnsToContents();
+			ui.notificationsList->resizeRowsToContents();		
 		}
-		while(l_ci.hasNext()){
-			l_change=l_ci.next();		
-			QList<QStandardItem *> l_list;
-			l_list	<< new QStandardItem(l_change->getDate().toString(Qt::SystemLocaleLongDate))
-				<< new QStandardItem(l_change->getDevice())
-				<< new QStandardItem(l_change->getMessage());
-			notificationsModel->insertRow(0,l_list);
-			l_row++;
-		}
-		ui.notifications->setVisible(true);
-		ui.notificationsList->resizeColumnsToContents();
-		ui.notificationsList->resizeRowsToContents();		
 	}
-		
 }
 
 TMainWindow::~TMainWindow()
