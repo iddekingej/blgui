@@ -52,7 +52,7 @@ before_script:
 - sudo apt-get install -y kdebase-workspace-dev
 - sudo apt-get install -y libqjson-dev
 script:
-- mkdir build && cd build && cmake -Drun_test="1" -Dkde=4 .. && make && sh ../test/test.sh
+- mkdir build && cd build && cmake -Drun_test="1" -Dkde=4 .. && make -j2 && sh ../test/test.sh
 notifications:
   email:
   - iddekingej@lycos.com
