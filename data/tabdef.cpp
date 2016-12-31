@@ -100,7 +100,7 @@ TTabDef * TTabDefList::getByName(QString& p_name)
 }
 
 
-TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(int p_no)
+TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(long p_no)
 {
 	TDoubleLinkedListItem<TTabDef> *l_item=this->getStart();
 	while(l_item != nullptr){				
@@ -110,9 +110,9 @@ TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(int p_no)
 	return nullptr;
 }
 
-TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(int p_pos)
+TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(long p_pos)
 {
-	int l_pos=0;
+	long l_pos=0;
 	TDoubleLinkedListItem<TTabDef> *l_item=this->getStart();
 	while(l_item != nullptr){				
 		if(l_pos==p_pos) return l_item;

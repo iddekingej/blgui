@@ -28,7 +28,7 @@ private:
 	QString        conditionValue;
 	QVector<int>   selectedList;
 	bool           isActive;
-	unsigned long  no=-1;
+	long           no=-1;
 public:
 	inline void setName(const QString &p_name){name=p_name;}
 	inline QString &getName(){ return name;}
@@ -43,8 +43,8 @@ public:
 	inline QVector<int> *getSelectedList(){ return &selectedList;};
 	inline bool getIsActive(){ return isActive;}
 	inline void setIsActive(bool p_isActive){ isActive=p_isActive;}
-	inline int getNo(){ return no;}
-	inline void setNo(int p_no){ no=p_no;}
+	inline long getNo(){ return no;}
+	inline void setNo(long p_no){ no=p_no;}
 	void toJson(QList<QVariant> &p_variant);
 	TTabDef(QVariant &p_json);
 	void addSelectedList(int p_field);
@@ -58,8 +58,8 @@ class TTabDefList:public TDoubleLinkedList<TTabDef>{
 public:
 	TTabDef *createTabDef(const QString &p_name);
 	TTabDef *getByName(QString &p_name);
-	TDoubleLinkedListItem<TTabDef> *getByPosition(int p_pos);
-	TDoubleLinkedListItem<TTabDef> *getByNo(int p_no);
+	TDoubleLinkedListItem<TTabDef> *getByPosition(long p_pos);
+	TDoubleLinkedListItem<TTabDef> *getByNo(long p_no);
 	void save();
 	void read();
 };

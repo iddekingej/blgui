@@ -621,7 +621,7 @@ void TMainWindow::fillUserTabDef()
 
 void TMainWindow::setupUserTabs()
 {
-	unsigned long l_no=-1;
+	long l_no=-1;
 	QWidget *l_widget=ui.info->currentWidget();
 	TUserTabDef *l_defWidget;
 	if(l_widget != nullptr){
