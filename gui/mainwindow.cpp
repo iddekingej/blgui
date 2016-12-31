@@ -130,8 +130,8 @@ void TMainWindow::fillLvm()
 	int l_sortHeader=ui.pvInfo->horizontalHeader()->sortIndicatorSection();
 	Qt::SortOrder l_sortOrder=ui.pvInfo->horizontalHeader()->sortIndicatorOrder();		
 	ui.pvInfo->setModel(l_model);
-	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->resizeColumnsToContents();
+	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->sortByColumn(l_sortHeader,l_sortOrder);
 	
 	TLinkList<TVolumeGroup> *l_vg=info->getLVM()->getVgList();
@@ -213,8 +213,8 @@ void TMainWindow::fillIscsi()
 		}	
 	}
 	ui.iscsiTable->setModel(l_model);
-	ui.iscsiTable->resizeRowsToContents();
 	ui.iscsiTable->resizeColumnsToContents();
+	ui.iscsiTable->resizeRowsToContents();
 	ui.iscsiTable->sortByColumn(l_sortHeader,l_sortOrder);
 }
 void TMainWindow::fillMtab()
@@ -255,8 +255,8 @@ void TMainWindow::fillMtab()
 		l_cnt++;
 	}
 	ui.mtabList->setModel(l_model);
-	ui.mtabList->resizeRowsToContents();
 	ui.mtabList->resizeColumnsToContents();
+	ui.mtabList->resizeRowsToContents();
 	ui.mtabList->sortByColumn(l_sortHeader,l_sortOrder);
 
 }
@@ -289,8 +289,8 @@ void TMainWindow::fillRaid()
 	}
 		
 	ui.raidList->setModel(l_model);
-	ui.raidList->resizeRowsToContents();
 	ui.raidList->resizeColumnsToContents();
+	ui.raidList->resizeRowsToContents();
 	ui.raidList->sortByColumn(l_sortHeader,l_sortOrder);
 
 }

@@ -45,8 +45,8 @@ void TFormBaseDevInfo::fillAliases(QTableView *p_view,QLabel *p_noAlias,TDeviceB
 		}
 		p_view->setModel(l_model);	
 		p_noAlias->setVisible(false);
-		p_view->resizeRowsToContents();
 		p_view->resizeColumnsToContents();	
+		p_view->resizeRowsToContents();
 	}
 	
 }

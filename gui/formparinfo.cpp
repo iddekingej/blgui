@@ -48,8 +48,8 @@ void TFormParInfo::fillMount(TPartition *p_partition)
 			l_cnt++;			
 		}
 		ui.mountPoints->setModel(l_model);
-		ui.mountPoints->resizeRowsToContents();
 		ui.mountPoints->resizeColumnsToContents();	
+		ui.mountPoints->resizeRowsToContents();		
 		ui.noMountPoints->setVisible(false);
 		
 	}

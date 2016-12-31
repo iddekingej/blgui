@@ -136,8 +136,8 @@ void TFormDevInfo::fillMountPoints(TDevice *p_device)
 	ui.mountPoints->setVisible(l_found);
 	ui.noMountPointsLabel->setVisible(!l_found);
 	if(l_found){
-		ui.mountPoints->resizeRowsToContents();
 		ui.mountPoints->resizeColumnsToContents();	
+		ui.mountPoints->resizeRowsToContents();		
 	}
 }
 
@@ -173,8 +173,8 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	}
 	ui.partInfo->setModel(l_model);	
 	ui.partInfo->setWordWrap(false);
-	ui.partInfo->resizeRowsToContents();
 	ui.partInfo->resizeColumnsToContents();	
+	ui.partInfo->resizeRowsToContents();
 }
 
 //Fill slaves tab

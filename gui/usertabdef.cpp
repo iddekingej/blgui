@@ -98,6 +98,8 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 			l_row++;
 		}
 	}
+	ui.dataView->resizeColumnsToContents();
+	ui.dataView->resizeRowsToContents();
 	ui.dataView->sortByColumn(0,Qt::AscendingOrder);
 
 }
