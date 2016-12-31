@@ -21,7 +21,7 @@ TFormBaseDevInfo::TFormBaseDevInfo():QDialog()
 
 /**
  * Fill alias grid
- * \param grid       to fill
+ * \param p_view     grid to fill
  * \param p_noAlias  "Not aliases found" message label, displayed when device has no aliases
  * \param p_device   Display alases from device/partition device
  */

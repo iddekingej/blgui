@@ -32,16 +32,19 @@ bool TMTab::hasMount(const QString &p_device,const QString &p_mountPoint){
 	return false;
 }
 
-
-bool TMTab::notInOther(TMTab *p_other, QSet<QString>& p_return)
+/**
+ * 
+ * 
+ */
+bool TMTab::notInOther(TMTab *p_other, TLinkList<TMountDiff> &p_diff)
 {	
 	bool l_found=false;
 	TLinkListIterator<TMTabEntry> l_mtabIter(&entries);
 	TMTabEntry *l_item;
 	while(l_mtabIter.hasNext()){		
 		l_item=l_mtabIter.next();
-		if(!p_other->hasMount(l_item->getDevice(),l_item->getMountPoint())){
-			p_return += l_item->getDevice();
+		if(!p_other->hasMount(l_item->getDevice(),l_item->getMountPoint())){			
+			p_diff.append(new TMountDiff(l_item->getDevice(),l_item->getMountPoint()));
 			l_found=true;
 		}		
 	}

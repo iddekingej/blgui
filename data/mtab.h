@@ -4,8 +4,9 @@
 #include <QString>
 #include <QSet>
 #include "base/linklist.h"
-#include "data/devicebase.h"
-#include "data/devicelist.h"
+#include "devicebase.h"
+#include "devicelist.h"
+#include "mountdiff.h"
 class TMTabEntry
 {
 private:
@@ -46,7 +47,7 @@ public:
 	bool untilNext(const QString& p_text, int& p_cnt);
 	void nextItem(const QString &p_text,QString &p_out,int &p_cnt);
 	bool hasMount(const QString &p_device,const QString &p_mountPoint);
-	bool notInOther(TMTab *p_other,QSet<QString>&p_return);
+	bool notInOther(TMTab *p_other, TLinkList<TMountDiff> &p_diff);
 	void processInfo();
 	void addMountTODevices();
 	void copyFileType();

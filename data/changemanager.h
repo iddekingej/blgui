@@ -14,21 +14,21 @@ private:
 	QString message;
 public:
 	inline QDateTime &getDate(){ return date;}
-	inline QString &getDevice(){ return device;}
-	inline QString &getMessage(){ return message;}
-	TChangeItem(QDateTime p_date,QString &p_device,QString &p_message);
+	inline const QString &getDevice(){ return device;}
+	inline const QString &getMessage(){ return message;}
+	TChangeItem(QDateTime p_date,const QString &p_device,const QString &p_message);
 };
 
 class TChangeManager
 {
 private:
-	QSet<QString>  mounted;
-	QSet<QString>  unmounted;
+
 	TMTab         *prvMounted=nullptr;
 	TDeviceInfo   *info=nullptr;
 	TUDevMonitor   changeMonitor;
 	
 	void getStringOfSet(const QSet<QString >& p_set, QString p_text,TLinkList<TChangeItem> &p_what);
+	void getStringOfDiff(TLinkList<TMountDiff> &p_diff,QString p_text,TLinkList<TChangeItem> &p_what);
 public:
 	void getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed);
 	void clear();
