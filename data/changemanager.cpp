@@ -67,7 +67,7 @@ void TChangeManager::getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed)
 		if(l_tab->notInOther(prvMounted,l_mounted)) p_changed=true;
 		getStringOfDiff(l_mounted,"mounted",p_what);
 		if(prvMounted->notInOther(l_tab,l_unmounted)) p_changed=true;
-		getStringOfDiff(l_unmounted,"mounted",p_what);
+		getStringOfDiff(l_unmounted,"unmounted",p_what);
 		if(changeMonitor.isSomethingChanged()) p_changed=true;
 
 		getStringOfSet(changeMonitor.getAdded(),i18n("added"),p_what);
