@@ -5,20 +5,6 @@
 #include <QStandardItem>
 #include <klocalizedstring.h>
 
-
-void TFormBaseDevInfo::readConfiguation()
-{
-	enableDeviceFields.clear();
-	KSharedConfig::Ptr config=KSharedConfig::openConfig();
-	KConfigGroup  configGroup=config->group("enabledfields");
-	enableDeviceFields=configGroup.readEntry("devicefields",QVariantList());
-}
-
-TFormBaseDevInfo::TFormBaseDevInfo():QDialog()
-{
-	readConfiguation();
-}
-
 /**
  * Fill alias grid
  * \param p_view     grid to fill

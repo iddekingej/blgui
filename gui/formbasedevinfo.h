@@ -9,11 +9,8 @@
 class TFormBaseDevInfo:public QDialog
 {
 	
-protected:
-	QVariantList enableDeviceFields;
+
 public:
-	void readConfiguation();
-	TFormBaseDevInfo();
 	void fillAliases(QTableView *p_view,QLabel *p_noAlias,TDeviceBase *p_device);
 	virtual ~TFormBaseDevInfo();
 };

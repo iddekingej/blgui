@@ -15,7 +15,17 @@
 #include "data/devicealias.h"
 #include "gui/formparinfo.h"
 #include <klocalizedstring.h>
-//if device selection changes
+#include "base/config.h"
+#include <QVectorIterator>
+
+
+/**
+ *  The dialog contains a selection list for selecting a device. When a device is selected, this function is called and
+ *  the dialog is filled with information about this device.
+ * 
+ *  \param p_index unused
+ */
+
 void TFormDevInfo::deviceSelected(UNUSEDPAR int p_index)
 {	
 	TDeviceBase *l_deviceBase=deviceList->getDeviceByName(ui.deviceName->currentText());
@@ -23,6 +33,13 @@ void TFormDevInfo::deviceSelected(UNUSEDPAR int p_index)
 		setInfo(l_device);
 	}
 }
+
+
+/**
+ *  click on partition grid a jump to the partition information dialog and closes current dialog.
+ * 
+ *  \param p_index Index of selected partition.
+ */
 
 void TFormDevInfo::clickPartition(const QModelIndex &p_index)
 {
@@ -39,9 +56,11 @@ void TFormDevInfo::clickPartition(const QModelIndex &p_index)
 }
 
 
-//Initilize device selectionlist
-//p_list =>List of devices
-//p_device=>Current selected device
+/**
+ * Initilize device selection list
+ * \param p_list  List of devices
+ * \param p_device Current selected device
+*/
 
 void TFormDevInfo::initDevSelect(TDeviceList *p_list,TDevice *p_device)
 {
@@ -58,7 +77,12 @@ void TFormDevInfo::initDevSelect(TDeviceList *p_list,TDevice *p_device)
 	}
 }
 
-//Fill all field of form with information from p_device
+/**
+ * Fill dialog with information from device p_device
+ * 
+ * \param p_device - Fill dialog with information from this device.
+ * 
+ */
 
 void TFormDevInfo::setInfo(TDevice* p_device)
 {
@@ -100,6 +124,13 @@ TFormDevInfo::TFormDevInfo(TDeviceList *p_list,TDevice *p_device):TFormBaseDevIn
 
 }
 
+
+/**
+ *  Fills mount tab grid. fillMountPoints calls this function first for the device and then for it's partitions
+ * 
+ *  \param p_model   model to fill with.
+ *  \param p_device  fill grid with mount point from this partition or device 
+ */
 bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *p_device)
 {	
 	int  l_cnt=p_model->rowCount();
@@ -117,6 +148,12 @@ bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *
 	}
 	return  l_found;
 }
+
+/**
+ *  Fill mount point tab
+ * 
+ *  \param p_device fill mount points tab with mount points of this device;
+ */
 
 void TFormDevInfo::fillMountPoints(TDevice *p_device)
 {
@@ -140,6 +177,12 @@ void TFormDevInfo::fillMountPoints(TDevice *p_device)
 		ui.mountPoints->resizeRowsToContents();		
 	}
 }
+
+/** 
+ * Fill 'partitions' tab.
+ *
+ *\param p_device fill partition tab with partitions of this device. 
+ */
 
 void TFormDevInfo::fillParitions(TDevice* p_device)
 {
@@ -177,7 +220,11 @@ void TFormDevInfo::fillParitions(TDevice* p_device)
 	ui.partInfo->resizeRowsToContents();
 }
 
-//Fill slaves tab
+/**
+ * Fill "Slaves" grid 
+ * 
+ * \param p_device - fill slaves grid with slaves of this device.
+ */
 void TFormDevInfo::fillSlaves(TDevice* p_device)
 {
 	
@@ -196,33 +243,5 @@ void TFormDevInfo::fillSlaves(TDevice* p_device)
 			l_cnt++;
 		}
 		ui.slaveList->setModel(l_model);
-	}
-}
-
-
-void TFormDevInfo::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list)
-{
-	int l_fieldId;
-	QStandardItem *l_item;
-
-	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
-		l_item=new QStandardItem(p_list[l_cnt]);		
-		p_model->setItem(p_row,l_cnt,l_item);
-	}
-	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
-		l_fieldId=enableDeviceFields[l_cnt].toInt();
-		if(l_fieldId+p_begin<p_list.count()){
-			p_model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));
-		}
-	}
-}
-
-void TFormDevInfo::fillHeader(int p_begin,QStandardItemModel *p_model){
-	int l_fieldId;
-	for(int l_cnt=0;l_cnt<enableDeviceFields.count();l_cnt++){
-		l_fieldId=enableDeviceFields[l_cnt].toInt();
-		if(l_fieldId<g_numDeviceFields){
-			p_model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));
-		}
 	}
 }
