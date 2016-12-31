@@ -107,7 +107,7 @@ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
 message(STATUS ${RUN_TEST})
-if(${RUN_TEST} EQUAL "1")
+if(RUN_TEST EQUAL "1")
 enable_testing()
 
 message(STATUS "Testing enabled")
