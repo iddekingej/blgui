@@ -588,6 +588,7 @@ void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 		l_name=p_index.sibling(p_index.row() ,0).data(Qt::UserRole+1).toString();//get device or partition name
 		l_deviceBase=info->getDevices()->getDeviceByName(l_name);
 		if(l_deviceBase){
+			checkChange.stop();
 			if(TPartition *l_partition=dynamic_cast<TPartition *>(l_deviceBase)){
 				TFormParInfo l_parInfo(info->getDevices(),l_partition);
 				l_parInfo.exec();
@@ -595,6 +596,7 @@ void TMainWindow::doubleClickedDevGrid(const QModelIndex &p_index)
 				TFormDevInfo l_info(info->getDevices(),l_device);
 				l_info.exec();			
 			}
+			checkChange.start();
 		}
 	}
 	

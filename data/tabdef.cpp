@@ -74,7 +74,6 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 }
 
 
-//TODO: Exception when already exists
 TTabDef * TTabDefList::createTabDef(const QString& p_name)
 {
 	TTabDef *l_item=new TTabDef(p_name);
