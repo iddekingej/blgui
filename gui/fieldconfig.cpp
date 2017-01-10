@@ -29,6 +29,17 @@ void TFieldsConfig::save()
 		
 }
 
+/**
+ *  Scroll current selected item in the selected field list into view
+ */
+void TFieldsConfig::scrollToSelected()
+{
+		QModelIndexList l_list=ui.fieldsSelected->selectionModel()->selectedIndexes();
+		if(l_list.size()>0){
+			ui.fieldsSelected->scrollTo(l_list[0]);
+		}
+}
+
 /** Move current selected item 
  *  \param p_diff  move up (p_diff=-1) or down (p_diff=+1)
 */
@@ -53,6 +64,7 @@ void TFieldsConfig::moveItem(int p_diff)
 			}
 		}
 	}
+	scrollToSelected();
 }
 
 
@@ -144,6 +156,7 @@ void TFieldsConfig::addLabel()
 		
 	}
 	enableRemoveButton();
+	scrollToSelected();
 }
 
 void TFieldsConfig::hideByCode(QListView *p_view,int p_code,bool p_flag)

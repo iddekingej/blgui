@@ -4,10 +4,12 @@
 #include <QHash>
 #include <QFile>
 
-/*
- * Start with a file follows symlinks until in reaches a non symlink (endpoint)
- * All symlinks as stored (symlink,endpoint)
- **/
+/**
+ * Start with a file follows symlinks until it reaches a non symlink (endpoint)
+ * All symlinks as stored as (symlink,endpoint)
+ * 
+ * \param p_file - Start point for following symlinks
+ */
 void TAlias::processAlias(const QString &p_file)
 {
 	QString l_currentFile=p_file;
@@ -32,9 +34,10 @@ void TAlias::processAlias(const QString &p_file)
 			
 	}
 }
-/*Scans all files in a folder "p_path" , if it is a symlink the 
+/**Scans all files in a folder "p_path" , if it is a symlink the 
  * links are followed until a non symlink is found(endpoint)
- *
+ * 
+ * \param p_path - process all symlinks in this directory
 */
 void TAlias::procesAliasses(const QString &p_path)
 {	
@@ -46,8 +49,11 @@ void TAlias::procesAliasses(const QString &p_path)
 		}
 	}
 }
-/*
+
+/**
+ *   Convert alias (=symlink) to device
  * 
+ *  \param p_path alias.
  */
 
 const QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
@@ -56,6 +62,10 @@ const QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
 	return l_info.fileName();
 }
 
+
+/**
+ *  Proces all 'aliases' symlinks from a list of folders.
+ */
 void TAlias::readInfo()
 {
 	procesAliasses(QString("/dev/disk/by-id"));
