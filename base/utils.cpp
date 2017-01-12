@@ -83,9 +83,29 @@ QString getReadableSize(TDiskSize p_value)
 }
 
 
-//Compare is paths are same, ignoring end slashes
+/**
+ * For comparing paths, the path needs to be normalized.
+ * This function adds a slash at the end, if there isn't one
+ */
 QString normelizePath(QString p_path)
 {
     
     return p_path+(!p_path.endsWith("/")?"/":"");
 }
+
+/**
+ *  When setting a new model, the old model and the selection model needs to be deleted (see qt docs)
+ * 
+ * \param p_view - View who's model needs to be set.
+ * \param p_model - p_view is set with model p_model
+ */
+
+void setViewModel(QAbstractItemView *p_view,QStandardItemModel *p_model)
+{
+	QAbstractItemModel *l_oldModel=p_view->model();
+	QItemSelectionModel *l_oldSelection=p_view->selectionModel();
+	p_view->setModel(p_model);
+	delete l_oldModel;
+	delete l_oldSelection;
+}
+	

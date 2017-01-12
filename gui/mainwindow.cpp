@@ -128,8 +128,8 @@ void TMainWindow::fillLvm()
 		}
 	}
 	int l_sortHeader=ui.pvInfo->horizontalHeader()->sortIndicatorSection();
-	Qt::SortOrder l_sortOrder=ui.pvInfo->horizontalHeader()->sortIndicatorOrder();		
-	ui.pvInfo->setModel(l_model);
+	Qt::SortOrder l_sortOrder=ui.pvInfo->horizontalHeader()->sortIndicatorOrder();			
+	setViewModel(ui.pvInfo,l_model);
 	ui.pvInfo->resizeColumnsToContents();
 	ui.pvInfo->resizeRowsToContents();
 	ui.pvInfo->sortByColumn(l_sortHeader,l_sortOrder);
@@ -175,13 +175,13 @@ void TMainWindow::fillLvm()
 	l_lvModel->setRowCount(l_lvCnt);
 	l_vgModel->setRowCount(l_cnt);
 	l_sortHeader=ui.vgList->horizontalHeader()->sortIndicatorSection();
-	l_sortOrder=ui.vgList->horizontalHeader()->sortIndicatorOrder();		
-	ui.vgList->setModel(l_vgModel);
+	l_sortOrder=ui.vgList->horizontalHeader()->sortIndicatorOrder();			
+	setViewModel(ui.vgList,l_vgModel);
 	ui.vgList->resizeColumnsToContents();
 	ui.vgList->sortByColumn(l_sortHeader,l_sortOrder);
 	l_sortHeader=ui.lvList->horizontalHeader()->sortIndicatorSection();
 	l_sortOrder=ui.lvList->horizontalHeader()->sortIndicatorOrder();		
-	ui.lvList->setModel(l_lvModel);
+	setViewModel(ui.lvList,l_lvModel);	
 	ui.lvList->resizeColumnsToContents();
 	ui.lvList->sortByColumn(l_sortHeader,l_sortOrder);
 
@@ -212,7 +212,8 @@ void TMainWindow::fillIscsi()
 			l_cnt++;
 		}	
 	}
-	ui.iscsiTable->setModel(l_model);
+
+	setViewModel(ui.iscsiTable,l_model);
 	ui.iscsiTable->resizeColumnsToContents();
 	ui.iscsiTable->resizeRowsToContents();
 	ui.iscsiTable->sortByColumn(l_sortHeader,l_sortOrder);
@@ -253,8 +254,8 @@ void TMainWindow::fillMtab()
 		}
 		l_model->setItem(l_cnt,0,new QStandardItem(l_note));		
 		l_cnt++;
-	}
-	ui.mtabList->setModel(l_model);
+	}	
+	setViewModel(ui.mtabList,l_model);
 	ui.mtabList->resizeColumnsToContents();
 	ui.mtabList->resizeRowsToContents();
 	ui.mtabList->sortByColumn(l_sortHeader,l_sortOrder);
@@ -454,8 +455,8 @@ void TMainWindow::fillDeviceTree()
 	    }
 	    l_cnt++;
 	}
-	ui.diskList->setWordWrap(false);
-	ui.diskList->setModel(l_model);
+	ui.diskList->setWordWrap(false);	
+	setViewModel(ui.diskList,l_model);
 	ui.diskList->setSortingEnabled(true);
 	
 	setExpandedDevRows(l_expanded);
@@ -524,8 +525,8 @@ void TMainWindow::fillDeviceGrid()
 		l_cnt++;
 	}
 
-	ui.diskList->setWordWrap(false);
-	ui.diskList->setModel(l_model);
+	ui.diskList->setWordWrap(false);	
+	setViewModel(ui.diskList,l_model);
 	deviceAsTree=false;
 	
 }
@@ -668,10 +669,10 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	info=nullptr;
 	devModel=nullptr;
 	userTabs.read();
-	statsModel=new QStandardItemModel(0,4,this);
-	ui.stats->setModel(statsModel);
+	statsModel=new QStandardItemModel(0,4,this);	
+	setViewModel(ui.stats,statsModel);
 	notificationsModel=new QStandardItemModel(0,3,this);
-	ui.notificationsList->setModel(notificationsModel);
+	setViewModel(ui.notificationsList,notificationsModel);	
 	ui.notifications->setVisible(false);
 	
 	ui.itemSource->addItem(i18n("Devices"));
