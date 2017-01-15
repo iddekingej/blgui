@@ -19,9 +19,14 @@
 
 const char* MOUNTS_PATH="/proc/mounts";
 
-//List of devices and retrives information about the device
-//Information about the devices are read from the /sys/block /dev/disk /proc/mounts/ proc/swap 
 
+/**
+ * Tnis routine reads 'dev'  file  which contains the device number in the form major:minor.
+ * and converts it to the device number (major *256+minir).
+ * 
+ * \param p_path   base path to sysblock folder
+ * \param p_device The deviceno path is set in this device 
+ */
 
 void TDeviceList::handleDevNo(QString p_path,TDeviceBase *p_device){
 	QString      l_dev;
@@ -39,18 +44,14 @@ void TDeviceList::handleDevNo(QString p_path,TDeviceBase *p_device){
 	}	
 }
 
-
-//Read all block devices (not the partitions) by scanning /sys/block
-//This routine determines:
-//-Size
-//-Removable
-//-Read only
-//-loopback file
-
+/**
+ * This routine reads information  of all information from the /sys/block folder
+ * of all devices.
+ */
 void TDeviceList::readDevices()
 {
 	QString      l_deviceName;	
-	QDirIterator l_iter("/sys/block",QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter(sysBlockPath,QDirIterator::NoIteratorFlags);
 	TDevice      *l_device;
 	QString      l_model;
 	QString      l_loopFile;
@@ -78,7 +79,6 @@ void TDeviceList::readDevices()
 				readString(l_iter.filePath(),"device/model",l_model);					
 				readString(l_iter.filePath(),"device/vendor",l_vendor);
 			} else if(l_dir.exists("loop")==1){
-//if /sys/block/<dev>/loop exists =>it is a loop back device read loopback file from loop/backing_file
 				l_model="Loopback";
 				readString(l_iter.filePath(),"loop/backing_file",l_loopFile);				
 			} else{
@@ -108,7 +108,7 @@ void TDeviceList::readDevices()
 
 //finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
 //set device scsibus and add device to scsibus index
-			QDir l_scsi("/sys/block/"+l_deviceName+"/device/scsi_device/");	
+			QDir l_scsi(l_iter.filePath()+"/device/scsi_device/");	
 			if(l_scsi.exists()){
 				QDirIterator l_scsiIter(l_scsi);
 				while(l_scsiIter.hasNext()){
@@ -131,9 +131,11 @@ void TDeviceList::readDevices()
 	}
 }
 
-//read information about mounded swap devices.
-//Information is read from file /proc/swap.
-//This routine set device type to "swap"
+/**
+* read information about mounded swap devices.
+* Information is read from file /proc/swap.
+* This routine set device type to "swap"
+*/
 
 void TDeviceList::readSwap()
 {
@@ -156,10 +158,14 @@ void TDeviceList::readSwap()
 }
 
 
-//Read data from partitions belonging to block device p_device
+/**
+ * Read data from partitions 
+ * 
+ * \param p_device Read all partitions belonging to the block device in p_device
+ */
 void TDeviceList::readPartitions(TDevice* p_device)
 {
-	QDirIterator l_iter("/sys/block/"+p_device->getName(),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter(sysBlockPath+p_device->getName(),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	TDiskSize    l_size;
 	QString      l_deviceName;
 	QString      l_sizeStr("size");
@@ -184,7 +190,10 @@ void TDeviceList::readPartitions(TDevice* p_device)
 }
 
 
-//Read from all mounted devices the free size through statvfs
+/**
+ * Read from all mounted devices the free size through statvfs
+ */
+
 void TDeviceList::readFreeSpace()
 {
 	QHashIterator<QString,TDeviceBase *> l_iter(nameIndex);
@@ -205,8 +214,10 @@ void TDeviceList::readFreeSpace()
 }
 
 
-//under /dev/disk symlinks to the device are stored. The name of the symlink are 'aliases' of the device (e.g. device uuid,label,bus path etc..
-///dev/mapper are LVM devices
+/** under /dev/disk symlinks to the device are stored. The name of the symlink are 'aliases' of the device (e.g. device uuid,label,bus 
+ *  path etc..
+ *  /dev/mapper are LVM devices
+ */
 
 
 void TDeviceList::readAliases()
@@ -220,6 +231,14 @@ void TDeviceList::readAliases()
 	
 }
 
+/**
+ *  Read alias of device ('symbolic link to real device) from path.
+ *  - Each alias is added to their own index list
+ *  - The alais is added to the alias list of the device itself.
+ * 
+ *  \param p_type  - Type of alias ('label','uuid','path' etc)
+ *  \param p_path  - Directory from which to read the symbolic.
+ */
 void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,QHash<QString,TDeviceBase *> &p_index)
 {	
 	QDirIterator l_iter(p_path,QDirIterator::NoIteratorFlags);
@@ -239,7 +258,9 @@ void TDeviceList::readAliasFromPath(const QString &p_type,const QString &p_path,
 		}
 	}
 }
-
+/**
+ *  Set from labelIndex list the label properties of all TDeviceBase 
+ */
 void TDeviceList::readLabels()
 {
 	QHashIterator<QString,TDeviceBase*> l_iter(labelIndex);
@@ -256,7 +277,7 @@ void TDeviceList::readLabels()
  */
 void TDeviceList::readLVM()
 {
-	QDir l_dir("/sys/block/");
+	QDir l_dir(sysBlockPath);
 	QDirIterator l_iter(l_dir,QDirIterator::NoIteratorFlags);
 	TDeviceBase *l_deviceBase;
 	TDeviceBase *l_slaveDevice;	
@@ -288,7 +309,11 @@ void TDeviceList::readLVM()
 		
 }
 
-//Finds TDeviceBase by the path of device inode(or its symbolic link) 
+/**
+ * Finds TDeviceBase(TDevice or TPartition) object by the path of device or its symbolic link.
+ * 
+ * \param p_devPath Full path of device (e.g /dev/sda)
+ */
 
 TDeviceBase* TDeviceList::findDeviceByDevPath(const QString& p_devPath)
 {
@@ -303,11 +328,16 @@ TDeviceBase* TDeviceList::findDeviceByDevPath(const QString& p_devPath)
 
 TDeviceList::TDeviceList(TAlias *p_aliasses)
 {
+	sysBlockPath="/sys/block/";
 	aliasses=p_aliasses;
 }
 
-// For BTRFS raid the mount point from only one raid member is retrieved
-// This routine copies the mount information to the other raid members.
+/**
+ * For btrfs only one raid member have mount information
+ * This routine copies the mount information to the other raid members.
+ * 
+ * \param p_raidMembers  all raidmember from a device.
+ */
 void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_raidMembers)
 {
 	TDeviceBase *l_copyFrom=nullptr;
@@ -331,7 +361,9 @@ void TDeviceList::sameMountPoint(const QList<TDeviceBase* >& p_raidMembers)
 	}
 }
 
-//Read all information
+/**
+ * Read all information of all devices
+ */
 void TDeviceList::readInfo()
 {
 	readDevices();

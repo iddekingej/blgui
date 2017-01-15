@@ -48,7 +48,7 @@ public:
 	void nextItem(const QString &p_text,QString &p_out,int &p_cnt);
 	bool hasMount(const QString &p_device,const QString &p_mountPoint);
 	bool notInOther(TMTab *p_other, TLinkList<TMountDiff> &p_diff);
-	void processInfo();
+	bool processInfo();
 	void addMountTODevices();
 	void copyFileType();
 

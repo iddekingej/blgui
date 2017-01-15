@@ -4,6 +4,14 @@
 
 #include <QString>
 
+/**
+ * TDevice constructor
+ * 
+ * \param p_name  device name (/dev/sda => name=sda)
+ * \param p_model device model (read from /sys/block/#dev#/device/model file)
+ * \param p_size  disk size
+ */
+
 TDevice::TDevice(const QString &p_name,const QString &p_model,TDiskSize p_size)
 :TDeviceBase(p_name,p_size)
 {		

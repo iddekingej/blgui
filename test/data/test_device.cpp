@@ -2,8 +2,10 @@
 
 void TTestDevice::doRun()
 {
-	std::cout << "TestDevice::doRun" <<std::endl;
+	std::cout << "TestDevice::doRun begin" <<std::endl;
 	test1();
+	std::cout << "TestDevice::doRun end" <<std::endl;
+
 }
 
 

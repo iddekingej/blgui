@@ -2,6 +2,7 @@
 #include "run_data.h"
 #include "test_btrfs.h"
 #include "test_device.h"
+#include "test_mtab.h"
 
 class TDataRunner:public TRunner
 {
@@ -11,6 +12,7 @@ protected:
 	{
 		runner(new TTestBtrfs());
 		runner(new TTestDevice());
+		runner(new TTestDataMTab());
 	}
 	
 public:

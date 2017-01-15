@@ -15,7 +15,7 @@ class TTestBtrfs:public TTestClass
 private:
 	TBtrfsInfoTest *info;
 protected:
-	void doRun();	
+	virtual void doRun() override;	
 	void test01();
 	void test02();
 public:

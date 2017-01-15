@@ -12,6 +12,7 @@ class TDeviceList:public TLinkList<TDevice>
 {
 	
 private:
+	QString sysBlockPath;
 	TAlias *aliasses;
 	TUsbInfo usbInfo;
 	TPCIInfo pciInfo;	
@@ -35,6 +36,14 @@ private:
 	void readAliasFromPath(const QString &p_alias,const QString &p_path,QHash<QString,TDeviceBase *> &p_index);	
 	void readLVM();
 public:
+	inline void setSysBlockPath(const QString p_path){
+		sysBlockPath=p_path;		
+	}
+	
+	inline QString &getSysBlockPath()
+	{
+		return sysBlockPath;
+	}
 	
 	inline TDeviceBase *getDeviceByDeviceNo(long p_no){
 		return devNoIndex.value(p_no);

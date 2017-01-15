@@ -8,7 +8,7 @@ class TTestDevice:public TTestClass
 private:
 	TDevice *device;
 protected:
-	void doRun();	
+	virtual void doRun() override;	
 	void test1();
 	void test2();
 public:		

@@ -22,6 +22,14 @@ TMTab::TMTab(TDeviceList* p_devList)
 	sourceFile="/etc/fstab";
 }
 
+/**
+ *  Checks if a device is  mounted on a certain mount point
+ * 
+ *  \param p_device      Device name (e.g. sda)
+ *  \param p_mountPoint  Mount point
+ *  \return              True when device p_device is mounted on mountpoint p_mount otherwise false.
+ */
+
 bool TMTab::hasMount(const QString &p_device,const QString &p_mountPoint){
 	TLinkListIterator<TMTabEntry> l_iter(&entries);
 	TMTabEntry *l_entry;
@@ -33,8 +41,10 @@ bool TMTab::hasMount(const QString &p_device,const QString &p_mountPoint){
 }
 
 /**
+ *   Checks which the combinition (device, mountpoint) are not in the other list
  * 
- * 
+ *   \param p_other  The devices are checked against this list.
+ *   \param p_diff   This list contains (Device,mountpoint) that are not in the p_other list.
  */
 bool TMTab::notInOther(TMTab *p_other, TLinkList<TMountDiff> &p_diff)
 {	
@@ -87,7 +97,9 @@ bool TMTab::untilNext(const QString& p_text, int& p_cnt)
 	return false;;	
 }
 
-// Proces line in mount file (/etc/mtab or /etc/fstan)
+/**
+ * Proces line in mount file (/etc/mtab or /etc/fstan) 
+ */
 bool TMTab::processLine(const QString& p_line)
 {
 	QStringList l_items;
@@ -119,12 +131,14 @@ bool TMTab::processLine(const QString& p_line)
 	return true;
 }
 
-//Read moint file
-void TMTab::processInfo()
+/**
+ * Process entries 
+ */
+bool TMTab::processInfo()
 {
 	QFile l_file(sourceFile);
 	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
-		return;
+		return false;
 	}
 	QTextStream l_stream(&l_file);
 	QString l_line;
@@ -137,7 +151,7 @@ void TMTab::processInfo()
 		}
 
 	}
-
+	return true;
 }
 void TMTab::copyFileType()
 {
