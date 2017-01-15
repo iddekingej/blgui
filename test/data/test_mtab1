@@ -1,0 +1,5 @@
+/dev/sda1 /mnt/home btrfs rw,xx,yy 0 0
+/dev/sda2 /var      rw,aa=bb,cc=dd 0 0
+/dev/sda3 /test     default  0 0
+/dev/sdb1 /xxx      ww,aa=cc   0 0
+/dev/sdc
