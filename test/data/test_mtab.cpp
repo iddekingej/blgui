@@ -1,6 +1,6 @@
 #include "test_mtab.h"
 #include  <iostream>
-
+#include "../../data/mount.h"
 
 TTestDataMTab::TTestDataMTab()
 {
@@ -41,6 +41,7 @@ void  TTestDataMTab::test2()
 	expect("Number of entries read from test mtab",4,l_le);
 }
 
+
 void TTestDataMTab::test3()
 {
 	if(!mtab->hasMount("/dev/sda1","/mnt/home/")){
@@ -53,3 +54,23 @@ void TTestDataMTab::test3()
 		fail("hasMount on 'x' and 'y' should return false");
 	}
 }
+
+void TTestDataMTab::test4()
+{
+	mtab->addMountTODevices();
+	TDeviceBase *l_dev=deviceList->getDeviceByName("sda1");
+	if(l_dev==nullptr){
+		fail("Device sda1 not found");
+	} else {
+		expect("Is mounted",l_dev->isMounted(),true);
+		expect("Number of mounts ",1,l_dev->getMounts()->getLength());
+		if(l_dev->getMounts()->getStart()==nullptr){
+			fail("mount.getStart return null");
+		} else {
+			TMount *l_mount=l_dev->getMounts()->getStart()->getItem();
+			expect("Mount point ",l_mount->getMountPoint(),"/mnt/home");
+			expect("Type",l_mount->getType(),"btrfs");
+		}
+	}
+}
+

@@ -18,5 +18,6 @@ int main(UNUSEDPAR int argc,UNUSEDPAR char **argv) {
 		std::cout <<"run_data failed" <<std::endl;
 		return 255;
 	}
+	delete l_config;
 	return 0;
 }

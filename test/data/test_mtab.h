@@ -15,6 +15,7 @@ protected:
 	void test1();
 	void test2();
 	void test3();
+	void test4();
 public:
 	TTestDataMTab();
 	virtual  ~TTestDataMTab();

@@ -8,9 +8,9 @@ set(test_SRCS   test/lib/testclass.cpp
 		test/base/run_base.cpp
 		test/data/test_btrfs.cpp
 		test/data/test_device.cpp
+		test/data/test_devicelist.cpp
 		test/data/test_mtab.cpp
 		test/data/run_data.cpp
-		
 )
 
 add_executable(bdgui_test test/test.cpp ${test_SRCS} ${bdgui_SRCS})

@@ -25,6 +25,7 @@ bool TTestConfig::initConfig()
 		return false;
 	}
 	tempDir=l_tempDir;
+	free(l_tempDir);
 	return true;
 }
 
