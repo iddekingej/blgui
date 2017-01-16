@@ -34,7 +34,7 @@ void TDeviceList::handleDevNo(const QString &p_path,TDeviceBase *p_device){
 	int l_major;
 
 	readString(p_path,QStringLiteral("dev"),l_dev);
-	QVector<QStringRef> l_devNos=l_dev.splitRef(":");
+	QStringList l_devNos=l_dev.split(":");
 	if(l_devNos.size()==2){
 		l_major=l_devNos[0].toLong();
 		l_minor=l_devNos[1].toLong();
