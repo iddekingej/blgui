@@ -25,8 +25,8 @@ private:
 	QHash<QString,TDeviceBase *> lvmIndex;
 	QHash<QString,TDevice *> scsiIndex;
 	QHash<long,TDeviceBase *> devNoIndex;
-	void handleDevNo(QString p_path,TDeviceBase *p_device);
-	void readPartitions(TDevice *p_device);         //read information about partitions of device  p_device
+	void handleDevNo(const QString &p_path,TDeviceBase *p_device);
+	void readPartitions(const QString &p_path,TDevice *p_device);         //read information about partitions of device  p_device
 	void readDevices();                             //read device information from /sys/block
 	void readLabels();            			//read information about all labels
 	void readUuid();

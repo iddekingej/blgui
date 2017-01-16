@@ -145,7 +145,7 @@ public:
 	const QString &getModel();
 	virtual void fillDataRow(QStringList &p_list);
 
-	TDevice(const QString &p_name,const QString &p_model,TDiskSize p_size);
+	TDevice(const QString &p_name,TDiskSize p_size);
 	TPartition *addParition(const QString &p_name,TDiskSize p_size,TDiskSize p_start);
 	bool hasPartitions();
 };

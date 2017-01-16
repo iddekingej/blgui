@@ -18,25 +18,25 @@ void TPartition::fillDataRow(QStringList& p_list)
 	p_list 	<<getDevice()->getName()
 		<<getName()
 		<<QString::number(getSize())
-		<<""
+		<<QStringLiteral("")
 		<<getType()
 		<<getMountText()
 		<<getLabel()
 		<<getReadableSize()
-		<<""
-		<<""
-		<<""
+		<<QStringLiteral("")
+		<<QStringLiteral("")
+		<<QStringLiteral("")
 		<<getSlavesString()
 		<< (getHasFree()?QString::number(getFree()):QStringLiteral(""))
-		<<""
-		<<""
+		<<QStringLiteral("")
+		<<QStringLiteral("")
 		<<QString::number(start)
 		<<getReadableFreeSize()
-		<<""
-		<<""
-		<<""
+		<<QStringLiteral("")
+		<<QStringLiteral("")
+		<<QStringLiteral("")
 		<< getVGName()
-		<< "";
+		<<QStringLiteral("");
 ;
 }
 

@@ -82,12 +82,13 @@ TAlias* TTestClass::createAliasList()
 TDeviceList * TTestClass::createDeviceList(TAlias *p_alias)
 {
 	TDeviceList *l_deviceList =new TDeviceList(p_alias);
-	TDevice *l_sda=new TDevice("sda","m1",1024*1024);
+	TDevice *l_sda=new TDevice("sda",1024*1024);
+	l_sda->setModel("m1");
 	l_sda->addParition("sda1",1024*5,5);
  	l_sda->addParition("sda2",1024*10,1024*6);
-	TDevice *l_sdb=new TDevice("sda","m1",1024*1024);
+	TDevice *l_sdb=new TDevice("sda",1024*1024);
 	l_sdb->addParition("sdb",1024*5,5); 	
-
+	l_sdb->setModel("m2");
 	l_deviceList->append(l_sda);
 	l_deviceList->append(l_sdb);
 	return l_deviceList;

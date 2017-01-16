@@ -41,7 +41,8 @@ void TTestDevice::test2()
 
 TTestDevice::TTestDevice():TTestClass()
 {
-	device=new TDevice("Test1","Test2",1024*1024);
+	device=new TDevice("Test1",1024*1024);
+	device->setModel("Test2");
 }
 
 TTestDevice::~TTestDevice()

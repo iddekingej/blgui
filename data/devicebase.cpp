@@ -14,7 +14,7 @@ QString TDeviceBase::getReadableFreeSize()
     if(getHasFree()){
 	return ::getReadableSize(getFree());
     }
-    return "";
+    return QStringLiteral("");
 }
 
 
@@ -22,7 +22,7 @@ TDeviceBase::TDeviceBase(const QString &p_name, TDiskSize p_size)
 {
 	name=p_name;
 	size=p_size;	
-	devPath="/dev/"+p_name;
+	devPath=QStringLiteral("/dev/")+p_name;
 }
 
 //Add device mount

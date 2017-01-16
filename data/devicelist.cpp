@@ -16,7 +16,7 @@
 #include "base/compat.h"
 #include "base/utils.h"
 #include "usb.h"
-
+#include <iostream>
 const char* MOUNTS_PATH="/proc/mounts";
 
 
@@ -28,13 +28,13 @@ const char* MOUNTS_PATH="/proc/mounts";
  * \param p_device The deviceno path is set in this device 
  */
 
-void TDeviceList::handleDevNo(QString p_path,TDeviceBase *p_device){
+void TDeviceList::handleDevNo(const QString &p_path,TDeviceBase *p_device){
 	QString      l_dev;
 	int l_minor;
 	int l_major;
 
-	readString(p_path,"dev",l_dev);
-	QStringList l_devNos=l_dev.split(":");
+	readString(p_path,QStringLiteral("dev"),l_dev);
+	QVector<QStringRef> l_devNos=l_dev.splitRef(":");
 	if(l_devNos.size()==2){
 		l_major=l_devNos[0].toLong();
 		l_minor=l_devNos[1].toLong();
@@ -51,12 +51,13 @@ void TDeviceList::handleDevNo(QString p_path,TDeviceBase *p_device){
 void TDeviceList::readDevices()
 {
 	QString      l_deviceName;	
-	QDirIterator l_iter(sysBlockPath,QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter(sysBlockPath,QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	TDevice      *l_device;
 	QString      l_model;
 	QString      l_loopFile;
 	QString      l_vendor;
 	QString      l_scsiBus="";
+	QString      l_path;
 	TDiskSize    l_size;
 	unsigned long  l_removable;
 	unsigned long  l_readonly;
@@ -66,68 +67,63 @@ void TDeviceList::readDevices()
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_deviceName=l_iter.fileName();
-		if( l_deviceName != "." && l_deviceName != ".."){		
-			QDir l_dir(l_iter.filePath());
-			readLong(l_iter.filePath(),"size",l_size);
-			l_size=l_size*512;
-			
-			readLong(l_iter.filePath(),"removable",l_removable);
-			readLong(l_iter.filePath(),"ro",l_readonly);
-			readLong(l_iter.filePath(),"queue/rotational",l_rotational);
+		QDir l_dir(l_iter.filePath());
+		readLong(l_iter.filePath(),QStringLiteral("size"),l_size);
+		l_size=l_size*512;
+		l_path=l_iter.filePath();
+		readLong(l_path,QStringLiteral("removable"),l_removable);
+		readLong(l_path,QStringLiteral("ro"),l_readonly);
+		readLong(l_path,QStringLiteral("queue/rotational"),l_rotational);
 
-			if(l_dir.exists("device")==1){
-				readString(l_iter.filePath(),"device/model",l_model);					
-				readString(l_iter.filePath(),"device/vendor",l_vendor);
-			} else if(l_dir.exists("loop")==1){
-				l_model="Loopback";
-				readString(l_iter.filePath(),"loop/backing_file",l_loopFile);				
-			} else{
-				l_model="";
-				l_loopFile="";
-			}
 
-			QString l_lvmName;
-			readString(l_iter.filePath(),"dm/name",l_lvmName);
-			l_device=new TDevice(l_deviceName,l_model,l_size);
-			l_device->setReadonly(l_readonly==1);
-			l_device->setRemovable(l_removable==1);
-			l_device->setLoopbackFile(l_loopFile);
-			l_device->setScsiBus(l_scsiBus);
+
+		QString l_lvmName;
+		readString(l_path,QStringLiteral("dm/name"),l_lvmName);
+		l_device=new TDevice(l_deviceName,l_size);
+		l_device->setReadonly(l_readonly==1);
+		l_device->setRemovable(l_removable==1);
+		l_device->setScsiBus(l_scsiBus);
+		
+		l_device->setRotational(l_rotational==1);
+		l_device->setLVMName(l_lvmName);
+		if(l_dir.exists(QStringLiteral("device"))==1){
+			readString(l_path,QStringLiteral("device/model"),l_model);					
+			readString(l_path,QStringLiteral("device/vendor"),l_vendor);
 			l_device->setVendor(l_vendor.trimmed());
-			l_device->setRotational(l_rotational==1);
-			l_device->setLVMName(l_lvmName);
-			QString l_usbBus;
-			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
-				l_device->setUsbBus(l_usbBus);
-			}
-			QString l_pciBus;
-			if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
-				l_device->setPciBus(l_pciBus);
-			}			
-			handleDevNo(l_iter.filePath(),l_device);
+			l_device->setModel(l_model);
+		} else if(l_dir.exists(QStringLiteral("loop"))==1){			
+			readString(l_path,QStringLiteral("loop/backing_file"),l_loopFile);				
+			l_device->setModel(QStringLiteral("Loopback"));
+			l_device->setLoopbackFile(l_loopFile);
+
+		} 
+		QString l_usbBus;
+		if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
+			l_device->setUsbBus(l_usbBus);
+		}
+		QString l_pciBus;
+		if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
+			l_device->setPciBus(l_pciBus);
+		}			
+		handleDevNo(l_path,l_device);
 
 //finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
 //set device scsibus and add device to scsibus index
-			QDir l_scsi(l_iter.filePath()+"/device/scsi_device/");	
-			if(l_scsi.exists()){
-				QDirIterator l_scsiIter(l_scsi);
-				while(l_scsiIter.hasNext()){
-					
-					l_scsiIter.next();
-					if(l_scsiIter.fileName() != "." && l_scsiIter.fileName() != ".."){
-						l_scsiBus=l_scsiIter.fileName();
-						scsiIndex.insert(l_scsiBus,l_device);
-						l_device->setScsiBus(l_scsiBus);
-						break;
-					}
-					
-				}
-			}						
-			append(l_device);
-			nameIndex.insert(l_deviceName,l_device);
-			deviceByDevPath.insert(l_device->getDevPath(),l_device);
-			readPartitions(l_device);
-		}
+		
+		QDirIterator l_scsiIter(l_path+QStringLiteral("/device/scsi_device/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+		while(l_scsiIter.hasNext()){
+			l_scsiIter.next();
+			l_scsiBus=l_scsiIter.fileName();
+			scsiIndex.insert(l_scsiBus,l_device);
+			l_device->setScsiBus(l_scsiBus);
+			break;
+			
+		}			
+		append(l_device);
+		nameIndex.insert(l_deviceName,l_device);
+		deviceByDevPath.insert(l_device->getDevPath(),l_device);
+		readPartitions(l_path,l_device);
+	
 	}
 }
 
@@ -152,7 +148,7 @@ void TDeviceList::readSwap()
 		l_dev=l_line.left(l_line.indexOf(' '));
 		l_device=findDeviceByDevPath(l_dev);
 		if(l_device){
-			l_device->setType("swap");
+			l_device->setType(QStringLiteral("swap"));
 		}		
 	}
 }
@@ -163,12 +159,11 @@ void TDeviceList::readSwap()
  * 
  * \param p_device Read all partitions belonging to the block device in p_device
  */
-void TDeviceList::readPartitions(TDevice* p_device)
+void TDeviceList::readPartitions(const QString &p_path,TDevice* p_device)
 {
-	QDirIterator l_iter(sysBlockPath+p_device->getName(),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter(p_path,QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	TDiskSize    l_size;
 	QString      l_deviceName;
-	QString      l_sizeStr("size");
 	TPartition   *l_partition;
 	TDiskSize    l_start;
 	QString     l_dev;
@@ -176,15 +171,14 @@ void TDeviceList::readPartitions(TDevice* p_device)
 	while(l_iter.hasNext()){
 		l_iter.next();
 		if(l_iter.fileInfo().isDir() && l_iter.fileName().startsWith(p_device->getName())){
-			readLong(l_iter.filePath(),l_sizeStr,l_size);		
+			readLong(l_iter.filePath(),QStringLiteral("size"),l_size);		
 			readLong(l_iter.filePath(),QStringLiteral("start"),l_start);
 			l_size=l_size*512;
 			l_deviceName=l_iter.fileName();		
 			l_partition=p_device->addParition(l_deviceName,l_size,l_start);	
 			nameIndex.insert(l_deviceName,l_partition);
 			deviceByDevPath.insert(l_partition->getDevPath(),l_partition);
-			handleDevNo(l_iter.filePath(),l_partition);
-		
+			handleDevNo(l_iter.filePath(),l_partition);		
 		}
 	}	
 }
@@ -204,7 +198,7 @@ void TDeviceList::readFreeSpace()
 		if(l_device->isMounted()){
 			struct statvfs l_info;
 			//statvfs needs some file at device. Using top directory (/.) of first mount point
-			l_somePath=l_device->getMounts()->getStart()->getItem()->getMountPoint()+"/.";
+			l_somePath=l_device->getMounts()->getStart()->getItem()->getMountPoint()+QStringLiteral("/.");
 			if((statvfs(qstr(l_somePath),&l_info))==0){
 				l_device->setFree(l_info.f_bsize*l_info.f_bfree,true);				
 			} 
@@ -287,11 +281,11 @@ void TDeviceList::readLVM()
 		
 		if(l_deviceBase != nullptr){
 			QDir l_slaves(l_iter.filePath());
-			if(l_slaves.exists("dm")){
+			if(l_slaves.exists(QStringLiteral("dm"))){
 				if(TDevice *l_device=dynamic_cast<TDevice *>(l_deviceBase)){
 					l_device->setModel(i18n("LVM Device"));
 				}
-				l_slaves.cd("slaves");
+				l_slaves.cd(QStringLiteral("slaves"));
 				if(l_slaves.exists()){
 					QDirIterator l_slaveIter(l_slaves,QDirIterator::NoIteratorFlags);
 					while(l_slaveIter.hasNext()){
@@ -328,7 +322,7 @@ TDeviceBase* TDeviceList::findDeviceByDevPath(const QString& p_devPath)
 
 TDeviceList::TDeviceList(TAlias *p_aliasses)
 {
-	sysBlockPath="/sys/block/";
+	sysBlockPath=QStringLiteral("/sys/block/");
 	aliasses=p_aliasses;
 }
 

@@ -13,15 +13,15 @@
  */
 void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 {		
-	QDirIterator l_iter(p_path+"/allocation/system/",QDirIterator::NoIteratorFlags);
+	QDirIterator l_iter(p_path+QStringLiteral("/allocation/system/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 	while(l_iter.hasNext()){
 		l_iter.next();
-		if(l_iter.fileName().startsWith("raid")){
+		if(l_iter.fileName().startsWith(QStringLiteral("raid"))){
 			p_raidLevel=l_iter.fileName();
 			return ;
 		}
 	}
-	p_raidLevel="";	
+	p_raidLevel=QStringLiteral("");	
 }
 
 /** parses btrfs info (under /sys/fs/btrfs).
@@ -33,28 +33,27 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 
 void TBtrfsInfo::processInfo(TDeviceList *p_list,TRaidInfo *p_raid)
 {
-	QDirIterator l_iter("/sys/fs/btrfs/",QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
-	QString l_fileName;
+	QDirIterator l_iter(QStringLiteral("/sys/fs/btrfs/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);	
 	while(l_iter.hasNext())
 	{
 		l_iter.next();
-		l_fileName=l_iter.fileName();
-		if(l_iter.fileInfo().isDir() && (l_fileName != "features") && (l_fileName != ".") && (l_fileName != "..")){
-			QDirIterator l_deviceIter(l_iter.fileInfo().filePath()+"/devices/",QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+		
+		if(l_iter.fileName() != QStringLiteral("features")){
+			QDirIterator l_deviceIter(l_iter.fileInfo().filePath()+QStringLiteral("/devices/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
 			QList<TDeviceBase *> l_btrfsMembers;
 			while(l_deviceIter.hasNext()){
 				l_deviceIter.next();
 				TDeviceBase *l_device=p_list->getDeviceByName(l_deviceIter.fileName());
 				if(l_device!=nullptr){
 					l_btrfsMembers.append(l_device);
-					l_device->setType("btrfs");
+					l_device->setType(QStringLiteral("btrfs"));
 				}
 			}
 			if(l_btrfsMembers.length()>1){
 				p_list->sameMountPoint(l_btrfsMembers);
 				QString l_raidLevel="";
 				getRaidLevel(l_iter.fileInfo().filePath(),l_raidLevel);
-				p_raid->addRaid(l_btrfsMembers[0],"btrfs",l_raidLevel,l_btrfsMembers);
+				p_raid->addRaid(l_btrfsMembers[0],QStringLiteral("btrfs"),l_raidLevel,l_btrfsMembers);
 			}
 		}
 	}

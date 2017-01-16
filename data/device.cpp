@@ -8,14 +8,12 @@
  * TDevice constructor
  * 
  * \param p_name  device name (/dev/sda => name=sda)
- * \param p_model device model (read from /sys/block/#dev#/device/model file)
  * \param p_size  disk size
  */
 
-TDevice::TDevice(const QString &p_name,const QString &p_model,TDiskSize p_size)
+TDevice::TDevice(const QString &p_name,TDiskSize p_size)
 :TDeviceBase(p_name,p_size)
-{		
-	model=p_model;
+{			
 }
 
 const QString &TDevice::getModel()
@@ -33,7 +31,7 @@ TPartition *TDevice::addParition(const QString &p_name,TDiskSize p_size,TDiskSiz
 void TDevice::fillDataRow(QStringList& p_list)
 {
 	p_list 	<< getName()
-		<< ""
+		<< QStringLiteral("")
 		<< QString::number(getSize())
 		<< getVendor()+"/"+getModel()
 		<< getType()
@@ -47,7 +45,7 @@ void TDevice::fillDataRow(QStringList& p_list)
 		<<  (getHasFree()?QString::number(getFree()):QStringLiteral(""))
 		<< getScsiBus()
 		<< getIScsiAddress()
-		<< ""
+		<< QStringLiteral("")
 		<< getReadableFreeSize()
 		<< (getRotational()?"X":"")
 		<< getUsbBus()

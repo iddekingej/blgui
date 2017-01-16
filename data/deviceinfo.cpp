@@ -54,7 +54,7 @@ void TDeviceInfo::getDisks()
 	devices->readInfo();
 	mtab->processInfo();
 	TMTab *l_mtab2=new TMTab(devices);
-	l_mtab2->setSourceFile("/proc/mounts");
+	l_mtab2->setSourceFile(QStringLiteral("/proc/mounts"));
 	l_mtab2->processInfo();
 	l_mtab2->addMountTODevices();	
 	l_mtab2->copyFileType();
@@ -86,7 +86,7 @@ void TDeviceInfo::getDisks()
 			l_db->setLabel(l_partLabel);
 		}
 	}
-	sbTime=QFileInfo("/sys/block").lastModified();
+	sbTime=QFileInfo(QStringLiteral("/sys/block")).lastModified();
 }
 
 TDeviceInfo::TDeviceInfo()
