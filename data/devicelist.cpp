@@ -89,36 +89,36 @@ void TDeviceList::readDevices()
 		if(l_dir.exists(QStringLiteral("device"))==1){
 			readString(l_path,QStringLiteral("device/model"),l_model);					
 			readString(l_path,QStringLiteral("device/vendor"),l_vendor);
+			QDirIterator l_scsiIter(l_path+QStringLiteral("/device/scsi_device/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
+			while(l_scsiIter.hasNext()){
+				l_scsiIter.next();
+				l_scsiBus=l_scsiIter.fileName();
+				scsiIndex.insert(l_scsiBus,l_device);
+				l_device->setScsiBus(l_scsiBus);
+				break;
+				
+			}				
 			l_device->setVendor(l_vendor.trimmed());
 			l_device->setModel(l_model);
+			QString l_usbBus;
+			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
+				l_device->setUsbBus(l_usbBus);
+				std::cout << qstr(l_deviceName) << "/" << qstr(l_scsiBus) <<  "/" << qstr(l_usbBus) << std::endl;
+			}
+			QString l_pciBus;
+			if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
+				l_device->setPciBus(l_pciBus);
+			}			
+			
 		} else if(l_dir.exists(QStringLiteral("loop"))==1){			
 			readString(l_path,QStringLiteral("loop/backing_file"),l_loopFile);				
 			l_device->setModel(QStringLiteral("Loopback"));
 			l_device->setLoopbackFile(l_loopFile);
 
 		} 
-		QString l_usbBus;
-		if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
-			l_device->setUsbBus(l_usbBus);
-		}
-		QString l_pciBus;
-		if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
-			l_device->setPciBus(l_pciBus);
-		}			
 		handleDevNo(l_path,l_device);
 
-//finds scsi bus in /sys/bock/<dev>/device/scsi_device/	
-//set device scsibus and add device to scsibus index
 		
-		QDirIterator l_scsiIter(l_path+QStringLiteral("/device/scsi_device/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
-		while(l_scsiIter.hasNext()){
-			l_scsiIter.next();
-			l_scsiBus=l_scsiIter.fileName();
-			scsiIndex.insert(l_scsiBus,l_device);
-			l_device->setScsiBus(l_scsiBus);
-			break;
-			
-		}			
 		append(l_device);
 		nameIndex.insert(l_deviceName,l_device);
 		deviceByDevPath.insert(l_device->getDevPath(),l_device);
