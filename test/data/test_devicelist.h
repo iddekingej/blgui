@@ -11,6 +11,8 @@ class TTestDataDeviceList:public TTestClass
 protected:
 	virtual void doRun() override;
 	void test1();
+	void test2();
+	void test3();
 public:
 	TTestDataDeviceList();
 	~TTestDataDeviceList();

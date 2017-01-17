@@ -14,7 +14,6 @@ private:
 	TTestConfig *config;
 protected:
 	virtual void doRun();		
-	QString getFilePath(const QString &p_path);
 public:
 	inline void setConfig(TTestConfig *p_config){ config=p_config;}
 	inline TTestConfig *getConfig(){ return config;}

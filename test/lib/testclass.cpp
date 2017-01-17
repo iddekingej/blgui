@@ -94,8 +94,5 @@ TDeviceList * TTestClass::createDeviceList(TAlias *p_alias)
 	return l_deviceList;
 }
 
-QString TTestClass::getFilePath(const QString& p_path)
-{
-	return QStringLiteral("../../test/")+p_path;
-}
+
 

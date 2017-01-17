@@ -74,9 +74,6 @@ void TDeviceList::readDevices()
 		readLong(l_path,QStringLiteral("removable"),l_removable);
 		readLong(l_path,QStringLiteral("ro"),l_readonly);
 		readLong(l_path,QStringLiteral("queue/rotational"),l_rotational);
-
-
-
 		QString l_lvmName;
 		readString(l_path,QStringLiteral("dm/name"),l_lvmName);
 		l_device=new TDevice(l_deviceName,l_size);

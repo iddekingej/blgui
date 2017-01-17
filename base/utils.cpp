@@ -4,7 +4,7 @@
 #include <QTextStream>
 #include <QIODevice>
 #include "base/compat.h"
-
+#include <iostream>
 /**
  * Used for reading files in /sys/block
  * Read file containing ulong (like /sys/block/sda/size)

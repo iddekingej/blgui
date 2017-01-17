@@ -38,3 +38,7 @@ bool TTestConfig::tmpMkDir(const std::string &p_path,std::string *p_fullPath)
 	return mkdir(l_fullPath.c_str(),0777)==0;	
 }
 
+QString TTestConfig::getFilePath(const QString& p_path)
+{
+	return QStringLiteral("../../test/testdata/")+p_path;
+}
