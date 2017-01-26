@@ -34,25 +34,53 @@ void TConfig::setup()
 
 }
 	
-void TConfig::getTabDef(QVariant& p_list)
+/**
+ * Read information about user defined tabs.
+ * This information is stored as a json string inside the configuration file. This is parsed
+ * to a QVariant.
+ * 
+ * \param  p_tabDef returns the parsed json.  
+ */	
+void TConfig::getTabDef(QVariant& p_tabDef)
 {
 	QByteArray l_data=configGui.readEntry("tabdef",QByteArray());
-	p_list=QJsonWrapper::parseJson(l_data);
+	p_tabDef=QJsonWrapper::parseJson(l_data);
 }
 
-void TConfig::setTabDef(QVariant& p_list)
+/**
+ * This method saves the data from the user tab def configuration.
+ * The TTabDef (User tab configuration) obect creates a QVariant. This data is
+ * covnerted to a json string and save as a string to the configuration file
+ * 
+ * \param p_tabDef  Definition of the user tabs as a QVariant
+ */
+
+void TConfig::setTabDef(QVariant& p_tabDef)
 {	
-	configGui.writeEntry("tabdef",QJsonWrapper::toJson(p_list));
+	configGui.writeEntry("tabdef",QJsonWrapper::toJson(p_tabDef));
 }
 
 	
-//Sync needs to be called after a change
+/**
+ * 
+ * Sync needs to be called after a change
+ */
+
 void TConfig::sync()
 {
 	config->sync();
 }
 
-// Return QVariant list with enabled fields=>is integer
+
+/**
+ *  "deviceFIelds" configuration contains the configured fields and it's order displayed in the device tab
+ * 
+ * The list is read as a QVariantList and converted to a QVector.
+ * The result QVector[pos]=fieldno
+ * 
+ * fieldno is the index into the field list defined in  g_deviceFields (globals.cpp)
+ */
+
 QVector<int>* TConfig::getDeviceFields()
 {
 	if(deviceFields==nullptr){
@@ -69,45 +97,103 @@ QVector<int>* TConfig::getDeviceFields()
 	return deviceFields;
 }
 
-//Set enabled fields in device list
+/**
+ *   Set enable fields displayed in the device tab
+ * 
+ *  \param p_list list of fieldno's (Fieldno is the index of the g_deviceFields array )
+ */
+
 void TConfig::setDeviceFields(QVariantList p_list)
 {
 	deviceFields=nullptr;
 	configGui.writeEntry("devicefields",p_list);
 }
 
-//Set mainw window size in config.  is called from mainwindow.resize
+/**
+ * Saves the main window size  in the configuration file.
+ * When the main window is resized, the size is stored in the configurationa. When the program is restarted
+ * the size is estored the last window size.
+ * 
+ * \param p_width - width of the window
+ * \param p_height - height of the window
+ */
 
 void TConfig::setMainWindowSize(int p_width, int p_height)
 {
 	configGui.writeEntry(QStringLiteral("mainWidth"),p_width );
 	configGui.writeEntry(QStringLiteral("mainHeight"),p_height);
 }
-//Get Mainwindow height as defined in config. Return=-1 when not set
+/**
+ * get the main window height as saved in the configuration. 
+ * See  \see TConfig::setMainWindowSize for more information
+ * 
+ * \return main window height
+ */
 
 int TConfig::getMainWindowHeight()
 {
 	return configGui.readEntry(QStringLiteral("mainHeight"),-1);
 }
 
-//Get mainwindow height as set in config. Return=-1 when not set
+/**
+ * get the main window width as saved in the configuration. 
+ * See   \see TConfig::setMainWindowSize for more information
+ * 
+ * \return  main window width
+ */
+
 int TConfig::getMainWindowWidth()
 {
 	return configGui.readEntry(QStringLiteral("mainWidth"),-1);
 }
 
+/**
+ *   Show or hide disktab?
+ *   It is possible to hide or show the "disk" tab. This is saved in the configuration
+ *   file
+ * 
+ *   \return true if "disktab"  is visible or else false.
+ */
+
 bool TConfig::getDisksTab(){
 	return configGui.readEntry(QStringLiteral("diskTab"),true);
 }
+
+/**
+ *   It is possible to hide or show the "disk" tab. This is saved in the configuration
+ *   file. 
+ *   This method saves the configuration to the configuration file 
+ * 
+ *   \param p_flag True if the disk tab is visible or false when hidden.
+ */
+
+
 void TConfig::setdiskTab(bool p_flag)
 {
 	configGui.writeEntry(QStringLiteral("diskTab"),p_flag);
 }
 
+
+/**
+ *   Show or hide raid tab?
+ *   It is possible to hide or show the "raid" tab. This is saved in the configuration
+ *   file
+ * 
+ *   \return true if "raid" tab  is visible or else false.
+ */
+
 bool TConfig::getRaidTab()
 {
 	return configGui.readEntry(QStringLiteral("raidTab"),true);
 }
+
+/**
+ *   It is possible to hide or show the "raid" tab. This is saved in the configuration
+ *   file. 
+ *   This method saves the configuration to the configuration file 
+ * 
+ *   \param p_flag True if the raid tab is visible or false when hidden.
+ */
 
 void TConfig::setRaidTab(bool p_flag)
 {

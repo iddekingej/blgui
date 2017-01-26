@@ -78,7 +78,7 @@ void TTestDataDeviceList::test4()
 		return;
 	}
 	expect("Partition 1 name ","sda1",l_partition->getName());
-	expect("Partition 1 size ",102400,l_partition->getSize());
+	expect("Partition 1 size ",102400*512,(long)l_partition->getSize());
 }
 
 
