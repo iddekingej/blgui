@@ -13,10 +13,17 @@ TTestDataDeviceList::~TTestDataDeviceList()
 	delete deviceList;
 }
 
+/**
+ *  Read data from current device
+ */
 void TTestDataDeviceList::test1()
 {
 	deviceList->readInfo();
 }
+
+/**
+ *  Read data from test data
+ */
 
 void TTestDataDeviceList::test2()
 {
@@ -26,6 +33,13 @@ void TTestDataDeviceList::test2()
 	deviceList->readInfo();
 }	
 
+/**
+ *  Check device1 and checkdevice2:
+ *  - Size
+ *  - Device name
+ *  - Device model
+ *  - Device vendor
+ */
 void TTestDataDeviceList::test3()
 {	
 	expect("Number of devices read from test /sys/block",3,deviceList->getLength());
@@ -41,8 +55,30 @@ void TTestDataDeviceList::test3()
 		} else {
 			expect("Device 2 name","sdb",l_item->getItem()->getName());
 			expect("Model of dev 2","bla bla",l_item->getItem()->getModel());
+			expect("Vendor of dev 2","TestVendor",l_item->getItem()->getVendor());
 		}
 	}
+}
+
+void TTestDataDeviceList::test4()
+{
+	TLinkListItem<TDevice> *l_item=deviceList->getStart();
+	TDevice *l_device=l_item->getItem();
+	if(l_device ==nullptr){
+		fail("First device returns null");
+		return;
+	}
+	
+	if(expect("Number of paritions",3,l_device->getPartitions()->getLength())){
+		return;
+	}
+	TPartition *l_partition=l_device->getPartitions()->getStart()->getItem();
+	if(l_partition==nullptr){
+		fail("Partitions is null");
+		return;
+	}
+	expect("Partition 1 name ","sda1",l_partition->getName());
+	expect("Partition 1 size ",102400,l_partition->getSize());
 }
 
 
@@ -52,6 +88,7 @@ void TTestDataDeviceList::doRun()
 	test1();
 	test2();
 	test3();
+	test4();
 	std::cout << "data/test_devicelist end" << std::endl;
 }
 
