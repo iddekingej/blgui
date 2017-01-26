@@ -106,7 +106,7 @@ install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
-message(STATUS ${RUN_TEST})
+
 if(RUN_TEST EQUAL "1")
    include("bdgui_test.cmake")
 endif()
