@@ -1,0 +1,14 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+​<component type="desktop-application">
+​  <id>org.elaya.bdgui</id>
+​  <metadata_license>CC0</metadata_license>
+​  <project_license>GPL-2.0+</project_license>
+​  <name>BDGui</name>
+​  <summary>Display information about block devices</summary>
+​
+​  <description>
+	Display information about block devices
+  </description>
+  
+</component>
