@@ -18,18 +18,7 @@ void TFormTabDef::fillConditionField()
 }
 
 
-void TFormTabDef::fillFields()
-{
-	ui.fieldSelector->clear();
-	ui.fieldSelector->addItem("",-1);
-	if(current != nullptr){
-		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
-			if(!current->hasFieldInSelected(l_cnt))	ui.fieldSelector->addItem(g_deviceFields[l_cnt],l_cnt);
-		}	
-		ui.fieldSelector->model()->sort(0);
-	}
-	
-}
+
 
 /** This method fills condition type combo box with options
  * 
@@ -66,8 +55,53 @@ void TFormTabDef::newTab()
 	
 }
 
-/** Fill widget with selected field from tab definition object
+/**
+ *  Fill list with available fields (which can be added to the grid).
+ *  Only fields that aren't selected yet are added.
  * 
+ */
+
+void TFormTabDef::fillFields()
+{
+	ui.fieldSelector->clear();	
+	ui.fieldSelector->model()->sort(-1);
+	ui.fieldSelector->addItem("",-1);
+	int l_idx=1;
+	if(current != nullptr){
+		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
+			if(!current->hasFieldInSelected(l_cnt)){
+				ui.fieldSelector->addItem(g_deviceFields[l_cnt],l_cnt);
+				l_idx++;
+			}
+		}	
+		ui.fieldSelector->model()->sort(0);
+	}
+
+}
+/**
+ *  Near the "available field" listbox there is a "+" button. When pressing this button, the selected index is 
+ *  added to the list.
+ */
+
+void TFormTabDef::addField()
+{
+	QVariant l_userData=ui.fieldSelector->itemData(ui.fieldSelector->currentIndex());
+	int l_index=l_userData.toInt();
+	if(l_index==-1){
+		QMessageBox::information(nullptr,i18n("Error"),i18n("Please select a field to add"));
+	} else{
+		addFieldToFieldListModel(l_index);
+		if(current != nullptr){
+			current->addSelectedList(l_index);
+		}
+		fillFields();
+	}
+
+}
+
+
+/** 
+ * Add the selected fields (The fields displayed in the grid) from the selected tab def.
  */
 
 void TFormTabDef::fillSelectedFields()
@@ -127,7 +161,7 @@ void TFormTabDef::formToCurrentTabDef()
 	}
 }
 
-/**If tab is selected, this method setup form with tab definition
+/**If tab is selected, this method  fills the form with tab definition
  * \param p_selected - UNUSED
  * \param p_deselected - UNUSED
  */
@@ -157,7 +191,8 @@ void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSE
 
 }
 
-/** Save tab definition in configuration file
+/** 
+ * Save tab definition in configuration file
  * 
  */
 void TFormTabDef::saveTabDef()
@@ -167,9 +202,11 @@ void TFormTabDef::saveTabDef()
 	accept();
 }
 
-/** Cancel dialog. Reread current configuration file
+/** 
+ * Cancel dialog. Reread current configuration file
  * 
  */
+
 void TFormTabDef::cancelDef()
 {	
 	tabDefs->clear();
@@ -279,21 +316,6 @@ void TFormTabDef::selectField(UNUSEDPAR const QItemSelection& p_selected,UNUSEDP
 }
 
 
-void TFormTabDef::addField()
-{
-	QVariant l_userData=ui.fieldSelector->itemData(ui.fieldSelector->currentIndex());
-	int l_index=l_userData.toInt();
-	if(l_index==-1){
-		QMessageBox::information(nullptr,i18n("Error"),i18n("Please select a field to add"));
-	} else{
-		addFieldToFieldListModel(l_index);
-		if(current != nullptr){
-			current->addSelectedList(l_index);
-		}
-		fillFields();
-	}
-
-}
 
 
 void TFormTabDef::delField()
