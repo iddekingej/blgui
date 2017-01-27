@@ -41,31 +41,48 @@ void TTestDataDeviceList::test2()
  *  - Device vendor
  */
 void TTestDataDeviceList::test3()
-{	
+{
+	TDevice *l_device;
 	expect("Number of devices read from test /sys/block",3,deviceList->getLength());
-	TLinkListItem<TDevice> *l_item=deviceList->getStart();
-	if(l_item==nullptr){
+	TDeviceBase *l_deviceBase=deviceList->getDeviceByName("sda");
+	if(l_deviceBase==nullptr){
 		fail("Except first item != nullptr");
 	} else {
-		expect("Device 1 name ","sda",l_item->getItem()->getName());
-		expect("Size of device 1",3202400*512,(long)l_item->getItem()->getSize());
-		l_item=l_item->getNext();
-		if(l_item==nullptr){
+		l_device=dynamic_cast<TDevice *>(l_deviceBase);
+		if( l_device==nullptr){
+			fail("Found device sda is not a TDevice *");
+		} else {
+			expect("Device 1 name ","sda",l_device->getName());
+			expect("Size of device 1",3202400*512,(long)l_device->getSize());
+		}
+		l_deviceBase=deviceList->getDeviceByName("sdb");
+		if(l_deviceBase==nullptr){
 			fail("Expected second item != nullptr");
 		} else {
-			expect("Device 2 name","sdb",l_item->getItem()->getName());
-			expect("Model of dev 2","bla bla",l_item->getItem()->getModel());
-			expect("Vendor of dev 2","TestVendor",l_item->getItem()->getVendor());
+			if((l_device=dynamic_cast<TDevice *>(l_deviceBase))==nullptr){
+				fail("Found device sdb is not a TDevice *");
+
+			} else {
+				expect("Device 2 name","sdb",l_device->getName());
+				expect("Model of dev 2","bla bla",l_device->getModel());
+				expect("Vendor of dev 2","TestVendor",l_device->getVendor());
+			}
 		}
 	}
 }
 
 void TTestDataDeviceList::test4()
-{
-	TLinkListItem<TDevice> *l_item=deviceList->getStart();
-	TDevice *l_device=l_item->getItem();
-	if(l_device ==nullptr){
+{	
+	TDevice *l_device;
+	TDeviceBase *l_deviceBase=deviceList->getDeviceByName("sda");
+	if(l_deviceBase ==nullptr){
 		fail("First device returns null");
+		return;
+	}
+	
+	l_device=dynamic_cast<TDevice *>(l_deviceBase);
+	if(l_device==nullptr){
+		fail("Device sda is not a TDevice");
 		return;
 	}
 	
