@@ -89,11 +89,18 @@ void TTestDataDeviceList::test4()
 	if(expect("Number of paritions",3,l_device->getPartitions()->getLength())){
 		return;
 	}
-	TPartition *l_partition=l_device->getPartitions()->getStart()->getItem();
-	if(l_partition==nullptr){
-		fail("Partitions is null");
+	
+	TLinkListItem<TPartition> *l_item=l_device->getPartitions()->getStart();
+	if(l_item==nullptr){
+		fail("Partitions.start=null");
 		return;
 	}
+	while(l_item != nullptr && l_item->getItem()->getName() != "sda1") l_item=l_item->getNext();
+		if(l_item==nullptr){
+		fail("Sda1 parition not found");
+		return;
+	}
+	TPartition *l_partition=l_item->getItem();
 	expect("Partition 1 name ","sda1",l_partition->getName());
 	expect("Partition 1 size ",102400*512,(long)l_partition->getSize());
 }
