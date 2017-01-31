@@ -20,16 +20,47 @@
 #include "base/compat.h"
 #include "lvm.h"
 
+/**
+ * This class combines all the information
+ */
+
 class TDeviceInfo
 {
 private:
+	/**
+	 *  Information about all devices
+	 */
 	TDeviceList       *devices;
+	
+	/**
+	 * list of aliases of a device
+	 */
+	
 	TAlias            *aliasses;
+	/*
+	 * Information about raid on the system (Lsinux raid and btrfs)
+	 */
 	TRaidInfo         *raidList;
+	/**
+	 * Information about mounted devices
+	 */
 	TMTab             *mtab;
+	/**
+	 * Information about iscsi deices
+	 */
 	TIScsiSessionList *iscsi;
+	/**
+	 * Information about LVM devices 
+	 */
 	TLVM              *lvm;
+	/**
+	 * libblkid is used for determine the file system type.
+	 * this information is cached
+	 */
 	blkid_cache blkidCache;
+	/**
+	 * Time and date the information is read.
+	 */
 	QDateTime   sbTime;
 	
 

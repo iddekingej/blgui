@@ -1,6 +1,8 @@
 #include "globals.h"
 #include <klocalizedstring.h>
-//List of fields shown in "Device" tab
+/**
+ *  List of possible fields shown in "Device" tab
+ */
 
 
 const  char *g_deviceFields[]={
@@ -25,4 +27,9 @@ const  char *g_deviceFields[]={
 ,	I18N_NOOP("Volume group name")
 ,	I18N_NOOP("Lvm name")
 };
+
+
+/**
+ *  Number of fields in g_deviceFields
+ */
 const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);

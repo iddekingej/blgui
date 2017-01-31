@@ -8,8 +8,11 @@
 
 
 /**Get raid level
+ * The raid level is stored in /sys/fs/btrfs/#uid#/allocation/system.
+ * There is a folder starting with raid and the raid level. The name of this folder is taken as raid level.
+ * 
  * \param p_path  path to /sys/fs/btrf entry for raid device
- * \param p_raidLevel  raid level is returned (directory name in /sys/fs/bfrfs/xxx/allocation/system sarting with 'raid')
+ * \param p_raidLevel  returns raid level as a string (ex raid5, raid2)
  */
 void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 {		
@@ -24,7 +27,8 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 	p_raidLevel=QStringLiteral("");	
 }
 
-/** parses btrfs info (under /sys/fs/btrfs).
+/** 
+ *  parses btrfs info (under /sys/fs/btrfs).
  *  The fs type, mount points are copied to all raid members and raid information is set
  * 
  * \param p_list   Devicelist used to convert device name to device objects

@@ -1,3 +1,11 @@
+/**
+ *   This class monitors changes on file system 
+ *   -udev is used for adding and removing devices
+ *   -rereading /proc/mounts(=mtab) is used for detecting mounting/unmounting
+ * 
+ *   Informationc ollected by the TChangeManager is displayed in the notification message
+ */
+
 #ifndef __CHANGEMANAGER_H_
 #define __CHANGEMANAGER_H_
 #include <QString>
@@ -6,11 +14,27 @@
 #include "udevmonitor.h"
 #include <QDateTime>
 #include "base/linklist.h"
+
+/**
+ * A change in a device state is stored in this item
+ * */
 class TChangeItem
 {
 private:
+	
+/**
+ *  Data of change. This is displayed at the notification
+ */
 	QDateTime date;
+	
+/**
+ * Device name which state is changed.
+ */
 	QString device;
+/**
+ * Message describing the change
+ */	
+
 	QString message;
 public:
 	inline QDateTime &getDate(){ return date;}
@@ -22,9 +46,21 @@ public:
 class TChangeManager
 {
 private:
-
+/**
+ *  Periodically mtab (=/proc/mounts) is read and compared to the previous mount information. Every difference is 
+ *  added to the change list.
+ *  This property contains the previous /proc/mounts information
+ */
 	TMTab         *prvMounted=nullptr;
+/**
+ *  Device information list.
+ */
 	TDeviceInfo   *info=nullptr;
+	
+/**
+ * changeMonitor is a interface to udev. This object returns 
+ * device that are added or removed from the system
+ */
 	TUDevMonitor   changeMonitor;
 	
 	void getStringOfSet(const QSet<QString >& p_set, QString p_text,TLinkList<TChangeItem> &p_what);

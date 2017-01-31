@@ -5,7 +5,9 @@
 #include "devicelist.h"
 #include "raid.h"
 
-/**Read all btrfs info
+/**
+ *   /sys/block/btrfs contains information about btrfs filesystems like device (=raid member if it is a raid) and raid level.
+ *   This information is read by this class
  */
 class TBtrfsInfo
 {

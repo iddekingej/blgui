@@ -3,9 +3,20 @@
 #include <QHash>
 #include <QString>
 
+/**
+ *  A device can have a alias. That is a symlink to the original device.
+ *  This class collect all symlinks and determine the original device.
+ */
+
 class TAlias
 {
 private:
+	
+	/**
+	 * List of found aliases.
+	 * The symlink is the index and the value is the original device
+	 */
+	
 	QHash<QString,QString> aliasses;
 	void processAlias(const QString &p_file);
 	void procesAliasses(const QString &p_path);
@@ -16,6 +27,7 @@ public:
 		return aliasses.value(p_name);
 	}
 	
+	//Device name
 	const QString getDeviceNameFromAliasPath(const QString &p_name);		
 
 	//Does alias exists?

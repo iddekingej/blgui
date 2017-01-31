@@ -2,13 +2,23 @@
 #include "mount.h"
 #include <QListIterator>
 #include "base/compat.h"
-//Get disk size in easy to read size like 10k 10M 100G
+/** 
+ * Get disk size in easy to read size 
+ * 
+ * \return get size in easy readable form (10k ,100M etc..)
+ */
+
 QString TDeviceBase::getReadableSize()
 {
     return ::getReadableSize(getSize());
 }
 
-//Get freedisk size in easy to read size like 10k 10M 100G
+/**
+ *Get free size in easy readable form
+ * 
+ * \return Free size in easy readable form (10k ,100M etc...) or empty string when
+ *         empty size couldn't be determined
+ */
 QString TDeviceBase::getReadableFreeSize()
 {
     if(getHasFree()){
@@ -25,17 +35,23 @@ TDeviceBase::TDeviceBase(const QString &p_name, TDiskSize p_size)
 	devPath=QStringLiteral("/dev/")+p_name;
 }
 
-//Add device mount
-//parameters:
-//p_type       : fs type
-//p_mountPoint : Mount point path
+/**
+ *  Add mount information to devices.
+ *  The mount information is a list of mountpoints on which the device is mounted and the fs type.
+ *  
+ *  \param p_mountPoin  Mount point directory  on which the device is mounted
+ *   \param p_type      Type of file system (btrfs,ext2 etc..)
+ */
+
 void TDeviceBase::addMount(const QString &p_mountPoint,const QString &p_type)
 {
 	mounts.append(new TMount(p_mountPoint,p_type));
 }
 
 
-//Get QString of all mountpoints from device
+/***
+ *  All mount points are concated to one string separated by a newline
+ */
 QString TDeviceBase::getMountText()
 {
 	TLinkListIterator<TMount> l_iter(&mounts);	
@@ -49,7 +65,10 @@ QString TDeviceBase::getMountText()
 	return l_return;
 }
 
-//Copy mounts from other device
+/**
+ *  when a btrfs raid is mounted, only the mount points of one device is stored.
+ *  This method copies the mount information to the other devices.
+ */
 void TDeviceBase::copyMount(TLinkList<TMount> *p_mounts)
 {
 	TLinkListIterator<TMount> l_iter(p_mounts);
@@ -61,8 +80,11 @@ void TDeviceBase::copyMount(TLinkList<TMount> *p_mounts)
 }
 
 
-//True is device is mounted on path
-//p_path=>path to test
+/**
+ * Checks if the device is mounted on some path
+ * 
+ *  \param p_path path to test.
+ */
 bool TDeviceBase::isMountedOn(const QString &p_path)
 {	
 	TLinkListIterator<TMount> l_iter(&mounts);
@@ -72,7 +94,11 @@ bool TDeviceBase::isMountedOn(const QString &p_path)
 	}
 	return false;
 }
-//Get slaves of device as a string
+
+/**
+ *  The salves concated to one string , separated by a comma
+ * 
+ */
 const QString TDeviceBase::getSlavesString()
 {
 	QListIterator<TDeviceBase *> l_iter(slaves);

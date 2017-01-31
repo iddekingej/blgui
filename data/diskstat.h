@@ -1,13 +1,25 @@
+/**
+ * This class read statics information of devices
+ */
 #ifndef __DISKSTAT_H_
 #define __DISKSTAT_H_
 #include <QString>
 #include <QMap>
 #include "base/linklist.h"
 
+/**
+ *  This class contains static information of one device
+ *  It is read from /sys/block/#device/stat file
+ */
 class TDiskStat
 {
 private:
+	/**
+	 * Device name (e.g. sda)
+	 */
 	QString device;
+	/*
+	 */
 	long readIO;
 	long readMerges;
 	long readSectors;

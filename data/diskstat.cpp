@@ -3,7 +3,13 @@
 #include <QMap>
 #include <QDirIterator>
 #include "base/utils.h"
-
+/**
+ * /sys/blck/#device/stat contains information about device io statistics
+ * The file contains one line, with statics data  separated by a spaces
+ * 
+ * \param p_device devicename 
+ * \param p_line   line read from stat file
+ */
 TDiskStat::TDiskStat(QString p_device,QString p_line)
 {
 	QStringList l_data=p_line.split(" ",QString::SkipEmptyParts);
@@ -35,6 +41,12 @@ TDiskStat::TDiskStat(QString p_device,QString p_line)
 		
 	}
 }
+
+/**
+ *  Read statics of all files
+ *  This method scan /sys/block on all devices and reads on line from the stat file.
+ *  This data is used to create the TStatInfo object.s
+ */
 
 void TDiskStatList::readInfo()
 {

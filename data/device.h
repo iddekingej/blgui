@@ -4,19 +4,61 @@
 #include "base/linklist.h"
 #include "partition.h"
 #include <QString>
+
+/**
+ *  Information about devices
+ */
 class TDevice:public TDeviceBase
 {
 private:
+	/**
+	* List of partitions on device
+	*/
 	TLinkList<TPartition> partitions;	
+	
+	/**
+	* Model of device
+	*/
 	QString model;
+	
+	/**
+	 * Vendor of device 
+	 */
 	QString vendor;
+	/**
+	 * When the device is readonly
+	 */
 	bool    readonly;
+	
+	/**
+	 * flag indicating if it is a removeable type
+	 */
 	bool    removable;
+	
+	/**
+	 * If the device is a loopback device, this field contains the file used for the loopback.
+	 */
 	QString loopbackFile;
+	/**
+	 * Scsi bus of the adres
+	 */
 	QString scsiBus;
+	/**
+	 * IP adres  of the nas of iscsi device
+	 */
 	QString iscsiAddress;
+	/**
+	 * USB Bus of the device
+	 */
 	QString usbBus;
+	/**
+	 * PCI Bus of the device
+	 */
 	QString pciBus;
+	
+	/**
+	 * LVM name when device is a LVM (device mapper) device
+	 */
 	QString LVMName;
 	bool    rotational;
 public:

@@ -221,58 +221,142 @@ void TConfig::setFsTabTab(bool p_flag){
 bool TConfig::getIscsiTab(){
 	return configGui.readEntry(QStringLiteral("iscsiTab"),true);	
 }
+
+/**
+ *  Save if the iscsi disk tab is visible in the configuration file
+ * 
+ * \param p_flag Flag indicating if iscsi tab is visible 
+ */
+
 void TConfig::setIscsiTab(bool p_flag){
 	configGui.writeEntry(QStringLiteral("iscsiTab"),p_flag);
 }
+
+/**
+ * The "Stats" tab can be set hidden or set visible. This is saved in the 
+ * configuration file.
+ * This routine reads the "statsTab" configuration entry.
+ * @see setStatsTab()
+ * 
+ * \return True if the disk stats is visible, false it is hidden
+ * 
+ */
 
 bool TConfig::getStatsTab()
 {
 	return configGui.readEntry(QStringLiteral("statsTab"),true);
 }
 
-
-
+/**
+ * Save the flag if the stats tab is visible in the configuration file
+ * 
+ * \param p_flag  True if stats tab is visible and false when hidden.
+ */
 
 void TConfig::setStatsTab(bool p_flag)
 {
 	configGui.writeEntry(QStringLiteral("statsTab"),p_flag);
 }
 
+/**
+ *  The "LVM" tab can be set hidden or visible. This is saved in the
+ *  configuration file.
+ *  This rotine reads the "lvmTab" configuration value.
+ * 
+ * \return true  - Lvm tab is visible
+ *         false - Lvm tab is hidden 
+ */
+
 bool TConfig::getLVMTab()
 {
 	return configGui.readEntry(QStringLiteral("lvmTab"),true);
 }
+
+/**
+ * Save the flag if the LVM tab is displayed or hidden in the configuration file
+ * 
+ * \param p_flag true :LVM tab is visible and when false it is hidden.
+ */
 
 void TConfig::setLVMTab(bool p_flag)
 {
 	configGui.writeEntry(QStringLiteral("lvmTab"),p_flag);
 }
 
-
+/**
+ *  The device grid can be displayed as a tree (First device and then partition)
+ *  or as a linear list (device and partition are in one list)
+ *  This method reads the "devicetree" configuration value.
+ *  This value is set by @see  void TConfig::setDeviceAsTree()
+ * 
+ * \return  true  - device grid is displayed as a tree
+ *          false - device grid is displayed as a list
+ */
 bool TConfig::getDeviceAsTree()
 {
 	return configGui.readEntry(QStringLiteral("devicetree"),true);
 }
+
+/**
+ *  Save the flag if the device grid is displayed as a tree or as a list
+ *  The value is read by @See TConfig::getDeviceAsTree()
+ * 
+ *  \param p_flag  true  - device list is displayed as a tree
+ *                 false - device list is displayed as list
+ */
 
 void TConfig::setDeviceAsTree(bool p_flag)
 {
 	configGui.writeEntry(QStringLiteral("devicetree"),p_flag);
 }
 
+/**
+ *  When the device tab is displayed as a tree, it is possible to auto expand the tree
+ *  This method reads 'expanddefault' 
+ *  This value is ignored then the devicelist is displayed as a list (devicetree=false)
+ * 
+ *  \return  true - expand tree by default
+ *           false - Tree is collapse  by default
+ */
+
 bool TConfig::getExpandByDefault()
 {
 	return configGui.readEntry(QStringLiteral("expanddefault"),true);
 }
+
+
+/**
+ *  When the device tab is displayed as a tree, it is possible to auto expand the tree
+ *  This method saves the expand tree flag.
+ *  This value is read by  @see  TConfig::getExpandByDefault()
+ * 
+ *  \param p_exapnd true  expand tree by default , false: tree is collapsed by default.
+ */
 
 void TConfig::setExpandByDefault(bool p_expand)
 {
 	configGui.writeEntry(QStringLiteral("expanddefault"),p_expand);
 }
 
+/**
+ * When  a device is mounted, removed or added there is a notification on the top of the main window.
+ * This notification can be enabled or hidden by a configuration setting "shownotifications".
+ * 
+ * \return  true - show show notifications 
+ *          false - don't show notifications
+ */
+
 bool TConfig::getShowNotifications()
 {
 	return configGui.readEntry(QStringLiteral("shownotifications"),true);
 }
+
+/**
+ * The setting for displaying notifications a save with this method.
+ * See also @see TConfig::getShowNotifications
+ * 
+ * \param p_flag True when the notification is display, false when hidden.
+ */
 
 void TConfig::setShowNotification(bool p_flag)
 {

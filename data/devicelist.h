@@ -8,22 +8,71 @@
 #include <QHash>
 #include "usb.h"
 #include "pci.h"
+
+/**
+ *  List of all devices in the system.
+ *  This class reads all information of /sys/block /sys/fs and /sys/mounts
+ */
 class TDeviceList:public TLinkList<TDevice>
 {
 	
 private:
+/**
+ * Path where devices information is located. This is 
+ * always /sys/block
+ * It can be changed for testing purpose (point to test data).
+ */
 	QString sysBlockPath;
+/**
+ *  List of device aliases
+ */
 	TAlias *aliasses;
+/**
+ * Information about usb bus and storage devices
+ */
 	TUsbInfo usbInfo;
+/**
+ * Information about pci bus and storage devices
+ */
 	TPCIInfo pciInfo;	
-	QHash<QString,TDeviceBase *> nameIndex;		//name=>Device or partition
+	
+/**
+ *  List of devices/partition , index by its name (sda,sdb1 etc...)
+ */
+	QHash<QString,TDeviceBase *> nameIndex;		
+	
+/**
+ *  List of devices/partitions, indexed by device path (/dev/sda etc..)
+ */
 	QHash<QString,TDeviceBase *> deviceByDevPath;
+/**
+ *  List of devices index by label
+ */
 	QHash<QString,TDeviceBase *> labelIndex;
+/**
+ *  List of devices indexed by uuid of device
+ */
 	QHash<QString,TDeviceBase *> uuidIndex;
+/**
+ *  List of device path of device
+ *  This is NOT /dev/sda etc... but symlinks in /dev/disk/by-path/
+ */
 	QHash<QString,TDeviceBase *> pathIndex;
+/**
+ *  List of devices, indexed by id
+ */
 	QHash<QString,TDeviceBase *> idIndex;
+/**
+ *  List of devices, indexed by lvm name
+ */
 	QHash<QString,TDeviceBase *> lvmIndex;
+/**
+ * List of device index by scsi bus
+ */
 	QHash<QString,TDevice *> scsiIndex;
+/**
+ * List of devices index by device no
+ */
 	QHash<long,TDeviceBase *> devNoIndex;
 	void handleDevNo(const QString &p_path,TDeviceBase *p_device);
 	void readPartitions(const QString &p_path,TDevice *p_device);         //read information about partitions of device  p_device

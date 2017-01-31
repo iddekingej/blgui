@@ -181,7 +181,10 @@ void TDeviceList::readPartitions(const QString &p_path,TDevice* p_device)
 
 
 /**
- * Read from all mounted devices the free size through statvfs
+ * For all mounted devices the free  size.
+ * statvfs need the path to a random file on the file system. 
+ * This method uses #mountpoint#/. file.
+ * 
  */
 
 void TDeviceList::readFreeSpace()
