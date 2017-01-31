@@ -100,7 +100,6 @@ void TDeviceList::readDevices()
 			QString l_usbBus;
 			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
 				l_device->setUsbBus(l_usbBus);
-				std::cout << qstr(l_deviceName) << "/" << qstr(l_scsiBus) <<  "/" << qstr(l_usbBus) << std::endl;
 			}
 			QString l_pciBus;
 			if(pciInfo.getPciBus(l_scsiBus,l_pciBus)){
