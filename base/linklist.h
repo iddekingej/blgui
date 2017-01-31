@@ -1,12 +1,16 @@
-#ifndef __LINKLIST_H_
-#define __LINKLIST_H_
+#ifndef _LINKLIST_H_
+#define _LINKLIST_H_
 #include <stdio.h>
 
 template<class T>
 class TLinkList;
 
-// Container class for item with T
-// Container is added to TLinklist
+/**
+ * Container class for item with T
+ * Container is added to TLinklist
+ * 
+ * \tparam T  Item type of the list
+ */
 
 template<class T>
 class TLinkListItem
@@ -15,19 +19,29 @@ class TLinkListItem
 private:
 	T *item;   //Item
 protected:
+	/**
+	 * Next element in linklist.
+	 */
 	TLinkListItem<T> *next;	
 public:		
 	inline T *getItem(){ return item;} //GetItem from container
 	inline TLinkListItem<T> *getNext(){ return next;} //Next item in linked list
-	
+
+	/**
+ *  Destructor
+ *  When container is desturcted the containing element is also deleted
+ */	
+
 	~TLinkListItem()
 	{
 		delete item;
 	}
 	
-//Constructor
-//p_item : Item to add to list:
-//See TLinkList::Append
+/**
+ *Constructor
+ *\param p_item : Item to add to list: (see \ref TLinkList::append)
+ *
+ */
 
 	TLinkListItem(T *p_item)
 	{	
@@ -37,31 +51,53 @@ public:
 };
 
 
-//Linkedlist 
-//Create:  TLinkList<TMyObject> l_list()
-//Append item  l_list->append(myObject) (myObject of type TMyObject)
-//Get top:     l_link->getStart()
-//When listis is destoyes item is also deleted
+/**
+ * Linkedlist 
+ * Create:  TLinkList<TMyObject> l_list()
+ * Append item  l_list->append(myObject) (myObject of type TMyObject)
+ * Get top:     l_link->getStart() 
+ * When list is is destroyed item is also deleted
+ * 
+ * \tparam T  Item  type of the list.
+ */
 
 template<class T>
 class TLinkList
 {
 private:
-	TLinkListItem<T> *start;   //start of linklist
-	TLinkListItem<T> *end;     //last in linkedlist
+	/**
+	 *  Start of linklist
+	 */
+	TLinkListItem<T> *start;   
+	
+	/**
+	 * Top of linked list. 
+	 * All items are added tot the end
+	 */
+	TLinkListItem<T> *end;     
+	
+	/**
+	 * Length of linklist
+	 */
 	long             length=0;
 public:
 		
-	inline TLinkListItem<T> *getStart(){ return start;} //start of linked list
-	inline TLinkListItem<T> *getEnd(){ return end;} //end of linked list
-	inline long getLength(){ return length;}
-	inline bool isEmpty(){ return start==nullptr;}
+	inline TLinkListItem<T> *getStart() const{ return start;} //start of linked list
+	inline TLinkListItem<T> *getEnd() const{ return end;} //end of linked list
+	inline long getLength() const{ return length;}
+	inline bool isEmpty() const{ return start==nullptr;}
 	
 	TLinkList(){
 		end=nullptr;
 		start=nullptr;
 	}
-	~TLinkList(){
+	
+	/**
+	 * Clear all items from link list.
+	 * Also all containing items are deleted.
+	 */
+	void clear()
+	{
 		TLinkListItem<T> *l_current=start;
 		TLinkListItem<T> *l_next;
 		while(l_current !=nullptr){
@@ -69,7 +105,25 @@ public:
 			delete l_current;
 			l_current=l_next;
 		}
+		end=nullptr;
+		start=nullptr;
+		length=0;
 	}
+	
+	/**
+	 *  Destructor
+	 *  All items on the lists are deleted
+	 */
+	
+	~TLinkList(){
+		clear();
+	}
+	
+	/**
+	 * Append item to list
+	 * 
+	 * \param p_item item to append
+	 */
 	
 	void append(T *p_item)
 	{
@@ -86,22 +140,47 @@ public:
 
 };
 
+/**
+ * Java like iterator for linklist
+ * 
+ * \tparam T item type of list which is going to be iterated
+ */
+
 template<class T>
 class TLinkListIterator{
 private:
 	TLinkListItem<T> *current;
 	
 public:
+
+	
 	inline TLinkListIterator(TLinkList<T> &p_list){
 		current=p_list.getStart();
 	}
+	
+/**
+ * Constructor for iterating pointer to list 
+ * (TLinkListiterator&lt;MyObject&gt;(l_list)  when l_list is TLinkList&lt;MyObject&gt;*)
+ *
+ * \param p_list pointer to list
+ */	
+	
 	inline TLinkListIterator(TLinkList<T> *p_list){
 		current=p_list->getStart();
 	}
 	
-	inline bool hasNext(){
+	/**
+	 *  Returns true when there is a next item.
+	 */
+	
+	inline bool hasNext() const{
 		return current != nullptr;
 	}
+	
+	/**
+	 *  returns the current item and advances to the next item.
+	 */
+	
 	inline T* next(){
 		if(current != nullptr){
 			T *l_item=current->getItem();
@@ -114,6 +193,5 @@ public:
 };
 
 
-
-
 #endif
+

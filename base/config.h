@@ -9,14 +9,27 @@
 #include <QVariant>
 /*
  * Singelton to manage configuration
+ * the configuration is writeer to bdguirc file in the
+ * default kde configuration folder
  */
 
 
 class TConfig
 {
 private:
+	/**
+	 * Configuration data
+	 */
 	KSharedConfig::Ptr config;
+	
+	/**
+	 *  Configuration section used for configure the gui
+	 */
 	KConfigGroup configGui;
+	
+	/**
+	 * Cache of fields displayed in the "device tab"
+	 */
 	QVector<int> *deviceFields;
 	
 public:

@@ -203,9 +203,21 @@ bool TConfig::getFsTabTab(){
 	return configGui.readEntry(QStringLiteral("fsTabTab"),true);
 }
 
+/**
+ * 
+ */
+
 void TConfig::setFsTabTab(bool p_flag){
 	configGui.writeEntry(QStringLiteral("fsTabTab"),p_flag);
 }
+
+/**
+ * Get settings if iscsi tab must be displayed
+ * This setting is save by the @see TConfig::setIscsiTab(bool) method
+ * 
+ * \return True if iscsi tab should be displayed
+ */
+
 bool TConfig::getIscsiTab(){
 	return configGui.readEntry(QStringLiteral("iscsiTab"),true);	
 }
