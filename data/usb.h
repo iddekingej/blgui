@@ -4,13 +4,19 @@
 #include <QString>
 #include "base/linklist.h"
 #include <QHash>
+
 /**
- *  For retrieving usb connected to a storage device
+ *  For retrieving infromation USB bus
  */
 
 class TUsbInfo
 {
 private:
+	/**
+	 * USB bus indexed by scsibus
+	 * When reading information about block devices from /sys/block, the scsi bus is known.
+	 * The information in scsiBusIndex is uded to translate this to the USB bus
+	 */
 	QHash<QString,QString> scsiBusIndex;
 	void handleHost(QString p_path,QString &l_usbBus);
 	void handleTarget(QString p_path,QString &l_usbBus);

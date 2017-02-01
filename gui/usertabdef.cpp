@@ -15,7 +15,16 @@ TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 	ui.dataView->setModel(model);	
 }
 
-
+/**
+ *  The first column of the grid the allways the device name.
+ *  The second field can be the partition name if the data set contain partition
+ *  The rest of the column are user configured
+ *  This method fills the user defined column names
+ * 
+ *  \param p_begin Start of user configured columns (can be 1 or 2)
+ *  \param p_fields List of fields displayed int he grid. This Vevtor contains
+ *                  field ids (@See g_deviceFields)
+ */
 void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
 	int l_fieldId;
 	for(int l_cnt=0;l_cnt<p_fields->size();l_cnt++){
@@ -26,6 +35,20 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
 	}
 }
 
+/**
+ *  The first column of the grid the allways the device name.
+ *  The second field can be the partition name if the data set contain partition 
+ *  First the fixed set of data is added to the row
+ *  Next the user selected columns are added to the displayRow
+ * 
+ *  \param p_fixedEnd  End  of the fixed column (and start of the user defined columns)
+ *  \param p_begin     Start of the user defined data in p_list
+ *  \param p_row       Row number
+ *  \param p_enableFields Which fields must be displayed (contain field id's)
+ *  \param p_list         A QStringList with device data (index is the fieldid)
+ *  
+ * 
+ */
 void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list)
 {
 	int l_fieldId;
@@ -46,6 +69,15 @@ void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *
 		}
 	}
 }
+
+/**
+ *  Fills the grid with information
+ *  This routine scans through all the device data, filters the data and only displays
+ *  the data that passes the filter
+ * 
+ *  \param p_def  Definition of the data
+ *  \param p_info Information about all devices and partitions.
+ */
 
 void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 {
@@ -89,7 +121,7 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
 				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
 				case CT_IsValue:l_ok=(l_value==p_def->getConditionValue());break;
-				case CT_Empty:l_ok=true;break;
+				case CT_NoCondition:l_ok=true;break;
 			}
 			
 		}

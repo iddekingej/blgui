@@ -1,7 +1,10 @@
 #include "visibletabs.h"
 #include "base/config.h"
 
-
+/**
+ *  Setup window
+ *  The GUI is defined in  visibletabs.ui
+ */
 TVisibleTabs::TVisibleTabs():QDialog()
 {
 	ui.setupUi(this);
@@ -15,6 +18,9 @@ TVisibleTabs::TVisibleTabs():QDialog()
 	ui.checkLVM->setCheckState(g_config.getLVMTab()?Qt::Checked:Qt::Unchecked);
 }
 
+/**
+ *  When ok is pressed settings is saved to the configuration file.
+ */
 void TVisibleTabs::okPressed()
 {	
 	g_config.setdiskTab(ui.checkDisk->checkState()==Qt::Checked);

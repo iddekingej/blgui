@@ -3,7 +3,10 @@
 #include "../base/utils.h"
 #include "lib/testconfig.h"
 #include <iostream>
-
+/**
+ * Main entry point test program
+ * 
+ */
 int main(UNUSEDPAR int argc,UNUSEDPAR char **argv) {
 	TTestConfig *l_config=new TTestConfig();
 	if(!l_config->initConfig()){

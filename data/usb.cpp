@@ -3,7 +3,13 @@
 #include <QStringList>
 #include "base/utils.h"
 
-
+/**
+ * This is the start point of gathering USB information
+ * 
+ * This method scans /sys/bus/usb/devices and looking 
+ * for directries in the form 1-1.6:1.2, this is the usb no.
+ * 
+ */
 void TUsbInfo::readInfo()
 {
 	QDirIterator l_iter("/sys/bus/usb/devices/");
@@ -19,7 +25,13 @@ void TUsbInfo::readInfo()
 	}
 }
 
-
+/**
+ *  When readinfo find a folder in the form like A-B.C:D:E where a..e are numbers, the method checks
+ *  folders that start with host
+ * 
+ * \param p_path     Path to scan
+ * \param p_usbBus   USB bus currently processed
+ */
 void TUsbInfo::handleHost(QString p_path,QString &p_usbBus)
 {
 	QDirIterator l_iter(p_path,QStringList() << "host*",QDir::Dirs,QDirIterator::NoIteratorFlags);
@@ -29,6 +41,13 @@ void TUsbInfo::handleHost(QString p_path,QString &p_usbBus)
 	}
 }
 
+/**
+ * Inside the host* folder found @see TUsbInfo::handleHost(QString,QString &) this method look at folders 
+ * starting with  "target" 
+ * 
+ * \param p_path  - path of the host* folder found in TUsbInfo::handleHost
+ * \param p_usbBus  - The current USB bus number
+ */
 void TUsbInfo::handleTarget(QString p_path,QString &p_usbBus)
 {
 	QDirIterator l_iter(p_path,QStringList() << "target*",QDir::Dirs,QDirIterator::NoIteratorFlags);
@@ -38,6 +57,13 @@ void TUsbInfo::handleTarget(QString p_path,QString &p_usbBus)
 	}
 }
 
+/**
+ *  This method scans to folder with the format a:b:c:d inside the folder 
+ *  found by @see TUsbInfo::handleTarget(QString,QString &).
+ * 
+ *  This is the scsi bus number to which the usb is connected
+ *  This data is added to the hash list scsiBusIndex The index is the scsibus and the value is the usb bus.
+ */
 void TUsbInfo::handleBus(QString p_path,QString &p_usbBus)
 {
 	QDirIterator l_iter(p_path,QStringList() << "[0-9]*",QDir::Dirs,QDirIterator::NoIteratorFlags);
@@ -46,6 +72,15 @@ void TUsbInfo::handleBus(QString p_path,QString &p_usbBus)
 		scsiBusIndex.insert(l_iter.fileName(),p_usbBus);
 	}
 }
+
+/**
+ *  Get USB bus by scsi bus
+ * 
+ * \param p_scsBus  scsi bus.
+ * \param p_usb     returns usb bus to which the scsi bus is connected
+ * \return          True if scsibus is connected to a usb bus.
+ *                  False if not connected to usb bus.
+ */
 
 bool TUsbInfo::getUsbBus(QString& p_scsiBus, QString& p_usb)
 {

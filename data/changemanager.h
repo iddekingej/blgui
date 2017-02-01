@@ -36,6 +36,7 @@ private:
  */	
 
 	QString message;
+	
 public:
 	inline QDateTime &getDate(){ return date;}
 	inline const QString &getDevice(){ return device;}
@@ -62,11 +63,15 @@ private:
  * device that are added or removed from the system
  */
 	TUDevMonitor   changeMonitor;
-	
-	void getStringOfSet(const QSet<QString >& p_set, QString p_text,TLinkList<TChangeItem> &p_what);
-	void getStringOfDiff(TLinkList<TMountDiff> &p_diff,QString p_text,TLinkList<TChangeItem> &p_what);
+/**
+ * List of changed items
+ */
+	TLinkList<TChangeItem> changes;
+	void getStringOfSet(const QSet<QString >& p_set, QString p_text);
+	void getStringOfDiff(TLinkList<TMountDiff> &p_diff,QString p_text);
 public:
-	void getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed);
+	inline TLinkList<TChangeItem> *getChanges(){ return &changes;}
+	void getChanged(bool &p_changed);
 	void clear();
 	inline void setInfo(TDeviceInfo *p_info){ info=p_info;}
 	~TChangeManager();

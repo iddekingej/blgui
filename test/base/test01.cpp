@@ -12,6 +12,9 @@ void TTest01::doRun()
 	test03();
 }
 
+/**
+ * Check empty list
+ */
 void TTest01::test01()
 {
 	if(list->getStart() != nullptr) fail(" getStart is not null");
@@ -20,6 +23,9 @@ void TTest01::test01()
 	if(!list->isEmpty()) fail("isEmopty returns false");
 }
 
+/**
+ * Check linklist after inserting one item
+ */
 
 void TTest01::test02()
 {
@@ -46,7 +52,9 @@ void TTest01::test02()
 	}
 }
 
-
+/**
+ * Check linklist after appending a second item
+ */
 void TTest01::test03()
 {
 	item2=new TTestItem(2);

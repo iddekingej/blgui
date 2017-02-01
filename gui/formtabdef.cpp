@@ -148,7 +148,7 @@ void TFormTabDef::formToCurrentTabDef()
 		if(ui.filterDevice->isChecked()){
 			l_type=TT_Device;
 		} else if(ui.filterBoth->isChecked()){
-			l_type=TT_BOTH;
+			l_type=TT_Both;
 		}
 		current->setConditionObject(l_type);
 		current->setConditionField(ui.conditionField->currentIndex()-1);

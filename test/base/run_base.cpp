@@ -4,7 +4,9 @@
 class TRunBaseRunner:public TRunner
 {
 protected:
-		
+/**
+ *Run all base tests
+ */		
 	virtual void doRun()
 	{
 		runner(new TTest01());
@@ -18,6 +20,9 @@ public:
 
 };
 
+/**
+ * Start all base testes
+ */
 bool run_base(TTestConfig* p_config)
 {
 

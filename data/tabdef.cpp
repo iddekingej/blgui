@@ -7,21 +7,34 @@
 #include <QList>
 #include <QListIterator>
 #include <sys/time.h>
-
+/**
+ * Initialize default definition of a tab
+ * 
+ * \param p_name Name of tab, this also used a title.
+ */
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
 	conditionObject=TT_Device;
-	conditionType=CT_Empty;
+	conditionType=CT_NoCondition;
 	conditionField=-1;
 	conditionValue="";
 	isActive=true;
 	struct timeval l_time;
 	gettimeofday(&l_time,nullptr);
+/**
+ *Unique ID is current time in usec
+ */
 	no=((unsigned long)l_time.tv_sec)*1000000+l_time.tv_usec;
 }
 
-
+/**
+ * This constructor is used when readign the definition from the configuration
+ * The definition is  stored as json.
+ * The json is parsed to a qvariant.
+ * 
+ * \param p_json Definition of tab read from configuration
+ */
 TTabDef::TTabDef(QVariant& p_json)
 {
 	QMap<QString,QVariant> l_map=p_json.toMap();
@@ -47,13 +60,24 @@ TTabDef::TTabDef(QVariant& p_json)
 		selectedList.append(l_fields[l_cnt].toInt());
 	}
 }
-
+/**
+ * selectedList is a list of field that are displayed in the grid
+ * The method adds a field to the list.
+ * 
+ * \param p_field  Field id.
+ */
 
 void TTabDef::addSelectedList(int p_field)
 {
 	selectedList.push_back(p_field);
 }
 
+/**
+ *  Convert te definition to a QVariant. This data is later written as json to the 
+ *  configuration file
+ * 
+ * \param p_document out param:List of QVariant contain the definition of this tabdef
+ */
 
 void TTabDef::toJson(QList<QVariant>& p_document)
 {
@@ -73,6 +97,12 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 	p_document.push_back(l_object);
 }
 
+/**
+ *  Create new tab def and add this to the list
+ * 
+ *  \param p_name  Name/title of new tab def 
+ *  \return  New tab def object
+ */
 
 TTabDef * TTabDefList::createTabDef(const QString& p_name)
 {
@@ -98,6 +128,12 @@ TTabDef * TTabDefList::getByName(QString& p_name)
 	return nullptr;
 }
 
+/**
+ * Get tab def by unique ID
+ * 
+ * \param p_no unique ID 
+ * \return tab def with unique ID=p_no or null when not found
+ */
 
 TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(long p_no)
 {
@@ -108,6 +144,13 @@ TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(long p_no)
 	}
 	return nullptr;
 }
+
+/**
+ *  Get tab def  by position in list
+ *  
+ * \param p_no  position
+ * \return tab def at position or null when not found
+ */
 
 TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(long p_pos)
 {
@@ -121,6 +164,11 @@ TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(long p_pos)
 	return nullptr;
 }
 
+
+/**
+ * Read tab defs from configuration
+ * g_config.getTab def read json from 
+ */
 void TTabDefList::read()
 {
 	QVariant l_data;
@@ -139,6 +187,11 @@ void TTabDefList::read()
 	
 }
 
+/**
+ * Save tab def in configuration file.
+ * The definition is covnerted to a variant.
+ * In g_config the variant is saved as json.
+ */
 void TTabDefList::save()
 {
 	QList<QVariant> l_data;

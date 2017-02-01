@@ -4,22 +4,20 @@
 #include <QString>
 #include <QSet>
 
+/**
+ * Monitors udev on state changes of devices
+ * This system can detect add new device and remove device.
+ */
+
 class TUDevMonitor
 {
 private:
-		struct udev         *udev=nullptr;
-		struct udev_monitor *monitor=nullptr;
-		int waitFd;
-		QSet<QString> added;
-		QSet<QString> removed;
-		
+	struct udev         *udev=nullptr;
+	struct udev_monitor *monitor=nullptr;
 public:
-		bool open();
-		bool isSomethingChanged();
-		void clear();
-		inline const QSet<QString> &getAdded(){ return added;}
-		inline const QSet<QString> &getRemoved(){ return removed;}
-		~TUDevMonitor();
+	bool open();
+	bool isSomethingChanged(QSet<QString> &p_added,QSet<QString> &p_removed);		
+	~TUDevMonitor();
 }
 ;
 #endif

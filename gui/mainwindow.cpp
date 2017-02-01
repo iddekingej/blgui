@@ -790,7 +790,7 @@ void TMainWindow::visibleTabs()
 
 
 /**
- * Clear "change message" (Mounts/Unmounts/new device/remove etc..)
+  * Clear "change message" (Mounts/Unmounts/new device/remove etc..)
  */
 
 void TMainWindow::clearChangeMessage()
@@ -800,6 +800,11 @@ void TMainWindow::clearChangeMessage()
 	changeManager.clear();
 }
 
+/**
+ *  There is a "show notification" checkbox on the main window.
+ *  When this is checked or unchecked, the changes is save to the configuration
+ *  If the Notification is hidden, the list of changes is cleared.
+ */
 void TMainWindow::checkSetNotifications()
 {	
 	if(ui.shownotifications->checkState()==Qt::Checked){
@@ -818,7 +823,7 @@ void TMainWindow::checkSetNotifications()
 
 void TMainWindow::timeOutCheckChange()
 {
-	TLinkList<TChangeItem> l_what;
+	TLinkList<TChangeItem> *l_what;
 
 	fillStats();
 	if(refreshNext){
@@ -829,8 +834,8 @@ void TMainWindow::timeOutCheckChange()
 	}
 
 	if(g_config.getShowNotifications()){
-		changeManager.getChanged(l_what,refreshNext);
-
+		changeManager.getChanged(refreshNext);
+		l_what=changeManager.getChanges();
 		if(refreshNext){	
 			TChangeItem *l_change;
 			TLinkListIterator<TChangeItem> l_ci(l_what);
@@ -863,6 +868,9 @@ TMainWindow::~TMainWindow()
 	if(prvStats != nullptr) delete prvStats;
 }
 
+/**
+ * When the about menu item is selected in the menu the about dialog is showen.
+ */
 void TMainWindow::showAbout()
 {
 	TAbout l_about;

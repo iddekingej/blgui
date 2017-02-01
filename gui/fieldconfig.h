@@ -26,7 +26,7 @@ private:
 	QStandardItemModel *modelSelected;
 	Ui::FieldsConfig ui;
 
-	void hideByCode(QListView *p_view,int p_code,bool p_flag);
+	void hideByFieldId(QListView *p_view,int p_fieldId,bool p_flag);
 	void moveItem(int p_dif);
 	void enableRemoveButton();
 	void fillAvailableList();

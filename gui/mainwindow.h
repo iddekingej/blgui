@@ -33,21 +33,73 @@ private slots:
 	void setupUserTabs();
 	void checkSetNotifications();
 private:
-	TDeviceInfo        *info;
-	QStandardItemModel *statsModel;
-	QStandardItemModel *devModel;
-	QStandardItemModel *notificationsModel;
-	QVector<int> *enableDeviceFields;
-	Ui::MainWindow ui;
-	QTimer checkChange;
 	
+/**
+ *  Information about all block devices ont he system.
+ */
+	TDeviceInfo        *info;
+/**
+ *  Data model for the stats grid
+ */
+	QStandardItemModel *statsModel;
+/**
+ *  Data model for the device grid
+ */
+	QStandardItemModel *devModel;
+/**
+ *  Data model for the notification model
+ */
+	QStandardItemModel *notificationsModel;
+/**
+ * List of fields displayed inside the device grid
+ * The Vector contains field id's
+ */
+	QVector<int> *enableDeviceFields;
+/**
+ * Layout of the main window.
+ * This is generated from main.ui
+ */
+	Ui::MainWindow ui;
+/**
+ * Timer for periodicly checking changes of device states (mount,added removed, unmounted)
+ */
+	QTimer checkChange;
+/**
+ * Monitors device changes (mount,added, removed, unmounted)
+ */
 	TChangeManager  changeManager;
+/**
+ * List of pre defined tabs.
+ * This is used for hiding and displaying thos tabs
+ */
 	QWidget *tabs[6];
+/**
+ * Array of visible pre defined tabs 
+ */
 	QWidget *tabsVisible[6];
+/**
+ * Previous io stats , this is used to calculate the difference
+ */
 	TDiskStatList *prvStats=nullptr;
+/**
+ * List of user defined tabs
+ */
 	TTabDefList userTabs;
+/**
+ * List of widget used for displaying
+ * the user defined tabs
+ */
 	QList<TUserTabDef *> userTabWidgets;
+/**
+ * List of devices that are manual expanded.
+ * This is used to restore expand state after a refresh
+ */
 	QSet< QString > expandedDevices;
+	
+/**
+ *  Display the device list as a tree or as a linear list.
+ *  This value is read from the configuration file
+ */
 	bool deviceAsTree=false;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);

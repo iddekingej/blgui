@@ -10,20 +10,20 @@ bool TUDevMonitor::open()
 	monitor=udev_monitor_new_from_netlink(udev,"udev");
 	udev_monitor_filter_add_match_subsystem_devtype(monitor, "block", nullptr);
 	udev_monitor_enable_receiving(monitor);
-	waitFd=udev_monitor_get_fd(monitor);
 	return true;
 }
 
 
-void TUDevMonitor::clear()
-{
-	added.clear();
-	removed.clear();
-}
-
-
-//Checks if something changed
-bool TUDevMonitor::isSomethingChanged()
+/**
+ * Checks trough udev changes in device state (added/removed)
+ * Added devices are added to the "added" list and removed
+ * devicdes to the "removed" list.
+ * 
+ * \param  p_added   List of added devices
+ * \param  p_removed List of removed devices
+ * \return true -changes detected
+ */
+bool TUDevMonitor::isSomethingChanged(QSet<QString> &p_added,QSet<QString> &p_removed)
 {
 	bool l_found=false;
 	const char *l_action;
@@ -36,9 +36,9 @@ bool TUDevMonitor::isSomethingChanged()
 			l_devName=udev_device_get_devnode(l_dev);
 			
 			if(strcmp(l_action,"add")==0){				
-				added.insert(l_devName);
+				p_added.insert(l_devName);
 			} else if(strcmp(l_action,"remove")==0){
-				removed.insert(l_devName);
+				p_removed.insert(l_devName);
 				
 			} 
 			udev_device_unref(l_dev);

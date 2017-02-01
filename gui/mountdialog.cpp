@@ -114,7 +114,14 @@ void TMountDialog::onDevChange(UNUSEDPAR int p_index)
 	actionClicked();
 }
 
-
+/**
+ *  On this dialog there is a combobox for selecting the device to mount.
+ *  "devices" property contain all  devices (for example sda) and partitions (sda1,sda2 etc)
+ *  Not all items should be added to the list because not all of the items can be mounted
+ *  (for example a paritioned harddisk)
+ *  A simpl heuristic rule is used: hsPatitions flag must be false.
+ *  
+ */
 void TMountDialog::fillDeviceSelectList()
 {
 	QHashIterator<QString,TDeviceBase *> l_iter(*devices);
@@ -135,7 +142,10 @@ void TMountDialog::fillDeviceSelectList()
 	ui.mountDevice->model()->sort(0);
 }
 
-
+/**
+ *  The dialog contains a "action" selection: Mount or unmount
+ *  When one of the items is selected the mount part or the unmount part of the dialog is displayed.
+ */
 void TMountDialog::actionClicked()
 {
 	ui.unmountForm->setMaximumHeight(ui.optionUnmount-> isChecked()?16777215:0);
@@ -144,6 +154,12 @@ void TMountDialog::actionClicked()
 	resize( sizeHint() );
 }
 
+/**
+ *  This metho is called the the "Ok" Button is pressed:
+ *  -mountDevice is called when "mount device"  is selected
+ *  -unmountDevice is called when "unmout dvice"  is selected
+ *  - an error is display is no action is selected
+ */
 
 void TMountDialog::handleAction()
 {
@@ -156,6 +172,11 @@ void TMountDialog::handleAction()
 
 	}
 }
+
+/**
+ *  Unmout selected device
+ */
+
 void TMountDialog::unmountDevice()
 {
 	QString l_what=ui.unmountWhat->currentText();
@@ -172,7 +193,9 @@ void TMountDialog::unmountDevice()
 }
 
 
-
+/**
+ *  mount selected device
+ */
 
 void TMountDialog::mountDevice()
 {

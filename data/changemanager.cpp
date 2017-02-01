@@ -26,7 +26,7 @@ TChangeItem::TChangeItem(QDateTime p_date, const QString& p_device, const QStrin
 
 void TChangeManager::clear()
 {
-	changeMonitor.clear();
+	changes.clear();
 }
 
 TChangeManager::~TChangeManager()
@@ -41,9 +41,8 @@ TChangeManager::~TChangeManager()
  * 
  * \param p_set  list of devices
  * \param p_message message  describing the change
- * \param p_what    All changed devices are added to this list.
  */
-void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_message,TLinkList<TChangeItem> &p_what)
+void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_message)
 {
 	
 	QSetIterator<QString> l_iter(p_set);
@@ -52,7 +51,7 @@ void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_mess
 	while(l_iter.hasNext()){
 		l_device=l_iter.next();
 		l_change=new TChangeItem(QDateTime::currentDateTime(),l_device,p_message );
-		p_what.append(l_change);
+		changes.append(l_change);
 	}
 }
 
@@ -66,7 +65,7 @@ void TChangeManager::getStringOfSet(const QSet< QString >& p_set, QString p_mess
  *  \param p_text   Message describing the state change (mounted or unmounted)
  */
 
-void TChangeManager::getStringOfDiff(TLinkList<TMountDiff>& p_diff, QString p_text, TLinkList<TChangeItem>& p_what)
+void TChangeManager::getStringOfDiff(TLinkList<TMountDiff>& p_diff, QString p_text)
 {	
 	TLinkListIterator<TMountDiff> l_iter(p_diff);
 	TChangeItem *l_change;
@@ -75,7 +74,7 @@ void TChangeManager::getStringOfDiff(TLinkList<TMountDiff>& p_diff, QString p_te
 	while(l_iter.hasNext()){
 		l_diff=l_iter.next();
 		l_change=new TChangeItem(QDateTime::currentDateTime(),l_diff->getDevice(),p_text+" '"+l_diff->getPath()+"'");
-		p_what.append(l_change);
+		changes.append(l_change);
 	}
 }
 
@@ -85,14 +84,13 @@ void TChangeManager::getStringOfDiff(TLinkList<TMountDiff>& p_diff, QString p_te
  *  -get change information from udev 
  * Next tranform the information to change item
  * 
- *  \param p_what  List of changed items
  *  \param p_changed true when there are changes, flase if there are no changes
  */
 
-void TChangeManager::getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed)
-{
-	QString l_what;
-	
+void TChangeManager::getChanged(bool &p_changed)
+{	
+	QSet<QString> l_added;
+	QSet<QString> l_removed;
 	TMTab *l_tab=new TMTab(info->getDevices());
 	TLinkList<TMountDiff> l_mounted;
 	TLinkList<TMountDiff> l_unmounted;
@@ -107,13 +105,13 @@ void TChangeManager::getChanged(TLinkList<TChangeItem> &p_what,bool &p_changed)
 		
 			
 		if(l_tab->notInOther(prvMounted,l_mounted)) p_changed=true;
-		getStringOfDiff(l_mounted,"mounted",p_what);
+		getStringOfDiff(l_mounted,"mounted");
 		if(prvMounted->notInOther(l_tab,l_unmounted)) p_changed=true;
-		getStringOfDiff(l_unmounted,"unmounted",p_what);
-		if(changeMonitor.isSomethingChanged()) p_changed=true;
+		getStringOfDiff(l_unmounted,"unmounted");
+		if(changeMonitor.isSomethingChanged(l_added,l_removed)) p_changed=true;
 
-		getStringOfSet(changeMonitor.getAdded(),i18n("added"),p_what);
-		getStringOfSet(changeMonitor.getRemoved(),i18n("removed"),p_what);		
+		getStringOfSet(l_added,i18n("added"));
+		getStringOfSet(l_removed,i18n("removed"));		
 		delete prvMounted;
 		prvMounted=l_tab;		
 	}

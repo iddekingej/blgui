@@ -71,6 +71,11 @@ void TTestDataDeviceList::test3()
 	}
 }
 
+/**
+ *  deviceList is read from a test data set
+ *  This test checks if the data read for device sda is corrext
+ */
+
 void TTestDataDeviceList::test4()
 {	
 	TDevice *l_device;

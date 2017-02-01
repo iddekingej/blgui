@@ -1,6 +1,7 @@
 /*
  * fieldconfig.cpp
- * configure which fields to display and the desired order
+ * configure which fields and the  order of the fields that 
+ * are displayed in the  device tab
  */
 #include <QStandardItem>
 #include <QStandardItemModel>
@@ -10,7 +11,11 @@
 #include "base/globals.h"
 #include "base/config.h"
 #include <klocalizedstring.h>
-/** Save configuration after pressing "Ok" button
+
+/** 
+ * Save configuration after pressing "Ok" button
+ * "selected field list" is the list of fields that are displayed in the grid
+ * "avaiable fied list"  fields that  can be added to the "selected field list"
  */
 
 void TFieldsConfig::save()
@@ -30,7 +35,11 @@ void TFieldsConfig::save()
 }
 
 /**
- *  Scroll current selected item in the selected field list into view
+ *  Scrolls select field into view.
+ * 
+ *  It is possible to change the position of a field inside the device tab.
+ *  When moing the field up of down , this routine garantees that the field
+ *  is allways visible in the listbox.
  */
 void TFieldsConfig::scrollToSelected()
 {
@@ -67,18 +76,24 @@ void TFieldsConfig::moveItem(int p_diff)
 	scrollToSelected();
 }
 
-
+/**
+ *  Change position of field up in the listbox(is to the left in the grid)
+ */
 void TFieldsConfig::moveUp()
 {
 	moveItem(-1);
 }
 
+/**
+ *  Change position of field down in the listbox(Is to the right in th grid)
+ */
 void TFieldsConfig::moveDown()
 {
 	moveItem(+1);
 }
 
-/* Display remove (selected items) button  when there is at least one item in selected list
+/* 
+ * Display remove (selected items) button  when there is at least one item in selected field list
  */
 void TFieldsConfig::enableRemoveButton()
 {
@@ -98,18 +113,18 @@ void TFieldsConfig::removeLabel()
 		l_item=l_iter.previous();
 		l_selectedItem=modelSelected->item(l_item.row());
 		l_code=l_selectedItem->data().toInt();
-		hideByCode(ui.fieldsAvailable,l_code,false);
+		hideByFieldId(ui.fieldsAvailable,l_code,false);
 		modelSelected->removeRow(l_item.row());
 	}
 	enableRemoveButton();	
 }
 
 /**
- * When field is selected in ui.fieldsAvailable and moved to the visible field
+ * When field is selected in ui.fieldsAvailable and moved to the selected field list
  * The field is hidden in ui.fieldsAvailable and the 'next' field in fieldsAvailable must be selected
  * Find first nearest visible row in ui.fieldsAvailable relative to index p_index
  * first look downward and thant up
- * \param  p_index 
+ * \param  p_index look for the neares visible field relative to this index
 */
 
 int TFieldsConfig::getFAVisibleRow(int p_index)
@@ -127,6 +142,10 @@ int TFieldsConfig::getFAVisibleRow(int p_index)
 	return -1;
 }
 
+/**
+ *  add selected field in the "available field list"  to the "selected field list"
+ *  Select newly added fields
+ */
 void TFieldsConfig::addLabel()
 {
 	QModelIndexList l_list=ui.fieldsAvailable->selectionModel()->selectedIndexes();
@@ -159,18 +178,30 @@ void TFieldsConfig::addLabel()
 	scrollToSelected();
 }
 
-void TFieldsConfig::hideByCode(QListView *p_view,int p_code,bool p_flag)
+/**
+ * Make fields inside a listview visible by field id.
+ * For field id , see @see g_deviceFields
+ * 
+ * \param p_view     list view
+ * \param p_fieldId  field id which should be made visible or hidden
+ * \param p_flag     True : make field visible
+ *                   False: make field hidden
+ */
+void TFieldsConfig::hideByFieldId(QListView *p_view,int p_fieldId,bool p_flag)
 {
 	QStandardItem *l_item;
 	QStandardItemModel *l_model=(QStandardItemModel *)p_view->model();
 	for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
 		l_item=l_model->item(l_cnt);
-		if(l_item->data().toInt()==p_code){
+		if(l_item->data().toInt()==p_fieldId){
 			p_view->setRowHidden(l_cnt,p_flag);
 		}
 	}
 }
 
+/**
+ *  Fill the "available field list"  list view from @see g_numDeviceFields
+ */
 void TFieldsConfig::fillAvailableList()
 {
 	QStandardItem *l_item;
@@ -183,6 +214,10 @@ void TFieldsConfig::fillAvailableList()
 	ui.fieldsAvailable->setModel(modelAvailable);
 }
 
+/**
+ * Fill the "selected field list" 
+ */
+
 void TFieldsConfig::fillSelectedList()
 {
 	QStandardItem *l_item;
@@ -194,25 +229,33 @@ void TFieldsConfig::fillSelectedList()
 			l_item->setData(l_selectedId);
 			l_item->setEditable(false);
 			modelSelected->setItem(l_cnt,0,l_item);
-			hideByCode(ui.fieldsAvailable,l_selectedId,true);
+			hideByFieldId(ui.fieldsAvailable,l_selectedId,true);
 		}
 	}
 	enableRemoveButton();
 	ui.fieldsSelected->setModel(modelSelected);
 }
 
+/**
+ *  On the dialog there is a "Display as grid" radio button. 
+ *  when this radio button is checked "Expand by default" is hidden, because it isn't relevant
+ *  when de device grid is displayed as a list.
+ */
 void TFieldsConfig::displayAsGridClicked()
 {
 	ui.expandDefault->hide();
 }
-
+/**
+ * When  "Display as tree" radio button is clicked, the checkbox "expand default" is made visible
+ */
 
 void TFieldsConfig::displayAsTreeClicked()
 {
 	ui.expandDefault->show();
 }
 
-/* Setup form
+/**
+ * Setup form
  */
 TFieldsConfig::TFieldsConfig():QDialog()
 {
