@@ -3,19 +3,33 @@
 #include <QDir>
 #include <QDirIterator>
 
-TIScsiSession::TIScsiSession(QString p_name,QString p_connection)
+TIScsiSession::TIScsiSession(QString p_name,QString p_connection,QString p_targetName)
 {
 	name=p_name;
 	connection=p_connection;
+	targetName=p_targetName;
 }
-	
+
+/**
+ *  devices is a list of storage devices that uses this iscsi sesion
+ *  This method adds a device to the list.
+ * 
+ *  \param p_device Add device to the list of devices that uses this session
+ */
 void TIScsiSession::addDevice(TDevice* p_device)
 {
 	devices.append(p_device);
 }
 
 
-
+/**
+*     /sys/class/iscsi_connection/#sessionno#/device there is a folder that starts with connection
+*     this folder contains information about the ip and port aderes of the nas/iscsi device
+* 
+*    \name p_path    Path to /sys/class/iscsi_connection/#sessionno#/device 
+*    \return Path to  folder with information about the network ip address and 
+*                     port of the nas/iscsi device.
+*/
 QString TIScsiSessionList::findConnection(const QString &p_path)
 {
 	QDir l_dir(p_path+"/device/");
@@ -40,6 +54,14 @@ QString TIScsiSessionList::findConnection(const QString &p_path)
 	return nullptr;
 }
 
+/**
+ * Find a folder starting with "target" in
+ * /sys/class/iscsi_connection/#sessionno#/device
+ * In this folder contains all devices that are using this iscsi session
+ * 
+ * \param p_path folder where to search for the  target* folder
+ * \return path name to a folder inside p_path that starts with "target"
+ */
 QString TIScsiSessionList::findTargetPath(const QString &p_path){
 	
 	QStringList l_list;
@@ -52,6 +74,12 @@ QString TIScsiSessionList::findTargetPath(const QString &p_path){
 	return nullptr;
 }
 
+/**
+ * Read all the information from /sys/class/iscsi_session
+ * 
+ * \param p_list  information about all storage devices on the system
+ * 
+ */
 void TIScsiSessionList::processInfo(TDeviceList* p_list)
 {
 	QString l_sessionName;
@@ -62,6 +90,7 @@ void TIScsiSessionList::processInfo(TDeviceList* p_list)
 	QString l_address;
 	QString l_port;
 	QString l_target;
+	QString l_targetName;
 	TDevice *l_device;
 	while(l_si.hasNext()){
 		l_si.next();
@@ -69,15 +98,21 @@ void TIScsiSessionList::processInfo(TDeviceList* p_list)
 		
 		l_conPath=findConnection(l_si.filePath());
 		l_target=findTargetPath(l_si.filePath()+"/device/");
+		
 		if(l_conPath != nullptr && l_target !=nullptr){
 			readString(l_conPath,"address",l_address);
 			readString(l_conPath,"port",l_port);
-			
-			TIScsiSession *l_session=new TIScsiSession(l_sessionName,l_address+":"+l_port);
+			readString(l_si.filePath(),"targetname",l_targetName);
+			TIScsiSession *l_session=new TIScsiSession(l_sessionName,l_address+":"+l_port,l_targetName);
 			sessions.append(l_session);
 			QDirIterator l_dit(l_target);
-			//Look in target for file containing ":"=>this are scsi bus number
-			//look device in devicelist and add to scsi list
+
+			/**
+			 * /sys/class/iscsi_session/#session#/device/target*   contains a folder 
+			 * what looks like 11:0:0:0, that is the iscsi bus
+			 * 
+			 */
+			
 			while(l_dit.hasNext()){
 				l_dit.next();
 				if(l_dit.fileName().contains(":") && l_dit.fileInfo().isDir()){

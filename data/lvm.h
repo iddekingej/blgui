@@ -7,6 +7,11 @@
 #include "devicelist.h"
 using namespace std;
 
+/***
+ * Class for reading a storing information about lvm devices
+ *  
+ */
+
 typedef enum{
 	st_top
 ,	st_data
@@ -86,12 +91,36 @@ class TVolumeGroup;
 
 class TLogicalVolume{
 private:
+	/**
+	 * Logical volume id
+	 */
 	QString id;
+	/**
+	 * Logical volume name
+	 */
 	QString name;
+	/**
+	 * This logical volume belongs this volume group
+	 */
 	TVolumeGroup *volumeGroup;
+	/**
+	 * Device that is this logical volume
+	 */
 	TDevice *realDevice;
+	/**
+	 * readFlag - true can read lv
+	 *            false can't read lv
+	 */
 	bool readFlag;
+	/**
+	 * writeFlag - true can write to lv
+	 *             false can't write to lv
+	 */
 	bool writeFlag;
+	/**
+	 * visibility flag - true lv is visible
+	 *                   false lv isn't visible
+	 */
 	bool visibleFlag;
 public:
 	inline bool getReadFlag(){ return readFlag;}
@@ -112,10 +141,22 @@ public:
 	TLogicalVolume(QString &p_name,TVolumeGroup *p_volumeGroup);
 };
 
+/***
+ *  Information about a volume group
+ */
 class TVolumeGroup {
 private:
+	/**
+	 * Volume group id
+	 */
 	QString key;
+	/**
+	 * volume group name
+	 */
 	QString name;
+	/**
+	 * List of logical volumes places in this volume group
+	 */
 	TLinkList<TLogicalVolume> logicalVolumns;
 public:
 	inline void setKey(QString &p_key){ key=p_key;}
@@ -134,6 +175,10 @@ public:
 	void processInfo(TDeviceList *p_list);
 };
 
+/**
+ *  The lvm data is retrieved through the lvm meta deamon.
+ *  This class parses the response data
+ */
 class TLVMResponseParser{
 private:
 	QString text;

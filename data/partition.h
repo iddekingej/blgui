@@ -4,10 +4,19 @@
 #include "devicebase.h"
 #include "mount.h"
 
+/**
+ * Partition contains information about a partition
+ */
 class TPartition:public TDeviceBase
 {
 private:
+	/*
+	 * Partition belong to this device
+	 */
 	TDeviceBase *device;
+	/*
+	 * Start in bytes of the partition
+	 */
 	TDiskSize start;
 public:
 	inline TDeviceBase *getDevice(){ return device;}

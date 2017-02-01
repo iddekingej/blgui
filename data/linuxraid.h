@@ -3,6 +3,10 @@
 #include "data/devicelist.h"
 #include "data/raid.h"
 
+/**
+ * Read information about linux raid devices
+ * 
+ */
 class TLinuxRaid
 {
 public:

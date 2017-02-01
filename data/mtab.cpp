@@ -61,7 +61,16 @@ bool TMTab::notInOther(TMTab *p_other, TLinkList<TMountDiff> &p_diff)
 	return l_found;
 }
 
-
+/**
+ * An mtab/fstab information consist of fields (like device name, mount point etcc...) seperated by spaces.
+ * The current position (p_cnt) is at the beginnen of a field(=begin). The method scans until a space or a tab is found (end of the field)(=end)
+ * This method return the value of the field (everything between begin and end)
+ * 
+ * \param p_text line to process
+ * \param p_out  value of field
+ * \param p_cnt  current position. When the routine exists p_cnt is just after the last character of the field or 
+ *               at the end of the string if the end of the line is reached.
+ */
 void TMTab::nextItem(const QString& p_text, QString& p_out, int& p_cnt)
 {
 	int l_length=p_text.length();
@@ -78,7 +87,7 @@ void TMTab::nextItem(const QString& p_text, QString& p_out, int& p_cnt)
 	p_out=p_text.mid(l_begin);
 }
 
-/**Scan until next field in fstab or mtab file line (scan until char is no space
+/**Scan until next field (scan until char is no space
  * \param  p_text  Current line to proces
  * \param  p_cnt   Position. This variable is incremented until next field (until character is not a space of tab) 
  * \return true if non space character found(=field found)
@@ -98,7 +107,9 @@ bool TMTab::untilNext(const QString& p_text, int& p_cnt)
 }
 
 /**
- * Proces line in mount file (/etc/mtab or /etc/fstan) 
+ * Proces line in mount file (/etc/mtab or /etc/fstab or...)
+ *
+ * \param p_line line to process.  
  */
 bool TMTab::processLine(const QString& p_line)
 {
@@ -132,7 +143,8 @@ bool TMTab::processLine(const QString& p_line)
 }
 
 /**
- * Process entries 
+ * Process all lines in the file
+ * Files beginnen with a # are skipped.
  */
 bool TMTab::processInfo()
 {
@@ -153,6 +165,13 @@ bool TMTab::processInfo()
 	}
 	return true;
 }
+
+/**
+ * The filesystem type can also be determine for mounted devices, by looking at the information from /proc/mount, because 
+ * he /proc/mounts file (mounted device) contains also the file system type.
+ * 
+ * This method copies this information to the device info.
+ */
 void TMTab::copyFileType()
 {
 	TMTabEntry *l_entry;
@@ -194,6 +213,15 @@ TMTabEntry::TSameType TMTabEntry::isSameType()
 	}
 }
 
+/**
+ *  The fstab contains mount points that could be mounted. This function determines if
+ *  the device are really mounted on the mount point, or not.
+ * 
+ * \return     UNKMOUNTED  It is not possible to determine if the device is mounted or not
+ *             MOUNTED     The device is mounted on the given mount point
+ *             DIFMOUNT    The device is mounted on an other mount point
+ *           
+ */
 
 TMTabEntry::TMountStatus TMTabEntry::isMounted()
 {

@@ -1,7 +1,16 @@
 #include "linuxraid.h"
 #include "raid.h"
 #include <QDirIterator>
-
+/**
+ *  Read informationa about linux software raid devices and adds it to the raid list (p_raid)
+ *  When a storage device is a  linux soft wate, the /sys/block/#block device# folder contains a 
+ *  "md" folders
+ *  This folder contains the raid info
+ *  The slaves folder contains the raid members
+ *  
+ *  \param p_list Information about all devices on the system
+ *  \param p_raid Raid information list. The linux soft raids are added to this 
+ */
 void TLinuxRaid::processInfo(TDeviceList* p_list,TRaidInfo *p_raid)
 {
 	QString      l_level;		

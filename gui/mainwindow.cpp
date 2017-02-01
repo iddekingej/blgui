@@ -191,13 +191,14 @@ void TMainWindow::fillIscsi()
 {
 	int l_sortHeader=ui.iscsiTable->horizontalHeader()->sortIndicatorSection();
 	Qt::SortOrder l_sortOrder=ui.iscsiTable->horizontalHeader()->sortIndicatorOrder();		
-	QStandardItemModel *l_model=new QStandardItemModel(0,4,this);
+	QStandardItemModel *l_model=new QStandardItemModel(0,5,this);
 	TDevice            *l_device;
 	int                l_cnt=0;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Session")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Address")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(3,new QStandardItem(i18n("Iscsi bus")));
+	l_model->setHorizontalHeaderItem(4,new QStandardItem(i18n("Target")));
 	TLinkListIterator<TIScsiSession> l_sessionIter(info->getIscsiSessions()->getSessions());
 	TIScsiSession *l_session;
 	while(l_sessionIter.hasNext()){
@@ -209,6 +210,7 @@ void TMainWindow::fillIscsi()
 			l_model->setItem(l_cnt,1,new QStandardItem(l_session->getConnection()));
 			l_model->setItem(l_cnt,2,new QStandardItem(l_device->getName()));
 			l_model->setItem(l_cnt,3,new QStandardItem(l_device->getScsiBus()));
+			l_model->setItem(l_cnt,4,new QStandardItem(l_session->getTargetName()));
 			l_cnt++;
 		}	
 	}

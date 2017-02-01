@@ -3,7 +3,10 @@
 
 #include <QString>
 #include "base/linklist.h"
-
+/**
+ * A device/partition has a list of mount points
+ * A mount pointer is stored as a TMount object
+ */
 class TMount
 {
 private:

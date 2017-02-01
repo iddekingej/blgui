@@ -1,3 +1,8 @@
+/**
+ *  TMTabEntry and TMTab are for reading and getting information about fstab/mtab like files
+ */
+
+
 #ifndef __MTAB_H_
 #define __MTAB_H_
 
@@ -7,13 +12,33 @@
 #include "devicebase.h"
 #include "devicelist.h"
 #include "mountdiff.h"
+
+/**
+ * TMtabEmtru is one mount line from mtab/fstab
+ * 
+ */
 class TMTabEntry
 {
 private:
+	/**
+	 * Device name (could be UID,label etc...)
+	 */
 	QString      device;
+	/**
+	 * Mount point
+	 */
 	QString      mountPoint;
+	/**
+	 * File system type
+	 */
 	QString      type;
+	/**
+	 * Mount option
+	 */
 	QString      options;
+	/**
+	 *  Device translate to the real device 
+	 */
 	TDeviceBase *realDevice;
 	
 public:
@@ -33,10 +58,22 @@ public:
 	
 };
 
+/**
+ * This class reads and stores information from a mtab/fstab like file
+ */
 class TMTab{
 private:
+	/**
+	 * List of mount lines/entries on the system
+	 */
 	TLinkList<TMTabEntry> entries;
+	/**
+	 * List devices on the system
+	 */
 	TDeviceList           *devList;
+	/**
+	 * From which file the information is read
+	 */
 	QString               sourceFile;
 public:
 	inline TLinkList<TMTabEntry> *getEntries(){ return &entries;}
