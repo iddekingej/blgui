@@ -13,7 +13,7 @@ void TFormTabDef::fillConditionField()
 {
 	ui.conditionField->addItem("");
 	for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
-		ui.conditionField->addItem(g_deviceFields[l_cnt]);
+		ui.conditionField->addItem(g_deviceFields[l_cnt].title);
 	}
 }
 
@@ -70,7 +70,7 @@ void TFormTabDef::fillFields()
 	if(current != nullptr){
 		for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
 			if(!current->hasFieldInSelected(l_cnt)){
-				ui.fieldSelector->addItem(g_deviceFields[l_cnt],l_cnt);
+				ui.fieldSelector->addItem(g_deviceFields[l_cnt].title,l_cnt);
 				l_idx++;
 			}
 		}	
@@ -300,7 +300,7 @@ void TFormTabDef::downDef()
 
 void TFormTabDef::addFieldToFieldListModel(int p_index)
 {
-	auto l_item=new QStandardItem(g_deviceFields[p_index]);
+	auto l_item=new QStandardItem(g_deviceFields[p_index].title);
 	l_item->setData(p_index);
 	fieldListModel->appendRow(l_item);
 }
@@ -343,10 +343,10 @@ void TFormTabDef::moveField(int p_dir)
 			int l_item2=(*l_list)[l_newRow];
 			(*l_list)[l_row]=l_item2;
 			(*l_list)[l_newRow]=l_item1;
-			QStandardItem *l_item=new QStandardItem(g_deviceFields[l_item1]);
+			QStandardItem *l_item=new QStandardItem(g_deviceFields[l_item1].title);
 			l_item->setData(l_item1);
 			fieldListModel->setItem(l_newRow,0,l_item);
-			l_item=new QStandardItem(g_deviceFields[l_item2]);
+			l_item=new QStandardItem(g_deviceFields[l_item2].title);
 			l_item->setData(l_item2);
 			fieldListModel->setItem(l_row,0,l_item);
 			ui.fieldList->setCurrentIndex(fieldListModel->index(l_newRow,0));

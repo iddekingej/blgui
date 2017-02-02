@@ -30,7 +30,7 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
 	for(int l_cnt=0;l_cnt<p_fields->size();l_cnt++){
 		l_fieldId=(*p_fields)[l_cnt];
 		if(l_fieldId<g_numDeviceFields){
-			model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));
+			model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId].title))));
 		}
 	}
 }

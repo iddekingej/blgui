@@ -385,7 +385,7 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
 		l_fieldId=(*enableDeviceFields)[l_cnt];
 		if(l_fieldId<g_numDeviceFields){
-			p_model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId]))));
+			p_model->setHorizontalHeaderItem(l_cnt+p_begin,new QStandardItem(QString(i18n(g_deviceFields[l_fieldId].title))));
 		}
 	}
 }
