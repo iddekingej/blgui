@@ -90,8 +90,7 @@ void TMainWindow::sourceChanged(int p_index  PAR_UNUSED)
 }
 
 void TMainWindow::refresh()
-{	
-	readConfiguation();
+{		
 	if(info != nullptr) delete info;
 	info=new TDeviceInfo();
 	info->getDisks();
@@ -438,6 +437,7 @@ void TMainWindow::fillDeviceTree()
 	TPartition *l_partition;
 	int l_cnt=0;
 	int l_partRow;
+	devProxyModel->setFlexStart(2);
 	while(l_iter.hasNext()){
 	    l_device=l_iter.next();
 	    l_deviceRow.clear();
@@ -457,10 +457,8 @@ void TMainWindow::fillDeviceTree()
 	    }
 	    l_cnt++;
 	}
-	ui.diskList->setWordWrap(false);	
-	setViewModel(ui.diskList,l_model);
-	ui.diskList->setSortingEnabled(true);
 	
+	devProxyModel->setSourceModel(l_model);
 	setExpandedDevRows(l_expanded);
 	deviceAsTree=true;
 }
@@ -512,7 +510,7 @@ void TMainWindow::fillDeviceGrid()
 	l_fixed++;
 
 	fillHeader(l_fixed,l_model);
-	
+	devProxyModel->setFlexStart(l_fixed);
 	QHashIterator<QString,TDeviceBase *> l_mi(*l_map);
 	while(l_mi.hasNext()){
 		l_mi.next();		
@@ -527,8 +525,7 @@ void TMainWindow::fillDeviceGrid()
 		l_cnt++;
 	}
 
-	ui.diskList->setWordWrap(false);	
-	setViewModel(ui.diskList,l_model);
+	devProxyModel->setSourceModel(l_model);
 	deviceAsTree=false;
 	
 }
@@ -570,10 +567,6 @@ void TMainWindow::showFieldChooser(){
 	}	
 }
 
-void TMainWindow::readConfiguation()
-{
-	enableDeviceFields=g_config.getDeviceFields();
-}
 
 /** Displays device or partition information dialog
  *  Event handle when double clicked on device grid.  First, the name of the device/partition is retrieved (stored at column 0 of the row)
@@ -668,6 +661,8 @@ void TMainWindow::fillMessages()
 TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 {
 	ui.setupUi(this);
+	enableDeviceFields=g_config.getDeviceFields();
+
 	info=nullptr;
 	devModel=nullptr;
 	userTabs.read();
@@ -675,8 +670,10 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setViewModel(ui.stats,statsModel);
 	notificationsModel=new QStandardItemModel(0,3,this);
 	setViewModel(ui.notificationsList,notificationsModel);	
-	ui.notifications->setVisible(false);
+	devProxyModel=new TSortProxy(enableDeviceFields,this);
+	ui.diskList->setModel(devProxyModel);
 	
+	ui.notifications->setVisible(false);	
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));
 	ui.itemSource->addItem(i18n("Labels"));
@@ -717,8 +714,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	tabsVisible[2]=nullptr;
 	tabsVisible[3]=nullptr;
 	tabsVisible[4]=nullptr;
-	tabsVisible[5]=nullptr;
-	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
+	tabsVisible[5]=nullptr;	
 	ui.pvInfo->sortByColumn(0,Qt::AscendingOrder);
 	ui.vgList->sortByColumn(0,Qt::AscendingOrder);
 	ui.lvList->sortByColumn(0,Qt::AscendingOrder);

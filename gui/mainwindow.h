@@ -13,6 +13,7 @@
 #include "data/diskstat.h"
 #include "data/tabdef.h"
 #include "gui/usertabdef.h"
+#include "data/sortproxy.h"
 extern QApplication *g_app;
 
 class TMainWindow: public QMainWindow
@@ -46,6 +47,7 @@ private:
  *  Data model for the device grid
  */
 	QStandardItemModel *devModel;
+	TSortProxy         *devProxyModel;
 /**
  *  Data model for the notification model
  */
@@ -103,8 +105,7 @@ private:
 	bool deviceAsTree=false;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
-	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);
-	void readConfiguation();
+	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);	
 	void getExpandedDevRows(QSet<QString> &p_list);
 	void setExpandedDevRows(QSet<QString> &p_list);
 	void fillHeader(int p_begin,QStandardItemModel *p_model);

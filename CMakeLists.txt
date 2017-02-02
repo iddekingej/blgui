@@ -54,6 +54,7 @@ set(bdgui_SRCS
 	data/pci.cpp
 	data/tabdef.cpp
 	data/lvm.cpp
+	data/sortproxy.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 
