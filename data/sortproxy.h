@@ -6,6 +6,7 @@
 
 /**
  * Proxy model for sorting the  device fields
+ * 
  */
 
 class TSortProxy:public QSortFilterProxyModel
