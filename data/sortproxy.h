@@ -4,10 +4,20 @@
 #include <QVector>
 #include <QModelIndex>
 
+/**
+ * Proxy model for sorting the  device fields
+ */
+
 class TSortProxy:public QSortFilterProxyModel
 {
 private:
+	/**
+	 * List of fields in list
+	 */
 	QVector<int> *fields;
+	/**
+	 * Start of flexible part
+	 */
 	int  flexStart=0;
 	char getSortType(int p_col) const;
 protected:
