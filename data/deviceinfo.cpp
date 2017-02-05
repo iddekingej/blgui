@@ -50,6 +50,9 @@ void TDeviceInfo::getDisks()
 	if (blkid_get_cache(&blkidCache, NULL) < 0){
 		printf("Failed to cache\n");
 	 }	
+	 
+	 devices->setSysBlockPath(sysBlockPath);
+	 
 	aliasses->readInfo();
 	devices->readInfo();
 	mtab->processInfo();
@@ -98,6 +101,7 @@ TDeviceInfo::TDeviceInfo()
 	mtab     = new TMTab(devices);	
 	iscsi    = new TIScsiSessionList();
 	lvm      = new TLVM();
+	sysBlockPath="/sys/block";
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete devices;

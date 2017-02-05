@@ -27,6 +27,8 @@
 class TDeviceInfo
 {
 private:
+	QString sysBlockPath;
+
 	/**
 	 *  Information about all devices
 	 */
@@ -68,11 +70,21 @@ private:
 	void processAlias(const QString &p_file);
 	void getTypeByDevice(TDeviceBase *p_device,QString &p_type);
 public:
+	inline QString &getSysBlockPath()
+	{
+		return sysBlockPath;
+	}
+	
+	inline void setSysBlockPath(const QString &p_sysBlockPath)
+	{
+		sysBlockPath=p_sysBlockPath;
+	}
+	
 	inline TDeviceList *getDevices(){
 		return devices;
 	}
 	
-	QDateTime *getSbTime()
+	inline QDateTime *getSbTime()
 	{
 		return &sbTime;
 	}

@@ -297,6 +297,13 @@ void TMainWindow::fillRaid()
 
 }
 
+/**
+ * Fill the statistics grid from the TDiskStatList object
+ * 
+ * @See TDiskStatList
+ * @See TDiskStat
+ */
+
 void TMainWindow::fillStats()
 {
 	int l_cnt=0;
@@ -378,7 +385,12 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 
 
 
-// Fill the header of the configured columns
+/**
+ * Fill the headers of the configurable part of the grid.
+ * 
+ * \param p_begin  The first columns of the grid are fixed. p_begin is the start of the configurable part of the grid.
+ * \param p_model  Data model of the grid.
+ */
 void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	int l_fieldId;
 	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
@@ -390,7 +402,7 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 }
 
 /**
- * Collect all expanded tree items. This callled before a refresh
+ *Collect all expanded tree items. This callled before a refresh
  *After refresh all tree items are restored with setExpandedDevRows
  * 
  * \param p_list return the devices names that are expanded
@@ -682,7 +694,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setViewModel(ui.notificationsList,notificationsModel);	
 	devProxyModel=new TSortProxy(enableDeviceFields,this);
 	ui.diskList->setModel(devProxyModel);
-	
+	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
 	ui.notifications->setVisible(false);	
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));

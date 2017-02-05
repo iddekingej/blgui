@@ -46,6 +46,6 @@ TTestBtrfs::TTestBtrfs()
 }
 
 TTestBtrfs::~TTestBtrfs()
-{
+{	
 	if(info != nullptr) delete info;
 }

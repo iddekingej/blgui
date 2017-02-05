@@ -28,6 +28,7 @@ public:
 
 	TAlias      *createAliasList();
 	TDeviceList *createDeviceList(TAlias *p_alias);
+	TDeviceList *createDeviceList2(TAlias *p_alias);
 	bool run();
 	virtual ~TTestClass(){};
 };

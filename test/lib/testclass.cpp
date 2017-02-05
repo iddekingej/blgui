@@ -94,5 +94,11 @@ TDeviceList * TTestClass::createDeviceList(TAlias *p_alias)
 	return l_deviceList;
 }
 
-
-
+TDeviceList * TTestClass::createDeviceList2(TAlias* p_alias)
+{
+	TDeviceList *l_deviceList;
+	l_deviceList=new TDeviceList(p_alias);
+	l_deviceList->setSysBlockPath(getConfig()->getFilePath("/sys/block/"));
+	l_deviceList->readInfo();
+	return l_deviceList;
+}
