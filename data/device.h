@@ -28,12 +28,12 @@ private:
 	/**
 	 * When the device is readonly
 	 */
-	bool    readonly;
+	bool    readonly=false;
 	
 	/**
 	 * flag indicating if it is a removeable type
 	 */
-	bool    removable;
+	bool    removable=false;
 	
 	/**
 	 * If the device is a loopback device, this field contains the file used for the loopback.
@@ -60,7 +60,7 @@ private:
 	 * LVM name when device is a LVM (device mapper) device
 	 */
 	QString LVMName;
-	bool    rotational;
+	bool    rotational=false;
 public:
 	/** Set lvm name
 	 *\param p_LVMName  name of lvm 
