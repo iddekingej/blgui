@@ -51,18 +51,19 @@ void TDeviceInfo::getDisks()
 		printf("Failed to cache\n");
 	 }	
 	 
-	 devices->setSysBlockPath(sysBlockPath);
-	 
+	devices->setSysBlockPath(basePath+QStringLiteral("sys/block"));
+	btrfsInfo->setBasePath(basePath); 
 	aliasses->readInfo();
 	devices->readInfo();
+	mtab->setSourceFile(basePath+QStringLiteral("etc/fstab"));
 	mtab->processInfo();
 	TMTab *l_mtab2=new TMTab(devices);
-	l_mtab2->setSourceFile(QStringLiteral("/proc/mounts"));
+	l_mtab2->setSourceFile(basePath+QStringLiteral("proc/mounts"));
 	l_mtab2->processInfo();
 	l_mtab2->addMountTODevices();	
 	l_mtab2->copyFileType();
 	delete l_mtab2;
-	TBtrfsInfo::processInfo(devices,raidList);
+	btrfsInfo->processInfo(devices,raidList);
 	TLinuxRaid::processInfo(devices,raidList);
 	devices->readFreeSpace();
 	iscsi->processInfo(devices);
@@ -101,7 +102,8 @@ TDeviceInfo::TDeviceInfo()
 	mtab     = new TMTab(devices);	
 	iscsi    = new TIScsiSessionList();
 	lvm      = new TLVM();
-	sysBlockPath="/sys/block";
+	btrfsInfo= new TBtrfsInfo();
+	basePath="/";
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete devices;
@@ -110,5 +112,6 @@ TDeviceInfo::~TDeviceInfo(){
 	delete mtab;
 	delete iscsi;
 	delete lvm;
+	delete btrfsInfo;
 	blkid_put_cache(blkidCache);
 }
