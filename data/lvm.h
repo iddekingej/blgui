@@ -42,8 +42,8 @@ private:
 	long long dao_size=0;
 	QString vgid;
 	QString vgName;
-	TDeviceBase *realDevice;
-	TVolumeGroup *volumeGroup;
+	TDeviceBase *realDevice=nullptr;
+	TVolumeGroup *volumeGroup=nullptr;
 public:
 	inline TVolumeGroup *getVolumeGroup(){ return volumeGroup;}
 	inline void setVolumeGroup(TVolumeGroup *p_volumeGroup){ volumeGroup=p_volumeGroup;}
@@ -77,7 +77,7 @@ public:
 	inline void setDevice(int p_device){ device=p_device;}
 	inline QString getKey(){ return key;}
 	inline void setKey(QString &p_key){ key=p_key;}
-	   TPhysicalVolume();
+	TPhysicalVolume();
 };
 
 class TPhysicalVolumeList:public TLinkList<TPhysicalVolume>{
@@ -237,8 +237,8 @@ public:
 
 class TVGParser:public TLVMResponseParser{
 private:
-	TVolumeGroup *current;
-	TLogicalVolume *currentLv;
+	TVolumeGroup *current=nullptr;
+	TLogicalVolume *currentLv=nullptr;
 public:
 	TVGParser(TVolumeGroup *p_item,QString &p_text);
 	virtual bool chapter(QSTRINGREF &p_item) override;
