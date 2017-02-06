@@ -170,6 +170,7 @@ void TPVParser::setVar(QString& p_name, QString& p_value)
 
 TVGMainParser::TVGMainParser(QString& p_text):TLVMResponseParser(p_text)
 {
+	current=nullptr;
 	items=new TVolumeGroupList();
 }
 
@@ -345,11 +346,15 @@ bool TLVMHandler::sendMessage(const char *p_message,QString &p_return)
 	char l_buffer[1024];
 	ssize_t l_num;
 	p_return="";
+	ssize_t l_bufferSize=sizeof(l_buffer);
 	while(true){
-		l_num=read(readSocket,l_buffer,sizeof(l_buffer)-1);
+		l_num=read(readSocket,l_buffer,l_bufferSize-1);
+		if(l_num<0){
+			break;
+		}
 		l_buffer[l_num]=0;
 		p_return += l_buffer;
-		if(l_num+1<static_cast<ssize_t>(sizeof(l_buffer))) break;
+		if(l_num+1< l_bufferSize ) break;
 	}
 	return true;
 }

@@ -32,7 +32,7 @@ private:
 	TTabDefList *tabDefs;
 	TTabDef     *current;
 	
-	int currentRow;
+	int currentRow=0;
 	void fillConditionField();
 	void fillConditionType();
 	void fillFormByTabDef(TTabDef *p_def);

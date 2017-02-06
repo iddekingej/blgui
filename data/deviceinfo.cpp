@@ -104,6 +104,7 @@ TDeviceInfo::TDeviceInfo()
 	lvm      = new TLVM();
 	btrfsInfo= new TBtrfsInfo();
 	basePath="/";
+	blkid_get_cache(&blkidCache,nullptr);
 }
 TDeviceInfo::~TDeviceInfo(){
 	delete devices;

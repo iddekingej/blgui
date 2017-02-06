@@ -32,7 +32,7 @@ private:
 	int device=0;
 	long long dev_size=0;
 	QString format;
-	int label_sector;
+	int label_sector=0;
 	QString id;
 	int mdao_ignore=0;
 	int mdao_start=0;
@@ -224,8 +224,8 @@ public:
 
 class TVGMainParser:public TLVMResponseParser{
 private:
-	TVolumeGroupList *items;
-	TVolumeGroup *current;
+	TVolumeGroupList *items=nullptr;
+	TVolumeGroup *current=nullptr;
 public:
 	TVGMainParser(QString &p_text);
 	virtual bool chapter(QSTRINGREF &p_item) override;
@@ -237,7 +237,7 @@ public:
 
 class TVGParser:public TLVMResponseParser{
 private:
-	   TVolumeGroup *current;
+	TVolumeGroup *current;
 	TLogicalVolume *currentLv;
 public:
 	TVGParser(TVolumeGroup *p_item,QString &p_text);

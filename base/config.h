@@ -30,7 +30,7 @@ private:
 	/**
 	 * Cache of fields displayed in the "device tab"
 	 */
-	QVector<int> *deviceFields;
+	QVector<int> *deviceFields=nullptr;
 	
 public:
 	TConfig();
