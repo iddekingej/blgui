@@ -4,6 +4,7 @@
 #include "test_device.h"
 #include "test_mtab.h"
 #include "test_devicelist.h"
+#include "test_deviceinfo.h"
 
 class TDataRunner:public TRunner
 {
@@ -15,6 +16,7 @@ protected:
 		runner(new TTestDevice());
 		runner(new TTestDataMTab());
 		runner(new TTestDataDeviceList());
+		runner(new TTestDataDeviceInfo());
 	}
 	
 public:

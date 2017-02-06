@@ -11,10 +11,20 @@
  */
 class TBtrfsInfo
 {
+private:
+	/**
+	 * Information is read from /sys/block/btrfs folder but can be changed by base basepath 
+	 * for testing purpose.
+	 * basePath is by default /
+	 */
+	QString basePath;
 protected:
 	static void getRaidLevel(const QString &p_path,QString &p_raidLevel);
 public:	
-	static void processInfo(TDeviceList *p_list,TRaidInfo *p_raid);
+	inline QString &getBasePath(){ return basePath;}
+	inline void setBasePath(const QString &p_basePath){ basePath=p_basePath;}
+	 void processInfo(TDeviceList *p_list,TRaidInfo *p_raid);
+	TBtrfsInfo();
 };
 
 #endif

@@ -5,7 +5,7 @@
 TTestDataMTab::TTestDataMTab()
 {
 	alias=createAliasList();
-	deviceList=createDeviceList(alias);
+	deviceList=createDeviceList2(alias);
 	mtab=new TMTab(deviceList);
 	mtab->setSourceFile(getConfig()->getFilePath("test_mtab1"));
 }

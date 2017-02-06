@@ -11,6 +11,7 @@ set(test_SRCS   test/lib/testclass.cpp
 		test/data/test_devicelist.cpp
 		test/data/test_mtab.cpp
 		test/data/run_data.cpp
+		test/data/test_deviceinfo.cpp
 )
 
 add_executable(bdgui_test test/test.cpp ${test_SRCS} ${bdgui_SRCS})

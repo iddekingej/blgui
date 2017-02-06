@@ -68,11 +68,11 @@ private:
 /**
  * minor device id
  */
-	int minor;
+	int minor=0;
 /**
  * major device id
  */
-	int major;
+	int major=0;
 
 public:
 	inline void setVGName(QString p_name){ vgName=p_name;}

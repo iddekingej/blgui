@@ -6,6 +6,11 @@
 #include "devicelist.h"
 #include "raid.h"
 
+TBtrfsInfo::TBtrfsInfo()
+{
+	basePath="/";
+}
+
 
 /**Get raid level
  * The raid level is stored in /sys/fs/btrfs/#uid#/allocation/system.
@@ -37,7 +42,7 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 
 void TBtrfsInfo::processInfo(TDeviceList *p_list,TRaidInfo *p_raid)
 {
-	QDirIterator l_iter(QStringLiteral("/sys/fs/btrfs/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);	
+	QDirIterator l_iter(basePath+QStringLiteral("sys/fs/btrfs/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);	
 	while(l_iter.hasNext())
 	{
 		l_iter.next();

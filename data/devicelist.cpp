@@ -17,7 +17,7 @@
 #include "base/utils.h"
 #include "usb.h"
 #include <iostream>
-const char* MOUNTS_PATH="/proc/mounts";
+
 
 
 /**

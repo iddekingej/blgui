@@ -58,7 +58,7 @@ void TMainWindow::handleMount()
 {	
 	QModelIndexList l_list=ui.diskList->selectionModel()->selectedIndexes();
 	TDeviceBase *l_device=nullptr;
-	QString l_message="";
+	QString l_message=QStringLiteral("");
 	if(getuid()!=0){
 		l_message=i18n("Only root can mount");
 	}  else if(l_list.length()>0 && ui.info->currentIndex()==0){
@@ -120,7 +120,7 @@ void TMainWindow::fillLvm()
 			l_pvInfo=l_pvIter.next();
 			
 			
-			l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?"":l_pvInfo->getRealDevice()->getName()));
+			l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?QStringLiteral(""):l_pvInfo->getRealDevice()->getName()));
 			l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_pvInfo->getDevSize())));
 			l_model->setItem(l_cnt,2,new QStandardItem(l_pvInfo->getVgName()));
 			l_cnt++;
@@ -161,7 +161,7 @@ void TMainWindow::fillLvm()
 				l_lvInfo=l_iterLv.next();
 				l_lvModel->setItem(l_lvCnt,0,new QStandardItem(l_lvInfo->getName()));
 				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_vgInfo->getName()));
-				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():""));
+				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():QStringLiteral("")));
 				l_lvModel->setItem(l_lvCnt,3,new QStandardItem(l_lvInfo->getId()));
 				if(l_lvInfo->getReadFlag())l_lvModel->setItem(l_lvCnt,4,new QStandardItem("X"));
 				if(l_lvInfo->getWriteFlag())l_lvModel->setItem(l_lvCnt,5,new QStandardItem("X"));
@@ -238,7 +238,7 @@ void TMainWindow::fillMtab()
 	while(l_mtabIter.hasNext()){
 		l_info=l_mtabIter.next();
 		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getDevice()));
-		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():""));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():QStringLiteral("")));
 		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getMountPoint()));
 		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getType()));
 		l_model->setItem(l_cnt,5,new QStandardItem(l_info->getOptions()));		
@@ -296,6 +296,13 @@ void TMainWindow::fillRaid()
 	ui.raidList->sortByColumn(l_sortHeader,l_sortOrder);
 
 }
+
+/**
+ * Fill the statistics grid from the TDiskStatList object
+ * 
+ * @See TDiskStatList
+ * @See TDiskStat
+ */
 
 void TMainWindow::fillStats()
 {
@@ -378,7 +385,12 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 
 
 
-// Fill the header of the configured columns
+/**
+ * Fill the headers of the configurable part of the grid.
+ * 
+ * \param p_begin  The first columns of the grid are fixed. p_begin is the start of the configurable part of the grid.
+ * \param p_model  Data model of the grid.
+ */
 void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	int l_fieldId;
 	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
@@ -389,9 +401,12 @@ void TMainWindow::fillHeader(int p_begin,QStandardItemModel *p_model){
 	}
 }
 
-//Collect all expanded tree items. This callled before a refresh
-//After refresh all tree items are restored with setExpandedDevRows
-//p_list ->  device names which are expanded
+/**
+ *Collect all expanded tree items. This callled before a refresh
+ *After refresh all tree items are restored with setExpandedDevRows
+ * 
+ * \param p_list return the devices names that are expanded
+ */
 void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
 {
 	p_list.clear();
@@ -406,7 +421,14 @@ void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
 	}
 }
 
-//expand all nodes for devices in set p_lists
+/**
+ *  Expand all device nodes. This is used to restore 'expand' state after a refresh
+ *  of the device list
+ *  
+ *  \param p_list list of the devices that are expanded
+ */
+
+
 void TMainWindow::setExpandedDevRows(QSet< QString >& p_list)
 {
 	QModelIndex l_index;
@@ -672,7 +694,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 	setViewModel(ui.notificationsList,notificationsModel);	
 	devProxyModel=new TSortProxy(enableDeviceFields,this);
 	ui.diskList->setModel(devProxyModel);
-	
+	ui.diskList->sortByColumn(0,Qt::AscendingOrder);
 	ui.notifications->setVisible(false);	
 	ui.itemSource->addItem(i18n("Devices"));
 	ui.itemSource->addItem(i18n("Id"));

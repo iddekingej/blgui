@@ -28,6 +28,12 @@ class TDeviceInfo
 {
 private:
 	/**
+	 * Base path of information (/proc /sys/block /etc ..) to read.
+	 * By default '/', can be changed for testing 
+	 */
+	QString basePath;
+
+	/**
 	 *  Information about all devices
 	 */
 	TDeviceList       *devices;
@@ -61,18 +67,32 @@ private:
 	/**
 	 * Time and date the information is read.
 	 */
-	QDateTime   sbTime;
 	
+	QDateTime   sbTime;
+	/**
+	 * Btrfs information
+	 */
+	TBtrfsInfo *btrfsInfo;	
 
 	void procesAliasses(const QString &p_path);
 	void processAlias(const QString &p_file);
 	void getTypeByDevice(TDeviceBase *p_device,QString &p_type);
 public:
+	inline QString &getBasePath()
+	{
+		return basePath;
+	}
+	
+	inline void setBasePath(const QString &p_basePath)
+	{
+		basePath=p_basePath;
+	}
+	
 	inline TDeviceList *getDevices(){
 		return devices;
 	}
 	
-	QDateTime *getSbTime()
+	inline QDateTime *getSbTime()
 	{
 		return &sbTime;
 	}

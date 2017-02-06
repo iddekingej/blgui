@@ -32,4 +32,4 @@ const TFieldInfo  g_deviceFields[]={
 /**
  *  Number of fields in g_deviceFields
  */
-const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(char*);
+const  int g_numDeviceFields=sizeof(g_deviceFields)/sizeof(TFieldInfo);

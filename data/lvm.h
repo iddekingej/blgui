@@ -29,17 +29,17 @@ class TVolumeGroupList;
 class TPhysicalVolume {
 private:
 	QString key;
-	int device;
-	long long dev_size;
+	int device=0;
+	long long dev_size=0;
 	QString format;
 	int label_sector;
 	QString id;
-	int mdao_ignore;
-	int mdao_start;
-	long long mdao_size;
-	long long mdao_free_sectors;
-	long long dao_offset;
-	long long dao_size;
+	int mdao_ignore=0;
+	int mdao_start=0;
+	long long mdao_size=0;
+	long long mdao_free_sectors=0;
+	long long dao_offset=0;
+	long long dao_size=0;
 	QString vgid;
 	QString vgName;
 	TDeviceBase *realDevice;

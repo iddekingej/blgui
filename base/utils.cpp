@@ -47,7 +47,7 @@ bool readString(QString p_path,QString p_name,QString &p_value)
 	}
 	QTextStream l_stream(&l_file);
 	p_value=l_stream.readLine();
-	l_succes=(l_stream.status() ==  QTextStream::Ok);
+	l_succes=(l_stream.status() ==  QTextStream::Ok);	
 	l_file.close();
 	
 	return l_succes;

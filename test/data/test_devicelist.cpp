@@ -43,7 +43,7 @@ void TTestDataDeviceList::test2()
 void TTestDataDeviceList::test3()
 {
 	TDevice *l_device;
-	expect("Number of devices read from test /sys/block",3,deviceList->getLength());
+	expect("Number of devices read from test /sys/block",5,deviceList->getLength());
 	TDeviceBase *l_deviceBase=deviceList->getDeviceByName("sda");
 	if(l_deviceBase==nullptr){
 		fail("Except first item != nullptr");
@@ -110,6 +110,22 @@ void TTestDataDeviceList::test4()
 	expect("Partition 1 size ",102400*512,(long)l_partition->getSize());
 }
 
+void TTestDataDeviceList::test5()
+{
+	TLinkListItem<TDevice> *l_current=deviceList->getStart();
+	TLinkListItem<TPartition> *l_parCurrent;
+	QStringList l_info;
+	while(l_current != nullptr){
+		l_current->getItem()->fillDataRow(l_info);
+		l_parCurrent=l_current->getItem()->getPartitionStart();
+		while(l_parCurrent != nullptr){
+			l_parCurrent->getItem()->fillDataRow(l_info);
+			l_parCurrent=l_parCurrent->getNext();
+		}
+		l_current=l_current->getNext();
+	}
+}
+
 
 void TTestDataDeviceList::doRun()
 {
@@ -118,6 +134,7 @@ void TTestDataDeviceList::doRun()
 	test2();
 	test3();
 	test4();
+	test5();
 	std::cout << "data/test_devicelist end" << std::endl;
 }
 
