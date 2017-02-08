@@ -412,8 +412,8 @@ void TMainWindow::getExpandedDevRows(QSet<QString> &p_list)
 	p_list.clear();
 	if(devModel != nullptr){
 		QModelIndex l_index;		
-		for(int l_row=0;l_row<devModel->rowCount();l_row++){
-			l_index=devModel->index(l_row,0);
+		for(int l_row=0;l_row<devProxyModel->rowCount();l_row++){
+			l_index=devProxyModel->index(l_row,0);
 			if(ui.diskList->isExpanded(l_index)){
 				p_list += l_index.data().toString();
 			}
@@ -433,8 +433,9 @@ void TMainWindow::setExpandedDevRows(QSet< QString >& p_list)
 {
 	QModelIndex l_index;
 	
-	for(int l_row=0;l_row<devModel->rowCount();l_row++){
-		l_index=devModel->index(l_row,0);
+	
+	for(int l_row=0;l_row<devProxyModel->rowCount();l_row++){
+		l_index=devProxyModel->index(l_row,0);
 		if(p_list.contains(l_index.data().toString())){
 			ui.diskList->setExpanded(l_index,true);
 		}
