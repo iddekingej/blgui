@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2016-12-30 18:46+0100\n"
+"POT-Creation-Date: 2017-02-23 20:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,160 +17,600 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base/globals.cpp:7 gui/formdevinfo.cpp:151 gui/mainwindow.cpp:112
+#: base/globals.cpp:9 gui/formdevinfo.cpp:194 gui/mainwindow.cpp:111
 msgid "Size"
 msgstr ""
 
-#: base/globals.cpp:8
+#: base/globals.cpp:10
 msgid "Model"
 msgstr ""
 
-#: base/globals.cpp:9 gui/formbasedevinfo.cpp:37 gui/formdevinfo.cpp:150
-#: gui/mainwindow.cpp:233
+#: base/globals.cpp:11 gui/formbasedevinfo.cpp:23 gui/formdevinfo.cpp:193
+#: gui/mainwindow.cpp:235
 msgid "Type"
 msgstr ""
 
-#: base/globals.cpp:10
+#: base/globals.cpp:12
 msgid "Mounted"
 msgstr ""
 
-#: base/globals.cpp:11 gui/mainwindow.cpp:479
+#: base/globals.cpp:13 gui/mainwindow.cpp:503
 msgid "Label"
 msgstr ""
 
-#: base/globals.cpp:12
+#: base/globals.cpp:14
 msgid "Size (KMG)"
 msgstr ""
 
-#: base/globals.cpp:13
+#: base/globals.cpp:15
 msgid "Read only"
 msgstr ""
 
-#: base/globals.cpp:14
+#: base/globals.cpp:16
 msgid "Removable"
 msgstr ""
 
-#: base/globals.cpp:15
+#: base/globals.cpp:17
 msgid "Loop back file"
 msgstr ""
 
-#: base/globals.cpp:16
+#: base/globals.cpp:18 build/ui_devinfo.h:478 build/ui_devinfo.h:480
 msgid "Slaves"
 msgstr ""
 
-#: base/globals.cpp:17
+#: base/globals.cpp:19
 msgid "Free space"
 msgstr ""
 
-#: base/globals.cpp:18
+#: base/globals.cpp:20
 msgid "Scsi bus"
 msgstr ""
 
-#: base/globals.cpp:19
+#: base/globals.cpp:21
 msgid "Iscsi host"
 msgstr ""
 
-#: base/globals.cpp:20
+#: base/globals.cpp:22
 msgid "Start(bytes)"
 msgstr ""
 
-#: base/globals.cpp:21
+#: base/globals.cpp:23
 msgid "Free space (KMG)"
 msgstr ""
 
-#: base/globals.cpp:22 gui/formdevinfo.cpp:76
+#: base/globals.cpp:24 gui/formdevinfo.cpp:100
 msgid "Rotational"
 msgstr ""
 
-#: base/globals.cpp:23
+#: base/globals.cpp:25
 msgid "USB bus"
 msgstr ""
 
-#: base/globals.cpp:24
+#: base/globals.cpp:26 build/ui_devinfo.h:468
 msgid "PCI bus"
 msgstr ""
 
-#: base/globals.cpp:25
+#: base/globals.cpp:27
 msgid "Volume group name"
 msgstr ""
 
-#: base/globals.cpp:26
+#: base/globals.cpp:28
 msgid "Lvm name"
 msgstr ""
 
-#: data/changemanager.cpp:56
-msgid "mounted"
+#: build/ui_about.h:122
+msgid "About"
 msgstr ""
 
-#: data/changemanager.cpp:57
-msgid "unmounted"
+#: build/ui_about.h:123
+msgid "Disk information GUI"
 msgstr ""
 
-#: data/changemanager.cpp:58
-msgid "added"
+#: build/ui_about.h:124
+msgid "Version:"
 msgstr ""
 
-#: data/changemanager.cpp:59
-msgid "removed"
+#: build/ui_about.h:125 build/ui_devinfo.h:454 build/ui_devinfo.h:458
+#: build/ui_devinfo.h:461 build/ui_devinfo.h:465 build/ui_parinfo.h:273
+msgid "none"
 msgstr ""
 
-#: data/devicelist.cpp:271
-msgid "LVM Device"
+#: build/ui_about.h:126
+msgid "(C) 2016 Jeroen van Iddekinge"
 msgstr ""
 
-#: data/devicelist.cpp:280
-msgid "LVM Member"
+#: build/ui_about.h:127
+msgid "License: Gpl v2"
 msgstr ""
 
-#: gui/formbasedevinfo.cpp:38
-msgid "Alias"
+#: build/ui_about.h:128 build/ui_devinfo.h:481 build/ui_parinfo.h:289
+msgid "Close"
 msgstr ""
 
-#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
-msgid "Yes"
+#: build/ui_devinfo.h:442
+msgid "Device details information"
 msgstr ""
 
-#: gui/formdevinfo.cpp:67 gui/formdevinfo.cpp:68
-msgid "No"
+#: build/ui_devinfo.h:443
+msgid "Usb bus"
 msgstr ""
 
-#: gui/formdevinfo.cpp:76
-msgid "SSD"
+#: build/ui_devinfo.h:444
+msgid "SSD?"
 msgstr ""
 
-#: gui/formdevinfo.cpp:125 gui/mainwindow.cpp:111 gui/mainwindow.cpp:146
-#: gui/mainwindow.cpp:199 gui/mainwindow.cpp:230 gui/mainwindow.cpp:273
-#: gui/mainwindow.cpp:308 gui/mainwindow.cpp:837
+#: build/ui_devinfo.h:445 build/ui_devinfo.h:457 build/ui_devinfo.h:463
+#: build/ui_devinfo.h:467 build/ui_devinfo.h:469
+msgid "TextLabel"
+msgstr ""
+
+#: build/ui_devinfo.h:446
+msgid "Scsi bus:"
+msgstr ""
+
+#: build/ui_devinfo.h:447
+msgid "Vendor:"
+msgstr ""
+
+#: build/ui_devinfo.h:448 build/ui_parinfo.h:282
+msgid "Device name:"
+msgstr ""
+
+#: build/ui_devinfo.h:449 build/ui_parinfo.h:277
+msgid "Size:"
+msgstr ""
+
+#: build/ui_devinfo.h:450 build/ui_devinfo.h:452 build/ui_devinfo.h:456
+#: build/ui_devinfo.h:459 build/ui_parinfo.h:274 build/ui_parinfo.h:275
+#: build/ui_parinfo.h:280
+msgid "None"
+msgstr ""
+
+#: build/ui_devinfo.h:451
+msgid "Model:"
+msgstr ""
+
+#: build/ui_devinfo.h:453
+msgid "Removable:"
+msgstr ""
+
+#: build/ui_devinfo.h:455
+msgid "Read only:"
+msgstr ""
+
+#: build/ui_devinfo.h:460 build/ui_parinfo.h:279
+msgid "Label:"
+msgstr ""
+
+#: build/ui_devinfo.h:462 build/ui_parinfo.h:276
+msgid "Type:"
+msgstr ""
+
+#: build/ui_devinfo.h:464
+msgid "Loopback file:"
+msgstr ""
+
+#: build/ui_devinfo.h:466
+msgid "Iscsi host:"
+msgstr ""
+
+#: build/ui_devinfo.h:470 build/ui_parinfo.h:283
+msgid "Device aliases"
+msgstr ""
+
+#: build/ui_devinfo.h:471 build/ui_parinfo.h:284
+msgid "Device has no aliasses"
+msgstr ""
+
+#: build/ui_devinfo.h:472 build/ui_parinfo.h:285
+msgid "Aliases"
+msgstr ""
+
+#: build/ui_devinfo.h:473 build/ui_devinfo.h:474
+msgid "Partitions"
+msgstr ""
+
+#: build/ui_devinfo.h:475 build/ui_devinfo.h:477 build/ui_parinfo.h:286
+#: build/ui_parinfo.h:288
+msgid "Mount points"
+msgstr ""
+
+#: build/ui_devinfo.h:476
+msgid "This device or it's partitions are not mounted"
+msgstr ""
+
+#: build/ui_devinfo.h:479
+msgid "No slave found"
+msgstr ""
+
+#: build/ui_fields.h:265
+msgid "Device tab configuration"
+msgstr ""
+
+#: build/ui_fields.h:266
+msgid "Available fields:"
+msgstr ""
+
+#: build/ui_fields.h:267
+msgid "Fields displayed in disks tab:"
+msgstr ""
+
+#: build/ui_fields.h:268
+msgid "Up"
+msgstr ""
+
+#: build/ui_fields.h:269
+msgid "<"
+msgstr ""
+
+#: build/ui_fields.h:270
+msgid ">"
+msgstr ""
+
+#: build/ui_fields.h:271
+msgid "Down"
+msgstr ""
+
+#: build/ui_fields.h:272
+msgid "Display devices /pratitions"
+msgstr ""
+
+#: build/ui_fields.h:273
+msgid "As a &tree"
+msgstr ""
+
+#: build/ui_fields.h:274
+msgid "As a &grid"
+msgstr ""
+
+#: build/ui_fields.h:275
+msgid "Expand by default"
+msgstr ""
+
+#: build/ui_main.h:396
+msgid "Device information GUI"
+msgstr ""
+
+#: build/ui_main.h:397
+msgid "&Quit"
+msgstr ""
+
+#: build/ui_main.h:398
+msgid "&Fields"
+msgstr ""
+
+#: build/ui_main.h:399
+msgid "&About"
+msgstr ""
+
+#: build/ui_main.h:400
+msgid "&Visible tabs"
+msgstr ""
+
+#: build/ui_main.h:401
+msgid "&User defined tabs"
+msgstr ""
+
+#: build/ui_main.h:402
+msgid "(Un)mount"
+msgstr ""
+
+#: build/ui_main.h:403
+msgid "Refresh"
+msgstr ""
+
+#: build/ui_main.h:404
+msgid "Automatic refresh"
+msgstr ""
+
+#: build/ui_main.h:405
+msgid "Show notifications"
+msgstr ""
+
+#: build/ui_main.h:407 build/ui_visibletabs.h:120 gui/mainwindow.cpp:793
+msgid "Disks"
+msgstr ""
+
+#: build/ui_main.h:408 build/ui_visibletabs.h:121 gui/mainwindow.cpp:794
+msgid "Raid"
+msgstr ""
+
+#: build/ui_main.h:409 gui/mainwindow.cpp:795
+msgid "Fstab"
+msgstr ""
+
+#: build/ui_main.h:410
+msgid "iscsi"
+msgstr ""
+
+#: build/ui_main.h:411 build/ui_visibletabs.h:124 gui/mainwindow.cpp:797
+msgid "Stats"
+msgstr ""
+
+#: build/ui_main.h:412
+msgid ""
+"LVM information on this page can only be retrieved when bdgui is run as root."
+msgstr ""
+
+#: build/ui_main.h:413
+msgid ""
+"Can't get information about LVM because \"lvmetad\" deamon  is not running"
+msgstr ""
+
+#: build/ui_main.h:414
+msgid "Physical volumes"
+msgstr ""
+
+#: build/ui_main.h:415
+msgid "Volume groups"
+msgstr ""
+
+#: build/ui_main.h:416
+msgid "Logical volumes"
+msgstr ""
+
+#: build/ui_main.h:417 build/ui_visibletabs.h:125 gui/mainwindow.cpp:512
+#: gui/mainwindow.cpp:798
+msgid "LVM"
+msgstr ""
+
+#: build/ui_main.h:418
+msgid "Fi&le"
+msgstr ""
+
+#: build/ui_main.h:419
+msgid "Setti&ngs"
+msgstr ""
+
+#: build/ui_main.h:420
+msgid "Help"
+msgstr ""
+
+#: build/ui_mount.h:283
+msgid "Mounting device"
+msgstr ""
+
+#: build/ui_mount.h:284 gui/formdevinfo.cpp:162 gui/mainwindow.cpp:110
+#: gui/mainwindow.cpp:145 gui/mainwindow.cpp:198 gui/mainwindow.cpp:232
+#: gui/mainwindow.cpp:275 gui/mainwindow.cpp:317 gui/mainwindow.cpp:866
 msgid "Device"
 msgstr ""
 
-#: gui/formdevinfo.cpp:126 gui/formdevinfo.cpp:154 gui/formparinfo.cpp:38
-#: gui/mainwindow.cpp:232
+#: build/ui_mount.h:285
+msgid "&Unmount"
+msgstr ""
+
+#: build/ui_mount.h:286
+msgid "Moun&t"
+msgstr ""
+
+#: build/ui_mount.h:287
+msgid "Operation"
+msgstr ""
+
+#: build/ui_mount.h:288
+msgid "Unmount options"
+msgstr ""
+
+#: build/ui_mount.h:289
+msgid "Unmount"
+msgstr ""
+
+#: build/ui_mount.h:290
+msgid "Unmount options:"
+msgstr ""
+
+#: build/ui_mount.h:291
+msgid "Lazy unmount"
+msgstr ""
+
+#: build/ui_mount.h:292
+msgid "Mount options"
+msgstr ""
+
+#: build/ui_mount.h:293
+msgid "Mount on"
+msgstr ""
+
+#: build/ui_mount.h:294
+msgid "filesystem type"
+msgstr ""
+
+#: build/ui_mount.h:295
+msgid "Readonly"
+msgstr ""
+
+#: build/ui_mount.h:296
+msgid "No execute"
+msgstr ""
+
+#: build/ui_mount.h:297
+msgid "No suid"
+msgstr ""
+
+#: build/ui_mount.h:298
+msgid "No device"
+msgstr ""
+
+#: build/ui_mount.h:299
+msgid "Access time"
+msgstr ""
+
+#: build/ui_mount.h:300
+msgid "No directorty access time"
+msgstr ""
+
+#: build/ui_mount.h:301
+msgid "Security:"
+msgstr ""
+
+#: build/ui_mount.h:302
+msgid "Extra mount options"
+msgstr ""
+
+#: build/ui_mount.h:303 build/ui_newtab.h:103 build/ui_tabconfig.h:409
+msgid "Ok"
+msgstr ""
+
+#: build/ui_mount.h:304 build/ui_newtab.h:104 build/ui_tabconfig.h:410
+msgid "Cancel"
+msgstr ""
+
+#: build/ui_newtab.h:101
+msgid "New tab"
+msgstr ""
+
+#: build/ui_newtab.h:102
+msgid "Label of new tab:"
+msgstr ""
+
+#: build/ui_parinfo.h:272
+msgid "Partition details information"
+msgstr ""
+
+#: build/ui_parinfo.h:278
+msgid "Partition name:"
+msgstr ""
+
+#: build/ui_parinfo.h:281
+msgid "Go"
+msgstr ""
+
+#: build/ui_parinfo.h:287
+msgid "This partition is not mounted"
+msgstr ""
+
+#: build/ui_tabconfig.h:390
+msgid "User define tab"
+msgstr ""
+
+#: build/ui_tabconfig.h:391
+msgid "User defined tabs:"
+msgstr ""
+
+#: build/ui_tabconfig.h:396
+msgid "Tab label:"
+msgstr ""
+
+#: build/ui_tabconfig.h:397
+msgid "Tab is active?"
+msgstr ""
+
+#: build/ui_tabconfig.h:398
+msgid "Display what?"
+msgstr ""
+
+#: build/ui_tabconfig.h:399
+msgid "&Device"
+msgstr ""
+
+#: build/ui_tabconfig.h:400
+msgid "Par&tition"
+msgstr ""
+
+#: build/ui_tabconfig.h:401
+msgid "Both"
+msgstr ""
+
+#: build/ui_tabconfig.h:402
+msgid "Condition field:"
+msgstr ""
+
+#: build/ui_tabconfig.h:403
+msgid "Condition:"
+msgstr ""
+
+#: build/ui_tabconfig.h:404
+msgid "Fields in tab:"
+msgstr ""
+
+#: build/ui_usertabdef.h:54
+msgid "Form"
+msgstr ""
+
+#: build/ui_visibletabs.h:118
+msgid "Setup visible tabs"
+msgstr ""
+
+#: build/ui_visibletabs.h:119
+msgid "Visible tab pages"
+msgstr ""
+
+#: build/ui_visibletabs.h:122
+msgid "FSTab"
+msgstr ""
+
+#: build/ui_visibletabs.h:123 gui/mainwindow.cpp:796
+msgid "Iscsi"
+msgstr ""
+
+#: build/ui_visibletabs.h:126
+msgid "&Ok"
+msgstr ""
+
+#: build/ui_visibletabs.h:127
+msgid "&Cancel"
+msgstr ""
+
+#: data/changemanager.cpp:113
+msgid "added"
+msgstr ""
+
+#: data/changemanager.cpp:114
+msgid "removed"
+msgstr ""
+
+#: data/devicelist.cpp:285
+msgid "LVM Device"
+msgstr ""
+
+#: data/devicelist.cpp:294
+msgid "LVM Member"
+msgstr ""
+
+#: gui/formbasedevinfo.cpp:24
+msgid "Alias"
+msgstr ""
+
+#: gui/formdevinfo.cpp:91 gui/formdevinfo.cpp:92
+msgid "Yes"
+msgstr ""
+
+#: gui/formdevinfo.cpp:91 gui/formdevinfo.cpp:92
+msgid "No"
+msgstr ""
+
+#: gui/formdevinfo.cpp:100
+msgid "SSD"
+msgstr ""
+
+#: gui/formdevinfo.cpp:163 gui/formdevinfo.cpp:197 gui/formparinfo.cpp:38
+#: gui/mainwindow.cpp:234
 msgid "Mount point"
 msgstr ""
 
-#: gui/formdevinfo.cpp:127 gui/formparinfo.cpp:39
+#: gui/formdevinfo.cpp:164 gui/formparinfo.cpp:39
 msgid "Fs. type"
 msgstr ""
 
-#: gui/formdevinfo.cpp:149 gui/mainwindow.cpp:430 gui/mainwindow.cpp:506
+#: gui/formdevinfo.cpp:192 gui/mainwindow.cpp:455 gui/mainwindow.cpp:530
 msgid "Name"
 msgstr ""
 
-#: gui/formdevinfo.cpp:152
+#: gui/formdevinfo.cpp:195
 msgid "Start(Bytes)"
 msgstr ""
 
-#: gui/formdevinfo.cpp:153
+#: gui/formdevinfo.cpp:196
 msgid "Available"
 msgstr ""
 
-#: gui/formdevinfo.cpp:192
+#: gui/formdevinfo.cpp:239
 msgid "Slave name"
 msgstr ""
 
-#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:287 gui/mountdialog.cpp:155
-#: gui/mountdialog.cpp:163 gui/mountdialog.cpp:183 gui/mountdialog.cpp:187
+#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:91 gui/mountdialog.cpp:171
+#: gui/mountdialog.cpp:184 gui/mountdialog.cpp:206 gui/mountdialog.cpp:210
 msgid "Error"
 msgstr ""
 
@@ -178,7 +618,7 @@ msgstr ""
 msgid "Name can't be empty"
 msgstr ""
 
-#: gui/formtabdef.cpp:287
+#: gui/formtabdef.cpp:91
 msgid "Please select a field to add"
 msgstr ""
 
@@ -194,152 +634,132 @@ msgstr ""
 msgid "Can't mount device"
 msgstr ""
 
-#: gui/mainwindow.cpp:113 gui/mainwindow.cpp:142 gui/mainwindow.cpp:145
+#: gui/mainwindow.cpp:112 gui/mainwindow.cpp:141 gui/mainwindow.cpp:144
 msgid "Volume group"
 msgstr ""
 
-#: gui/mainwindow.cpp:143 gui/mainwindow.cpp:147 gui/mainwindow.cpp:476
-#: gui/mainwindow.cpp:676
+#: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:500
+#: gui/mainwindow.cpp:701
 msgid "Id"
 msgstr ""
 
-#: gui/mainwindow.cpp:144
+#: gui/mainwindow.cpp:143
 msgid "Logical volume"
 msgstr ""
 
-#: gui/mainwindow.cpp:148
+#: gui/mainwindow.cpp:147
 msgid "Read"
 msgstr ""
 
-#: gui/mainwindow.cpp:149
+#: gui/mainwindow.cpp:148
 msgid "Write"
 msgstr ""
 
-#: gui/mainwindow.cpp:150
+#: gui/mainwindow.cpp:149
 msgid "Visible"
 msgstr ""
 
-#: gui/mainwindow.cpp:197
+#: gui/mainwindow.cpp:196
 msgid "Session"
 msgstr ""
 
-#: gui/mainwindow.cpp:198
+#: gui/mainwindow.cpp:197
 msgid "Address"
 msgstr ""
 
-#: gui/mainwindow.cpp:200
+#: gui/mainwindow.cpp:199
 msgid "Iscsi bus"
 msgstr ""
 
-#: gui/mainwindow.cpp:229
-msgid "Comments"
+#: gui/mainwindow.cpp:200
+msgid "Target"
 msgstr ""
 
 #: gui/mainwindow.cpp:231
+msgid "Comments"
+msgstr ""
+
+#: gui/mainwindow.cpp:233
 msgid "Real device"
 msgstr ""
 
-#: gui/mainwindow.cpp:234
+#: gui/mainwindow.cpp:236
 msgid "Options"
 msgstr ""
 
-#: gui/mainwindow.cpp:244
+#: gui/mainwindow.cpp:246
 msgid "Not mounted\n"
 msgstr ""
 
-#: gui/mainwindow.cpp:245
+#: gui/mainwindow.cpp:247
 msgid "Mounted on different path \n"
 msgstr ""
 
-#: gui/mainwindow.cpp:251
+#: gui/mainwindow.cpp:253
 msgid "Wrong type. Type is (%1)"
 msgstr ""
 
-#: gui/mainwindow.cpp:252
+#: gui/mainwindow.cpp:254
 msgid "Device not mountable (has partitions)"
 msgstr ""
 
-#: gui/mainwindow.cpp:274
+#: gui/mainwindow.cpp:276
 msgid "Raid members"
 msgstr ""
 
-#: gui/mainwindow.cpp:275
+#: gui/mainwindow.cpp:277
 msgid "Raid level"
 msgstr ""
 
-#: gui/mainwindow.cpp:276
+#: gui/mainwindow.cpp:278
 msgid "Raid type"
 msgstr ""
 
-#: gui/mainwindow.cpp:277
+#: gui/mainwindow.cpp:279
 msgid "Mounted point"
 msgstr ""
 
-#: gui/mainwindow.cpp:309
+#: gui/mainwindow.cpp:318
 msgid "Read(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:310
+#: gui/mainwindow.cpp:319
 msgid "Read(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:311
+#: gui/mainwindow.cpp:320
 msgid "Write(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:312
+#: gui/mainwindow.cpp:321
 msgid "Write(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:431 gui/mainwindow.cpp:508
+#: gui/mainwindow.cpp:456 gui/mainwindow.cpp:532
 msgid "Partition"
 msgstr ""
 
-#: gui/mainwindow.cpp:482 gui/mainwindow.cpp:678
+#: gui/mainwindow.cpp:506 gui/mainwindow.cpp:703
 msgid "Uuid"
 msgstr ""
 
-#: gui/mainwindow.cpp:485 gui/mainwindow.cpp:679
+#: gui/mainwindow.cpp:509 gui/mainwindow.cpp:704
 msgid "Path"
 msgstr ""
 
-#: gui/mainwindow.cpp:488 gui/mainwindow.cpp:774
-msgid "LVM"
-msgstr ""
-
-#: gui/mainwindow.cpp:675
+#: gui/mainwindow.cpp:700
 msgid "Devices"
 msgstr ""
 
-#: gui/mainwindow.cpp:677
+#: gui/mainwindow.cpp:702
 msgid "Labels"
 msgstr ""
 
-#: gui/mainwindow.cpp:769
-msgid "Disks"
-msgstr ""
-
-#: gui/mainwindow.cpp:770
-msgid "Raid"
-msgstr ""
-
-#: gui/mainwindow.cpp:771
-msgid "Fstab"
-msgstr ""
-
-#: gui/mainwindow.cpp:772
-msgid "Iscsi"
-msgstr ""
-
-#: gui/mainwindow.cpp:773
-msgid "Stats"
-msgstr ""
-
-#: gui/mainwindow.cpp:836
+#: gui/mainwindow.cpp:865
 msgid "Date"
 msgstr ""
 
-#: gui/mainwindow.cpp:838
+#: gui/mainwindow.cpp:867
 msgid "Change"
 msgstr ""
 
@@ -363,27 +783,27 @@ msgstr ""
 msgid "Path is not a directory but a file"
 msgstr ""
 
-#: gui/mountdialog.cpp:155
+#: gui/mountdialog.cpp:171
 msgid "Please select operation"
 msgstr ""
 
-#: gui/mountdialog.cpp:163
+#: gui/mountdialog.cpp:184
 msgid "Please select what to unmount"
 msgstr ""
 
-#: gui/mountdialog.cpp:169
+#: gui/mountdialog.cpp:190
 msgid "Unmounting failed"
 msgstr ""
 
-#: gui/mountdialog.cpp:183
+#: gui/mountdialog.cpp:206
 msgid "No device selected"
 msgstr ""
 
-#: gui/mountdialog.cpp:187
+#: gui/mountdialog.cpp:210
 msgid "Mount point is empty"
 msgstr ""
 
-#: gui/mountdialog.cpp:206
+#: gui/mountdialog.cpp:229
 msgid "Error during mounting"
 msgstr ""
 
