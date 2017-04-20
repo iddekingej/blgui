@@ -14,14 +14,14 @@ set(test_SRCS   test/lib/testclass.cpp
 		test/data/test_deviceinfo.cpp
 )
 
-add_executable(bdgui_test test/test.cpp ${test_SRCS} ${bdgui_SRCS})
+add_executable(blgui_test test/test.cpp ${test_SRCS} ${blgui_SRCS})
 
-target_link_libraries(bdgui_test
-    ${bdgui_LIBS}
+target_link_libraries(blgui_test
+    ${blgui_LIBS}
     ${LIB_BLKID}    
     ${LIB_UDEV}
 )
 
 
-install(TARGETS bdgui_test  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS blgui_test  ${INSTALL_TARGETS_DEFAULT_ARGS})
 add_subdirectory(test)
