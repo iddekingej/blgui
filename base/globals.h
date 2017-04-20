@@ -1,7 +1,7 @@
 #ifndef __GLOBALS_H_
 #define __GLOBALS_H_
 
-
+#define PROG_NAME "blgui"
 /**
  *  Definition of fields available for the main grid
  */

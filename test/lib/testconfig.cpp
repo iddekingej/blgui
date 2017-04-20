@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include "../../base/compat.h"
 
-const char *g_tempDir="/tmp/bdguiXXXXXX";
+const char *g_tempDir="/tmp/blguiXXXXXX";
 
 TTestConfig::TTestConfig()
 {

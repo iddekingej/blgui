@@ -18,9 +18,9 @@ int main(int argc, char **argv) {
 	g_app=new QApplication(argc,argv);
 //TODO to KDE4
 #ifdef KDE5
-	KLocalizedString::setApplicationDomain("bdgui");
+	KLocalizedString::setApplicationDomain(PROG_NAME);
 	KAboutData l_aboutData(
-			"bdgui"
+			PROG_NAME
 		,	i18n("Disk information gui")
 		,	VERSION
 		,	i18n("X")
