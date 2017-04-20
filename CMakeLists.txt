@@ -1,4 +1,4 @@
-project (bdgui)
+project (blgui)
 
 
 set(KDE_VERSION ${kde})
@@ -11,7 +11,7 @@ else()
 endif()
 
 
-set(bdgui_ui
+set(blgui_ui
 	ui/main.ui 
 	ui/fields.ui 
 	ui/devinfo.ui 
@@ -24,11 +24,11 @@ set(bdgui_ui
 	ui/usertabdef.ui
 )
 
-set(bdgui_RESOURCES 
+set(blgui_RESOURCES 
 	resources/icons.qrc
 )
 
-set(bdgui_SRCS   
+set(blgui_SRCS   
 	base/globals.cpp 
 	base/linklist.cpp 
 	base/utils.cpp
@@ -90,31 +90,31 @@ endif()
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 
-set(bdgui_SRCS ${bdgui_rcc_h} ${bdgui_SRCS} ${bdgui_ui_h})
+set(blgui_SRCS ${blgui_rcc_h} ${blgui_SRCS} ${blgui_ui_h})
 
-add_executable(bdgui 	main.cpp ${bdgui_SRCS})
+add_executable(blgui 	main.cpp ${blgui_SRCS})
 
 
-target_link_libraries(bdgui
-    ${bdgui_LIBS}
+target_link_libraries(blgui
+    ${blgui_LIBS}
     ${LIB_BLKID}    
     ${LIB_UDEV}
 )
 
 
 
-install(TARGETS bdgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS blgui  ${INSTALL_TARGETS_DEFAULT_ARGS})
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 add_subdirectory(po)
 
 if(RUN_TEST EQUAL "1")
-   include("bdgui_test.cmake")
+   include("blgui_test.cmake")
 endif()
 
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Gui for displaying block device information")
 SET(CPACK_RPM_PACKAGE_SUMMARY ${CPACK_PACKAGE_DESCRIPTION_SUMMARY})
-SET(CPACK_RPM_PACKAGE_NAME "bdgui")
+SET(CPACK_RPM_PACKAGE_NAME "blgui")
 SET(CPACK_PACKAGE_VENDOR "iddekingej@lycos.com")
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Readme.txt")
 SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt")

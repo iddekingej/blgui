@@ -22,14 +22,14 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     WidgetsAddons   
     Config
 )
-set(bdgui_LIBS
+set(blgui_LIBS
     Qt5::Widgets
     KF5::CoreAddons
     KF5::ConfigCore
     KF5::I18n
  )
  
- KI18N_WRAP_UI(bdgui_ui_h ${bdgui_ui})
+ KI18N_WRAP_UI(blgui_ui_h ${blgui_ui})
 
-qt5_add_resources(bdgui_rcc_h ${bdgui_RESOURCES})
+qt5_add_resources(blgui_rcc_h ${blgui_RESOURCES})
 add_definitions(-DKDE5)
