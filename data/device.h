@@ -185,7 +185,7 @@ public:
 	inline TLinkList<TPartition> *getPartitions(){ return &partitions;}
 	
 	const QString &getModel();
-	virtual void fillDataRow(QStringList &p_list);
+	virtual void fillDataRow(TField p_no,QString &p_info) override;
 
 	TDevice(const QString &p_name,TDiskSize p_size);
 	TPartition *addParition(const QString &p_name,TDiskSize p_size,TDiskSize p_start);

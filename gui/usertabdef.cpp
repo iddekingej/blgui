@@ -49,14 +49,15 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
  *  
  * 
  */
-void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list)
+void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,TDeviceBase *p_device)
 {
 	int l_fieldId;
 	QStandardItem *l_item;
-	int l_itemSize=p_list.count();	
+	QString l_value;
 //fill fixed columns 
 	for(int l_cnt=0;l_cnt<p_fixedEnd;l_cnt++){
-		l_item=new QStandardItem(p_list[l_cnt]);	
+		p_device->fillDataRow((TField)l_cnt,l_value); //TODO TFIELD
+		l_item=new QStandardItem(l_value);	
 		model->setItem(p_row,l_cnt,l_item);
 		
 	}
@@ -64,9 +65,8 @@ void TUserTabDef::displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *
 //fill flexible columns
 	for(int l_cnt=0;l_cnt<p_enabledFields->count();l_cnt++){
 		l_fieldId=(*p_enabledFields)[l_cnt];		
-		if(l_fieldId+p_begin<l_itemSize){
-		    model->setItem(p_row,l_cnt+p_fixedEnd,new QStandardItem(p_list[l_fieldId+p_begin]));		
-		}
+		p_device->fillDataRow((TField)(l_fieldId+p_begin),l_value);
+		model->setItem(p_row,l_cnt+p_fixedEnd,new QStandardItem(l_value));		
 	}
 }
 
@@ -95,7 +95,6 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	const QHash<QString,TDeviceBase*> *l_map=p_info->getDevices()->getNameIndex();
 	QHashIterator<QString,TDeviceBase *> l_iter(*l_map);
 	TDeviceBase *l_device;
-	QStringList l_info;
 	int l_conditionField=p_def->getConditionField();
 	TConditionType l_conditionType=p_def->getConditionType();
 	bool l_ok;
@@ -112,11 +111,12 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 		if(p_def->getConditionObject()==TT_Partition){
 			if(dynamic_cast<TPartition *>(l_device)==nullptr) continue;
 		}
-		l_info.clear();
-		l_device->fillDataRow(l_info);
+		
+		
 		l_ok=true;
-		if(l_conditionField>=0 && l_conditionField+2<l_info.length()){
-			l_value=l_info[l_conditionField+2];	
+		if(l_conditionField>=0){
+			l_device->fillDataRow((TField)l_conditionField,l_value); //TODO TFIELD
+			
 			switch(l_conditionType){
 				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
 				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
@@ -126,7 +126,7 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 			
 		}
 		if(l_ok){
-			displayRow(l_fixedEnd,2,l_row,p_def->getSelectedList(),l_info);
+			displayRow(l_fixedEnd,2,l_row,p_def->getSelectedList(),l_device);
 			l_row++;
 		}
 	}

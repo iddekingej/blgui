@@ -2,7 +2,7 @@
 #include "devicebase.h"
 #include "partition.h"
 #include "base/compat.h"
-
+#include "base/globals.h"
 /**
  *  Creates partition information object
  *  
@@ -24,31 +24,59 @@ TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_s
  * is copied to a QStringList.
  */
 
-void TPartition::fillDataRow(QStringList& p_list)
+void TPartition::fillDataRow(TField p_no,QString &p_data)
 {	
-	p_list 	<<getDevice()->getName()
-		<<getName()
-		<<QString::number(getSize())
-		<<QStringLiteral("")
-		<<getType()
-		<<getMountText()
-		<<getLabel()
-		<<getReadableSize()
-		<<QStringLiteral("")
-		<<QStringLiteral("")
-		<<QStringLiteral("")
-		<<getSlavesString()
-		<< (getHasFree()?QString::number(getFree()):QStringLiteral(""))
-		<<QStringLiteral("")
-		<<QStringLiteral("")
-		<<QString::number(start)
-		<<getReadableFreeSize()
-		<<QStringLiteral("")
-		<<QStringLiteral("")
-		<<QStringLiteral("")
-		<< getVGName()
-		<<QStringLiteral("");
-;
+	switch(p_no){
+		case FIELD_DEVICE_NAME:
+			p_data=getDevice()->getName();
+			break;
+		case FIELD_PARTITION_NAME:
+			p_data=getName();
+			break;
+		case FIELD_SIZE:
+			p_data=QString::number(getSize());
+			break;
+		case FIELD_MODEL:
+			p_data=QStringLiteral("");
+			break;
+		case FIELD_TYPE:
+			p_data=getType();
+			break;
+		case FIELD_MOUNTED:
+			p_data=getMountText();
+			break;
+		case FIELD_LABEL:
+			p_data=getLabel();
+			break;
+		case FIELD_SIZE_KMG:
+			p_data=getReadableSize();
+			break;
+		case FIELD_READONLY:
+		case FIELD_REMOVABLE:
+		case FIELD_LOOPBACKFILE:
+		case FIELD_SCSI_BUS:
+		case FIELD_ISCSI_HOST:
+		case FIELD_ROTATIONAL:
+		case FIELD_USB_BUS:
+		case FIELD_PCI_BUS:
+		case FIELD_LVM_NAME:
+			p_data=QStringLiteral("");
+			break;
+		case FIELD_FREE_SPACE:
+			p_data=(getHasFree()?QString::number(getFree()):QStringLiteral(""));
+			break;
+		case FIELD_START:
+			p_data=QString::number(start);
+			break;
+		case FIELD_FREE_SPACE_KMG:
+			p_data=getReadableFreeSize();
+			break;
+		case FIELD_VG_NAME:
+			p_data=getVGName();
+			break;
+		default:
+			p_data=QStringLiteral("Invalid field no:")+QString::number(p_no);
+	}
 }
 
 /**

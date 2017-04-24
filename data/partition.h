@@ -22,7 +22,7 @@ public:
 	inline TDeviceBase *getDevice(){ return device;}
 	inline TDiskSize getStart(){ return start;}
 	TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size,TDiskSize p_start);
-	virtual void fillDataRow(QStringList &p_list);
+	virtual void fillDataRow(TField p_no,QString &p_data) override;
 	virtual bool hasPartitions();
 };
 #endif

@@ -354,14 +354,15 @@ void TMainWindow::fillStats()
 * \param p_list  - List with data
 * \param p_parent - parent row (for hierarchical display)
 */
-void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent)
+void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,TDeviceBase  *p_device,QStandardItem *p_parent)
 {
 	int l_fieldId;
 	QStandardItem *l_item;
-	int l_itemSize=p_list.count();	
+	QString l_value;
 //fill fixed columns 
 	for(int l_cnt=0;l_cnt<p_begin;l_cnt++){
-		l_item=new QStandardItem(p_list[l_cnt]);	
+		p_device->fillDataRow((TField)l_cnt,l_value);
+		l_item=new QStandardItem(l_value);	
 		if(p_parent != nullptr){
 		    p_parent->setChild(p_row,l_cnt,l_item);
 		} else {
@@ -372,13 +373,14 @@ void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,c
 //fill flexible columns
 	for(int l_cnt=0;l_cnt<enableDeviceFields->count();l_cnt++){
 		l_fieldId=(*enableDeviceFields)[l_cnt];		
-		if(l_fieldId+p_begin<l_itemSize){
+			p_device->fillDataRow((TField)(l_fieldId+p_begin),l_value);
+
 			if(p_parent !=nullptr){
-			    p_parent->setChild(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));			    
+			    p_parent->setChild(p_row,l_cnt+p_begin,new QStandardItem(l_value));			    
 			} else {
-			    p_model->setItem(p_row,l_cnt+p_begin,new QStandardItem(p_list[l_fieldId+p_begin]));
+			    p_model->setItem(p_row,l_cnt+p_begin,new QStandardItem(l_value));
 			}
-		}
+		
 	}
 }
 
@@ -445,7 +447,6 @@ void TMainWindow::setExpandedDevRows(QSet< QString >& p_list)
 //Fill devices tab as a tree
 void TMainWindow::fillDeviceTree()
 {
-    	QStringList l_deviceRow;
 	QStandardItem *l_parent;
     	QStandardItemModel *l_model=new QStandardItemModel(0,1,this);	
     	QSet<QString> l_expanded;
@@ -462,19 +463,15 @@ void TMainWindow::fillDeviceTree()
 	int l_partRow;
 	devProxyModel->setFlexStart(2);
 	while(l_iter.hasNext()){
-	    l_device=l_iter.next();
-	    l_deviceRow.clear();
-	    l_device->fillDataRow(l_deviceRow);
-	    displayRow(2,l_model,l_cnt,l_deviceRow,nullptr);
+	    l_device=l_iter.next();	    
+	    displayRow(2,l_model,l_cnt,l_device,nullptr);
 	    l_parent=l_model->item(l_cnt,0);
 	    TLinkListIterator<TPartition> l_iterPartition(l_device->getPartitions());
 	    l_model->item(l_cnt)->setData(l_device->getName());
 	    l_partRow=0;
 	    while(l_iterPartition.hasNext()){
-		l_partition=l_iterPartition.next();
-		l_deviceRow.clear();
-		l_partition->fillDataRow(l_deviceRow);
-		displayRow(2,l_model,l_partRow,l_deviceRow,l_parent);
+		l_partition=l_iterPartition.next();		
+		displayRow(2,l_model,l_partRow,l_partition,l_parent);
 		l_parent->child(l_partRow)->setData(l_partition->getName());
 		l_partRow++;
 	    }
@@ -542,8 +539,7 @@ void TMainWindow::fillDeviceGrid()
 			l_deviceRow << l_mi.key();
 		
 		}
-		l_mi.value()->fillDataRow(l_deviceRow);		
-		displayRow(l_fixed,l_model,l_cnt,l_deviceRow,nullptr);
+		displayRow(l_fixed,l_model,l_cnt,l_mi.value(),nullptr);
 		l_model->item(l_cnt)->setData(l_mi.value()->getName());
 		l_cnt++;
 	}
