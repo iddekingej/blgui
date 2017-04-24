@@ -55,7 +55,7 @@ bool qmount(const QString p_device,const QString p_path,const QString p_filetype
 /**
  * Umount mount point
  * 
- * \param p_umount  Mount point to unmount
+ * \param p_unmount  Mount point to unmount
  * \param p_lazy    Lazy unmount. Detach filesystem, but clean up reference when filesystem
  *                  isn't bussy anymore.
  */

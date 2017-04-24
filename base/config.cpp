@@ -330,7 +330,7 @@ bool TConfig::getExpandByDefault()
  *  This method saves the expand tree flag.
  *  This value is read by  @see  TConfig::getExpandByDefault()
  * 
- *  \param p_exapnd true  expand tree by default , false: tree is collapsed by default.
+ *  \param p_expand true  expand tree by default , false: tree is collapsed by default.
  */
 
 void TConfig::setExpandByDefault(bool p_expand)

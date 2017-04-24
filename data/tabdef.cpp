@@ -148,7 +148,7 @@ TDoubleLinkedListItem<TTabDef> *TTabDefList::getByNo(long p_no)
 /**
  *  Get tab def  by position in list
  *  
- * \param p_no  position
+ * \param p_pos  position
  * \return tab def at position or null when not found
  */
 

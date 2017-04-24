@@ -76,7 +76,7 @@ void TUsbInfo::handleBus(QString p_path,QString &p_usbBus)
 /**
  *  Get USB bus by scsi bus
  * 
- * \param p_scsBus  scsi bus.
+ * \param p_scsiBus  scsi bus.
  * \param p_usb     returns usb bus to which the scsi bus is connected
  * \return          True if scsibus is connected to a usb bus.
  *                  False if not connected to usb bus.

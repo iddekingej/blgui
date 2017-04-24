@@ -39,7 +39,7 @@ TDeviceBase::TDeviceBase(const QString &p_name, TDiskSize p_size)
  *  Add mount information to devices.
  *  The mount information is a list of mountpoints on which the device is mounted and the fs type.
  *  
- *  \param p_mountPoin  Mount point directory  on which the device is mounted
+ *  \param p_mountPoint  Mount point directory  on which the device is mounted
  *   \param p_type      Type of file system (btrfs,ext2 etc..)
  */
 

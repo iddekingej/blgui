@@ -44,7 +44,7 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
  *  \param p_fixedEnd  End  of the fixed column (and start of the user defined columns)
  *  \param p_begin     Start of the user defined data in p_list
  *  \param p_row       Row number
- *  \param p_enableFields Which fields must be displayed (contain field id's)
+ *  \param p_enabledFields Which fields must be displayed (contain field id's)
  *  \param p_list         A QStringList with device data (index is the fieldid)
  *  
  * 
