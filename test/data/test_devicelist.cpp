@@ -114,12 +114,16 @@ void TTestDataDeviceList::test5()
 {
 	TLinkListItem<TDevice> *l_current=deviceList->getStart();
 	TLinkListItem<TPartition> *l_parCurrent;
-	QStringList l_info;
+	QString l_info;
 	while(l_current != nullptr){
-		l_current->getItem()->fillDataRow(l_info);
+		for(int l_cnt=0;l_cnt<g_numDeviceFields+2;l_cnt++){
+			l_current->getItem()->fillDataRow((TField)l_cnt,l_info); //TODO TField
+		}
 		l_parCurrent=l_current->getItem()->getPartitionStart();
 		while(l_parCurrent != nullptr){
-			l_parCurrent->getItem()->fillDataRow(l_info);
+			for(int l_cnt=0;l_cnt<g_numDeviceFields+2;l_cnt++){
+				l_parCurrent->getItem()->fillDataRow((TField)l_cnt,l_info);//TODO TField
+			}
 			l_parCurrent=l_parCurrent->getNext();
 		}
 		l_current=l_current->getNext();

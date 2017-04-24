@@ -29,6 +29,7 @@ const TFieldInfo  g_deviceFields[]={
 };
 
 
+
 /**
  *  Number of fields in g_deviceFields
  */

@@ -105,7 +105,7 @@ private:
 	bool deviceAsTree=false;
 	bool refreshNext=false;
 	void setTabVisible(int p_indx,bool p_flag,const QString &p_label);
-	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,const QStringList  &p_list,QStandardItem *p_parent);	
+	void displayRow(int p_begin,QStandardItemModel *p_model,int p_row,TDeviceBase  *p_device,QStandardItem *p_parent);	
 	void getExpandedDevRows(QSet<QString> &p_list);
 	void setExpandedDevRows(QSet<QString> &p_list);
 	void fillHeader(int p_begin,QStandardItemModel *p_model);

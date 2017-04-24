@@ -35,7 +35,7 @@ private:
 	unsigned long no=-1;
 private:
 	void fillHeader(int p_begin,QVector<int> *p_fields);
-	void displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,const QStringList  &p_list);
+	void displayRow(int p_fixedEnd,int p_begin,int p_row,QVector<int> *p_enabledFields ,TDeviceBase *p_list);
 public:
 	inline unsigned long getNo(){ return no;}
 	TUserTabDef(QWidget *p_parent);

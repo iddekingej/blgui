@@ -5,6 +5,7 @@
 #include <QMap>
 #include "base/linklist.h"
 #include "base/utils.h"
+#include "base/globals.h"
 #include "mount.h"
 #include "devicealias.h"
 /**
@@ -160,7 +161,7 @@ public:
 	bool isMountedOn(const QString &p_path);
 	QString getMountText();
 	const QString getSlavesString();
-	virtual void fillDataRow(QStringList &p_list)=0;
+	virtual void fillDataRow(TField p_no,QString &p_data)=0;
 	TDeviceBase(const QString &p_name,TDiskSize p_size);
 	void addMount(const QString &p_type,const QString &p_mountPoint);
 	void addAlias(const QString &p_type,const QString &p_alias);
