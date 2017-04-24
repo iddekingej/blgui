@@ -74,6 +74,9 @@ void TPartition::fillDataRow(TField p_no,QString &p_data)
 		case FIELD_VG_NAME:
 			p_data=getVGName();
 			break;
+		case FIELD_SLAVES:
+			p_data=getSlavesString();
+			break;
 		default:
 			p_data=QStringLiteral("Invalid field no:")+QString::number(p_no);
 	}
