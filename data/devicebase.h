@@ -162,6 +162,7 @@ public:
 	QString getMountText();
 	const QString getSlavesString();
 	virtual void fillDataRow(TField p_no,QString &p_data)=0;
+	virtual void getFieldValue(TField p_no,QVariant &p_data)=0;
 	TDeviceBase(const QString &p_name,TDiskSize p_size);
 	void addMount(const QString &p_type,const QString &p_mountPoint);
 	void addAlias(const QString &p_type,const QString &p_alias);

@@ -1,2 +1,2 @@
-ADD_TEST(bdgui_test ../bdgui_test)
+ADD_TEST(blgui_test ../blgui_test)
 

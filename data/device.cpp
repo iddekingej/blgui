@@ -121,6 +121,81 @@ void TDevice::fillDataRow(TField p_no,QString &p_data)
 }
 
 
+
+void TDevice::getFieldValue(TField p_no,QVariant &p_data)
+{	
+	switch(p_no){
+		case FIELD_DEVICE_NAME:
+			p_data=getName();
+			break;
+		case FIELD_PARTITION_NAME:
+			p_data=QStringLiteral("");
+			break;
+		case FIELD_SIZE:
+			p_data=(qlonglong)getSize();
+			break;
+		case FIELD_MODEL:
+			p_data=getVendor()+"/"+getModel();
+			break;
+		case FIELD_TYPE:
+			p_data=getType();
+			break;
+		case FIELD_MOUNTED:
+			p_data=getMountText();
+			break;
+		case FIELD_LABEL:
+			p_data=getLabel();
+			break;
+		case FIELD_SIZE_KMG:
+			p_data=getReadableSize();
+			break;
+		case FIELD_READONLY:
+			p_data=readonly;
+			break;
+		case FIELD_REMOVABLE:
+			p_data=removable;
+			break;			
+		case FIELD_LOOPBACKFILE:
+			p_data=loopbackFile;
+			break;
+		case FIELD_SCSI_BUS:
+			p_data=getScsiBus();
+			break;
+		case FIELD_ISCSI_HOST:
+			p_data=getIScsiAddress();
+			break;
+		case FIELD_ROTATIONAL:
+			p_data=getRotational();
+			break;
+		case FIELD_USB_BUS:
+			p_data=getUsbBus();
+			break;
+		case FIELD_PCI_BUS:
+			p_data=getPciBus();
+			break;
+		case FIELD_LVM_NAME:
+			p_data=getLVMName();
+			break;
+		case FIELD_FREE_SPACE:
+			p_data=(qlonglong)(getHasFree()?getFree():-1);
+			break;
+		case FIELD_START:
+			p_data=QStringLiteral("");
+			break;
+		case FIELD_FREE_SPACE_KMG:
+			p_data=getReadableFreeSize();
+			break;
+		case FIELD_VG_NAME:
+			p_data=getVGName();
+			break;
+		case FIELD_SLAVES:
+			p_data=getSlavesString();
+			break;
+		default:
+			p_data=QStringLiteral("Invalid field no:")+QString::number(p_no);
+	}
+}
+
 /**
  *  Checks if the device has partition
  *  

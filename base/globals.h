@@ -8,6 +8,7 @@
 typedef struct {
 	const char *title; //Title of field
 	const char type;   //Sort type of field
+	const char *fieldName; //Field name in extended condition
 	int realValue;
 } TFieldInfo;
 

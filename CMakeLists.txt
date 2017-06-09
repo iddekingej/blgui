@@ -55,6 +55,8 @@ set(blgui_SRCS
 	data/tabdef.cpp
 	data/lvm.cpp
 	data/sortproxy.cpp
+	data/conditionparser.cpp
+	formula/scanner.cpp
 	gui/about.cpp
 	gui/formparinfo.cpp 
 	gui/formbasedevinfo.cpp 

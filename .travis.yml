@@ -50,6 +50,7 @@ before_script:
 - sudo apt-get install -y libudev-dev
 - sudo apt-get install -y libqt4-dev
 - sudo apt-get install -y kdebase-workspace-dev
+- sudo apt-get install -y plasma-workspace-dev
 - sudo apt-get install -y libqjson-dev
 script:
 - mkdir build && cd build && cmake -Drun_test="1" -Dkde=4 .. && make -j2  && cpack -G DEB && sh ../test/test.sh
