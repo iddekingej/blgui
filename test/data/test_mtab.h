@@ -11,13 +11,13 @@ private:
 	TDeviceList *deviceList;
 	TMTab       *mtab;
 protected:
+	virtual void setup() override;
 	virtual void doRun() override;	
 	void test1();
 	void test2();
 	void test3();
 	void test4();
 public:
-	TTestDataMTab();
 	virtual  ~TTestDataMTab();
 	
 };

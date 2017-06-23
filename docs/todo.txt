@@ -1,0 +1,10 @@
+0.9.3
+- [Done] Rename program 
+- Extended condition
+- All tabs to tab def (also build in)
+- More LLVM information
+- [Done] Data used by flexible grid not vector but device::get(<item type>)
+- Export data to csv
+- Improve testing
+- Smartd
+- Performance improvements

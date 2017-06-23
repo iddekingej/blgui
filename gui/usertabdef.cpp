@@ -13,6 +13,7 @@ TUserTabDef::TUserTabDef(QWidget* p_parent):QWidget(p_parent)
 	model=new QStandardItemModel(0,g_numDeviceFields+2,this);
 
 	ui.dataView->setModel(model);	
+	ui.parseError->setVisible(false);
 }
 
 /**
@@ -45,7 +46,7 @@ void TUserTabDef::fillHeader(int p_begin,QVector<int> *p_fields){
  *  \param p_begin     Start of the user defined data in p_list
  *  \param p_row       Row number
  *  \param p_enabledFields Which fields must be displayed (contain field id's)
- *  \param p_list         A QStringList with device data (index is the fieldid)
+ *  \param p_device         A QStringList with device data (index is the fieldid)
  *  
  * 
  */
@@ -90,42 +91,30 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	int l_fixedEnd=2;
 	if(p_def->getConditionObject()==TT_Device){
 		l_fixedEnd=1;
-	}	
+	}
+	
+	QString l_error;
+	
+	
+	if(p_def->validateCondition(l_error)){
+		ui.parseError->setText(l_error);
+		ui.parseError->setVisible(true);
+	} else {
+		ui.parseError->setText("");
+	}
+	
 	fillHeader(l_fixedEnd,p_def->getSelectedList());
 	const QHash<QString,TDeviceBase*> *l_map=p_info->getDevices()->getNameIndex();
 	QHashIterator<QString,TDeviceBase *> l_iter(*l_map);
 	TDeviceBase *l_device;
-	int l_conditionField=p_def->getConditionField();
-	TConditionType l_conditionType=p_def->getConditionType();
-	bool l_ok;
 	QString l_value;
 	int l_row=0;
-
+	
 	while(l_iter.hasNext()){
 		l_iter.next();
 		l_device=l_iter.value();
 		
-		if(p_def->getConditionObject()==TT_Device){
-			if(dynamic_cast<TDevice *>(l_device)==nullptr) continue;
-		}
-		if(p_def->getConditionObject()==TT_Partition){
-			if(dynamic_cast<TPartition *>(l_device)==nullptr) continue;
-		}
-		
-		
-		l_ok=true;
-		if(l_conditionField>=0){
-			l_device->fillDataRow((TField)l_conditionField,l_value); //TODO TFIELD
-			
-			switch(l_conditionType){
-				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
-				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
-				case CT_IsValue:l_ok=(l_value==p_def->getConditionValue());break;
-				case CT_NoCondition:l_ok=true;break;
-			}
-			
-		}
-		if(l_ok){
+		if(p_def->checkCondition(l_device)){
 			displayRow(l_fixedEnd,2,l_row,p_def->getSelectedList(),l_device);
 			l_row++;
 		}

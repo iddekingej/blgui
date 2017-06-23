@@ -348,10 +348,10 @@ void TMainWindow::fillStats()
 
 /**
 * Fill row with data
-* \param p_begin - Column 0..p_begin-1 is fixed columns from p_begin are configured
-* \param p_model - model for filled data
-* \param p_row   - row number
-* \param p_list  - List with data
+* \param p_begin  - Column 0..p_begin-1 is fixed columns from p_begin are configured
+* \param p_model  - model for filled data
+* \param p_row    - row number
+* \param p_device - Display information about this device
 * \param p_parent - parent row (for hierarchical display)
 */
 void TMainWindow::displayRow(int p_begin,QStandardItemModel *p_model,int p_row,TDeviceBase  *p_device,QStandardItem *p_parent)

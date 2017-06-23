@@ -7,6 +7,10 @@
 #include <QList>
 #include <QListIterator>
 #include <sys/time.h>
+#include "formula/parser.h"
+#include "data/device.h"
+#include "data/partition.h"
+#include "formula/node.h"
 /**
  * Initialize default definition of a tab
  * 
@@ -27,6 +31,63 @@ TTabDef::TTabDef(const QString &p_name)
  */
 	no=((unsigned long)l_time.tv_sec)*1000000+l_time.tv_usec;
 }
+
+
+bool TTabDef::validateCondition(QString &p_error)
+{
+	if(useExtendedCondition){
+		TNode *l_node=getParsedExtendedCondition();
+		if(l_node==nullptr){
+			p_error=parseError;
+			return true;
+		}
+	}
+	p_error="";
+	return false;
+}
+
+
+bool TTabDef::checkCondition(TDeviceBase* p_device)
+{
+		if(conditionObject ==TT_Device){
+			if(dynamic_cast<TDevice *>(p_device)==nullptr){
+				return false;
+			};
+		}
+		if(conditionObject==TT_Partition){
+			if(dynamic_cast<TPartition *>(p_device)==nullptr){
+				return false;
+			};
+		}
+		
+		bool l_ok=true;
+		
+		if(useExtendedCondition){
+			TNode *l_extendedCondition=getParsedExtendedCondition();
+			if(l_extendedCondition != nullptr){
+				TDeviceCreator l_creator(p_device);
+				QVariant l_check;
+				if(l_extendedCondition->calculate(&l_creator,l_check)){
+					std::cout << "Error :" << qstr(l_creator.getError()) << std::endl;
+				}
+				l_ok=l_check.toBool();				
+			}
+		} else if(conditionField>=0){
+			QString l_value;
+			p_device->fillDataRow((TField)conditionField,l_value); //TODO TFIELD
+			
+			switch(conditionType){
+				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
+				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
+				case CT_IsValue:l_ok=(l_value==conditionValue);break;
+				case CT_NoCondition:l_ok=true;break;
+			}
+			
+		}
+		return l_ok;
+}
+
+
 
 /**
  * This constructor is used when readign the definition from the configuration
@@ -55,11 +116,42 @@ TTabDef::TTabDef(QVariant& p_json)
 	} else {
 		no=-1;
 	}
+	if(l_map.contains("useExtendedCondition")){
+		useExtendedCondition=l_map["useExtendedCondition"].toBool();
+	} else {
+		useExtendedCondition=false;
+	}
+	if(l_map.contains("extendedCondition")){
+		extendedCondition=l_map["extendedCondition"].toString();
+	} else {
+		extendedCondition = "";
+	}
 	QList<QVariant> l_fields=l_map["selectedFields"].toList();
 	for(int l_cnt=0;l_cnt<l_fields.size();l_cnt++){
 		selectedList.append(l_fields[l_cnt].toInt());
 	}
 }
+
+TTabDef::~TTabDef()
+{
+	if(parsedExtendedCondition != nullptr ) {
+		delete parsedExtendedCondition;
+	}
+}
+
+
+TNode * TTabDef::getParsedExtendedCondition()
+{
+	if(parsedExtendedCondition == nullptr){
+		TParser l_parser(extendedCondition);
+		parsedExtendedCondition= l_parser.parseFormula();
+		parseError=l_parser.getError();
+	}
+	return parsedExtendedCondition;
+}
+
+
+
 /**
  * selectedList is a list of field that are displayed in the grid
  * The method adds a field to the list.
@@ -89,6 +181,8 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 	l_object["conditionField"]=QVariant(conditionField);
 	l_object["isactive"]=QVariant(isActive);
 	l_object["no"]=QVariant((unsigned long long)no);
+	l_object["useExtendedCondition"]=QVariant(useExtendedCondition);
+	l_object["extendedCondition"]=QVariant(extendedCondition);
 	QList<QVariant> l_arr;
 	for(int l_field:selectedList){
 		l_arr.push_back(QVariant(l_field));
@@ -203,5 +297,6 @@ void TTabDefList::save()
 	g_config.setTabDef(l_value);
 	g_config.sync();
 }
+
 
 

@@ -6,6 +6,7 @@
 #include <QString>
 #include <QVector>
 #include "qjsonwrapper/Json.h"
+#include "formula/node.h"
 
 #include "../base/doublelinkedlist.h"
 /**
@@ -83,7 +84,39 @@ private:
  * Unique ID of the tab
  */
 	long           no=-1;
+	
+/**
+ * Extended condition text
+ */
+	QString        extendedCondition;
+/**
+ * If true then use condition in extendedCondition or else use the simple condition
+ */
+	bool           useExtendedCondition=false;
+/**
+ * Parsed extended consition
+ */
+	
+	TNode          *parsedExtendedCondition=nullptr;
+	
+/**
+ * Parse errors while parsing extended condition
+ */
+	QString        parseError;
 public:
+	inline void setExendedCondition(const QString &p_extendedCondition){ 
+		if(parsedExtendedCondition != nullptr && extendedCondition != p_extendedCondition){
+			delete parsedExtendedCondition;
+			parsedExtendedCondition=nullptr;
+		}
+		extendedCondition=p_extendedCondition;
+		
+	}
+	inline const QString &getParseError(){ return parseError;}
+	inline const QString &getExtendedCondition(){ return extendedCondition;}
+	inline void setUseExtendedCondition(bool p_useExtendedCondition){ useExtendedCondition=p_useExtendedCondition;}
+	inline bool getUseExtendedCondition(){ return useExtendedCondition;}
+
 	inline void setName(const QString &p_name){name=p_name;}
 	inline QString &getName(){ return name;}
 	inline int getConditionField(){ return conditionField;}
@@ -99,13 +132,15 @@ public:
 	inline void setIsActive(bool p_isActive){ isActive=p_isActive;}
 	inline long getNo(){ return no;}
 	inline void setNo(long p_no){ no=p_no;}
+	inline bool hasFieldInSelected(int p_field){ return selectedList.indexOf(p_field) != -1;}
 	void toJson(QList<QVariant> &p_variant);
 	TTabDef(QVariant &p_json);
 	void addSelectedList(int p_field);
-	inline bool hasFieldInSelected(int p_field){ return selectedList.indexOf(p_field) != -1;}
-	
+	TNode *getParsedExtendedCondition();
+	bool checkCondition(TDeviceBase *p_device);
+	bool validateCondition(QString &p_error);
 	TTabDef(const QString &p_name);
-	
+	virtual ~TTabDef();
 };
 
 /**

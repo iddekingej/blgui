@@ -2,13 +2,14 @@
 #include  <iostream>
 #include "../../data/mount.h"
 
-TTestDataMTab::TTestDataMTab()
+void TTestDataMTab::setup()
 {
 	alias=createAliasList();
 	deviceList=createDeviceList2(alias);
 	mtab=new TMTab(deviceList);
 	mtab->setSourceFile(getConfig()->getFilePath("test_mtab1"));
 }
+
 
 TTestDataMTab::~TTestDataMTab()
 {
@@ -38,7 +39,7 @@ void TTestDataMTab::test1()
 void  TTestDataMTab::test2()
 {
 	long l_le=mtab->getEntries()->getLength();
-	expect("Number of entries read from test mtab",4,l_le);
+	expect("Number of entries read from test mtab",(long int)4,l_le);
 }
 
 
@@ -63,7 +64,7 @@ void TTestDataMTab::test4()
 		fail("Device sda1 not found");
 	} else {
 		expect("Is mounted",l_dev->isMounted(),true);
-		expect("Number of mounts ",1,l_dev->getMounts()->getLength());
+		expect("Number of mounts ",(long int)1,l_dev->getMounts()->getLength());
 		if(l_dev->getMounts()->getStart()==nullptr){
 			fail("mount.getStart return null");
 		} else {

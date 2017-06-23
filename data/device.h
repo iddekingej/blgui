@@ -186,7 +186,7 @@ public:
 	
 	const QString &getModel();
 	virtual void fillDataRow(TField p_no,QString &p_info) override;
-	virtual void getFieldValue(TField p_no,QVariant &p_data) override;
+	virtual bool getFieldValue(TField p_no,QVariant &p_data) override;
 
 	TDevice(const QString &p_name,TDiskSize p_size);
 	TPartition *addParition(const QString &p_name,TDiskSize p_size,TDiskSize p_start);

@@ -24,6 +24,8 @@ private slots:
 	void delField();
 	void upField();
 	void downField();
+	void checkUseExtended();
+	void extendedConditionChanged();
 	
 private:
 	Ui::tabdef ui;
@@ -33,6 +35,7 @@ private:
 	TTabDef     *current;
 	
 	int currentRow=0;
+	void toggleUseExtended(bool p_flag);
 	void fillConditionField();
 	void fillConditionType();
 	void fillFormByTabDef(TTabDef *p_def);
@@ -42,6 +45,8 @@ private:
 	void fillSelectedFields();
 	void addFieldToFieldListModel(int p_int);
 	void moveField(int p_dir);
+	void setExtendedConditionError(QString p_error);
+	void checkExtendedCondition();
 	TDoubleLinkedListItem<TTabDef> *getCurrentItem();
 protected:
 	virtual void closeEvent(QCloseEvent *p_event) override;

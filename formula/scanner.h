@@ -1,0 +1,67 @@
+#ifndef __SCANNER_H__
+#define __SCANNER_H__
+
+#include <QString>
+#include "../data/devicebase.h"
+
+enum class TToken:int{
+	FIELD
+,	INTEGER
+,	STRING
+,	CHAR
+,	FILE_END
+,	IDENT
+,	COND_EQUAL
+,	COND_NE
+,	COND_BIGGER
+,	COND_SMALLER
+,	COND_BE
+,	COND_SE
+,	COND_UNEUQAL
+,	COND_NOT
+,	HOOK_L
+,	HOOK_R
+,	OP_AND
+,	OP_OR
+,	ERROR
+};
+
+
+enum class TType:int{
+	STRING
+,	INT
+,	UINT
+,	BOOLEAN
+};
+
+
+class TScanner
+{
+private:
+	QString condition;
+	QString tokenText;
+	QString errorText;
+	TToken  token=TToken::FILE_END;
+	int current=0;
+	int col;
+	int line;
+	int tokenCol;
+	int tokenLine;
+	bool parseIdent();
+	bool parseString(QChar p_end);
+	void skipSpace();
+	
+public:	
+	inline TToken getToken(){ return token;}
+	inline int getCol(){ return col;}
+	inline int getLine(){ return line;}
+	inline int getCurrent(){return current;}
+	inline const QString &getFormula(){ return condition;}
+	inline const QString &getTokenText(){ return tokenText;}
+	TScanner(const QString &p_condition);
+	bool nextToken();
+};
+
+
+
+#endif

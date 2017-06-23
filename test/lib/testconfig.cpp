@@ -2,12 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "../../base/compat.h"
+#include "base/compat.h"
+#include "base/utils.h"
+#include <QDir>
 
 const char *g_tempDir="/tmp/blguiXXXXXX";
 
 TTestConfig::TTestConfig()
 {
+	QDir l_dir;
+	QString l_path;
+	if(l_dir.canonicalPath().endsWith("build")){
+		testDataBase="../test/testdata/";
+	} else {
+		testDataBase="../../test/testdata/";
+	}
 }
 
 TTestConfig::~TTestConfig()
@@ -41,5 +50,5 @@ bool TTestConfig::tmpMkDir(const std::string &p_path,std::string *p_fullPath)
 
 QString TTestConfig::getFilePath(const QString& p_path)
 {
-	return QStringLiteral("../../test/testdata/")+p_path;
+	return testDataBase+p_path;
 }

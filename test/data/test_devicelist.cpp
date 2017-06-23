@@ -1,16 +1,17 @@
 #include "test_devicelist.h"
 #include <iostream>
 
-TTestDataDeviceList::TTestDataDeviceList()
-{
-	alias=new TAlias();
-	deviceList=new TDeviceList(alias);
-}
-
 TTestDataDeviceList::~TTestDataDeviceList()
 {
 	delete alias;
 	delete deviceList;
+}
+
+void TTestDataDeviceList::setup()
+{
+	alias=new TAlias();
+	deviceList=new TDeviceList(alias);
+	
 }
 
 /**
@@ -28,7 +29,7 @@ void TTestDataDeviceList::test1()
 void TTestDataDeviceList::test2()
 {
 	delete deviceList;
-	deviceList=new TDeviceList(alias);
+	deviceList=new TDeviceList(alias);	
 	deviceList->setSysBlockPath(getConfig()->getFilePath("/sys/block/"));
 	deviceList->readInfo();
 }	

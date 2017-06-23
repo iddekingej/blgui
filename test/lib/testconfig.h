@@ -7,6 +7,7 @@ class TTestConfig
 {
 private:
 	std::string tempDir;
+	QString testDataBase;
 public:
 	inline std::string &getTempDir(){return tempDir;};
 	bool tmpMkDir(const std::string &p_path,std::string *p_fullPath=nullptr);

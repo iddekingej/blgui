@@ -11,10 +11,12 @@ class  TTestDataDeviceInfo:public TTestClass
 	 * TDeviceInfo object to test
 	 */
 	TDeviceInfo *deviceInfo;
-public:
-	TTestDataDeviceInfo();
-	~TTestDataDeviceInfo();
+protected:
+	virtual void setup() override;
 	virtual void doRun() override;
+public:
+	~TTestDataDeviceInfo();
+	
 	void test1();
 	void test2();
 };

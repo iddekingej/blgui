@@ -10,13 +10,13 @@ class TTestDataDeviceList:public TTestClass
 	TDeviceList *deviceList;
 protected:
 	virtual void doRun() override;
+	virtual void setup() override;
 	void test1();
 	void test2();
 	void test3();
 	void test4();
 	void test5();
 public:
-	TTestDataDeviceList();
 	~TTestDataDeviceList();
 };
 

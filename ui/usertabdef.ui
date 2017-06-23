@@ -15,6 +15,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="parseError">
+     <property name="styleSheet">
+      <string notr="true">color:#F00</string>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QTableView" name="dataView">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>

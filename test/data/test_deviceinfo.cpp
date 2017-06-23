@@ -4,7 +4,8 @@
  * Set up device info object 
  * and set the base path to the test data
  */
-TTestDataDeviceInfo::TTestDataDeviceInfo()
+
+void TTestDataDeviceInfo::setup()
 {
 	deviceInfo=new TDeviceInfo();
 	deviceInfo->setBasePath(getConfig()->getFilePath("/"));

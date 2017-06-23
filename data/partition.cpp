@@ -27,117 +27,119 @@ TPartition::TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_s
 void TPartition::fillDataRow(TField p_no,QString &p_data)
 {	
 	switch(p_no){
-		case FIELD_DEVICE_NAME:
+		case TField::DEVICE_NAME:
 			p_data=getDevice()->getName();
 			break;
-		case FIELD_PARTITION_NAME:
+		case TField::PARTITION_NAME:
 			p_data=getName();
 			break;
-		case FIELD_SIZE:
+		case TField::SIZE:
 			p_data=QString::number(getSize());
 			break;
-		case FIELD_MODEL:
+		case TField::MODEL:
 			p_data=QStringLiteral("");
 			break;
-		case FIELD_TYPE:
+		case TField::TYPE:
 			p_data=getType();
 			break;
-		case FIELD_MOUNTED:
+		case TField::MOUNTED:
 			p_data=getMountText();
 			break;
-		case FIELD_LABEL:
+		case TField::LABEL:
 			p_data=getLabel();
 			break;
-		case FIELD_SIZE_KMG:
+		case TField::SIZE_KMG:
 			p_data=getReadableSize();
 			break;
-		case FIELD_READONLY:
-		case FIELD_REMOVABLE:
-		case FIELD_LOOPBACKFILE:
-		case FIELD_SCSI_BUS:
-		case FIELD_ISCSI_HOST:
-		case FIELD_ROTATIONAL:
-		case FIELD_USB_BUS:
-		case FIELD_PCI_BUS:
-		case FIELD_LVM_NAME:
+		case TField::READONLY:
+		case TField::REMOVABLE:
+		case TField::LOOPBACKFILE:
+		case TField::SCSI_BUS:
+		case TField::ISCSI_HOST:
+		case TField::ROTATIONAL:
+		case TField::USB_BUS:
+		case TField::PCI_BUS:
+		case TField::LVM_NAME:
 			p_data=QStringLiteral("");
 			break;
-		case FIELD_FREE_SPACE:
+		case TField::FREE_SPACE:
 			p_data=(getHasFree()?QString::number(getFree()):QStringLiteral(""));
 			break;
-		case FIELD_START:
+		case TField::START:
 			p_data=QString::number(start);
 			break;
-		case FIELD_FREE_SPACE_KMG:
+		case TField::FREE_SPACE_KMG:
 			p_data=getReadableFreeSize();
 			break;
-		case FIELD_VG_NAME:
+		case TField::VG_NAME:
 			p_data=getVGName();
 			break;
-		case FIELD_SLAVES:
+		case TField::SLAVES:
 			p_data=getSlavesString();
 			break;
 		default:
-			p_data=QStringLiteral("Invalid field no:")+QString::number(p_no);
+			p_data=QStringLiteral("Invalid field no:")+QString::number((int)p_no);
 	}
 }
 
-void TPartition::getFieldValue(TField p_no, QVariant& p_data)
+bool TPartition::getFieldValue(TField p_no, QVariant& p_data)
 {
 		switch(p_no){
-		case FIELD_DEVICE_NAME:
+		case TField::DEVICE_NAME:
 			p_data=getDevice()->getName();
 			break;
-		case FIELD_PARTITION_NAME:
+		case TField::PARTITION_NAME:
 			p_data=getName();
 			break;
-		case FIELD_SIZE:
+		case TField::SIZE:
 			p_data=(qlonglong)getSize();
 			break;
-		case FIELD_MODEL:
+		case TField::MODEL:
 			p_data=QStringLiteral("");
 			break;
-		case FIELD_TYPE:
+		case TField::TYPE:
 			p_data=getType();
 			break;
-		case FIELD_MOUNTED:
+		case TField::MOUNTED:
 			p_data=getMountText();
 			break;
-		case FIELD_LABEL:
+		case TField::LABEL:
 			p_data=getLabel();
 			break;
-		case FIELD_SIZE_KMG:
+		case TField::SIZE_KMG:
 			p_data=getReadableSize();
 			break;
-		case FIELD_READONLY:
-		case FIELD_REMOVABLE:
-		case FIELD_LOOPBACKFILE:
-		case FIELD_SCSI_BUS:
-		case FIELD_ISCSI_HOST:
-		case FIELD_ROTATIONAL:
-		case FIELD_USB_BUS:
-		case FIELD_PCI_BUS:
-		case FIELD_LVM_NAME:
+		case TField::READONLY:
+		case TField::REMOVABLE:
+		case TField::LOOPBACKFILE:
+		case TField::SCSI_BUS:
+		case TField::ISCSI_HOST:
+		case TField::ROTATIONAL:
+		case TField::USB_BUS:
+		case TField::PCI_BUS:
+		case TField::LVM_NAME:
 			p_data=QStringLiteral("");
 			break;
-		case FIELD_FREE_SPACE:
+		case TField::FREE_SPACE:
 			p_data=getHasFree()?(qlonglong)getFree():-1;
 			break;
-		case FIELD_START:
+		case TField::START:
 			p_data=(qlonglong)start;
 			break;
-		case FIELD_FREE_SPACE_KMG:
+		case TField::FREE_SPACE_KMG:
 			p_data=getReadableFreeSize();
 			break;
-		case FIELD_VG_NAME:
+		case TField::VG_NAME:
 			p_data=getVGName();
 			break;
-		case FIELD_SLAVES:
+		case TField::SLAVES:
 			p_data=getSlavesString();
 			break;
 		default:
-			p_data=QStringLiteral("Invalid field no:")+QString::number(p_no);
+			p_data=QStringLiteral("Invalid field no:")+QString::number((int)p_no);
+			return true;
 	}
+	return false;
 }
 
 

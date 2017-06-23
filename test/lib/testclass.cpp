@@ -31,6 +31,21 @@ void TTestClass::errorv(const char* p_file, const char* p_method, const char* p_
 }
 
 
+bool TTestClass::fexpect(const char* p_file, const char* p_method, const char* p_message, int p_expected, int p_found)
+{
+	if(p_expected != p_found){
+		std::cout << p_file << ":" <<p_method <<":" << p_message <<": expected " << p_expected << " returned "<<p_found <<std::endl;
+		failed=true;
+		return true;
+	} 
+	return false;
+}
+
+bool TTestClass::fexpect(const char* p_file, const char* p_method, const char* p_message, int p_expected, long p_found)
+{
+	return fexpect(p_file,p_method,p_message,(long)p_expected,p_found);
+}
+
 bool TTestClass::fexpect(const char* p_file, const char* p_method, const char* p_message, long p_expected, long p_found)
 {
 	if(p_expected != p_found){
@@ -63,10 +78,26 @@ bool TTestClass::fexpect(const char* p_file, const char* p_method, const char* p
 	return false;
 }
 
+bool TTestClass::fexpect(const char* p_file, const char* p_method, const char* p_message, QVariant p_expected, QVariant p_found)
+{
+	if(p_expected != p_found){
+		std::cout << p_file << ":" <<p_method <<":" << p_message <<": expected " << qstr(p_expected.toString()) << " returned "<<qstr(p_found.toString()) <<std::endl;
+		failed=true;
+		return true;
+	} 
+	return false;
+	
+}
+
+void TTestClass::setup()
+{
+	
+}
+
 bool TTestClass::run()
 {
-
-	doRun();	
+	setup();
+	doRun();		
 	return failed;
 }
 

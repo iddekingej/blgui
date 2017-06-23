@@ -3,6 +3,7 @@
 #include "data/tabdef.h"
 #include "formnewtab.h"
 #include "base/utils.h"
+#include "formula/parser.h"
 #include <iostream>
 #include <QMessageBox>
 #include <klocalizedstring.h>
@@ -135,6 +136,9 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.conditionValue->setText(p_def->getConditionValue());
 	ui.conditionType->setCurrentIndex((int)(p_def->getConditionType())+1);	
 	ui.isactive->setCheckState(p_def->getIsActive()?Qt::Checked:Qt::Unchecked);
+	ui.extendedCondition->setPlainText(p_def->getExtendedCondition());
+	ui.useExtendedCondition->setCheckState(p_def->getUseExtendedCondition()?Qt::Checked:Qt::Unchecked);
+	toggleUseExtended(p_def->getUseExtendedCondition());
 	fillSelectedFields();
 }
 /**
@@ -155,6 +159,8 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setConditionType((TConditionType)(ui.conditionType->currentIndex()-1));
 		current->setConditionValue(ui.conditionValue->text());
 		current->setIsActive(ui.isactive->checkState()==Qt::Checked);
+		current->setExendedCondition(ui.extendedCondition->toPlainText());
+		current->setUseExtendedCondition(ui.useExtendedCondition->checkState()==Qt::Checked);
 		current=nullptr;
 		ui.editTabDef->setVisible(false);
 		ui.delField->setDisabled(false);
@@ -186,6 +192,11 @@ void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSE
 		ui.delField->setDisabled(true);
 		ui.upField->setEnabled(false);
 		ui.downField->setEnabled(false);
+		if(current->getUseExtendedCondition()){
+			checkExtendedCondition();
+		} else {
+			setExtendedConditionError("");
+		}
 		
 	}
 
@@ -367,6 +378,42 @@ void TFormTabDef::upField()
 }
 
 
+void TFormTabDef::extendedConditionChanged()
+{
+	checkExtendedCondition();
+}
+
+void TFormTabDef::checkExtendedCondition()
+{	
+	TParser l_parser(ui.extendedCondition->toPlainText());
+	TNode *l_node=l_parser.parseFormula();
+	if(l_node != nullptr){
+		delete l_node;
+	}
+	setExtendedConditionError(l_parser.getError());
+	
+}
+
+
+void TFormTabDef::setExtendedConditionError(QString p_error)
+{
+	ui.errLabel->setVisible(p_error.length()>0);
+	ui.errLabel->setText(p_error);
+}
+
+
+void TFormTabDef::checkUseExtended()
+{
+	toggleUseExtended(ui.useExtendedCondition->checkState() == Qt::Checked);
+}
+
+void TFormTabDef::toggleUseExtended(bool p_flag)
+{
+	ui.extendedCondition->setVisible(p_flag);
+	ui.errLabel->setVisible(p_flag && !ui.errLabel->text().isEmpty());
+	ui.simpleCondition->setVisible(!p_flag);
+}
+
 
 TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 {
@@ -400,12 +447,16 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	connect(ui.delField,SIGNAL(clicked()),this,SLOT(delField()));
 	connect(ui.upField,SIGNAL(clicked()),this,SLOT(upField()));
 	connect(ui.downField,SIGNAL(clicked()),this,SLOT(downField()));
+	connect(ui.useExtendedCondition,SIGNAL(clicked()),this,SLOT(checkUseExtended()));
+	connect(ui.extendedCondition,SIGNAL(textChanged()),this,SLOT(extendedConditionChanged()) );
 	ui.upDef->setDisabled(true);
 	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
 	ui.editTabDef->setVisible(false);
 	ui.upField->setEnabled(false);
 	ui.downField->setEnabled(false);
+	ui.errLabel->setVisible(false);
+	ui.errLabel->setText("");
 	
 	
 }
