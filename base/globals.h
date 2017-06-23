@@ -2,7 +2,12 @@
 #define __GLOBALS_H_
 
 #define PROG_NAME "blgui"
+#include <qglobal.h>
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <qhashfunctions.h>
+#else
+#include <qhash.h>
+#endif
 
 
 
