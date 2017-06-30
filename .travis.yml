@@ -46,11 +46,14 @@ before_script:
   fi          
 - sudo add-apt-repository -y  ppa:bryce/backports
 - sudo apt-get update -qq
+- sudo apt-get install -y kubuntu-desktop 
 - sudo apt-get install -y libblkid-dev
 - sudo apt-get install -y libudev-dev
-- sudo apt-get install -y libqt4-dev
-- sudo apt-get install -y kdebase-workspace-dev
-- sudo apt-get install -y libqjson-dev
+- sudo apt-get install -y libkf5coreaddons-dev
+- sudo apt-get install -y plasma-workspace-dev
+- sudo apt-get install -y libkf5widgetsaddons-dev
+- sudo apt-get install -y qt5-default
+- sudo apt-get install -y extra-cmake-modules
 script:
 - mkdir build && cd build && cmake -Drun_test="1" .. && make -j2  && cpack -G DEB && sh ../test/test.sh
 notifications:
