@@ -1,6 +1,5 @@
 #include "device.h"
 #include "base/utils.h"
-#include "base/compat.h"
 #include "base/globals.h"
 
 #include <QString>

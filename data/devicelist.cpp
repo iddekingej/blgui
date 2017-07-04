@@ -13,7 +13,6 @@
 #include <sys/types.h>
 #include <QTextStream>
 #include <errno.h>
-#include "base/compat.h"
 #include "base/utils.h"
 #include "usb.h"
 #include <iostream>

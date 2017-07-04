@@ -1,7 +1,6 @@
 #include <QString>
 #include "devicebase.h"
 #include "partition.h"
-#include "base/compat.h"
 #include "base/globals.h"
 /**
  *  Creates partition information object

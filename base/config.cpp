@@ -1,6 +1,5 @@
 #include "config.h"
 #include "globals.h"
-#include "compat.h"
 #include "utils.h"
 #include "qjsonwrapper/Json.h"
 #include <QVariant>

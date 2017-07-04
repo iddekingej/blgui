@@ -3,7 +3,6 @@
 #include <QDir>
 #include <QTextStream>
 #include <QIODevice>
-#include "base/compat.h"
 #include <iostream>
 /**
  * Some of the information is stored in a file containing a integer value (for example file size)

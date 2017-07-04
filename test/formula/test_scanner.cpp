@@ -24,7 +24,7 @@ void  TTestScanner::test2()
 	TScanner l_scanner("   'a' and 'b'");
 	l_scanner.nextToken();
 	expecti("Token 1 must be a string",TToken::STRING,l_scanner.getToken());
-	expect("Current position for token 1",5,l_scanner.getCurrent());
+	expect("Current position for token 1",6,l_scanner.getCurrent());
 	l_scanner.nextToken();
 	expecti("Token 2 ",TToken::OP_AND,l_scanner.getToken() );
 	

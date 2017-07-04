@@ -34,7 +34,7 @@ public:
 	TValueNode(T p_value){
 		value=p_value;
 	}
-	virtual bool calculate(TCreator *p_creator,QVariant &p_result) override{
+	virtual bool calculate(UNUSEDPAR TCreator *p_creator,QVariant &p_result) override{
 		p_result=value;
 		return false;
 	}

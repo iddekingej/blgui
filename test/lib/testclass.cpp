@@ -3,8 +3,7 @@
 #include "base/utils.h"
 #include "../../data/device.h"
 #include "../../data/partition.h"
-#include "../../base/compat.h"
-#include "../../base/compat.h"
+
 void TTestClass::error(const char * p_file,const char *p_method,const char* p_message)
 {
 	std::cout << p_file << ":" << p_method <<":" << p_message <<std::endl;

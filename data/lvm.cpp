@@ -51,7 +51,7 @@ TLVMResponseParser::~TLVMResponseParser()
 }
 
 
-bool TLVMResponseParser::chapter(UNUSEDPAR QSTRINGREF& p_item)
+bool TLVMResponseParser::chapter(UNUSEDPAR QStringRef& p_item)
 {
 	return false;
 }
@@ -67,12 +67,12 @@ void TLVMResponseParser::parseChapter()
 	TSectionType l_oldType;
 	bool l_namespace;
 	while(iter->hasNext()){
-		QSTRINGREF l_str=QREFADAPT(iter->next());
+		QStringRef l_str=iter->next();
 		
 		if(l_str.endsWith("{")){				
 			l_oldPrefix=prefix;
 			l_oldType=sectionType;
-			QSTRINGREF l_key=l_str.mid(0,l_str.length()-1).trimmed();
+			QStringRef l_key=l_str.mid(0,l_str.length()-1).trimmed();
 			l_namespace=chapter(l_key);
 			if(l_namespace){
 				if(prefix.length()>0) prefix += "_";
@@ -86,9 +86,9 @@ void TLVMResponseParser::parseChapter()
 		} else {
 			int l_split=l_str.indexOf("=");
 			if(l_split>=0){
-				QString l_pre=QREFTOSTRING(l_str.mid(0,l_split).trimmed());
+				QString l_pre=l_str.mid(0,l_split).trimmed().toString();
 				if(prefix.length()>0) l_pre=prefix+"_"+l_pre;
-				QString l_after=QREFTOSTRING(l_str.mid(l_split+1).trimmed());
+				QString l_after=l_str.mid(l_split+1).trimmed().toString();
 				if(l_after.startsWith('"') && l_after.endsWith('"')){
 					l_after=l_after.mid(1,l_after.length()-2);
 				}
@@ -125,7 +125,7 @@ TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser
 	devList=p_devList;
 }
 
-bool TPVParser::chapter(QSTRINGREF& p_item)
+bool TPVParser::chapter(QStringRef& p_item)
 {
 	bool l_namespace=false;
 	if(sectionType==st_top){
@@ -133,7 +133,7 @@ bool TPVParser::chapter(QSTRINGREF& p_item)
 	} else if(sectionType==st_data){
 		sectionType=st_pv;
 		current=new TPhysicalVolume();
-		QString l_key=QREFTOSTRING(p_item);
+		QString l_key=p_item.toString();
 		current->setKey(l_key);
 		items->append(current);		
 	} else if(sectionType==st_pv){
@@ -175,7 +175,7 @@ TVGMainParser::TVGMainParser(QString& p_text):TLVMResponseParser(p_text)
 }
 
 
-bool TVGMainParser::chapter(QSTRINGREF& p_item)
+bool TVGMainParser::chapter(QStringRef& p_item)
 {
 	if(sectionType==st_top){
 		sectionType=st_data;
@@ -183,7 +183,7 @@ bool TVGMainParser::chapter(QSTRINGREF& p_item)
 		sectionType=st_vg;
 		current=new TVolumeGroup();
 		items->append(current);
-		QString l_key=QREFTOSTRING(p_item);
+		QString l_key=p_item.toString();
 		current->setKey(l_key);
 		cout <<qstr(p_item) <<endl;
   	}
@@ -198,7 +198,7 @@ void TVGMainParser::setVar(QString& p_name, QString& p_value)
 
 
 
-bool TVGParser::chapter(QSTRINGREF& p_item)
+bool TVGParser::chapter(QStringRef& p_item)
 {
 	if(sectionType==st_top){
 		sectionType=st_vg;
@@ -207,7 +207,7 @@ bool TVGParser::chapter(QSTRINGREF& p_item)
 			sectionType=st_lvsection;
 		}
 	} else if(sectionType==st_lvsection){
-		QString l_name=QREFTOSTRING(p_item);
+		QString l_name=p_item.toString();
 		currentLv=current->addLv(l_name);
 		sectionType=st_lv;
 	}

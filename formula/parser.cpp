@@ -2,7 +2,6 @@
 #include "parser.h"
 #include "node.h"
 #include "base/globals.h"
-#include "base/compat.h"
 #include <QString>
 
 TNode *TParser::parseField()

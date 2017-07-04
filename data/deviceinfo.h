@@ -17,7 +17,6 @@
 #include "devicelist.h"
 #include "mtab.h"
 #include "iscsi.h"
-#include "base/compat.h"
 #include "lvm.h"
 
 /**

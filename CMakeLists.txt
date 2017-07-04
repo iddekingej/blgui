@@ -4,11 +4,8 @@ project (blgui)
 set(KDE_VERSION ${kde})
 set(RUN_TEST ${run_test})
 
-if(KDE_VERSION EQUAL "4")
-	cmake_minimum_required(VERSION 2.8.7 FATAL_ERROR)
-else()
-	cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-endif()
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+
 
 
 set(blgui_ui
@@ -85,11 +82,8 @@ if(NOT INC_UDEV OR NOT LIB_UDEV)
 	message(FATAL_ERROR "Can't find libudev")
 endif()
 
-if(KDE_VERSION EQUAL "4")
-	include("kde4.cmake")
-else()
-	include("kde5.cmake")
-endif()
+include("kde5.cmake")
+
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

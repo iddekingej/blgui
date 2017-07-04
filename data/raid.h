@@ -5,7 +5,6 @@
 #include <QString>
 #include "base/linklist.h"
 #include "devicebase.h"
-#include "base/compat.h"
 
 class TRaidDevice
 {
