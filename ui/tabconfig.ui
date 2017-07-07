@@ -252,7 +252,36 @@
          </widget>
         </item>
         <item>
-         <widget class="QTextEdit" name="extendedCondition"/>
+         <widget class="QWidget" name="extendedContainer" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Fields:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="extendedFields"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTextEdit" name="extendedCondition"/>
+           </item>
+          </layout>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="errLabel">

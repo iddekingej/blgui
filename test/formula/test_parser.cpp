@@ -21,7 +21,7 @@ void TTestParser::test2()
 	
 	TMOCParser l_parser("mounted='1' and device_name='sda'");
 	TNode *l_node=l_parser.parseFormula();
-	expect("Parser error",QStringLiteral(""),l_parser.getError());
+	expect("Parser error",QString(),l_parser.getError());
 	TDualOperatorNode *l_dual=dynamic_cast<TDualOperatorNode *>(l_node);
 	if(l_dual==nullptr){
 		fail("Top node is not a dual operator");

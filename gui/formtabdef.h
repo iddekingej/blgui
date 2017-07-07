@@ -26,6 +26,7 @@ private slots:
 	void downField();
 	void checkUseExtended();
 	void extendedConditionChanged();
+	void extendedFieldChanged(int p_index);
 	
 private:
 	Ui::tabdef ui;
@@ -36,6 +37,7 @@ private:
 	
 	int currentRow=0;
 	void toggleUseExtended(bool p_flag);
+	void fillExtendedFields();
 	void fillConditionField();
 	void fillConditionType();
 	void fillFormByTabDef(TTabDef *p_def);

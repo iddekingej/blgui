@@ -18,8 +18,17 @@ void TFormTabDef::fillConditionField()
 	}
 }
 
-
-
+/**
+ * Fill extendedFields list. This is a list of field available for there
+ * extended condition
+ */
+void TFormTabDef::fillExtendedFields()
+{
+	ui.extendedFields->addItem("");
+	for(int l_cnt=0;l_cnt<g_numDeviceFields;l_cnt++){
+		ui.extendedFields->addItem(g_deviceFields[l_cnt].fieldName);
+	}
+}
 
 /** This method fills condition type combo box with options
  * 
@@ -31,6 +40,9 @@ void TFormTabDef::fillConditionType()
 	ui.conditionType->addItem("Is not empty");
 	ui.conditionType->addItem("Has value");
 }
+
+
+
 
 void TFormTabDef::changeConditionType(int p_index)
 {
@@ -377,6 +389,17 @@ void TFormTabDef::upField()
 	moveField(-1);
 }
 
+void TFormTabDef::extendedFieldChanged(int p_index)
+{
+	if(!ui.extendedFields->currentText().isEmpty()){
+		QString l_text=ui.extendedFields->currentText()+" ";
+		ui.extendedCondition->insertPlainText(l_text);
+		ui.extendedCondition->setFocus();		
+		QTextCursor l_cursor=ui.extendedCondition->textCursor();
+		l_cursor.setPosition(l_cursor.position()+l_text.length());		
+	}
+}
+
 
 void TFormTabDef::extendedConditionChanged()
 {
@@ -409,7 +432,7 @@ void TFormTabDef::checkUseExtended()
 
 void TFormTabDef::toggleUseExtended(bool p_flag)
 {
-	ui.extendedCondition->setVisible(p_flag);
+	ui.extendedContainer->setVisible(p_flag);
 	ui.errLabel->setVisible(p_flag && !ui.errLabel->text().isEmpty());
 	ui.simpleCondition->setVisible(!p_flag);
 }
@@ -431,6 +454,7 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	l_proxy->setSortCaseSensitivity(Qt::CaseInsensitive );
 	tabDefs=p_list;	
 	current=nullptr;
+	fillExtendedFields();
 	fillConditionField();
 	fillConditionType();
 	fillTabDef();
@@ -449,6 +473,7 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	connect(ui.downField,SIGNAL(clicked()),this,SLOT(downField()));
 	connect(ui.useExtendedCondition,SIGNAL(clicked()),this,SLOT(checkUseExtended()));
 	connect(ui.extendedCondition,SIGNAL(textChanged()),this,SLOT(extendedConditionChanged()) );
+	connect(ui.extendedFields,SIGNAL(currentIndexChanged(int)),this,SLOT(extendedFieldChanged(int)));
 	ui.upDef->setDisabled(true);
 	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
