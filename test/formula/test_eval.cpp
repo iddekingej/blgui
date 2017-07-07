@@ -34,6 +34,7 @@ void TTestEval::test1()
 		fail("Test 2 failed with error "+l_creator.getError());
 	}
 	expect("eval 1) '' != 'X' ",QVariant(true),l_variant);	
+	delete l_formula;
 }
 
 
@@ -68,5 +69,6 @@ void TTestEval::test2()
 		fail("Test 2 failed with error "+l_creator.getError());
 	}
 	expect("eval 1) sdb1=sda1 and '' != 'X' ",QVariant(false),l_variant);	
+	delete l_formula;
 
 }

@@ -28,7 +28,7 @@ void TTestParser::test2()
 	} else {
 		expect("Top node",(int) TToken::OP_AND,(int) l_dual->getOperatorType());
 	}
-	
+	delete l_node;
 }
 
 void TTestParser::test3()
