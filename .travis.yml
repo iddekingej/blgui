@@ -1,21 +1,9 @@
 language: cpp
 sudo: required
 matrix:
-        include:
         - compiler: gcc
           os: linux
           dist: trusty
-          env: GCC="48"
-          addons: 
-                apt:
-                        sources:
-                        - ubuntu-toolchain-r-test
-                        packages:    
-                        - gcc-4.8
-                        - g++-4.8
-        - compiler: gcc
-          os: linux
-          dist: precise
           env: GCC="48"
           addons: 
                 apt:
@@ -51,7 +39,6 @@ before_script:
 - sudo apt-get install -y libudev-dev
 - sudo apt-get install -y libkf5coreaddons-dev
 - sudo apt-get install -y plasma-workspace-dev
-- sudo apt-get install -y libkf5widgetsaddons-dev
 - sudo apt-get install -y qt5-default
 - sudo apt-get install -y extra-cmake-modules
 - sudo apt-get install -y kde-workspace plasma-desktop plasma-netbook software-properties-kde
