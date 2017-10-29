@@ -35,6 +35,9 @@ before_script:
 - sudo add-apt-repository -y  ppa:bryce/backports
 - sudo apt-add-repository -y ppa:kubuntu-ppa/backports
 - sudo apt-get update -qq
+- sudo apt-add-repository -y ppa:kubuntu-ppa/next
+- sudo apt-get update -
+- sudo apt-get install -y kubuntu-plasma5-desktop
 - sudo apt-get install -y libblkid-dev
 - sudo apt-get install -y libudev-dev
 - sudo apt-get install -y plasma-workspace-dev
@@ -42,7 +45,7 @@ before_script:
 - sudo apt-get install -y qt5-default
 - sudo apt-get install -y extra-cmake-modules
 - sudo apt-get install -y kde-workspace plasma-desktop plasma-netbook software-properties-kde
-- sudo apt-get install -y kubuntu-desktop 
+
 script:
 - mkdir build && cd build && cmake -Drun_test="1" .. && make -j2  && cpack -G DEB && sh ../test/test.sh
 notifications:
