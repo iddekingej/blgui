@@ -389,7 +389,7 @@ void TFormTabDef::upField()
 	moveField(-1);
 }
 
-void TFormTabDef::extendedFieldChanged(int p_index)
+void TFormTabDef::extendedFieldChanged(UNUSEDPAR int p_index)
 {
 	if(!ui.extendedFields->currentText().isEmpty()){
 		QString l_text=ui.extendedFields->currentText()+" ";
@@ -413,7 +413,9 @@ void TFormTabDef::checkExtendedCondition()
 	if(l_node != nullptr){
 		delete l_node;
 	}
-	setExtendedConditionError(l_parser.getError());
+	QString l_error;
+	l_parser.getFullError(l_error);
+	setExtendedConditionError(l_error);
 	
 }
 

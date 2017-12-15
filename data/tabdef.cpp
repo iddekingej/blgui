@@ -145,7 +145,7 @@ TNode * TTabDef::getParsedExtendedCondition()
 	if(parsedExtendedCondition == nullptr){
 		TParser l_parser(extendedCondition);
 		parsedExtendedCondition= l_parser.parseFormula();
-		parseError=l_parser.getError();
+		l_parser.getFullError(parseError);
 	}
 	return parsedExtendedCondition;
 }

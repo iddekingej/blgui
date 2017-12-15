@@ -53,7 +53,7 @@ bool TScanner::parseIdent()
 bool TScanner::nextToken()
 {	
 	skipSpace();	
-	tokenCol=col;
+	tokenCol=current-lineStart;
 	tokenLine=line;
 	if(current>=condition.length()){
 		token=TToken::FILE_END;
@@ -116,27 +116,26 @@ void TScanner::skipSpace(){
 		l_ch=condition.at(current);		
 		if(l_ch==13){
 			current++;
-			line++;
-			col=0;
+			line++;			
 			if(current<condition.length()){
 				l_ch=condition.at(current);
 				if(l_ch==10){
 					current++;
 				}
 			}
+			lineStart =current;
 		} else if(l_ch==10){
 			current++;
-			line++;
-			col=0;;
+			line++;			
 			if(current<condition.length()){
 				l_ch=condition.at(current);
 				if(l_ch==13){
 					current++;
 				}
 			}
+			lineStart =current;
 		}  else if(l_ch== 32 || l_ch == 9){
 			current++;
-			col++;
 		} else {
 			break;
 		}

@@ -43,8 +43,8 @@ private:
 	QString errorText;
 	TToken  token=TToken::FILE_END;
 	int current=0;
-	int col;
-	int line;
+	int lineStart =0;
+	int line=0;
 	int tokenCol;
 	int tokenLine;
 	bool parseIdent();
@@ -53,7 +53,9 @@ private:
 	
 public:	
 	inline TToken getToken(){ return token;}
-	inline int getCol(){ return col;}
+	inline int getTokenCol(){ return tokenCol;}
+	inline int getTokenLine(){ return tokenLine;}
+	inline int getCol(){ return current-lineStart;}
 	inline int getLine(){ return line;}
 	inline int getCurrent(){return current;}
 	inline const QString &getFormula(){ return condition;}

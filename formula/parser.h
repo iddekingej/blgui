@@ -10,6 +10,8 @@ private:
 	TScanner *scanner;
 	
 	QString error;
+	int     errorCol=-1;
+	int     errorLine=-1;
 protected:	
 	TNode *parseField();
 	TNode *parseString();
@@ -18,12 +20,14 @@ protected:
 	TNode *parseCond();
 	TNode *parseBO();
 	TField getFieldIdByName(const QString& p_name);
+	void setError(const QString p_error);
 public:
 	TParser(const QString &p_formula);
 	virtual ~TParser();
 	inline TScanner *getScanner(){ return scanner;}
 	inline QString &getError(){ return error;}
 	TNode *parseFormula();
+	void getFullError(QString &p_error);
 };
 
 #endif

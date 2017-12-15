@@ -8,7 +8,7 @@ TNode *TParser::parseField()
 {
 	TField l_no=getFieldIdByName(scanner->getTokenText());
 	if(TField::NOTFOUND == l_no){
-		error = QStringLiteral("Unknown field :'%1'").arg(scanner->getTokenText());
+		setError( QStringLiteral("Unknown field :'%1'").arg(scanner->getTokenText()));
 		return nullptr;
 	}
 	TFieldNode *l_node=new TFieldNode(l_no);
@@ -16,6 +16,7 @@ TNode *TParser::parseField()
 	return l_node;
 	
 }
+
 
 TNode *TParser::parseString()
 {
@@ -35,7 +36,7 @@ TNode * TParser::parseSimple()
 	} else if(l_token==TToken::HOOK_L){
 		TNode *l_node=parseExpression();
 		if(scanner->getToken() != TToken::HOOK_R){
-			error="')' expected";
+			setError("')' expected");
 			delete l_node;
 			return nullptr;
 		}
@@ -44,7 +45,7 @@ TNode * TParser::parseSimple()
 	} else {
 		
 		//TODO Ident or "(" expected		
-		error=QStringLiteral("'%1' found but Identifier, string constant or '(' expected").arg(scanner->getTokenText());;
+		setError(QStringLiteral("'%1' found but Identifier, string constant or '(' expected").arg(scanner->getTokenText()));
 		return nullptr;
 	}
 }
@@ -91,22 +92,24 @@ TNode * TParser::parseBO()
 	if(l_left==nullptr){
 		return l_left;
 	}
-	l_token=scanner->getToken();
-	
-	switch(l_token){
-		case TToken::OP_AND:
-		case TToken::OP_OR:
-			scanner->nextToken();
-			l_right=parseCond();
-			
-			if(l_right==nullptr){
-				delete l_left;
-				return nullptr;
-			}
-			return new TDualOperatorNode(l_token,l_left,l_right);
-			
-		default:
-			return l_left;
+	while(true){
+		l_token=scanner->getToken();
+		
+		switch(l_token){
+			case TToken::OP_AND:
+			case TToken::OP_OR:
+				scanner->nextToken();
+				l_right=parseCond();
+				
+				if(l_right==nullptr){
+					delete l_left;
+					return nullptr;
+				}
+				l_left=new TDualOperatorNode(l_token,l_left,l_right);
+				break;
+			default:
+				return l_left;
+		}
 	}
 }
 
@@ -123,8 +126,8 @@ TNode *TParser::parseFormula()
 	scanner->nextToken();
 	TNode *l_node=parseExpression();
 	
-	if(scanner->getToken() != TToken::FILE_END && ""==error){
-		error="EOF expected but '"+scanner->getTokenText()+"' found";
+	if(scanner->getToken() != TToken::FILE_END && error.isEmpty()){
+		setError(QStringLiteral("EOF expected but '%1' found").arg(scanner->getTokenText()));
 	}
 	return l_node;
 }
@@ -153,3 +156,21 @@ TField TParser::getFieldIdByName(const QString& p_name)
 	}
 	return TField::NOTFOUND;
 }
+
+void TParser::setError(const QString p_error)
+{
+	error=p_error;
+	errorCol=scanner->getTokenCol();
+	errorLine=scanner->getTokenLine();
+}
+
+void
+TParser::getFullError (QString &p_error)
+{
+	if(error.isEmpty()){
+		p_error="";
+	} else {
+		p_error=QStringLiteral("At col %1 line %2 error:'%3'").arg(errorCol+1).arg(errorLine+1).arg(error);		
+	}
+}
+
