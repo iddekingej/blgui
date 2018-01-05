@@ -184,8 +184,7 @@ bool TVGMainParser::chapter(QStringRef& p_item)
 		current=new TVolumeGroup();
 		items->append(current);
 		QString l_key=p_item.toString();
-		current->setKey(l_key);
-		cout <<qstr(p_item) <<endl;
+		current->setKey(l_key);		
   	}
 	return false;
 }

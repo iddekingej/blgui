@@ -46,10 +46,6 @@ void TDeviceInfo::getDisks()
 	QString l_partLabel;
 	QString l_devicePath;
 	char *l_label;
-
-	if (blkid_get_cache(&blkidCache, NULL) < 0){
-		printf("Failed to cache\n");
-	 }	
 	 
 	devices->setSysBlockPath(basePath+QStringLiteral("sys/block"));
 	btrfsInfo->setBasePath(basePath); 

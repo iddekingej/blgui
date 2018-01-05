@@ -83,19 +83,20 @@ void TDeviceList::readDevices()
 		l_device->setRotational(l_rotational==1);
 		l_device->setLVMName(l_lvmName);
 		if(l_dir.exists(QStringLiteral("device"))==1){
+			
 			readString(l_path,QStringLiteral("device/model"),l_model);					
 			readString(l_path,QStringLiteral("device/vendor"),l_vendor);
+			l_device->setVendor(l_vendor.trimmed());
+			l_device->setModel(l_model);
+			
 			QDirIterator l_scsiIter(l_path+QStringLiteral("/device/scsi_device/"),QDir::Dirs|QDir::NoDotAndDotDot,QDirIterator::NoIteratorFlags);
-			while(l_scsiIter.hasNext()){
+			if(l_scsiIter.hasNext()){
 				l_scsiIter.next();
 				l_scsiBus=l_scsiIter.fileName();
 				scsiIndex.insert(l_scsiBus,l_device);
-				l_device->setScsiBus(l_scsiBus);
-				break;
-				
+				l_device->setScsiBus(l_scsiBus);						
 			}				
-			l_device->setVendor(l_vendor.trimmed());
-			l_device->setModel(l_model);
+
 			QString l_usbBus;
 			if(usbInfo.getUsbBus(l_scsiBus,l_usbBus)){
 				l_device->setUsbBus(l_usbBus);

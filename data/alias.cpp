@@ -68,11 +68,11 @@ const QString TAlias::getDeviceNameFromAliasPath(const QString &p_path){
  */
 void TAlias::readInfo()
 {
-	procesAliasses(QString("/dev/disk/by-id"));
-	procesAliasses(QString("/dev/disk/by-label"));
-	procesAliasses(QString("/dev/disk/by-partlabel"));
-	procesAliasses(QString("/dev/disk/by-partuid"));
-	procesAliasses(QString("/dev/disk/by-path"));
-	procesAliasses(QString("/dev/disk/by-uuid"));
-	procesAliasses(QString("/dev/mapper"));
+	procesAliasses(QStringLiteral("/dev/disk/by-id"));
+	procesAliasses(QStringLiteral("/dev/disk/by-label"));
+	procesAliasses(QStringLiteral("/dev/disk/by-partlabel"));
+	procesAliasses(QStringLiteral("/dev/disk/by-partuid"));
+	procesAliasses(QStringLiteral("/dev/disk/by-path"));
+	procesAliasses(QStringLiteral("/dev/disk/by-uuid"));
+	procesAliasses(QStringLiteral("/dev/mapper"));
 }
