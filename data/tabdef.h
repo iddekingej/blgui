@@ -31,12 +31,25 @@ typedef enum{
  *                 when a selected field has a certain value
  * CT_NoCondition - There is no filter
  */
-typedef enum{
-	CT_IsEmpty=0
-,	CT_IsNotEmpty=1
-,	CT_IsValue=2
-,       CT_NoCondition=-1
+typedef enum class{
+	IsEmpty=0
+,	IsNotEmpty=1
+,	IsValue=2
+,       NoCondition=-1
 } TConditionType;
+
+/**
+ * Enumeration of tab type
+ */
+
+typedef enum class{
+	disks=0
+,	raid 
+,       fstab
+,	iscsi
+,	stats
+,       lvm
+} TTabType;
 
 /**
  * A object of this class contains de definition of a user defined tab
@@ -48,13 +61,20 @@ private:
  * Name of tab. This name is also display on the tab
  */
 	QString        name;
+	
+/**
+ * Type of type 
+ * 0=Disk info
+ * 1=Raid info
+ */
+	TTabType       tabType;
 /**
  * ID of field used for filtering data
  * Field id is the index of base/globals/g_deviceFields
  */	
 	int            conditionField;
 /**
- * What type of object (Device or parition) to display in list 
+ * What type of object (Device or partition) to display in list 
  * @see TObjectType
  */
 	TObjectType    conditionObject;
@@ -94,7 +114,7 @@ private:
  */
 	bool           useExtendedCondition=false;
 /**
- * Parsed extended consition
+ * Parsed extended condition
  */
 	
 	TNode          *parsedExtendedCondition=nullptr;
@@ -117,6 +137,8 @@ public:
 	inline void setUseExtendedCondition(bool p_useExtendedCondition){ useExtendedCondition=p_useExtendedCondition;}
 	inline bool getUseExtendedCondition(){ return useExtendedCondition;}
 
+	inline void setTabType(TTabType p_type){ tabType=p_type;}
+	inline TTabType getTabType(){ return tabType;}
 	inline void setName(const QString &p_name){name=p_name;}
 	inline QString &getName(){ return name;}
 	inline int getConditionField(){ return conditionField;}
@@ -133,6 +155,7 @@ public:
 	inline long getNo(){ return no;}
 	inline void setNo(long p_no){ no=p_no;}
 	inline bool hasFieldInSelected(int p_field){ return selectedList.indexOf(p_field) != -1;}
+	
 	void toJson(QList<QVariant> &p_variant);
 	TTabDef(QVariant &p_json);
 	void addSelectedList(int p_field);

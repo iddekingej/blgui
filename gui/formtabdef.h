@@ -27,7 +27,7 @@ private slots:
 	void checkUseExtended();
 	void extendedConditionChanged();
 	void extendedFieldChanged(int p_index);
-	
+	void tabTypeChanged(int p_index);
 private:
 	Ui::tabdef ui;
 	QStandardItemModel *tabDefModel;

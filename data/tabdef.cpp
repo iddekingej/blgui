@@ -20,7 +20,7 @@ TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
 	conditionObject=TT_Device;
-	conditionType=CT_NoCondition;
+	conditionType=TConditionType::NoCondition;
 	conditionField=-1;
 	conditionValue="";
 	isActive=true;
@@ -77,10 +77,10 @@ bool TTabDef::checkCondition(TDeviceBase* p_device)
 			p_device->fillDataRow((TField)conditionField,l_value); //TODO TFIELD
 			
 			switch(conditionType){
-				case CT_IsEmpty:l_ok=l_value.isEmpty();break;
-				case CT_IsNotEmpty:l_ok=!l_value.isEmpty();break;
-				case CT_IsValue:l_ok=(l_value==conditionValue);break;
-				case CT_NoCondition:l_ok=true;break;
+				case TConditionType::IsEmpty:l_ok=l_value.isEmpty();break;
+				case TConditionType::IsNotEmpty:l_ok=!l_value.isEmpty();break;
+				case TConditionType::IsValue:l_ok=(l_value==conditionValue);break;
+				case TConditionType::NoCondition:l_ok=true;break;
 			}
 			
 		}
@@ -103,9 +103,14 @@ TTabDef::TTabDef(QVariant& p_json)
 	name=l_map["name"].toString();
 	int l_co=l_map["conditionObject"].toInt();
 	conditionObject=(l_co==TT_Device)?TT_Device:TT_Partition;
-	conditionType=(TConditionType)(l_map["conditionType"].toInt());
+	conditionType=static_cast<TConditionType>(l_map["conditionType"].toInt());
 	conditionValue=l_map["conditionValue"].toString();	
 	conditionField=l_map["conditionField"].toInt();
+	if(l_map.contains("tabType")){
+		tabType=static_cast<TTabType>(l_map["tabType"].toInt());
+	} else {
+		tabType=TTabType::disks;
+	}
 	if(l_map.contains("isactive")){
 		isActive=l_map["isactive"].toBool();
 	} else {		
@@ -176,13 +181,14 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 	QMap<QString,QVariant> l_object;
 	l_object["name"]=QVariant(name);
 	l_object["conditionObject"]=QVariant(conditionObject);
-	l_object["conditionType"]=QVariant(conditionType);
+	l_object["conditionType"]=QVariant(static_cast<int>(conditionType));
 	l_object["conditionValue"]=QVariant(conditionValue);
 	l_object["conditionField"]=QVariant(conditionField);
 	l_object["isactive"]=QVariant(isActive);
 	l_object["no"]=QVariant((unsigned long long)no);
 	l_object["useExtendedCondition"]=QVariant(useExtendedCondition);
 	l_object["extendedCondition"]=QVariant(extendedCondition);
+	l_object["tabType"]=QVariant(static_cast<int>(tabType));
 	QList<QVariant> l_arr;
 	for(int l_field:selectedList){
 		l_arr.push_back(QVariant(l_field));

@@ -35,10 +35,10 @@ void TFormTabDef::fillExtendedFields()
  */
 void TFormTabDef::fillConditionType()
 {
-	ui.conditionType->addItem("");
-	ui.conditionType->addItem("Is empty");
-	ui.conditionType->addItem("Is not empty");
-	ui.conditionType->addItem("Has value");
+	ui.conditionType->addItem(i18n(""));
+	ui.conditionType->addItem(i18n("Is empty"));
+	ui.conditionType->addItem(i18n("Is not empty"));
+	ui.conditionType->addItem(i18n("Has value"));
 }
 
 
@@ -150,6 +150,7 @@ void TFormTabDef::fillFormByTabDef(TTabDef* p_def)
 	ui.isactive->setCheckState(p_def->getIsActive()?Qt::Checked:Qt::Unchecked);
 	ui.extendedCondition->setPlainText(p_def->getExtendedCondition());
 	ui.useExtendedCondition->setCheckState(p_def->getUseExtendedCondition()?Qt::Checked:Qt::Unchecked);
+	ui.typeSelection->setCurrentIndex(static_cast<int>(p_def->getTabType()));
 	toggleUseExtended(p_def->getUseExtendedCondition());
 	fillSelectedFields();
 }
@@ -173,6 +174,7 @@ void TFormTabDef::formToCurrentTabDef()
 		current->setIsActive(ui.isactive->checkState()==Qt::Checked);
 		current->setExendedCondition(ui.extendedCondition->toPlainText());
 		current->setUseExtendedCondition(ui.useExtendedCondition->checkState()==Qt::Checked);
+		current->setTabType(static_cast<TTabType>(ui.typeSelection->currentIndex()));
 		current=nullptr;
 		ui.editTabDef->setVisible(false);
 		ui.delField->setDisabled(false);
@@ -440,6 +442,12 @@ void TFormTabDef::toggleUseExtended(bool p_flag)
 }
 
 
+void TFormTabDef::tabTypeChanged(int p_index)
+{
+	ui.userDefinition->setVisible(0==p_index);
+}
+
+
 TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 {
 	ui.setupUi(this);
@@ -476,6 +484,7 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	connect(ui.useExtendedCondition,SIGNAL(clicked()),this,SLOT(checkUseExtended()));
 	connect(ui.extendedCondition,SIGNAL(textChanged()),this,SLOT(extendedConditionChanged()) );
 	connect(ui.extendedFields,SIGNAL(currentIndexChanged(int)),this,SLOT(extendedFieldChanged(int)));
+	connect(ui.typeSelection,SIGNAL(currentIndexChanged(int)),this,SLOT(tabTypeChanged(int)));
 	ui.upDef->setDisabled(true);
 	ui.downDef->setDisabled(true);
 	ui.conditionValue->setVisible(false);
@@ -484,6 +493,10 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	ui.downField->setEnabled(false);
 	ui.errLabel->setVisible(false);
 	ui.errLabel->setText("");
-	
-	
+	ui.typeSelection->addItem(i18n("Disks"));
+	ui.typeSelection->addItem(i18n("Raid"));
+	ui.typeSelection->addItem(i18n("Fstab"));
+	ui.typeSelection->addItem(i18n("Iscsi"));
+	ui.typeSelection->addItem(i18n("Stats"));
+	ui.typeSelection->addItem(i18n("LVM"));
 }

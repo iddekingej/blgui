@@ -34,6 +34,7 @@ TNode * TParser::parseSimple()
 	} else if (l_token==TToken::STRING){
 		return parseString();
 	} else if(l_token==TToken::HOOK_L){
+		scanner->nextToken();
 		TNode *l_node=parseExpression();
 		if(scanner->getToken() != TToken::HOOK_R){
 			setError("')' expected");
