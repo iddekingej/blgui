@@ -243,14 +243,14 @@ void TMainWindow::fillMtab()
 		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getType()));
 		l_model->setItem(l_cnt,5,new QStandardItem(l_info->getOptions()));		
 		switch(l_info->isMounted()){
-			case TMTabEntry::NOTMOUNTED : l_note = i18n("Not mounted\n");break;
-			case TMTabEntry::DIFMOUNTED : l_note = i18n("Mounted on different path \n");break;
+			case TMountStatus::NOTMOUNTED : l_note = i18n("Not mounted\n");break;
+			case TMountStatus::DIFMOUNTED : l_note = i18n("Mounted on different path \n");break;
 			default:
 				l_note.clear();
 		}
 		l_realDevice=l_info->getRealDevice();
 		if(l_realDevice != nullptr){	
-			if(l_info->isSameType()==TMTabEntry::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_realDevice->getType());
+			if(l_info->isSameType()==TSameType::NOTSAMETYPE) l_note +=i18n("Wrong type. Type is (%1)",l_realDevice->getType());
 			if(l_realDevice->hasPartitions()) l_note+=i18n("Device not mountable (has partitions)");
 		}
 		l_model->setItem(l_cnt,0,new QStandardItem(l_note));		

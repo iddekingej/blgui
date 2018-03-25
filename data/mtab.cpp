@@ -181,7 +181,10 @@ void TMTab::copyFileType()
 		if(l_entry->getRealDevice()!=nullptr)l_entry->getRealDevice()->setType(l_entry->getType());
 	}
 }
-//Add mount to the TDeviceBase mount list
+/**
+ * Add mount to the \See TDeviceBase mount list
+ * 
+ */
 void TMTab::addMountTODevices()
 {	
 	TMTabEntry *l_entry;
@@ -194,22 +197,26 @@ void TMTab::addMountTODevices()
 	}
 }
 
-// Checks if the real device type is same as stored in this object
-// THis is used for checking if device in /etc/fstab is the same as se the real fs type
-TMTabEntry::TSameType TMTabEntry::isSameType()
+/**
+* Checks if the real device type is same as stored in this object
+* This is used for checking if device in /etc/fstab is the same as the real fs type
+* 
+* \return Returns mount status
+*/
+TSameType TMTabEntry::isSameType()
 {
 
 	if(nullptr != realDevice){
 		if(realDevice->getType()=="??"){
-			return UNKNOWNSAMETYPE;
+			return TSameType::UNKNOWNSAMETYPE;
 		}
 		if(realDevice->getType() ==type){
-			return SAMETYPE;
+			return TSameType::SAMETYPE;
 		} else {
-			return NOTSAMETYPE;
+			return TSameType::NOTSAMETYPE;
 		}
 	} else {
-		return UNKNOWNSAMETYPE;
+		return TSameType::UNKNOWNSAMETYPE;
 	}
 }
 
@@ -217,27 +224,27 @@ TMTabEntry::TSameType TMTabEntry::isSameType()
  *  The fstab contains mount points that could be mounted. This function determines if
  *  the device are really mounted on the mount point, or not.
  * 
- * \return     UNKMOUNTED  It is not possible to determine if the device is mounted or not
- *             MOUNTED     The device is mounted on the given mount point
- *             DIFMOUNT    The device is mounted on an other mount point
+ * \return   \See TMountStatus::UNKMOUNTED  It is not possible to determine if the device is mounted or not
+ *           \See TMountStatus::MOUNTED     The device is mounted on the given mount point
+ *           \See TMountStatus::DIFMOUNTED  The device is mounted on an other mount point
  *           
  */
 
-TMTabEntry::TMountStatus TMTabEntry::isMounted()
+TMountStatus TMTabEntry::isMounted()
 {
 	if(type=="swap"){
-		return UNKMOUNTED;
+		return TMountStatus::UNKMOUNTED;
 	}	
 	if(nullptr != realDevice){		
 		if(realDevice->isMountedOn(mountPoint)){			
-			return MOUNTED;
+			return TMountStatus::MOUNTED;
 		} else if(realDevice->isMounted()){			
-			return DIFMOUNTED;
+			return TMountStatus::DIFMOUNTED;
 		} else {
-			return NOTMOUNTED;
+			return TMountStatus::NOTMOUNTED;
 		}
 	} else {
-		return UNKMOUNTED;
+		return TMountStatus::UNKMOUNTED;
 	}
 }
 

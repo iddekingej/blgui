@@ -13,8 +13,22 @@
 #include "devicelist.h"
 #include "mountdiff.h"
 
+enum class TMountStatus{ 
+	 MOUNTED
+	,NOTMOUNTED
+	,UNKMOUNTED
+	,DIFMOUNTED	
+};
+	
+enum class TSameType{ 
+	SAMETYPE
+,	NOTSAMETYPE
+,	UNKNOWNSAMETYPE	
+};
+
+
 /**
- * TMtabEmtru is one mount line from mtab/fstab
+ * TMTabEntry is one mount line from mtab/fstab
  * 
  */
 class TMTabEntry
@@ -42,8 +56,7 @@ private:
 	TDeviceBase *realDevice;
 	
 public:
-	enum TMountStatus{ MOUNTED,NOTMOUNTED,UNKMOUNTED,DIFMOUNTED};
-	enum TSameType{ SAMETYPE,NOTSAMETYPE,UNKNOWNSAMETYPE};
+
 	inline const QString &getDevice(){ return device;}
 	inline const QString &getMountPoint(){ return mountPoint;}
 	inline const QString &getType(){ return type;}
