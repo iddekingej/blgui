@@ -21,7 +21,7 @@
 
 typedef unsigned long TDiskSize;
 
-// Reading a single line from a file containing a unsinged long
+// Reading a single line from a file containing a unsigned long
 bool readLong(QString p_path,QString p_name,unsigned long &p_size);
 
 
