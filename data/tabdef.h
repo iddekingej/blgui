@@ -15,11 +15,11 @@
  * TT_Partition - only oartitions
  * TT_Both - partition and decvices
  */
-typedef enum{
+enum class TObjectType{
 	TT_Device=0
 ,	TT_Partition=1
 ,	TT_Both=2
-} TObjectType;
+} ;
 
 /**
  * It is possible to define a simple filter.
@@ -31,25 +31,25 @@ typedef enum{
  *                 when a selected field has a certain value
  * CT_NoCondition - There is no filter
  */
-typedef enum class{
+enum class TConditionType{
 	IsEmpty=0
 ,	IsNotEmpty=1
 ,	IsValue=2
 ,       NoCondition=-1
-} TConditionType;
+} ;
 
 /**
  * Enumeration of tab type
  */
 
-typedef enum class _TTabType{
+enum class TTabType{
 	disks=0
 ,	raid 
 ,       fstab
 ,	iscsi
 ,	stats
 ,       lvm
-} TTabType;
+} ;
 
 /**
  * A object of this class contains de definition of a user defined tab

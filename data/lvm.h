@@ -11,7 +11,7 @@ using namespace std;
  *  
  */
 
-typedef enum{
+enum class TSectionType{
 	st_top
 ,	st_data
 ,	st_pv
@@ -20,7 +20,7 @@ typedef enum{
 ,	st_pvsection
 ,       st_lvsection
 ,       st_lv
-} TSectionType;
+};
 
 class TVolumeGroup;
 class TVolumeGroupList;

@@ -19,7 +19,7 @@
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
-	conditionObject=TT_Device;
+	conditionObject=TObjectType::TT_Device;
 	conditionType=TConditionType::NoCondition;
 	conditionField=-1;
 	conditionValue="";
@@ -49,12 +49,12 @@ bool TTabDef::validateCondition(QString &p_error)
 
 bool TTabDef::checkCondition(TDeviceBase* p_device)
 {
-		if(conditionObject ==TT_Device){
+		if(conditionObject ==TObjectType::TT_Device){
 			if(dynamic_cast<TDevice *>(p_device)==nullptr){
 				return false;
 			};
 		}
-		if(conditionObject==TT_Partition){
+		if(conditionObject==TObjectType::TT_Partition){
 			if(dynamic_cast<TPartition *>(p_device)==nullptr){
 				return false;
 			};
@@ -101,8 +101,8 @@ TTabDef::TTabDef(QVariant& p_json)
 	QMap<QString,QVariant> l_map=p_json.toMap();
 	
 	name=l_map["name"].toString();
-	int l_co=l_map["conditionObject"].toInt();
-	conditionObject=(l_co==TT_Device)?TT_Device:TT_Partition;
+	TObjectType l_co=(TObjectType)(l_map["conditionObject"].toInt());
+	conditionObject=(l_co==TObjectType::TT_Device)?TObjectType::TT_Device:TObjectType::TT_Partition;
 	conditionType=static_cast<TConditionType>(l_map["conditionType"].toInt());
 	conditionValue=l_map["conditionValue"].toString();	
 	conditionField=l_map["conditionField"].toInt();
@@ -180,7 +180,7 @@ void TTabDef::toJson(QList<QVariant>& p_document)
 {
 	QMap<QString,QVariant> l_object;
 	l_object["name"]=QVariant(name);
-	l_object["conditionObject"]=QVariant(conditionObject);
+	l_object["conditionObject"]=QVariant((int)conditionObject);
 	l_object["conditionType"]=QVariant(static_cast<int>(conditionType));
 	l_object["conditionValue"]=QVariant(conditionValue);
 	l_object["conditionField"]=QVariant(conditionField);

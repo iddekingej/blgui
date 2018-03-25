@@ -41,7 +41,7 @@ void TPhysicalVolumeList::processList(TVolumeGroupList* p_vgList)
 TLVMResponseParser::TLVMResponseParser(QString& p_text)
 {
 	text=p_text;
-	sectionType=st_top;
+	sectionType=TSectionType::st_top;
 	iter=new TStringLineIterator(p_text);
 }
 
@@ -128,16 +128,16 @@ TPVParser::TPVParser(TDeviceList* p_devList, QString& p_text):TLVMResponseParser
 bool TPVParser::chapter(QStringRef& p_item)
 {
 	bool l_namespace=false;
-	if(sectionType==st_top){
-		sectionType=st_data;
-	} else if(sectionType==st_data){
-		sectionType=st_pv;
+	if(sectionType==TSectionType::st_top){
+		sectionType=TSectionType::st_data;
+	} else if(sectionType==TSectionType::st_data){
+		sectionType=TSectionType::st_pv;
 		current=new TPhysicalVolume();
 		QString l_key=p_item.toString();
 		current->setKey(l_key);
 		items->append(current);		
-	} else if(sectionType==st_pv){
-		sectionType=st_da0;
+	} else if(sectionType==TSectionType::st_pv){
+		sectionType=TSectionType::st_da0;
 		l_namespace=true;
 	}
 	return l_namespace;
@@ -177,10 +177,10 @@ TVGMainParser::TVGMainParser(QString& p_text):TLVMResponseParser(p_text)
 
 bool TVGMainParser::chapter(QStringRef& p_item)
 {
-	if(sectionType==st_top){
-		sectionType=st_data;
-	} else if(sectionType==st_data){
-		sectionType=st_vg;
+	if(sectionType==TSectionType::st_top){
+		sectionType=TSectionType::st_data;
+	} else if(sectionType==TSectionType::st_data){
+		sectionType=TSectionType::st_vg;
 		current=new TVolumeGroup();
 		items->append(current);
 		QString l_key=p_item.toString();
@@ -199,16 +199,16 @@ void TVGMainParser::setVar(QString& p_name, QString& p_value)
 
 bool TVGParser::chapter(QStringRef& p_item)
 {
-	if(sectionType==st_top){
-		sectionType=st_vg;
-	} else if(sectionType==st_vg){
+	if(sectionType==TSectionType::st_top){
+		sectionType=TSectionType::st_vg;
+	} else if(sectionType==TSectionType::st_vg){
 		if(p_item=="logical_volumes"){
-			sectionType=st_lvsection;
+			sectionType=TSectionType::st_lvsection;
 		}
-	} else if(sectionType==st_lvsection){
+	} else if(sectionType==TSectionType::st_lvsection){
 		QString l_name=p_item.toString();
 		currentLv=current->addLv(l_name);
-		sectionType=st_lv;
+		sectionType=TSectionType::st_lv;
 	}
 	return false;
 }
@@ -218,7 +218,7 @@ bool TVGParser::chapter(QStringRef& p_item)
 
 void TVGParser::setVar(class QString& p_name, class QString& p_value)
 {
-	if(sectionType==st_lv){
+	if(sectionType==TSectionType::st_lv){
 		if(p_name=="id") currentLv->setId(p_value);
 		else if(p_name=="status"){
 			if(p_value.startsWith('[')  && p_value.endsWith(']')){
@@ -284,7 +284,7 @@ void TVolumeGroupList::processInfo(TDeviceList* p_list)
 		TLinkListIterator<TLogicalVolume> l_lvIter(l_vg->getLogicalVolumns());
 		while(l_lvIter.hasNext()){
 			l_lv=l_lvIter.next();
-			l_target=QFile::symLinkTarget(QString("/dev/")+l_vg->getName()+"/"+l_lv->getName());
+			l_target=QFile::symLinkTarget(QStringLiteral("/dev/")+l_vg->getName()+QStringLiteral("/")+l_lv->getName());
 			l_deviceBase=p_list->findDeviceByDevPath(l_target);
 			if((l_device=dynamic_cast<TDevice *>(l_deviceBase))!=nullptr){
 				l_device->setVGName(l_vg->getName());				
