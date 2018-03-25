@@ -42,7 +42,7 @@ typedef enum class{
  * Enumeration of tab type
  */
 
-typedef enum class{
+typedef enum class _TTabType{
 	disks=0
 ,	raid 
 ,       fstab
