@@ -19,7 +19,7 @@
 TTabDef::TTabDef(const QString &p_name)
 {
 	name=p_name;
-	conditionObject=TObjectType::TT_Device;
+	conditionObject=TObjectType::Device;
 	conditionType=TConditionType::NoCondition;
 	conditionField=-1;
 	conditionValue="";
@@ -49,12 +49,12 @@ bool TTabDef::validateCondition(QString &p_error)
 
 bool TTabDef::checkCondition(TDeviceBase* p_device)
 {
-		if(conditionObject ==TObjectType::TT_Device){
+		if(conditionObject ==TObjectType::Device){
 			if(dynamic_cast<TDevice *>(p_device)==nullptr){
 				return false;
 			};
 		}
-		if(conditionObject==TObjectType::TT_Partition){
+		if(conditionObject==TObjectType::Partition){
 			if(dynamic_cast<TPartition *>(p_device)==nullptr){
 				return false;
 			};
@@ -102,7 +102,7 @@ TTabDef::TTabDef(QVariant& p_json)
 	
 	name=l_map["name"].toString();
 	TObjectType l_co=(TObjectType)(l_map["conditionObject"].toInt());
-	conditionObject=(l_co==TObjectType::TT_Device)?TObjectType::TT_Device:TObjectType::TT_Partition;
+	conditionObject=(l_co==TObjectType::Device)?TObjectType::Device :TObjectType::Partition;
 	conditionType=static_cast<TConditionType>(l_map["conditionType"].toInt());
 	conditionValue=l_map["conditionValue"].toString();	
 	conditionField=l_map["conditionField"].toInt();

@@ -9,7 +9,10 @@
 #include <qhash.h>
 #endif
 
-
+enum class TSortType:int{
+	NUMERIC=0
+,	STRING=1		
+};
 
  enum class TField:int{
 	DEVICE_NAME=0
@@ -42,7 +45,7 @@
  */
 typedef struct {
 	const char *title; //Title of field
-	const char type;   //Sort type of field
+	TSortType sortType;   //Sort type of field
 	const char *fieldName; //Field name in extended condition
 	int realValue;
 	TField fieldId;

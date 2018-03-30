@@ -10,39 +10,34 @@
 
 #include "../base/doublelinkedlist.h"
 /**
- * Type of device displayed in Grid
- * TT_Device - only devices
- * TT_Partition - only oartitions
- * TT_Both - partition and decvices
+ * \enum TObjectType
+ * \brief Type of device displayed in Grid
  */
-enum class TObjectType{
-	TT_Device=0
-,	TT_Partition=1
-,	TT_Both=2
+enum class TObjectType:int{
+	Device=0      /**<  Object is a device (whole disk) */
+,	Partition =1  /**<  Object is a partition on a device */
+,	Both =2       /**<  Object is a device or a partition */
 } ;
 
 /**
- * It is possible to define a simple filter.
- * curently only a single condition can be defined:
- *  
- * CT_IsEmpty  - display device when selected field has a empty value
- * CT_IsNotEmpty - When selected field has a non empty value
- * CT_IsValue    - Needs a value.  Information about device/parition is only displayed
- *                 when a selected field has a certain value
- * CT_NoCondition - There is no filter
+ * \enum TConditionType
+ * \brief Type of condition used in a simple filter
+ * 
+ * In user defined tabs it's possible to filter the devices so only relevant devices are displayed
+ * When using a simple filter a TConditionType enum indicates the filter type.
  */
 enum class TConditionType{
-	IsEmpty=0
-,	IsNotEmpty=1
-,	IsValue=2
-,       NoCondition=-1
+	IsEmpty=0     /**< Display device when selected field is empty */
+,	IsNotEmpty=1  /**< Display device when selected field is not empty */
+,	IsValue=2     /**< Display device when selected field is some value */
+,       NoCondition=-1 /**< No condition */
 } ;
 
 /**
  * Enumeration of tab type
  */
 
-enum class TTabType{
+enum class TTabType:int{
 	disks=0
 ,	raid 
 ,       fstab
@@ -52,7 +47,8 @@ enum class TTabType{
 } ;
 
 /**
- * A object of this class contains de definition of a user defined tab
+ * 
+ * A object of this class contains the definition of a user defined tab
  */
 
 class TTabDef{

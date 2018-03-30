@@ -85,11 +85,11 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	no=p_def->getNo();
 	model->clear();
 	model->setHorizontalHeaderItem(0,new QStandardItem("Device"));
-	if(p_def->getConditionObject()!=TObjectType::TT_Device){
+	if(p_def->getConditionObject()!=TObjectType::Device){
 		model->setHorizontalHeaderItem(1,new QStandardItem("Partition"));
 	}
 	int l_fixedEnd=2;
-	if(p_def->getConditionObject()==TObjectType::TT_Device){
+	if(p_def->getConditionObject()==TObjectType::Device){
 		l_fixedEnd=1;
 	}
 	
