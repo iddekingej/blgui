@@ -6,6 +6,7 @@ set(test_SRCS   test/lib/testclass.cpp
 		test/lib/testconfig.cpp
 		test/lib/moccreator.cpp
 		test/base/test01.cpp
+		test/base/test02.cpp
 		test/base/run_base.cpp
 		test/data/test_btrfs.cpp
 		test/data/test_device.cpp

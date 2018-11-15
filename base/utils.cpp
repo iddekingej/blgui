@@ -15,7 +15,7 @@
  *            or when the value is not a valid integer
 */
 
-bool readLong(QString p_path,QString p_name,unsigned long &p_value)
+bool readLong(const QString p_path,const QString p_name,unsigned long &p_value)
 {
 	QString l_string;
 	bool l_ok;
@@ -36,7 +36,7 @@ bool readLong(QString p_path,QString p_name,unsigned long &p_value)
  * \return        true when successful  false when a file reading error has occurred
 */
 
-bool readString(QString p_path,QString p_name,QString &p_value)
+bool readString(const QString p_path,const QString p_name,QString &p_value)
 {
 	bool l_succes;	
 	QFile l_file(p_path+"/"+p_name);
@@ -107,7 +107,7 @@ QString getReadableSize(TDiskSize p_value)
  * \param  p_path Path to normalize
  * \return        Normalize string (/dummy => /dummy/  /dummy/=>/dummy/)
  */
-QString normelizePath(QString p_path)
+QString normelizePath(const QString p_path)
 {
     
     return p_path+(!p_path.endsWith("/")?"/":"");

@@ -182,7 +182,7 @@ void TMTab::copyFileType()
 	}
 }
 /**
- * Add mount to the \See TDeviceBase mount list
+ * Add mount to the \see TDeviceBase mount list
  * 
  */
 void TMTab::addMountTODevices()
@@ -224,9 +224,9 @@ TSameType TMTabEntry::isSameType()
  *  The fstab contains mount points that could be mounted. This function determines if
  *  the device are really mounted on the mount point, or not.
  * 
- * \return   \See TMountStatus::UNKMOUNTED  It is not possible to determine if the device is mounted or not
- *           \See TMountStatus::MOUNTED     The device is mounted on the given mount point
- *           \See TMountStatus::DIFMOUNTED  The device is mounted on an other mount point
+ * \return   \see TMountStatus::UNKMOUNTED  It is not possible to determine if the device is mounted or not
+ *           \see TMountStatus::MOUNTED     The device is mounted on the given mount point
+ *           \see TMountStatus::DIFMOUNTED  The device is mounted on an other mount point
  *           
  */
 

@@ -2,8 +2,9 @@
 #include <iostream>
 bool TRunner::run()
 {
-	
+	std::cout << "Run " <<__FUNCTION__ <<std::endl;
 	doRun();	
+	std::cout << "Run " <<__FUNCTION__ << " Failed:" << failed <<std::endl;
 	return failed;
 }
 

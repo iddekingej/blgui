@@ -1,5 +1,5 @@
-#ifndef __DOUBLELINKLIST_H_
-#define __DOUBLELINKLIST_H_
+#ifndef BASE_DOUBLELINKLIST_H_
+#define BASE_DOUBLELINKLIST_H_
 #include <stdio.h>
 template<class T>
 class TDoubleLinkedList;
@@ -295,7 +295,7 @@ private:
  *  Current item of iterator
  *  Can be null when end of list is reached
  */
-	TDoubleLinkedListItem<T> *current;
+	TDoubleLinkedListItem<T>  *current;
 	
 public:
 /**
@@ -333,7 +333,7 @@ public:
  * 
  * \return returns current item. This method can return a null item when iterating after the end.
  */	
-	inline T* next(){
+	inline  T * next(){
 		if(current != nullptr){
 			T *l_item=current->getItem();
 			current=current->getNext();
@@ -344,8 +344,5 @@ public:
 		
 };
 
-
-
-
-#endif
+#endif //BASE_DOUBLELINKLIST_H_
 

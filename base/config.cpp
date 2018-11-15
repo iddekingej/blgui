@@ -1,7 +1,7 @@
 #include "config.h"
 #include "globals.h"
 #include "utils.h"
-#include "qjsonwrapper/Json.h"
+#include <QJsonDocument>
 #include <QVariant>
 
 TConfig::TConfig()
@@ -43,7 +43,8 @@ void TConfig::setup()
 void TConfig::getTabDef(QVariant& p_tabDef)
 {
 	QByteArray l_data=configGui.readEntry("tabdef",QByteArray());
-	p_tabDef=QJsonWrapper::parseJson(l_data);
+	QJsonDocument lDocument=QJsonDocument::fromJson(l_data);
+	p_tabDef=lDocument.toVariant();
 }
 
 /**
@@ -56,7 +57,7 @@ void TConfig::getTabDef(QVariant& p_tabDef)
 
 void TConfig::setTabDef(QVariant& p_tabDef)
 {	
-	configGui.writeEntry("tabdef",QJsonWrapper::toJson(p_tabDef));
+	configGui.writeEntry("tabdef",QJsonDocument::fromVariant(p_tabDef).toJson());
 }
 
 	

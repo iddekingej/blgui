@@ -223,7 +223,7 @@ void TFormTabDef::selectTabDev(UNUSEDPAR const QItemSelection & p_selected,UNUSE
 void TFormTabDef::saveTabDef()
 {
 	formToCurrentTabDef();
-	tabDefs->save();
+	tabDefs->save(g_config);
 	accept();
 }
 
@@ -235,14 +235,14 @@ void TFormTabDef::saveTabDef()
 void TFormTabDef::cancelDef()
 {	
 	tabDefs->clear();
-	tabDefs->read();
+	tabDefs->read(g_config);
 	reject();
 }
 
 void TFormTabDef::closeEvent(QCloseEvent* p_event)
 {
 	tabDefs->clear();
-	tabDefs->read();
+	tabDefs->read(g_config);
 	p_event->accept();
 }
 

@@ -22,11 +22,12 @@
 typedef unsigned long TDiskSize;
 
 // Reading a single line from a file containing a unsigned long
-bool readLong(QString p_path,QString p_name,unsigned long &p_size);
+bool readLong ( const QString p_path, const QString p_name, long unsigned int& p_value )
+;
 
 
 //Reading a single line from a file
-bool readString(QString p_path,QString p_name,QString &p_return);
+bool readString ( const QString p_path, const QString p_name, QString& p_value );
 
 //convert size to readable format 1024=>1K
 void getReadableSize(TDiskSize p_value,TDiskSize &p_size,char &p_ind);

@@ -269,11 +269,11 @@ TDoubleLinkedListItem<TTabDef>* TTabDefList::getByPosition(long p_pos)
  * Read tab defs from configuration
  * g_config.getTab def read json from 
  */
-void TTabDefList::read()
+void TTabDefList::read(TConfig &p_config)
 {
 	QVariant l_data;
 	QVariant l_value;
-	g_config.getTabDef(l_data);
+	p_config.getTabDef(l_data);
 	QList<QVariant> l_list=l_data.toList();
 	QListIterator<QVariant> l_iter(l_list);
 	int l_no=0;
@@ -292,7 +292,7 @@ void TTabDefList::read()
  * The definition is covnerted to a variant.
  * In g_config the variant is saved as json.
  */
-void TTabDefList::save()
+void TTabDefList::save(TConfig &p_config)
 {
 	QList<QVariant> l_data;
 	TDoubleLinkedListIterator<TTabDef> l_iter(this);	
@@ -300,8 +300,8 @@ void TTabDefList::save()
 		l_iter.next()->toJson(l_data);		
 	}
 	QVariant l_value(l_data);
-	g_config.setTabDef(l_value);
-	g_config.sync();
+	p_config.setTabDef(l_value);
+	p_config.sync();
 }
 
 

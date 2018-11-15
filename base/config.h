@@ -8,8 +8,8 @@
 #include <QVector>
 #include <QVariant>
 /*
- * Singelton to manage configuration
- * the configuration is writeer to bdguirc file in the
+ * Singleton to manage configuration
+ * the configuration is writer to bdguirc file in the
  * default kde configuration folder
  */
 

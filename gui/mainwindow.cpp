@@ -684,7 +684,7 @@ TMainWindow::TMainWindow(QWidget *p_parent):QMainWindow(p_parent)
 
 	info=nullptr;
 	devModel=nullptr;
-	userTabs.read();
+	userTabs.read(g_config);
 	statsModel=new QStandardItemModel(0,4,this);	
 	setViewModel(ui.stats,statsModel);
 	notificationsModel=new QStandardItemModel(0,3,this);

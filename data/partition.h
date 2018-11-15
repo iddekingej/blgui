@@ -22,9 +22,8 @@ public:
 	inline TDeviceBase *getDevice(){ return device;}
 	inline TDiskSize getStart(){ return start;}
 	TPartition(TDeviceBase *p_device,const QString &p_name,TDiskSize p_size,TDiskSize p_start);
-	virtual void fillDataRow(TField p_no,QString &p_data) override;
-	virtual bool getFieldValue(TField p_no,QVariant &p_data) override;
-
-	virtual bool hasPartitions() override;
+	void fillDataRow(TField p_no,QString &p_data) override;
+	bool getFieldValue(TField p_no,QVariant &p_data) override;
+	bool hasPartitions() override;
 };
 #endif

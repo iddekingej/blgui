@@ -5,10 +5,10 @@
 #define __TABDEF_H_
 #include <QString>
 #include <QVector>
-#include "qjsonwrapper/Json.h"
 #include "formula/node.h"
 
-#include "../base/doublelinkedlist.h"
+#include "base/doublelinkedlist.h"
+#include "base/config.h"
 /**
  * \enum TObjectType
  * \brief Type of device displayed in Grid
@@ -171,8 +171,8 @@ public:
 	TTabDef *getByName(QString &p_name);
 	TDoubleLinkedListItem<TTabDef> *getByPosition(long p_pos);
 	TDoubleLinkedListItem<TTabDef> *getByNo(long p_no);
-	void save();
-	void read();
+	void save(TConfig &p_config);
+	void read(TConfig &p_config);
 };
 
 #endif

@@ -4,11 +4,13 @@
 #include "../base/utils.h"
 #include "lib/testconfig.h"
 #include <iostream>
+#include <QApplication>
 /**
  * Main entry point test program
  * 
  */
 int main(UNUSEDPAR int argc,UNUSEDPAR char **argv) {
+	QApplication l_app(argc,argv);
 	TTestConfig *l_config=new TTestConfig();
 	if(!l_config->initConfig()){
 		std::cout << "init config failed" <<std::endl;

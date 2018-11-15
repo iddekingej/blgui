@@ -29,7 +29,7 @@ public:
  * \param p_text This text will be iterated
  */
 
-	inline TStringLineIterator(QString &p_text){ 
+	inline TStringLineIterator(const QString &p_text){ 
 		text=p_text;
 	}
 
