@@ -21,9 +21,9 @@ QString TDeviceBase::getReadableSize()
 QString TDeviceBase::getReadableFreeSize()
 {
     if(getHasFree()){
-	return ::getReadableSize(getFree());
+        return ::getReadableSize(getFree());
     }
-    return QStringLiteral("");
+    return QEMPTY_STRING;
 }
 
 

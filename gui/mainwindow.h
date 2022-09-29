@@ -123,7 +123,7 @@ private:
 	virtual void setVisibleTabs();
 	
 protected:
-	void resizeEvent(QResizeEvent *p_event);
+	void resizeEvent(QResizeEvent *p_event) override;
 public:
 
 	TMainWindow(QWidget *p_parent=nullptr);

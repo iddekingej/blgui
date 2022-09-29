@@ -158,7 +158,6 @@ bool TFormDevInfo::fillMountPointItems(QStandardItemModel *p_model,TDeviceBase *
 void TFormDevInfo::fillMountPoints(TDevice *p_device)
 {
 	QStandardItemModel        *l_model=new QStandardItemModel(0,3,this);
-	QString l_value;
 	l_model->setHorizontalHeaderItem(0,new QStandardItem(i18n("Device")));
 	l_model->setHorizontalHeaderItem(1,new QStandardItem(i18n("Mount point")));
 	l_model->setHorizontalHeaderItem(2,new QStandardItem(i18n("Fs. type")));

@@ -36,7 +36,7 @@ void TPartition::fillDataRow(TField p_no,QString &p_data)
 			p_data=QString::number(getSize());
 			break;
 		case TField::MODEL:
-			p_data=QStringLiteral("");
+			p_data=QString();
 			break;
 		case TField::TYPE:
 			p_data=getType();
@@ -59,10 +59,10 @@ void TPartition::fillDataRow(TField p_no,QString &p_data)
 		case TField::USB_BUS:
 		case TField::PCI_BUS:
 		case TField::LVM_NAME:
-			p_data=QStringLiteral("");
+			p_data=QEMPTY_STRING;
 			break;
 		case TField::FREE_SPACE:
-			p_data=(getHasFree()?QString::number(getFree()):QStringLiteral(""));
+			p_data=getHasFree()?QString::number(getFree()):QEMPTY_STRING;
 			break;
 		case TField::START:
 			p_data=QString::number(start);
@@ -94,7 +94,7 @@ bool TPartition::getFieldValue(TField p_no, QVariant& p_data)
 			p_data=(qlonglong)getSize();
 			break;
 		case TField::MODEL:
-			p_data=QStringLiteral("");
+			p_data=QEMPTY_STRING;
 			break;
 		case TField::TYPE:
 			p_data=getType();
@@ -117,7 +117,7 @@ bool TPartition::getFieldValue(TField p_no, QVariant& p_data)
 		case TField::USB_BUS:
 		case TField::PCI_BUS:
 		case TField::LVM_NAME:
-			p_data=QStringLiteral("");
+			p_data=QString();
 			break;
 		case TField::FREE_SPACE:
 			p_data=getHasFree()?(qlonglong)getFree():-1;

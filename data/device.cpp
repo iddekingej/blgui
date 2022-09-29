@@ -52,7 +52,7 @@ void TDevice::fillDataRow(TField p_no,QString &p_data)
 			p_data=getName();
 			break;
 		case TField::PARTITION_NAME:
-			p_data=QStringLiteral("");
+			p_data=QString();
 			break;
 		case TField::SIZE:
 			p_data=QString::number(getSize());
@@ -100,10 +100,10 @@ void TDevice::fillDataRow(TField p_no,QString &p_data)
 			p_data=getLVMName();
 			break;
 		case TField::FREE_SPACE:
-			p_data=(getHasFree()?QString::number(getFree()):QStringLiteral(""));
+			p_data=(getHasFree()?QString::number(getFree()):QString());
 			break;
 		case TField::START:
-			p_data=QStringLiteral("");
+			p_data=QEMPTY_STRING;
 			break;
 		case TField::FREE_SPACE_KMG:
 			p_data=getReadableFreeSize();
@@ -130,7 +130,7 @@ bool TDevice::getFieldValue(TField p_no,QVariant &p_data)
 			p_data=getName();
 			break;
 		case TField::PARTITION_NAME:
-			p_data=QStringLiteral("");
+			p_data=QEMPTY_STRING;
 			break;
 		case TField::SIZE:
 			p_data=(qlonglong)getSize();
@@ -181,7 +181,7 @@ bool TDevice::getFieldValue(TField p_no,QVariant &p_data)
 			p_data=(qlonglong)(getHasFree()?getFree():-1);
 			break;
 		case TField::START:
-			p_data=QStringLiteral("");
+			p_data=QEMPTY_STRING;
 			break;
 		case TField::FREE_SPACE_KMG:
 			p_data=getReadableFreeSize();

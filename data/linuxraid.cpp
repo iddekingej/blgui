@@ -14,7 +14,6 @@
 void TLinuxRaid::processInfo(TDeviceList* p_list,TRaidInfo *p_raid)
 {
 	QString      l_level;		
-	QString      l_fileName;	
 	QDirIterator l_devIter("/sys/block/",QDirIterator::NoIteratorFlags);
 	TDeviceBase  *l_deviceBase;
 	TRaidDevice  *l_raid;

@@ -4,11 +4,14 @@
 #include "ui_newtab.h"
 class TFormNewTab:public QDialog
 {
+    Q_OBJECT
 private:
 	Ui::NewTab ui;
 public:
 	QString getTabName(){ return ui.tabName->text(); }
 	TFormNewTab(QString p_name);
-	void save();
+    virtual ~TFormNewTab(){};
+public slots:    
+	virtual void saveData();
 };
 #endif

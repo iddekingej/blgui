@@ -77,7 +77,7 @@ void TMountDialog::onDevChange(UNUSEDPAR int p_index)
 		QString l_lower=l_device->getType().toLower();
 		int l_foundIndex=-1;
 		int l_index=0;
-		for(QString l_fileSystem:l_fileSystems){
+		for(const auto &l_fileSystem:qAsConst(l_fileSystems)){
 			ui.fsType->addItem(l_fileSystem);
 			if(l_fileSystem.toLower()==l_lower) l_foundIndex=l_index;
 			l_index++;		
@@ -100,7 +100,7 @@ void TMountDialog::onDevChange(UNUSEDPAR int p_index)
 
 			ui.optionUnmount->setChecked(true);
 			if(l_mounts->getLength()>1){
-				ui.unmountWhat->addItem(QStringLiteral(""));
+				ui.unmountWhat->addItem(QString());
 			}
 			TLinkListIterator<TMount> l_iter(l_mounts);
 			TMount *l_item;	

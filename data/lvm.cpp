@@ -461,5 +461,5 @@ TLVM::~TLVM()
 
 bool TLVM::deamonRunning()
 {
-	return QFileInfo("/run/lvm/lvmetad.socket").exists();
+	return QFileInfo::exists("/run/lvm/lvmetad.socket");
 }

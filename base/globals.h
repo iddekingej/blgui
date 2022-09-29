@@ -50,4 +50,6 @@ extern const  int g_numDeviceFields;
 extern const  TFieldInfo g_deviceFields[];
 
 inline unsigned int qHash(TField p_field){ return qHash((int)p_field);}
+
+
 #endif

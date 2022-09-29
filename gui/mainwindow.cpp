@@ -42,7 +42,7 @@ class TGridDelegate : public QStyledItemDelegate
 public:
     TGridDelegate(QObject* p_parent ) : QStyledItemDelegate(p_parent) { }
  
-    void paint(QPainter* p_painter, const QStyleOptionViewItem& p_option, const QModelIndex& p_index ) const
+    void paint(QPainter* p_painter, const QStyleOptionViewItem& p_option, const QModelIndex& p_index ) const override 
     {
         p_painter->save();
         p_painter->setPen(QColor(Qt::lightGray));
@@ -58,7 +58,7 @@ void TMainWindow::handleMount()
 {	
 	QModelIndexList l_list=ui.diskList->selectionModel()->selectedIndexes();
 	TDeviceBase *l_device=nullptr;
-	QString l_message=QStringLiteral("");
+	QString l_message;
 	if(getuid()!=0){
 		l_message=i18n("Only root can mount");
 	}  else if(l_list.length()>0 && ui.info->currentIndex()==0){
@@ -120,7 +120,7 @@ void TMainWindow::fillLvm()
 			l_pvInfo=l_pvIter.next();
 			
 			
-			l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?QStringLiteral(""):l_pvInfo->getRealDevice()->getName()));
+			l_model->setItem(l_cnt,0,new QStandardItem(l_pvInfo->getRealDevice()==nullptr?QString():l_pvInfo->getRealDevice()->getName()));
 			l_model->setItem(l_cnt,1,new QStandardItem(QString::number(l_pvInfo->getDevSize())));
 			l_model->setItem(l_cnt,2,new QStandardItem(l_pvInfo->getVgName()));
 			l_cnt++;
@@ -161,7 +161,7 @@ void TMainWindow::fillLvm()
 				l_lvInfo=l_iterLv.next();
 				l_lvModel->setItem(l_lvCnt,0,new QStandardItem(l_lvInfo->getName()));
 				l_lvModel->setItem(l_lvCnt,1,new QStandardItem(l_vgInfo->getName()));
-				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():QStringLiteral("")));
+				l_lvModel->setItem(l_lvCnt,2,new QStandardItem(l_lvInfo->getRealDevice()!=nullptr?l_lvInfo->getRealDevice()->getName():QString()));
 				l_lvModel->setItem(l_lvCnt,3,new QStandardItem(l_lvInfo->getId()));
 				if(l_lvInfo->getReadFlag())l_lvModel->setItem(l_lvCnt,4,new QStandardItem("X"));
 				if(l_lvInfo->getWriteFlag())l_lvModel->setItem(l_lvCnt,5,new QStandardItem("X"));
@@ -238,7 +238,7 @@ void TMainWindow::fillMtab()
 	while(l_mtabIter.hasNext()){
 		l_info=l_mtabIter.next();
 		l_model->setItem(l_cnt,1,new QStandardItem(l_info->getDevice()));
-		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():QStringLiteral("")));
+		l_model->setItem(l_cnt,2,new QStandardItem(l_info->getRealDevice()!=nullptr?l_info->getRealDevice()->getName():QString()));
 		l_model->setItem(l_cnt,3,new QStandardItem(l_info->getMountPoint()));
 		l_model->setItem(l_cnt,4,new QStandardItem(l_info->getType()));
 		l_model->setItem(l_cnt,5,new QStandardItem(l_info->getOptions()));		

@@ -29,7 +29,7 @@ void TBtrfsInfo::getRaidLevel(const QString &p_path,QString &p_raidLevel)
 			return ;
 		}
 	}
-	p_raidLevel=QStringLiteral("");	
+	p_raidLevel=QEMPTY_STRING;	
 }
 
 /** 

@@ -470,7 +470,7 @@ TFormTabDef::TFormTabDef(TTabDefList *p_list):QDialog()
 	fillTabDef();
 	connect(ui.conditionType,SIGNAL(currentIndexChanged(int)),this,SLOT(changeConditionType(int)));
 	connect(ui.addTab, SIGNAL(clicked()),this,SLOT(newTab()));
-	connect(ui.tabList->selectionModel() ,SIGNAL(selectionChanged(const QItemSelection &,const QItemSelection &)),this,SLOT(selectTabDev(const QItemSelection &,const QItemSelection &)));
+	connect(ui.tabList->selectionModel() ,SIGNAL(selectionChanged(QItemSelection ,QItemSelection )),this,SLOT(selectTabDev(QItemSelection,QItemSelection)));
 	connect(ui.fieldList->selectionModel(),SIGNAL(selectionChanged(const QItemSelection &,const QItemSelection &)),this,SLOT(selectField(const QItemSelection &,const QItemSelection &)));
 	connect(ui.okButton,SIGNAL(clicked()),this,SLOT(saveTabDef()));
 	connect(ui.cancelButton,SIGNAL(clicked()),this,SLOT(cancelDef()));

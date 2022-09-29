@@ -44,5 +44,7 @@ void setViewModel(QAbstractItemView *p_view,QStandardItemModel *p_model);
 QString normelizePath(QString p_path);
 
 #define UNUSEDPAR __attribute__((unused))
+#define QEMPTY_STRING QString()
+
 
 #endif

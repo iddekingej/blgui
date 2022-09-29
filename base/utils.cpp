@@ -41,7 +41,7 @@ bool readString(const QString p_path,const QString p_name,QString &p_value)
 	bool l_succes;	
 	QFile l_file(p_path+"/"+p_name);
 	if(!l_file.open(QIODevice::ReadOnly|QIODevice::Text)){
-		p_value= QStringLiteral("");
+		p_value= QEMPTY_STRING;
 		return false;
 	}
 	QTextStream l_stream(&l_file);

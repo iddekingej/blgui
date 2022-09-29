@@ -107,7 +107,6 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	const QHash<QString,TDeviceBase*> *l_map=p_info->getDevices()->getNameIndex();
 	QHashIterator<QString,TDeviceBase *> l_iter(*l_map);
 	TDeviceBase *l_device;
-	QString l_value;
 	int l_row=0;
 	
 	while(l_iter.hasNext()){

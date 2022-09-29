@@ -162,7 +162,6 @@ void TDeviceList::readPartitions(const QString &p_path,TDevice* p_device)
 	QString      l_deviceName;
 	TPartition   *l_partition;
 	TDiskSize    l_start;
-	QString     l_dev;
 	
 	while(l_iter.hasNext()){
 		l_iter.next();
