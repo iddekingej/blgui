@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>605</width>
-    <height>716</height>
+    <height>768</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -127,7 +127,7 @@
                 </property>
                 <property name="icon">
                  <iconset resource="../resources/icons.qrc">
-                  <normaloff>:/icons/close.png</normaloff>:/icons/close.png</iconset>
+                  <normaloff>:/icons/delete.png</normaloff>:/icons/delete.png</iconset>
                 </property>
                </widget>
               </item>

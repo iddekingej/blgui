@@ -12,9 +12,12 @@ private:
 	QString error;
 	int     errorCol=-1;
 	int     errorLine=-1;
-protected:	
+    
+    qlonglong unitToValue(QChar p_value);
+    
 	TNode *parseField();
-	TNode *parseString();
+	TNode *parseString();    
+    TNode *parseInt();
 	TNode *parseSimple();
 	TNode *parseExpression();
 	TNode *parseCond();

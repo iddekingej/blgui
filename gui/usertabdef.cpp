@@ -85,12 +85,11 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 	no=p_def->getNo();
 	model->clear();
 	model->setHorizontalHeaderItem(0,new QStandardItem("Device"));
+    
+    int l_fixedEnd=1;
 	if(p_def->getConditionObject()!=TObjectType::Device){
 		model->setHorizontalHeaderItem(1,new QStandardItem("Partition"));
-	}
-	int l_fixedEnd=2;
-	if(p_def->getConditionObject()==TObjectType::Device){
-		l_fixedEnd=1;
+        l_fixedEnd++;
 	}
 	
 	QString l_error;
@@ -100,7 +99,7 @@ void TUserTabDef::fillGrid(TTabDef* p_def, TDeviceInfo* p_info)
 		ui.parseError->setText(l_error);
 		ui.parseError->setVisible(true);
 	} else {
-		ui.parseError->setText("");
+		ui.parseError->setVisible(false);
 	}
 	
 	fillHeader(l_fixedEnd,p_def->getSelectedList());

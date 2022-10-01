@@ -49,6 +49,7 @@ private:
 	int tokenLine;
 	bool parseIdent();
 	bool parseString(QChar p_end);
+    bool parseInt();
 	void skipSpace();
 	
 public:	

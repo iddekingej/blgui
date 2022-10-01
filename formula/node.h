@@ -32,7 +32,7 @@ private:
 	QVariant value;
 public:
 	TValueNode(T p_value){
-		value=p_value;
+		value.setValue(p_value);
 	}
 	virtual bool calculate(UNUSEDPAR TCreator *p_creator,QVariant &p_result) override{
 		p_result=value;

@@ -26,6 +26,21 @@ bool TScanner::parseString(QChar p_end)
 	return true;
 }
 
+bool TScanner::parseInt()
+{
+    int l_start=current;
+    while(current<condition.length()){
+        QChar l_ch=condition.at(current);
+        if((l_ch<'0' || l_ch>'9')  && (l_ch<'a' || l_ch >'z') && (l_ch <'A' && l_ch >'Z')){
+            break;
+        }
+        current++;
+    }
+    tokenText=condition.mid(l_start,current-l_start);
+    token=TToken::INTEGER;
+    return false;
+}
+
 bool TScanner::parseIdent()
 {
 	QChar l_ch;
@@ -62,8 +77,9 @@ bool TScanner::nextToken()
 	}	
 
 	QChar l_ch=condition.at(current);
-	
-	if(l_ch=='"'||l_ch=='\''){		
+	if((l_ch>='0'  && l_ch<='9') ){        
+        return parseInt();
+    } else if(l_ch=='"'||l_ch=='\''){		
 		return parseString(l_ch);
 	} else if((l_ch>='a' && l_ch <='z') ||(l_ch>='A' && l_ch<='Z') || l_ch=='_'){
 		return parseIdent();

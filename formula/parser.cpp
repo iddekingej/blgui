@@ -26,6 +26,55 @@ TNode *TParser::parseString()
 	return l_node;
 }
 
+qlonglong TParser::unitToValue(QChar p_value)
+{        
+    if(p_value=='k' || p_value =='K'){
+            return 1024;
+    } else if(p_value=='m' || p_value == 'M'){
+            return 1024*1024;
+    } else if(p_value == 'g' || p_value =='G'){
+            return 1024*1024*1024;
+    } else if(p_value == 't' || p_value =='T'){
+            qlonglong lValue=1024*1024*1024;
+            return lValue*1024;
+    }
+    return 0;
+}
+
+
+TNode *TParser::parseInt()
+{
+    QString lValue=scanner->getTokenText();
+    
+    if(lValue.size()==0){
+            setError("Internal error, string is empty");
+            printf("Internal error, parsing integer has empty string\n");
+            return nullptr;
+    }
+    QChar lCh=lValue.back();
+
+    qlonglong lMul=1;
+    if(lCh<'0' || lCh>'9'){
+            lMul=unitToValue(lCh);
+            if(lMul==0){
+                    setError("Invalid unit: k,m,g or t expected");
+                    return nullptr;
+            }
+            lValue=lValue.mid(0,lValue.size()-1);    
+    }
+    bool l_ok;
+    qlonglong lNumber=lValue.toLongLong(&l_ok)*lMul;    
+        
+    if(l_ok){            
+            scanner->nextToken();
+            return new TValueNode<long>(lNumber);            
+    } else {
+            setError("Invalid number");
+            return nullptr;
+    }
+
+}
+
 TNode * TParser::parseSimple()
 {
 	TToken l_token=scanner->getToken();
@@ -33,6 +82,8 @@ TNode * TParser::parseSimple()
 		return parseField();
 	} else if (l_token==TToken::STRING){
 		return parseString();
+    }else if (l_token==TToken::INTEGER){
+        return parseInt();
 	} else if(l_token==TToken::HOOK_L){
 		scanner->nextToken();
 		TNode *l_node=parseExpression();
