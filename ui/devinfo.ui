@@ -428,7 +428,7 @@
          <item alignment="Qt::AlignTop">
           <widget class="QLabel" name="noAliasesLabel">
            <property name="text">
-            <string>Device has no aliasses</string>
+            <string>Device has no aliases</string>
            </property>
           </widget>
          </item>

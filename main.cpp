@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
 		,	VERSION
 		,	i18n("X")
 		,	KAboutLicense::GPL
-		,	i18n("(C) 2016")
+		,	i18n("(C) 2016..2022")
 		,	i18n("x")
 		,	QStringLiteral("X")
 		,	QStringLiteral("X")

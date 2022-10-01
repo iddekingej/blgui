@@ -219,6 +219,7 @@ void TMainWindow::fillIscsi()
 	ui.iscsiTable->resizeRowsToContents();
 	ui.iscsiTable->sortByColumn(l_sortHeader,l_sortOrder);
 }
+
 void TMainWindow::fillMtab()
 {
 	int l_sortHeader=ui.mtabList->horizontalHeader()->sortIndicatorSection();

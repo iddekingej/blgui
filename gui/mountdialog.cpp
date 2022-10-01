@@ -52,7 +52,7 @@ void TMountDialog::mountpointChanged(const QString& p_path)
 	QFileInfo l_info(p_path);
 	QString l_text="";
 	if(!l_info.exists()){
-		l_text=i18n("Path doesn't exists.");		
+		l_text=i18n("Path doesn't exist.");		
 	} else if (!l_info.isDir()){
 		l_text=i18n("Path is not a directory but a file");
 	}

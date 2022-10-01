@@ -8,7 +8,7 @@ protected:
 /**
  *Run all base tests
  */		
-	virtual void doRun()
+	void doRun() override
 	{
 		runner(new TTest01());
 		runner(new TTest02());
