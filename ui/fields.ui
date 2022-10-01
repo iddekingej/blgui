@@ -249,7 +249,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Display devices /pratitions</string>
+        <string>Display devices / partitions</string>
        </property>
       </widget>
      </item>

@@ -35,7 +35,7 @@ void TFormTabDef::fillExtendedFields()
  */
 void TFormTabDef::fillConditionType()
 {
-	ui.conditionType->addItem(i18n(""));
+	ui.conditionType->addItem(QStringLiteral(""));
 	ui.conditionType->addItem(i18n("Is empty"));
 	ui.conditionType->addItem(i18n("Is not empty"));
 	ui.conditionType->addItem(i18n("Has value"));

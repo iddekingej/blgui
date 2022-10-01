@@ -1,5 +1,6 @@
 #include <iostream>
 #include "scanner.h"
+#include <klocalizedstring.h>
 
 TScanner::TScanner(const QString& p_condition)
 {
@@ -21,7 +22,7 @@ bool TScanner::parseString(QChar p_end)
 		}
 		current++;
 	}
-	errorText="Missing end quote";
+	errorText=i18n("Missing end quote");
 	token=TToken::ERROR;
 	return true;
 }

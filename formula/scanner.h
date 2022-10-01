@@ -2,6 +2,7 @@
 #define __SCANNER_H__
 
 #include <QString>
+
 #include "../data/devicebase.h"
 
 enum class TToken:int{

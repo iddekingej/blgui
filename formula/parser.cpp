@@ -3,12 +3,13 @@
 #include "node.h"
 #include "base/globals.h"
 #include <QString>
+#include <klocalizedstring.h>
 
 TNode *TParser::parseField()
 {
 	TField l_no=getFieldIdByName(scanner->getTokenText());
 	if(TField::NOTFOUND == l_no){
-		setError( QStringLiteral("Unknown field :'%1'").arg(scanner->getTokenText()));
+		setError( i18n("Unknown field :'%1'",scanner->getTokenText()));
 		return nullptr;
 	}
 	TFieldNode *l_node=new TFieldNode(l_no);
@@ -47,8 +48,7 @@ TNode *TParser::parseInt()
     QString lValue=scanner->getTokenText();
     
     if(lValue.size()==0){
-            setError("Internal error, string is empty");
-            printf("Internal error, parsing integer has empty string\n");
+            setError(i18n("Internal error, integer string is empty"));
             return nullptr;
     }
     QChar lCh=lValue.back();
@@ -57,7 +57,7 @@ TNode *TParser::parseInt()
     if(lCh<'0' || lCh>'9'){
             lMul=unitToValue(lCh);
             if(lMul==0){
-                    setError("Invalid unit: k,m,g or t expected");
+                    setError(i18n("Invalid unit: k,m,g or t expected"));
                     return nullptr;
             }
             lValue=lValue.mid(0,lValue.size()-1);    
@@ -69,7 +69,7 @@ TNode *TParser::parseInt()
             scanner->nextToken();
             return new TValueNode<long>(lNumber);            
     } else {
-            setError("Invalid number");
+            setError(i18n("Invalid number"));
             return nullptr;
     }
 
@@ -88,7 +88,7 @@ TNode * TParser::parseSimple()
 		scanner->nextToken();
 		TNode *l_node=parseExpression();
 		if(scanner->getToken() != TToken::HOOK_R){
-			setError("')' expected");
+			setError(i18n("')' expected"));
 			delete l_node;
 			return nullptr;
 		}
@@ -97,7 +97,7 @@ TNode * TParser::parseSimple()
 	} else {
 		
 		//TODO Ident or "(" expected		
-		setError(QStringLiteral("'%1' found but Identifier, string constant or '(' expected").arg(scanner->getTokenText()));
+		setError(i18n("'%1' found but Identifier, string constant or '(' expected",scanner->getTokenText()));
 		return nullptr;
 	}
 }
@@ -179,7 +179,7 @@ TNode *TParser::parseFormula()
 	TNode *l_node=parseExpression();
 	
 	if(scanner->getToken() != TToken::FILE_END && error.isEmpty()){
-		setError(QStringLiteral("EOF expected but '%1' found").arg(scanner->getTokenText()));
+		setError(i18n("EOF expected but '%1' found",scanner->getTokenText()));
 	}
 	return l_node;
 }
@@ -222,7 +222,7 @@ TParser::getFullError (QString &p_error)
 	if(error.isEmpty()){
 		p_error="";
 	} else {
-		p_error=QStringLiteral("At col %1 line %2 error:'%3'").arg(errorCol+1).arg(errorLine+1).arg(error);		
+		p_error=i18n("At col %1 line %2 error:'%3'",errorCol+1,errorLine+1,error);		
 	}
 }
 

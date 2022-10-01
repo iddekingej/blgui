@@ -13,15 +13,21 @@ include(KDECompilerSettings)
 include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS 
+    Gui
     Core    
 )
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS        
     CoreAddons      
     I18n            
     WidgetsAddons   
     Config
+ 
 )
+
+
+
+
 set(blgui_LIBS
     Qt5::Widgets
     KF5::CoreAddons
@@ -29,7 +35,7 @@ set(blgui_LIBS
     KF5::I18n
  )
  
- KI18N_WRAP_UI(blgui_ui_h ${blgui_ui})
-
+KI18N_WRAP_UI(blgui_ui_h ${blgui_ui})
+ki18n_install(po)
 qt5_add_resources(blgui_rcc_h ${blgui_RESOURCES})
 add_definitions(-DKDE5)

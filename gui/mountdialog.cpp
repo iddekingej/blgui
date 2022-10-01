@@ -26,7 +26,7 @@ TMountDialog::TMountDialog(TDeviceBase* p_device,const QHash<QString,TDeviceBase
 	
 
 	ui.accesTimeSet->addItem(i18n("Do not update access time"));
-	ui.accesTimeSet->addItem(i18n("Only later then mod. time"));
+	ui.accesTimeSet->addItem(i18n("Only later than mod. time"));
 	ui.accesTimeSet->addItem(i18n("Always"));
 	ui.accesTimeSet->setCurrentIndex(0);
 	

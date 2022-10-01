@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>User define tab</string>
+   <string>User defined tab</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>

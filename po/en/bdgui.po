@@ -3,826 +3,1368 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: http://none\n"
-"POT-Creation-Date: 2017-02-23 20:23+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-01 16:46+0200\n"
+"PO-Revision-Date: 2022-10-01 16:46+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: base/globals.cpp:9 gui/formdevinfo.cpp:194 gui/mainwindow.cpp:111
+#: base/globals.cpp:9 gui/formdevinfo.cpp:193 gui/mainwindow.cpp:111
+#, kde-format
 msgid "Size"
 msgstr ""
 
 #: base/globals.cpp:10
+#, kde-format
 msgid "Model"
 msgstr ""
 
-#: base/globals.cpp:11 gui/formbasedevinfo.cpp:23 gui/formdevinfo.cpp:193
-#: gui/mainwindow.cpp:235
+#. i18n: file: ui/tabconfig.ui:182
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: base/globals.cpp:11 gui/formbasedevinfo.cpp:23 gui/formdevinfo.cpp:192
+#: gui/mainwindow.cpp:236 rc.cpp:425
+#, kde-format
 msgid "Type"
 msgstr ""
 
 #: base/globals.cpp:12
+#, kde-format
 msgid "Mounted"
 msgstr ""
 
-#: base/globals.cpp:13 gui/mainwindow.cpp:503
+#: base/globals.cpp:13 gui/mainwindow.cpp:501
+#, kde-format
 msgid "Label"
 msgstr ""
 
 #: base/globals.cpp:14
+#, kde-format
 msgid "Size (KMG)"
 msgstr ""
 
 #: base/globals.cpp:15
+#, kde-format
 msgid "Read only"
 msgstr ""
 
 #: base/globals.cpp:16
+#, kde-format
 msgid "Removable"
 msgstr ""
 
 #: base/globals.cpp:17
+#, kde-format
 msgid "Loop back file"
 msgstr ""
 
-#: base/globals.cpp:18 build/ui_devinfo.h:478 build/ui_devinfo.h:480
+#. i18n: file: ui/devinfo.ui:556
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#. i18n: file: ui/devinfo.ui:571
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: base/globals.cpp:18 rc.cpp:182 rc.cpp:185
+#, kde-format
 msgid "Slaves"
 msgstr ""
 
 #: base/globals.cpp:19
+#, kde-format
 msgid "Free space"
 msgstr ""
 
 #: base/globals.cpp:20
+#, kde-format
 msgid "Scsi bus"
 msgstr ""
 
 #: base/globals.cpp:21
+#, kde-format
 msgid "Iscsi host"
 msgstr ""
 
 #: base/globals.cpp:22
+#, kde-format
 msgid "Start(bytes)"
 msgstr ""
 
 #: base/globals.cpp:23
+#, kde-format
 msgid "Free space (KMG)"
 msgstr ""
 
 #: base/globals.cpp:24 gui/formdevinfo.cpp:100
+#, kde-format
 msgid "Rotational"
 msgstr ""
 
 #: base/globals.cpp:25
+#, kde-format
 msgid "USB bus"
 msgstr ""
 
-#: base/globals.cpp:26 build/ui_devinfo.h:468
+#. i18n: file: ui/devinfo.ui:385
+#. i18n: ectx: property (text), widget (QLabel, label_17)
+#: base/globals.cpp:26 rc.cpp:152
+#, kde-format
 msgid "PCI bus"
 msgstr ""
 
 #: base/globals.cpp:27
+#, kde-format
 msgid "Volume group name"
 msgstr ""
 
 #: base/globals.cpp:28
+#, kde-format
 msgid "Lvm name"
 msgstr ""
 
-#: build/ui_about.h:122
-msgid "About"
-msgstr ""
-
-#: build/ui_about.h:123
-msgid "Disk information GUI"
-msgstr ""
-
-#: build/ui_about.h:124
-msgid "Version:"
-msgstr ""
-
-#: build/ui_about.h:125 build/ui_devinfo.h:454 build/ui_devinfo.h:458
-#: build/ui_devinfo.h:461 build/ui_devinfo.h:465 build/ui_parinfo.h:273
-msgid "none"
-msgstr ""
-
-#: build/ui_about.h:126
-msgid "(C) 2016 Jeroen van Iddekinge"
-msgstr ""
-
-#: build/ui_about.h:127
-msgid "License: Gpl v2"
-msgstr ""
-
-#: build/ui_about.h:128 build/ui_devinfo.h:481 build/ui_parinfo.h:289
-msgid "Close"
-msgstr ""
-
-#: build/ui_devinfo.h:442
-msgid "Device details information"
-msgstr ""
-
-#: build/ui_devinfo.h:443
-msgid "Usb bus"
-msgstr ""
-
-#: build/ui_devinfo.h:444
-msgid "SSD?"
-msgstr ""
-
-#: build/ui_devinfo.h:445 build/ui_devinfo.h:457 build/ui_devinfo.h:463
-#: build/ui_devinfo.h:467 build/ui_devinfo.h:469
-msgid "TextLabel"
-msgstr ""
-
-#: build/ui_devinfo.h:446
-msgid "Scsi bus:"
-msgstr ""
-
-#: build/ui_devinfo.h:447
-msgid "Vendor:"
-msgstr ""
-
-#: build/ui_devinfo.h:448 build/ui_parinfo.h:282
-msgid "Device name:"
-msgstr ""
-
-#: build/ui_devinfo.h:449 build/ui_parinfo.h:277
-msgid "Size:"
-msgstr ""
-
-#: build/ui_devinfo.h:450 build/ui_devinfo.h:452 build/ui_devinfo.h:456
-#: build/ui_devinfo.h:459 build/ui_parinfo.h:274 build/ui_parinfo.h:275
-#: build/ui_parinfo.h:280
-msgid "None"
-msgstr ""
-
-#: build/ui_devinfo.h:451
-msgid "Model:"
-msgstr ""
-
-#: build/ui_devinfo.h:453
-msgid "Removable:"
-msgstr ""
-
-#: build/ui_devinfo.h:455
-msgid "Read only:"
-msgstr ""
-
-#: build/ui_devinfo.h:460 build/ui_parinfo.h:279
-msgid "Label:"
-msgstr ""
-
-#: build/ui_devinfo.h:462 build/ui_parinfo.h:276
-msgid "Type:"
-msgstr ""
-
-#: build/ui_devinfo.h:464
-msgid "Loopback file:"
-msgstr ""
-
-#: build/ui_devinfo.h:466
-msgid "Iscsi host:"
-msgstr ""
-
-#: build/ui_devinfo.h:470 build/ui_parinfo.h:283
-msgid "Device aliases"
-msgstr ""
-
-#: build/ui_devinfo.h:471 build/ui_parinfo.h:284
-msgid "Device has no aliasses"
-msgstr ""
-
-#: build/ui_devinfo.h:472 build/ui_parinfo.h:285
-msgid "Aliases"
-msgstr ""
-
-#: build/ui_devinfo.h:473 build/ui_devinfo.h:474
-msgid "Partitions"
-msgstr ""
-
-#: build/ui_devinfo.h:475 build/ui_devinfo.h:477 build/ui_parinfo.h:286
-#: build/ui_parinfo.h:288
-msgid "Mount points"
-msgstr ""
-
-#: build/ui_devinfo.h:476
-msgid "This device or it's partitions are not mounted"
-msgstr ""
-
-#: build/ui_devinfo.h:479
-msgid "No slave found"
-msgstr ""
-
-#: build/ui_fields.h:265
-msgid "Device tab configuration"
-msgstr ""
-
-#: build/ui_fields.h:266
-msgid "Available fields:"
-msgstr ""
-
-#: build/ui_fields.h:267
-msgid "Fields displayed in disks tab:"
-msgstr ""
-
-#: build/ui_fields.h:268
-msgid "Up"
-msgstr ""
-
-#: build/ui_fields.h:269
-msgid "<"
-msgstr ""
-
-#: build/ui_fields.h:270
-msgid ">"
-msgstr ""
-
-#: build/ui_fields.h:271
-msgid "Down"
-msgstr ""
-
-#: build/ui_fields.h:272
-msgid "Display devices /pratitions"
-msgstr ""
-
-#: build/ui_fields.h:273
-msgid "As a &tree"
-msgstr ""
-
-#: build/ui_fields.h:274
-msgid "As a &grid"
-msgstr ""
-
-#: build/ui_fields.h:275
-msgid "Expand by default"
-msgstr ""
-
-#: build/ui_main.h:396
-msgid "Device information GUI"
-msgstr ""
-
-#: build/ui_main.h:397
-msgid "&Quit"
-msgstr ""
-
-#: build/ui_main.h:398
-msgid "&Fields"
-msgstr ""
-
-#: build/ui_main.h:399
-msgid "&About"
-msgstr ""
-
-#: build/ui_main.h:400
-msgid "&Visible tabs"
-msgstr ""
-
-#: build/ui_main.h:401
-msgid "&User defined tabs"
-msgstr ""
-
-#: build/ui_main.h:402
-msgid "(Un)mount"
-msgstr ""
-
-#: build/ui_main.h:403
-msgid "Refresh"
-msgstr ""
-
-#: build/ui_main.h:404
-msgid "Automatic refresh"
-msgstr ""
-
-#: build/ui_main.h:405
-msgid "Show notifications"
-msgstr ""
-
-#: build/ui_main.h:407 build/ui_visibletabs.h:120 gui/mainwindow.cpp:793
-msgid "Disks"
-msgstr ""
-
-#: build/ui_main.h:408 build/ui_visibletabs.h:121 gui/mainwindow.cpp:794
-msgid "Raid"
-msgstr ""
-
-#: build/ui_main.h:409 gui/mainwindow.cpp:795
-msgid "Fstab"
-msgstr ""
-
-#: build/ui_main.h:410
-msgid "iscsi"
-msgstr ""
-
-#: build/ui_main.h:411 build/ui_visibletabs.h:124 gui/mainwindow.cpp:797
-msgid "Stats"
-msgstr ""
-
-#: build/ui_main.h:412
-msgid ""
-"LVM information on this page can only be retrieved when bdgui is run as root."
-msgstr ""
-
-#: build/ui_main.h:413
-msgid ""
-"Can't get information about LVM because \"lvmetad\" deamon  is not running"
-msgstr ""
-
-#: build/ui_main.h:414
-msgid "Physical volumes"
-msgstr ""
-
-#: build/ui_main.h:415
-msgid "Volume groups"
-msgstr ""
-
-#: build/ui_main.h:416
-msgid "Logical volumes"
-msgstr ""
-
-#: build/ui_main.h:417 build/ui_visibletabs.h:125 gui/mainwindow.cpp:512
-#: gui/mainwindow.cpp:798
-msgid "LVM"
-msgstr ""
-
-#: build/ui_main.h:418
-msgid "Fi&le"
-msgstr ""
-
-#: build/ui_main.h:419
-msgid "Setti&ngs"
-msgstr ""
-
-#: build/ui_main.h:420
-msgid "Help"
-msgstr ""
-
-#: build/ui_mount.h:283
-msgid "Mounting device"
-msgstr ""
-
-#: build/ui_mount.h:284 gui/formdevinfo.cpp:162 gui/mainwindow.cpp:110
-#: gui/mainwindow.cpp:145 gui/mainwindow.cpp:198 gui/mainwindow.cpp:232
-#: gui/mainwindow.cpp:275 gui/mainwindow.cpp:317 gui/mainwindow.cpp:866
-msgid "Device"
-msgstr ""
-
-#: build/ui_mount.h:285
-msgid "&Unmount"
-msgstr ""
-
-#: build/ui_mount.h:286
-msgid "Moun&t"
-msgstr ""
-
-#: build/ui_mount.h:287
-msgid "Operation"
-msgstr ""
-
-#: build/ui_mount.h:288
-msgid "Unmount options"
-msgstr ""
-
-#: build/ui_mount.h:289
-msgid "Unmount"
-msgstr ""
-
-#: build/ui_mount.h:290
-msgid "Unmount options:"
-msgstr ""
-
-#: build/ui_mount.h:291
-msgid "Lazy unmount"
-msgstr ""
-
-#: build/ui_mount.h:292
-msgid "Mount options"
-msgstr ""
-
-#: build/ui_mount.h:293
-msgid "Mount on"
-msgstr ""
-
-#: build/ui_mount.h:294
-msgid "filesystem type"
-msgstr ""
-
-#: build/ui_mount.h:295
-msgid "Readonly"
-msgstr ""
-
-#: build/ui_mount.h:296
-msgid "No execute"
-msgstr ""
-
-#: build/ui_mount.h:297
-msgid "No suid"
-msgstr ""
-
-#: build/ui_mount.h:298
-msgid "No device"
-msgstr ""
-
-#: build/ui_mount.h:299
-msgid "Access time"
-msgstr ""
-
-#: build/ui_mount.h:300
-msgid "No directorty access time"
-msgstr ""
-
-#: build/ui_mount.h:301
-msgid "Security:"
-msgstr ""
-
-#: build/ui_mount.h:302
-msgid "Extra mount options"
-msgstr ""
-
-#: build/ui_mount.h:303 build/ui_newtab.h:103 build/ui_tabconfig.h:409
-msgid "Ok"
-msgstr ""
-
-#: build/ui_mount.h:304 build/ui_newtab.h:104 build/ui_tabconfig.h:410
-msgid "Cancel"
-msgstr ""
-
-#: build/ui_newtab.h:101
-msgid "New tab"
-msgstr ""
-
-#: build/ui_newtab.h:102
-msgid "Label of new tab:"
-msgstr ""
-
-#: build/ui_parinfo.h:272
-msgid "Partition details information"
-msgstr ""
-
-#: build/ui_parinfo.h:278
-msgid "Partition name:"
-msgstr ""
-
-#: build/ui_parinfo.h:281
-msgid "Go"
-msgstr ""
-
-#: build/ui_parinfo.h:287
-msgid "This partition is not mounted"
-msgstr ""
-
-#: build/ui_tabconfig.h:390
-msgid "User define tab"
-msgstr ""
-
-#: build/ui_tabconfig.h:391
-msgid "User defined tabs:"
-msgstr ""
-
-#: build/ui_tabconfig.h:396
-msgid "Tab label:"
-msgstr ""
-
-#: build/ui_tabconfig.h:397
-msgid "Tab is active?"
-msgstr ""
-
-#: build/ui_tabconfig.h:398
-msgid "Display what?"
-msgstr ""
-
-#: build/ui_tabconfig.h:399
-msgid "&Device"
-msgstr ""
-
-#: build/ui_tabconfig.h:400
-msgid "Par&tition"
-msgstr ""
-
-#: build/ui_tabconfig.h:401
-msgid "Both"
-msgstr ""
-
-#: build/ui_tabconfig.h:402
-msgid "Condition field:"
-msgstr ""
-
-#: build/ui_tabconfig.h:403
-msgid "Condition:"
-msgstr ""
-
-#: build/ui_tabconfig.h:404
-msgid "Fields in tab:"
-msgstr ""
-
-#: build/ui_usertabdef.h:54
-msgid "Form"
-msgstr ""
-
-#: build/ui_visibletabs.h:118
-msgid "Setup visible tabs"
-msgstr ""
-
-#: build/ui_visibletabs.h:119
-msgid "Visible tab pages"
-msgstr ""
-
-#: build/ui_visibletabs.h:122
-msgid "FSTab"
-msgstr ""
-
-#: build/ui_visibletabs.h:123 gui/mainwindow.cpp:796
-msgid "Iscsi"
-msgstr ""
-
-#: build/ui_visibletabs.h:126
-msgid "&Ok"
-msgstr ""
-
-#: build/ui_visibletabs.h:127
-msgid "&Cancel"
-msgstr ""
-
 #: data/changemanager.cpp:113
+#, kde-format
 msgid "added"
 msgstr ""
 
 #: data/changemanager.cpp:114
+#, kde-format
 msgid "removed"
 msgstr ""
 
-#: data/devicelist.cpp:285
+#: data/devicelist.cpp:284
+#, kde-format
 msgid "LVM Device"
 msgstr ""
 
-#: data/devicelist.cpp:294
+#: data/devicelist.cpp:293
+#, kde-format
 msgid "LVM Member"
 msgstr ""
 
 #: gui/formbasedevinfo.cpp:24
+#, kde-format
 msgid "Alias"
 msgstr ""
 
 #: gui/formdevinfo.cpp:91 gui/formdevinfo.cpp:92
+#, kde-format
 msgid "Yes"
 msgstr ""
 
 #: gui/formdevinfo.cpp:91 gui/formdevinfo.cpp:92
+#, kde-format
 msgid "No"
 msgstr ""
 
 #: gui/formdevinfo.cpp:100
+#, kde-format
 msgid "SSD"
 msgstr ""
 
-#: gui/formdevinfo.cpp:163 gui/formdevinfo.cpp:197 gui/formparinfo.cpp:38
-#: gui/mainwindow.cpp:234
+#. i18n: file: ui/mount.ui:22
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: gui/formdevinfo.cpp:161 gui/mainwindow.cpp:110 gui/mainwindow.cpp:145
+#: gui/mainwindow.cpp:198 gui/mainwindow.cpp:233 gui/mainwindow.cpp:276
+#: gui/mainwindow.cpp:318 gui/mainwindow.cpp:863 rc.cpp:356
+#, kde-format
+msgid "Device"
+msgstr ""
+
+#: gui/formdevinfo.cpp:162 gui/formdevinfo.cpp:196 gui/formparinfo.cpp:38
+#: gui/mainwindow.cpp:235
+#, kde-format
 msgid "Mount point"
 msgstr ""
 
-#: gui/formdevinfo.cpp:164 gui/formparinfo.cpp:39
+#: gui/formdevinfo.cpp:163 gui/formparinfo.cpp:39
+#, kde-format
 msgid "Fs. type"
 msgstr ""
 
-#: gui/formdevinfo.cpp:192 gui/mainwindow.cpp:455 gui/mainwindow.cpp:530
+#: gui/formdevinfo.cpp:191 gui/mainwindow.cpp:457 gui/mainwindow.cpp:528
+#, kde-format
 msgid "Name"
 msgstr ""
 
-#: gui/formdevinfo.cpp:195
+#: gui/formdevinfo.cpp:194
+#, kde-format
 msgid "Start(Bytes)"
 msgstr ""
 
-#: gui/formdevinfo.cpp:196
+#: gui/formdevinfo.cpp:195
+#, kde-format
 msgid "Available"
 msgstr ""
 
-#: gui/formdevinfo.cpp:239
+#: gui/formdevinfo.cpp:238
+#, kde-format
 msgid "Slave name"
 msgstr ""
 
-#: gui/formnewtab.cpp:17 gui/formtabdef.cpp:91 gui/mountdialog.cpp:171
-#: gui/mountdialog.cpp:184 gui/mountdialog.cpp:206 gui/mountdialog.cpp:210
+#: gui/formnewtab.cpp:18 gui/mountdialog.cpp:170 gui/mountdialog.cpp:183
+#: gui/mountdialog.cpp:205 gui/mountdialog.cpp:209 gui/formtabdef.cpp:104
+#, kde-format
 msgid "Error"
 msgstr ""
 
-#: gui/formnewtab.cpp:17
+#: gui/formnewtab.cpp:18
+#, kde-format
 msgid "Name can't be empty"
 msgstr ""
 
-#: gui/formtabdef.cpp:91
-msgid "Please select a field to add"
+#: gui/mountdialog.cpp:28
+#, kde-format
+msgid "Do not update access time"
+msgstr ""
+
+#: gui/mountdialog.cpp:29
+#, kde-format
+msgid "Only later than mod. time"
+msgstr ""
+
+#: gui/mountdialog.cpp:30
+#, kde-format
+msgid "Always"
+msgstr ""
+
+#: gui/mountdialog.cpp:55
+#, kde-format
+msgid "Path doesn't exist."
+msgstr ""
+
+#: gui/mountdialog.cpp:57
+#, kde-format
+msgid "Path is not a directory but a file"
+msgstr ""
+
+#: gui/mountdialog.cpp:170
+#, kde-format
+msgid "Please select operation"
+msgstr ""
+
+#: gui/mountdialog.cpp:183
+#, kde-format
+msgid "Please select what to unmount"
+msgstr ""
+
+#: gui/mountdialog.cpp:189
+#, kde-format
+msgid "Unmounting failed"
+msgstr ""
+
+#: gui/mountdialog.cpp:205
+#, kde-format
+msgid "No device selected"
+msgstr ""
+
+#: gui/mountdialog.cpp:209
+#, kde-format
+msgid "Mount point is empty"
+msgstr ""
+
+#: gui/mountdialog.cpp:228
+#, kde-format
+msgid "Error during mounting"
 msgstr ""
 
 #: gui/mainwindow.cpp:63
+#, kde-format
 msgid "Only root can mount"
 msgstr ""
 
 #: gui/mainwindow.cpp:69
+#, kde-format
 msgid "Device not found"
 msgstr ""
 
 #: gui/mainwindow.cpp:71
+#, kde-format
 msgid "Can't mount device"
 msgstr ""
 
 #: gui/mainwindow.cpp:112 gui/mainwindow.cpp:141 gui/mainwindow.cpp:144
+#, kde-format
 msgid "Volume group"
 msgstr ""
 
-#: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:500
-#: gui/mainwindow.cpp:701
+#: gui/mainwindow.cpp:142 gui/mainwindow.cpp:146 gui/mainwindow.cpp:498
+#: gui/mainwindow.cpp:698
+#, kde-format
 msgid "Id"
 msgstr ""
 
 #: gui/mainwindow.cpp:143
+#, kde-format
 msgid "Logical volume"
 msgstr ""
 
 #: gui/mainwindow.cpp:147
+#, kde-format
 msgid "Read"
 msgstr ""
 
 #: gui/mainwindow.cpp:148
+#, kde-format
 msgid "Write"
 msgstr ""
 
 #: gui/mainwindow.cpp:149
+#, kde-format
 msgid "Visible"
 msgstr ""
 
 #: gui/mainwindow.cpp:196
+#, kde-format
 msgid "Session"
 msgstr ""
 
 #: gui/mainwindow.cpp:197
+#, kde-format
 msgid "Address"
 msgstr ""
 
 #: gui/mainwindow.cpp:199
+#, kde-format
 msgid "Iscsi bus"
 msgstr ""
 
 #: gui/mainwindow.cpp:200
+#, kde-format
 msgid "Target"
 msgstr ""
 
-#: gui/mainwindow.cpp:231
+#: gui/mainwindow.cpp:232
+#, kde-format
 msgid "Comments"
 msgstr ""
 
-#: gui/mainwindow.cpp:233
+#: gui/mainwindow.cpp:234
+#, kde-format
 msgid "Real device"
 msgstr ""
 
-#: gui/mainwindow.cpp:236
+#: gui/mainwindow.cpp:237
+#, kde-format
 msgid "Options"
 msgstr ""
 
-#: gui/mainwindow.cpp:246
+#: gui/mainwindow.cpp:247
+#, kde-format
 msgid "Not mounted\n"
 msgstr ""
 
-#: gui/mainwindow.cpp:247
+#: gui/mainwindow.cpp:248
+#, kde-format
 msgid "Mounted on different path \n"
 msgstr ""
 
-#: gui/mainwindow.cpp:253
+#: gui/mainwindow.cpp:254
+#, kde-format
 msgid "Wrong type. Type is (%1)"
 msgstr ""
 
-#: gui/mainwindow.cpp:254
+#: gui/mainwindow.cpp:255
+#, kde-format
 msgid "Device not mountable (has partitions)"
 msgstr ""
 
-#: gui/mainwindow.cpp:276
+#: gui/mainwindow.cpp:277
+#, kde-format
 msgid "Raid members"
 msgstr ""
 
-#: gui/mainwindow.cpp:277
+#: gui/mainwindow.cpp:278
+#, kde-format
 msgid "Raid level"
 msgstr ""
 
-#: gui/mainwindow.cpp:278
+#: gui/mainwindow.cpp:279
+#, kde-format
 msgid "Raid type"
 msgstr ""
 
-#: gui/mainwindow.cpp:279
+#: gui/mainwindow.cpp:280
+#, kde-format
 msgid "Mounted point"
 msgstr ""
 
-#: gui/mainwindow.cpp:318
+#: gui/mainwindow.cpp:319
+#, kde-format
 msgid "Read(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:319
+#: gui/mainwindow.cpp:320
+#, kde-format
 msgid "Read(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:320
+#: gui/mainwindow.cpp:321
+#, kde-format
 msgid "Write(sectors)"
 msgstr ""
 
-#: gui/mainwindow.cpp:321
+#: gui/mainwindow.cpp:322
+#, kde-format
 msgid "Write(div)"
 msgstr ""
 
-#: gui/mainwindow.cpp:456 gui/mainwindow.cpp:532
+#: gui/mainwindow.cpp:458 gui/mainwindow.cpp:530
+#, kde-format
 msgid "Partition"
 msgstr ""
 
-#: gui/mainwindow.cpp:506 gui/mainwindow.cpp:703
+#: gui/mainwindow.cpp:504 gui/mainwindow.cpp:700
+#, kde-format
 msgid "Uuid"
 msgstr ""
 
-#: gui/mainwindow.cpp:509 gui/mainwindow.cpp:704
+#: gui/mainwindow.cpp:507 gui/mainwindow.cpp:701
+#, kde-format
 msgid "Path"
 msgstr ""
 
-#: gui/mainwindow.cpp:700
+#. i18n: file: ui/visibletabs.ui:68
+#. i18n: ectx: property (text), widget (QCheckBox, checkLVM)
+#. i18n: file: ui/main.ui:332
+#. i18n: ectx: attribute (title), widget (QWidget, lvmInfo)
+#: gui/mainwindow.cpp:510 gui/mainwindow.cpp:795 gui/formtabdef.cpp:501
+#: rc.cpp:65 rc.cpp:224
+#, kde-format
+msgid "LVM"
+msgstr ""
+
+#: gui/mainwindow.cpp:697
+#, kde-format
 msgid "Devices"
 msgstr ""
 
-#: gui/mainwindow.cpp:702
+#: gui/mainwindow.cpp:699
+#, kde-format
 msgid "Labels"
 msgstr ""
 
-#: gui/mainwindow.cpp:865
+#. i18n: file: ui/visibletabs.ui:33
+#. i18n: ectx: property (text), widget (QCheckBox, checkDisk)
+#. i18n: file: ui/main.ui:174
+#. i18n: ectx: attribute (title), widget (QWidget, tabDisks)
+#: gui/mainwindow.cpp:790 gui/formtabdef.cpp:496 rc.cpp:50 rc.cpp:209
+#, kde-format
+msgid "Disks"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:40
+#. i18n: ectx: property (text), widget (QCheckBox, checkRaid)
+#. i18n: file: ui/main.ui:216
+#. i18n: ectx: attribute (title), widget (QWidget, tabRaid)
+#: gui/mainwindow.cpp:791 gui/formtabdef.cpp:497 rc.cpp:53 rc.cpp:212
+#, kde-format
+msgid "Raid"
+msgstr ""
+
+#. i18n: file: ui/main.ui:263
+#. i18n: ectx: attribute (title), widget (QWidget, tabFstab)
+#: gui/mainwindow.cpp:792 gui/formtabdef.cpp:498 rc.cpp:215
+#, kde-format
+msgid "Fstab"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:54
+#. i18n: ectx: property (text), widget (QCheckBox, checkIsci)
+#: gui/mainwindow.cpp:793 gui/formtabdef.cpp:499 rc.cpp:59
+#, kde-format
+msgid "Iscsi"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:61
+#. i18n: ectx: property (text), widget (QCheckBox, checkStats)
+#. i18n: file: ui/main.ui:315
+#. i18n: ectx: attribute (title), widget (QWidget, tabStats)
+#: gui/mainwindow.cpp:794 gui/formtabdef.cpp:500 rc.cpp:62 rc.cpp:221
+#, kde-format
+msgid "Stats"
+msgstr ""
+
+#: gui/mainwindow.cpp:862
+#, kde-format
 msgid "Date"
 msgstr ""
 
-#: gui/mainwindow.cpp:867
+#: gui/mainwindow.cpp:864
+#, kde-format
 msgid "Change"
 msgstr ""
 
-#: gui/mountdialog.cpp:29
-msgid "Do not update access time"
+#: gui/formtabdef.cpp:39
+#, kde-format
+msgid "Is empty"
 msgstr ""
 
-#: gui/mountdialog.cpp:30
-msgid "Only later then mod. time"
+#: gui/formtabdef.cpp:40
+#, kde-format
+msgid "Is not empty"
 msgstr ""
 
-#: gui/mountdialog.cpp:31
-msgid "Always"
+#: gui/formtabdef.cpp:41
+#, kde-format
+msgid "Has value"
 msgstr ""
 
-#: gui/mountdialog.cpp:56
-msgid "Path doesn't exists."
-msgstr ""
-
-#: gui/mountdialog.cpp:58
-msgid "Path is not a directory but a file"
-msgstr ""
-
-#: gui/mountdialog.cpp:171
-msgid "Please select operation"
-msgstr ""
-
-#: gui/mountdialog.cpp:184
-msgid "Please select what to unmount"
-msgstr ""
-
-#: gui/mountdialog.cpp:190
-msgid "Unmounting failed"
-msgstr ""
-
-#: gui/mountdialog.cpp:206
-msgid "No device selected"
-msgstr ""
-
-#: gui/mountdialog.cpp:210
-msgid "Mount point is empty"
-msgstr ""
-
-#: gui/mountdialog.cpp:229
-msgid "Error during mounting"
+#: gui/formtabdef.cpp:104
+#, kde-format
+msgid "Please select a field to add"
 msgstr ""
 
 #: main.cpp:24
+#, kde-format
 msgid "Disk information gui"
 msgstr ""
 
 #: main.cpp:26 main.cpp:33
+#, kde-format
 msgid "X"
 msgstr ""
 
 #: main.cpp:28
-msgid "(C) 2016"
+#, kde-format
+msgid "(C) 2016..2022"
 msgstr ""
 
 #: main.cpp:29
+#, kde-format
 msgid "x"
 msgstr ""
 
 #: main.cpp:33
+#, kde-format
 msgid "Jeroen van Iddekinge"
+msgstr ""
+
+#: rc.cpp:1
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#: rc.cpp:2
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+
+#. i18n: file: ui/about.ui:20
+#. i18n: ectx: property (windowTitle), widget (QDialog, about)
+#: rc.cpp:5
+#, kde-format
+msgid "About"
+msgstr ""
+
+#. i18n: file: ui/about.ui:32
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:8
+#, kde-format
+msgid "Disk information GUI"
+msgstr ""
+
+#. i18n: file: ui/about.ui:56
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: rc.cpp:11
+#, kde-format
+msgid "Version:"
+msgstr ""
+
+#. i18n: file: ui/about.ui:63
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+#. i18n: file: ui/devinfo.ui:212
+#. i18n: ectx: property (text), widget (QLabel, removeableLabel)
+#. i18n: file: ui/devinfo.ui:258
+#. i18n: ectx: property (text), widget (QLabel, typeLabel)
+#. i18n: file: ui/devinfo.ui:306
+#. i18n: ectx: property (text), widget (QLabel, vendorLabel)
+#. i18n: file: ui/devinfo.ui:352
+#. i18n: ectx: property (text), widget (QLabel, ssdLabel)
+#. i18n: file: ui/parinfo.ui:28
+#. i18n: ectx: property (text), widget (QLabel, typeLabel)
+#: rc.cpp:14 rc.cpp:110 rc.cpp:122 rc.cpp:131 rc.cpp:143 rc.cpp:302
+#, kde-format
+msgid "none"
+msgstr ""
+
+#. i18n: file: ui/about.ui:72
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:17
+#, kde-format
+msgid "(C) 2016 Jeroen van Iddekinge"
+msgstr ""
+
+#. i18n: file: ui/about.ui:92
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:20
+#, kde-format
+msgid "License: Gpl v2"
+msgstr ""
+
+#. i18n: file: ui/about.ui:114
+#. i18n: ectx: property (text), widget (QPushButton, closeButton)
+#. i18n: file: ui/devinfo.ui:626
+#. i18n: ectx: property (text), widget (QPushButton, btnClose)
+#. i18n: file: ui/parinfo.ui:344
+#. i18n: ectx: property (text), widget (QPushButton, btnClose)
+#: rc.cpp:23 rc.cpp:191 rc.cpp:350
+#, kde-format
+msgid "Close"
+msgstr ""
+
+#. i18n: file: ui/newtab.ui:20
+#. i18n: ectx: property (windowTitle), widget (QDialog, NewTab)
+#: rc.cpp:26
+#, kde-format
+msgid "New tab"
+msgstr ""
+
+#. i18n: file: ui/newtab.ui:32
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:29
+#, kde-format
+msgid "Label of new tab:"
+msgstr ""
+
+#. i18n: file: ui/newtab.ui:53
+#. i18n: ectx: property (text), widget (QPushButton, okButton)
+#. i18n: file: ui/mount.ui:259
+#. i18n: ectx: property (text), widget (QPushButton, okButton)
+#. i18n: file: ui/tabconfig.ui:547
+#. i18n: ectx: property (text), widget (QPushButton, okButton)
+#: rc.cpp:32 rc.cpp:413 rc.cpp:464
+#, kde-format
+msgid "Ok"
+msgstr ""
+
+#. i18n: file: ui/newtab.ui:66
+#. i18n: ectx: property (text), widget (QPushButton, cancelButton)
+#. i18n: file: ui/mount.ui:266
+#. i18n: ectx: property (text), widget (QPushButton, cancelButton)
+#. i18n: file: ui/tabconfig.ui:554
+#. i18n: ectx: property (text), widget (QPushButton, cancelButton)
+#: rc.cpp:35 rc.cpp:416 rc.cpp:467
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#. i18n: file: ui/usertabdef.ui:14
+#. i18n: ectx: property (windowTitle), widget (QWidget, userTabDef)
+#: rc.cpp:38
+#, kde-format
+msgid "Form"
+msgstr ""
+
+#. i18n: file: ui/usertabdef.ui:23
+#. i18n: ectx: property (text), widget (QLabel, parseError)
+#. i18n: file: ui/devinfo.ui:53
+#. i18n: ectx: property (text), widget (QLabel, scsibusLabel)
+#. i18n: file: ui/devinfo.ui:251
+#. i18n: ectx: property (text), widget (QLabel, readonlyLabel)
+#. i18n: file: ui/devinfo.ui:326
+#. i18n: ectx: property (text), widget (QLabel, iscsiHost)
+#. i18n: file: ui/devinfo.ui:372
+#. i18n: ectx: property (text), widget (QLabel, usbBusLabel)
+#. i18n: file: ui/devinfo.ui:392
+#. i18n: ectx: property (text), widget (QLabel, pciBusLabel)
+#. i18n: file: ui/tabconfig.ui:333
+#. i18n: ectx: property (text), widget (QLabel, errLabel)
+#: rc.cpp:41 rc.cpp:83 rc.cpp:119 rc.cpp:137 rc.cpp:149 rc.cpp:155 rc.cpp:452
+#, kde-format
+msgid "TextLabel"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, visibleTabs)
+#: rc.cpp:44
+#, kde-format
+msgid "Setup visible tabs"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:26
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:47
+#, kde-format
+msgid "Visible tab pages"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:47
+#. i18n: ectx: property (text), widget (QCheckBox, checkFsTab)
+#: rc.cpp:56
+#, kde-format
+msgid "FSTab"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:77
+#. i18n: ectx: property (text), widget (QPushButton, pushOk)
+#: rc.cpp:68
+#, kde-format
+msgid "&Ok"
+msgstr ""
+
+#. i18n: file: ui/visibletabs.ui:84
+#. i18n: ectx: property (text), widget (QPushButton, pushCancel)
+#: rc.cpp:71
+#, kde-format
+msgid "&Cancel"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, devinfo)
+#: rc.cpp:74
+#, kde-format
+msgid "Device details information"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:33
+#. i18n: ectx: property (text), widget (QLabel, label_16)
+#: rc.cpp:77
+#, kde-format
+msgid "Usb bus"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:46
+#. i18n: ectx: property (text), widget (QLabel, label_15)
+#: rc.cpp:80
+#, kde-format
+msgid "SSD?"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:66
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: rc.cpp:86
+#, kde-format
+msgid "Scsi bus:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:85
+#. i18n: ectx: property (text), widget (QLabel, label_12)
+#: rc.cpp:89
+#, kde-format
+msgid "Vendor:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:116
+#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: file: ui/parinfo.ui:194
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:92 rc.cpp:329
+#, kde-format
+msgid "Device name:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:141
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: file: ui/parinfo.ui:86
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:95 rc.cpp:314
+#, kde-format
+msgid "Size:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:148
+#. i18n: ectx: property (text), widget (QLabel, sizeLabel)
+#. i18n: file: ui/devinfo.ui:180
+#. i18n: ectx: property (text), widget (QLabel, modelLabel)
+#. i18n: file: ui/devinfo.ui:244
+#. i18n: ectx: property (text), widget (QLabel, labelLabel)
+#. i18n: file: ui/devinfo.ui:265
+#. i18n: ectx: property (text), widget (QLabel, valLoopbackFile)
+#. i18n: file: ui/parinfo.ui:35
+#. i18n: ectx: property (text), widget (QLabel, parName)
+#. i18n: file: ui/parinfo.ui:42
+#. i18n: ectx: property (text), widget (QLabel, labelLabel)
+#. i18n: file: ui/parinfo.ui:143
+#. i18n: ectx: property (text), widget (QLabel, sizeLabel)
+#: rc.cpp:98 rc.cpp:104 rc.cpp:116 rc.cpp:125 rc.cpp:305 rc.cpp:308 rc.cpp:323
+#, kde-format
+msgid "None"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:173
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:101
+#, kde-format
+msgid "Model:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:205
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:107
+#, kde-format
+msgid "Removable:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:237
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: rc.cpp:113
+#, kde-format
+msgid "Read only:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:296
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#. i18n: file: ui/parinfo.ui:136
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: rc.cpp:128 rc.cpp:320
+#, kde-format
+msgid "Label:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:319
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#. i18n: file: ui/parinfo.ui:61
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: rc.cpp:134 rc.cpp:311
+#, kde-format
+msgid "Type:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:345
+#. i18n: ectx: property (text), widget (QLabel, labLoopbackFile)
+#: rc.cpp:140
+#, kde-format
+msgid "Loopback file:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:365
+#. i18n: ectx: property (text), widget (QLabel, label_14)
+#: rc.cpp:146
+#, kde-format
+msgid "Iscsi host:"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:412
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#. i18n: file: ui/parinfo.ui:207
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: rc.cpp:158 rc.cpp:332
+#, kde-format
+msgid "Aliases"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:424
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#. i18n: file: ui/parinfo.ui:219
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: rc.cpp:161 rc.cpp:335
+#, kde-format
+msgid "Device aliases"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:431
+#. i18n: ectx: property (text), widget (QLabel, noAliasesLabel)
+#. i18n: file: ui/parinfo.ui:226
+#. i18n: ectx: property (text), widget (QLabel, noAliasesLabel)
+#: rc.cpp:164 rc.cpp:338
+#, kde-format
+msgid "Device has no aliases"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:458
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: file: ui/devinfo.ui:470
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: rc.cpp:167 rc.cpp:170
+#, kde-format
+msgid "Partitions"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:497
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#. i18n: file: ui/devinfo.ui:520
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#. i18n: file: ui/parinfo.ui:250
+#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
+#. i18n: file: ui/parinfo.ui:262
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: rc.cpp:173 rc.cpp:176 rc.cpp:341 rc.cpp:344
+#, kde-format
+msgid "Mount points"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:527
+#. i18n: ectx: property (text), widget (QLabel, noMountPointsLabel)
+#: rc.cpp:179
+#, kde-format
+msgid "This device or it's partitions are not mounted"
+msgstr ""
+
+#. i18n: file: ui/devinfo.ui:578
+#. i18n: ectx: property (text), widget (QLabel, noSlaveLabel)
+#: rc.cpp:188
+#, kde-format
+msgid "No slave found"
+msgstr ""
+
+#. i18n: file: ui/main.ui:20
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: rc.cpp:194
+#, kde-format
+msgid "Device information GUI"
+msgstr ""
+
+#. i18n: file: ui/main.ui:46
+#. i18n: ectx: property (text), widget (QPushButton, mountButton)
+#: rc.cpp:197
+#, kde-format
+msgid "(Un)mount"
+msgstr ""
+
+#. i18n: file: ui/main.ui:59
+#. i18n: ectx: property (text), widget (QPushButton, refreshButton)
+#: rc.cpp:200
+#, kde-format
+msgid "Refresh"
+msgstr ""
+
+#. i18n: file: ui/main.ui:72
+#. i18n: ectx: property (text), widget (QCheckBox, autoRefresh)
+#: rc.cpp:203
+#, kde-format
+msgid "Automatic refresh"
+msgstr ""
+
+#. i18n: file: ui/main.ui:79
+#. i18n: ectx: property (text), widget (QCheckBox, shownotifications)
+#: rc.cpp:206
+#, kde-format
+msgid "Show notifications"
+msgstr ""
+
+#. i18n: file: ui/main.ui:292
+#. i18n: ectx: attribute (title), widget (QWidget, tabIscsi)
+#: rc.cpp:218
+#, kde-format
+msgid "iscsi"
+msgstr ""
+
+#. i18n: file: ui/main.ui:341
+#. i18n: ectx: property (text), widget (QLabel, lvmRootWarning)
+#: rc.cpp:227
+#, kde-format
+msgid ""
+"LVM information on this page can only be retrieved if this program is run as "
+"root."
+msgstr ""
+
+#. i18n: file: ui/main.ui:351
+#. i18n: ectx: property (text), widget (QLabel, lvmetadNotRunning)
+#: rc.cpp:230
+#, kde-format
+msgid ""
+"Can't get information about LVM because \"lvmetad\" deamon  is not running"
+msgstr ""
+
+#. i18n: file: ui/main.ui:367
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:233
+#, kde-format
+msgid "Physical volumes"
+msgstr ""
+
+#. i18n: file: ui/main.ui:387
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:236
+#, kde-format
+msgid "Volume groups"
+msgstr ""
+
+#. i18n: file: ui/main.ui:407
+#. i18n: ectx: property (text), widget (QLabel, label_xx)
+#: rc.cpp:239
+#, kde-format
+msgid "Logical volumes"
+msgstr ""
+
+#. i18n: file: ui/main.ui:437
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: rc.cpp:242
+#, kde-format
+msgid "Fi&le"
+msgstr ""
+
+#. i18n: file: ui/main.ui:443
+#. i18n: ectx: property (title), widget (QMenu, menuSss)
+#: rc.cpp:245
+#, kde-format
+msgid "Setti&ngs"
+msgstr ""
+
+#. i18n: file: ui/main.ui:451
+#. i18n: ectx: property (title), widget (QMenu, menuHelp)
+#: rc.cpp:248
+#, kde-format
+msgid "Help"
+msgstr ""
+
+#. i18n: file: ui/main.ui:462
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:251
+#, kde-format
+msgid "&Quit"
+msgstr ""
+
+#. i18n: file: ui/main.ui:467
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:254
+#, kde-format
+msgid "&Fields"
+msgstr ""
+
+#. i18n: file: ui/main.ui:472
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:257
+#, kde-format
+msgid "&About"
+msgstr ""
+
+#. i18n: file: ui/main.ui:480
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:260
+#, kde-format
+msgid "&Visible tabs"
+msgstr ""
+
+#. i18n: file: ui/main.ui:485
+#. i18n: ectx: property (text), widget (QStatusBar, statusbar)
+#: rc.cpp:263
+#, kde-format
+msgid "&User defined tabs"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:20
+#. i18n: ectx: property (windowTitle), widget (QDialog, FieldsConfig)
+#: rc.cpp:266
+#, kde-format
+msgid "Device tab configuration"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:37
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:269
+#, kde-format
+msgid "Available fields:"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:50
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:272
+#, kde-format
+msgid "Fields displayed in disks tab:"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:119
+#. i18n: ectx: property (text), widget (QPushButton, moveUp)
+#: rc.cpp:275
+#, kde-format
+msgid "Up"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:148
+#. i18n: ectx: property (text), widget (QPushButton, removeField)
+#: rc.cpp:278
+#, kde-format
+msgid "<"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:176
+#. i18n: ectx: property (text), widget (QPushButton, addLabel)
+#: rc.cpp:281
+#, kde-format
+msgid ">"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:224
+#. i18n: ectx: property (text), widget (QPushButton, moveDown)
+#: rc.cpp:284
+#, kde-format
+msgid "Down"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:252
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:287
+#, kde-format
+msgid "Display devices / partitions"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:284
+#. i18n: ectx: property (text), widget (QRadioButton, displayTree)
+#: rc.cpp:290
+#, kde-format
+msgid "As a &tree"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:297
+#. i18n: ectx: property (text), widget (QRadioButton, displayGrid)
+#: rc.cpp:293
+#, kde-format
+msgid "As a &grid"
+msgstr ""
+
+#. i18n: file: ui/fields.ui:322
+#. i18n: ectx: property (text), widget (QCheckBox, expandDefault)
+#: rc.cpp:296
+#, kde-format
+msgid "Expand by default"
+msgstr ""
+
+#. i18n: file: ui/parinfo.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, parinfo)
+#: rc.cpp:299
+#, kde-format
+msgid "Partition details information"
+msgstr ""
+
+#. i18n: file: ui/parinfo.ui:105
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:317
+#, kde-format
+msgid "Partition name:"
+msgstr ""
+
+#. i18n: file: ui/parinfo.ui:161
+#. i18n: ectx: property (text), widget (QPushButton, gotoDevice)
+#: rc.cpp:326
+#, kde-format
+msgid "Go"
+msgstr ""
+
+#. i18n: file: ui/parinfo.ui:272
+#. i18n: ectx: property (text), widget (QLabel, noMountPointsLabel)
+#: rc.cpp:347
+#, kde-format
+msgid "This partition is not mounted"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:14
+#. i18n: ectx: property (windowTitle), widget (QDialog, MountDialog)
+#: rc.cpp:353
+#, kde-format
+msgid "Mounting device"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:37
+#. i18n: ectx: property (text), widget (QRadioButton, optionUnmount)
+#: rc.cpp:359
+#, kde-format
+msgid "&Unmount"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:44
+#. i18n: ectx: property (text), widget (QRadioButton, optionMount)
+#: rc.cpp:362
+#, kde-format
+msgid "Moun&t"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:53
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: rc.cpp:365
+#, kde-format
+msgid "Operation"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:65
+#. i18n: ectx: property (title), widget (QGroupBox, unmountForm)
+#: rc.cpp:368
+#, kde-format
+msgid "Unmount options"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:79
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: rc.cpp:371
+#, kde-format
+msgid "Unmount"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:89
+#. i18n: ectx: property (text), widget (QLabel, label_12)
+#: rc.cpp:374
+#, kde-format
+msgid "Unmount options:"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:96
+#. i18n: ectx: property (text), widget (QCheckBox, lazyUnmount)
+#: rc.cpp:377
+#, kde-format
+msgid "Lazy unmount"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:108
+#. i18n: ectx: property (title), widget (QGroupBox, mountForm)
+#: rc.cpp:380
+#, kde-format
+msgid "Mount options"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:126
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:383
+#, kde-format
+msgid "Mount on"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:136
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: rc.cpp:386
+#, kde-format
+msgid "filesystem type"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:156
+#. i18n: ectx: property (text), widget (QCheckBox, readOnly)
+#: rc.cpp:389
+#, kde-format
+msgid "Readonly"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:163
+#. i18n: ectx: property (text), widget (QCheckBox, noExec)
+#: rc.cpp:392
+#, kde-format
+msgid "No execute"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:170
+#. i18n: ectx: property (text), widget (QCheckBox, noSuid)
+#: rc.cpp:395
+#, kde-format
+msgid "No suid"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:177
+#. i18n: ectx: property (text), widget (QCheckBox, noDevices)
+#: rc.cpp:398
+#, kde-format
+msgid "No device"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:184
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: rc.cpp:401
+#, kde-format
+msgid "Access time"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:198
+#. i18n: ectx: property (text), widget (QCheckBox, noAccessDir)
+#: rc.cpp:404
+#, kde-format
+msgid "No directory access time"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:205
+#. i18n: ectx: property (text), widget (QLabel, label_13)
+#: rc.cpp:407
+#, kde-format
+msgid "Security:"
+msgstr ""
+
+#. i18n: file: ui/mount.ui:212
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:410
+#, kde-format
+msgid "Extra mount options"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:20
+#. i18n: ectx: property (windowTitle), widget (QDialog, tabdef)
+#: rc.cpp:419
+#, kde-format
+msgid "User defined tab"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:61
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: rc.cpp:422
+#, kde-format
+msgid "User defined tabs:"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:212
+#. i18n: ectx: property (text), widget (QLabel, labelTitle)
+#: rc.cpp:428
+#, kde-format
+msgid "Tab label:"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:222
+#. i18n: ectx: property (text), widget (QCheckBox, isactive)
+#: rc.cpp:431
+#, kde-format
+msgid "Tab is active?"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:241
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: rc.cpp:434
+#, kde-format
+msgid "Display what?"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:259
+#. i18n: ectx: property (text), widget (QRadioButton, filterDevice)
+#: rc.cpp:437
+#, kde-format
+msgid "&Device"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:272
+#. i18n: ectx: property (text), widget (QRadioButton, filterPartition)
+#: rc.cpp:440
+#, kde-format
+msgid "Par&tition"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:279
+#. i18n: ectx: property (text), widget (QRadioButton, filterBoth)
+#: rc.cpp:443
+#, kde-format
+msgid "Both"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:291
+#. i18n: ectx: property (text), widget (QCheckBox, useExtendedCondition)
+#: rc.cpp:446
+#, kde-format
+msgid "Use extended condition"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:312
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: rc.cpp:449
+#, kde-format
+msgid "Fields:"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:355
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: rc.cpp:455
+#, kde-format
+msgid "Condition field:"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:377
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: rc.cpp:458
+#, kde-format
+msgid "Condition:"
+msgstr ""
+
+#. i18n: file: ui/tabconfig.ui:426
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: rc.cpp:461
+#, kde-format
+msgid "Fields in tab:"
 msgstr ""

@@ -1,4 +1,4 @@
-cmake_policy(SET CMP0002 OLD)
+cmake_policy(SET CMP0002 NEW)
 
 find_package(Gettext REQUIRED)
 if (NOT GETTEXT_MSGMERGE_EXECUTABLE)
